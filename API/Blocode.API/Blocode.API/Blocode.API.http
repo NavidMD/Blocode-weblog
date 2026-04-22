@@ -1,0 +1,6 @@
+@Blocode.API_HostAddress = http://localhost:5234
+
+GET {{Blocode.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
