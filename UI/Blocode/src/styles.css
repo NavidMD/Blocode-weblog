@@ -1,0 +1,36 @@
+@import './font.css';
+
+@import 'tailwindcss';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100vw;
+  min-height: 100vh;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  direction: rtl;
+  text-align: right;
+  font-family: 'IranSansX';
+}
+a {
+  text-decoration: none;
+}
+/* main {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+} */

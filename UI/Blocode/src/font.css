@@ -1,0 +1,38 @@
+/* IranSansX font */
+@font-face {
+  font-family: "IranSansX";
+  src:
+    url("./assets/fonts/IranSansX/IRANSansX-Medium.ttf") format("truetype"),
+    url("./assets/fonts/IranSansX/woff2/IRANSansX-Medium.woff2") format("woff2"),
+    url("./assets/fonts/IranSansX/IRANSansX-Regular.ttf") format("truetype"),
+    url("./assets/fonts/IranSansX/woff2/IRANSansX-Regular.woff2")
+      format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IranSansX";
+  src:
+    url("./assets/fonts/IranSansX/IRANSansX-DemiBold.ttf") format("truetype"),
+    url("./assets/fonts/IranSansX/woff2/IRANSansX-DemiBold.woff2")
+      format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IranSansX";
+  src:
+    url("./assets/fonts/IranSansX/IRANSansX-Bold.ttf") format("truetype"),
+    url("./assets/fonts/IranSansX/woff2/IRANSansX-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IranSansX";
+  src:
+    url("./assets/fonts/IranSansX/IRANSansX-ExtraBold.ttf") format("truetype"),
+    url("./assets/fonts/IranSansX/woff2/IRANSansX-ExtraBold.woff2")
+      format("woff2");
+  font-weight: 800;
+  font-style: normal;
+}

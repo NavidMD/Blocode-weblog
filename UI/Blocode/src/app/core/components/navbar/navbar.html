@@ -1,0 +1,26 @@
+<nav class="w-full py-5 px-6 bg-transparent">
+  <div class="w-auto flex flex-row gap-10 items-center">
+    <h1 class="font-extrabold text-[20px] text-blue-600">بلاکُد</h1>
+    <div>
+      <ul class="flex flex-row gap-5 text-black/80">
+        <li class="flex items-center">
+          <a href="#">خانه</a>
+        </li>
+        <li class="flex items-center">
+          <a href="#">مقالات</a>
+        </li>
+        <li class="flex items-center">
+          <a href="#">نویسندگان</a>
+        </li>
+        <li class="flex flex-row gap-0.5 items-center">
+          مدیریت
+          <select class="flex items-start" (change)="optionChangeHandler($event)">
+            <option value="categories">دسته بندی</option>
+            <option value="blogs">مقالات</option>
+            <option value="products">محصولات</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
