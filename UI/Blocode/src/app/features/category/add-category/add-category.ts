@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, effect, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CategoryService } from '../services/category-service';
+import { NewCategoryRequestValues } from '../models/category.model';
 
 @Component({
   selector: 'app-add-category',
@@ -9,6 +11,16 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class AddCategory {
   @Output() cancelAdding: EventEmitter<boolean> = new EventEmitter<boolean>();
+  constructor(private categoryService: CategoryService) {
+    effect(() => {
+      if (this.categoryService.addCategoryStatusSignal() === 'success') {
+        console.log('adding category succeeded in database');
+      }
+      if (this.categoryService.addCategoryStatusSignal() === 'error') {
+        console.log('adding category failed in database!');
+      }
+    });
+  }
 
   cancelAddingCategory() {
     this.cancelAdding.emit(false);
@@ -34,6 +46,13 @@ export class AddCategory {
   }
 
   onSubmit() {
-    console.log(this.addCategoryFormGroup.getRawValue());
+    const addCategoryFormValue = this.addCategoryFormGroup.getRawValue();
+    const newCategoryInsertedDataByUserDTO: NewCategoryRequestValues = {
+      name: addCategoryFormValue.name,
+      urlHandle: addCategoryFormValue.urlHandle,
+    };
+    if (newCategoryInsertedDataByUserDTO) {
+      this.categoryService.AddCategory(newCategoryInsertedDataByUserDTO);
+    }
   }
 }
