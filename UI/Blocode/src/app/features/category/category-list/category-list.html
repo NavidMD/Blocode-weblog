@@ -1,10 +1,17 @@
-<div class="w-full flex flex-col justify-center items-start">
+<div class="w-full flex flex-col justify-center items-start gap-5">
   <div class="w-full flex flex-row justify-between items-center">
-    <h1 class="text-[16px] font-bold">دسته بندی ها</h1>
+    <h1 class="text-[16px] font-bold">
+      دسته بندی ها
+      <span *ngIf="addCategoryActive" class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد دسته بندی </span>
+    </h1>
     <a
       role="button"
-      class="p-2 px-3 text-sm bg-blue-500 text-white rounded-md shadow-md shadow-black/20"
-      >افزودن دسته بندی</a
+      class="p-2 px-3 text-sm bg-blue-500 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+      (click)="addCategoryActive = true"
+      *ngIf="!addCategoryActive"
     >
+      افزودن دسته بندی
+    </a>
   </div>
+  <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full" *ngIf="addCategoryActive"></app-add-category>
 </div>
