@@ -1,5 +1,5 @@
 <div class="w-full h-auto flex flex-col justify-center items-start gap-5">
-  <div class="w-full flex flex-row justify-between items-center">
+  <div class="w-full flex flex-row justify-between items-center mb-10">
     <h1 class="text-[16px] font-bold">
       دسته بندی ها
       @if (addCategoryActive) {
@@ -19,12 +19,31 @@
   @if (addCategoryActive) {
     <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
   }
-  <div class="w-full flex flex-col">
+  <div class="w-full grid grid-flow-row grid-cols-5 gap-4">
     @if (isLoading()) {
       <span>درحال بارگذاری...</span>
     }
     @if (isError()) {
       <span>مشکل در بارگذاری اطلاعات!</span>
-    } @else {}
+    } @else {
+      @for (category of value(); track category.id) {
+        <div
+          class="w-full flex flex-col justify-between items-start gap-6 rounded-md shadow-md shadow-black/20 bg-white px-6 pt-6 pb-5"
+        >
+          <div class="w-full h-1/2 flex flex-row gap-3 justify-start items-center">
+            <span
+              class="shadow-md shadow-black/15 rounded-full text-xl text-white flex justify-center items-center w-10 h-10 pt-1 bg-blue-400/70"
+              >{{ category.name[0].toUpperCase() }}</span
+            >
+            <h3 class="text-lg text-black/90">{{ category.name }}</h3>
+          </div>
+          <div class="w-full h-1/2 flex flex-col justify-center items-start">
+            <span class="text-[11px] text-black/90 font-light"
+              >مسیر (slug) : {{ category.urlHandle }}</span
+            >
+          </div>
+        </div>
+      }
+    }
   </div>
 </div>
