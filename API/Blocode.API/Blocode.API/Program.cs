@@ -1,4 +1,4 @@
-using Blocode.API.Data;
+﻿using Blocode.API.Data;
 using Blocode.API.Repositories.Implementation;
 using Blocode.API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +29,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// برای حالت پروداکشن این قوانین سخت گیر تر باید باشن و یسری متد خاص رو باید بزاری
+//باید بعد ریدایرکشن بزاری
+app.UseCors(options =>
+{
+    options.AllowAnyHeader();
+    options.AllowAnyMethod();
+    options.AllowAnyOrigin();
+});
 
 app.UseAuthorization();
 

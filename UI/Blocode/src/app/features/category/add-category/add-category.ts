@@ -2,6 +2,8 @@ import { Component, effect, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryService } from '../services/category-service';
 import { NewCategoryRequestValues } from '../models/category.model';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-category',
@@ -11,9 +13,18 @@ import { NewCategoryRequestValues } from '../models/category.model';
 })
 export class AddCategory {
   @Output() cancelAdding: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(private categoryService: CategoryService) {
+  constructor(
+    private categoryService: CategoryService,
+    private router: Router,
+  ) {
     effect(() => {
       if (this.categoryService.addCategoryStatusSignal() === 'success') {
+        this.categoryService.addCategoryStatusSignal.set('idle');
+        const currentUrl = this.router.url;
+        //refreshing current url to sync data
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl(currentUrl);
+        });
         console.log('adding category succeeded in database');
       }
       if (this.categoryService.addCategoryStatusSignal() === 'error') {
@@ -47,12 +58,13 @@ export class AddCategory {
 
   onSubmit() {
     const addCategoryFormValue = this.addCategoryFormGroup.getRawValue();
-    const newCategoryInsertedDataByUserDTO: NewCategoryRequestValues = {
+    const newCategoryDataByUserDTO: NewCategoryRequestValues = {
       name: addCategoryFormValue.name,
       urlHandle: addCategoryFormValue.urlHandle,
     };
-    if (newCategoryInsertedDataByUserDTO) {
-      this.categoryService.AddCategory(newCategoryInsertedDataByUserDTO);
+    if (newCategoryDataByUserDTO) {
+      this.categoryService.addCategory(newCategoryDataByUserDTO);
+      this.addCategoryFormGroup.reset({ name: '', urlHandle: '' });
     }
   }
 }

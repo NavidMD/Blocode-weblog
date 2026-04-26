@@ -1,6 +1,7 @@
 ﻿using Blocode.API.Data;
 using Blocode.API.Models.Domain;
 using Blocode.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blocode.API.Repositories.Implementation
 {
@@ -16,6 +17,11 @@ namespace Blocode.API.Repositories.Implementation
             await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+        {
+            return await _context.Categories.ToListAsync();
         }
     }
 }

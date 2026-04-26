@@ -1,6 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { NewCategoryRequestValues } from '../models/category.model';
+
+import {
+  Category,
+  NewCategoryRequestValues,
+} from '../models/category.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,19 +12,25 @@ import { NewCategoryRequestValues } from '../models/category.model';
 export class CategoryService {
   constructor(private http: HttpClient) {}
 
-  private readonly baseUrl: string = 'https://localhost:7143/';
+  private readonly baseUrl: string = 'https://localhost:7143';
 
   addCategoryStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
 
-  AddCategory(newCategory: NewCategoryRequestValues) {
+  addCategory(newCategory: NewCategoryRequestValues) {
     this.addCategoryStatusSignal.set('loading');
-    this.http.post<void>(`${this.baseUrl}/api/categories`, newCategory).subscribe({
-      next: () => {
+    this.http.post<Category>(`${this.baseUrl}/api/categories`, newCategory).subscribe({
+      next: (res) => {
         this.addCategoryStatusSignal.set('success');
+        console.log(res);
       },
       error: () => {
         this.addCategoryStatusSignal.set('error');
       },
     });
   }
+
+  getAllCategories() {
+    return httpResource<Category[]>(() => `${this.baseUrl}/api/categories`)
+  }
+  
 }

@@ -33,10 +33,10 @@
           maxlength="30"
         />
         @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">نام دسته بندی نباید خالی باشد</span>
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
         }
         @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">نام دسته بندی حداقل 3 کلمه</span>
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
         }
       </div>
       <div class="w-1/3 h-[64px] items-end justify-end flex flex-row gap-2">
