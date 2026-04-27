@@ -1,5 +1,5 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Injectable, InputSignal, signal } from '@angular/core';
 
 import {
   Category,
@@ -17,6 +17,7 @@ export class CategoryService {
 
   addCategoryStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
 
+  //POST METHODS
   addCategory(newCategory: NewCategoryRequestValues) {
     this.addCategoryStatusSignal.set('loading');
     this.http.post<Category>(`${this.baseUrl}/api/categories`, newCategory).subscribe({
@@ -30,8 +31,13 @@ export class CategoryService {
     });
   }
 
+  //GET METHODS
   getAllCategories() {
     return httpResource<Category[]>(() => `${this.baseUrl}/api/categories`)
   }
+  getCategoryById(categoryId: InputSignal<string | undefined>) {
+    return httpResource<Category>(() => `${this.baseUrl}/api/categories/${categoryId()}`);
+  }
+
   
 }

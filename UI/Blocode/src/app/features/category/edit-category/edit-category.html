@@ -1,0 +1,91 @@
+<div class="w-full flex flex-col justify-center items-start gap-5">
+  <div class="w-full flex flex-row justify-between items-center">
+    <div class="flex justify-start items-center gap-4">
+      <span
+        class="w-13 h-13 shadow-md shadow-black/20 flex justify-center items-center bg-blue-400 text-white text-2xl pt-1 rounded-full"
+        >{{categoryByIdValue()?.name![0].toUpperCase()}}</span
+      >
+      <h1 class="text-[23px] font-bold">
+        {{categoryByIdValue()?.name?.toUpperCase()}}
+        <span class="text-[10px] text-black/80 font-light flex flex-row gap-0.5 items-start">
+          <img src="assets/vectors/attach.svg" class="w-3.5 h-3.5 opacity-80" />
+          {{categoryByIdValue()?.urlHandle}}
+        </span>
+      </h1>
+    </div>
+    @if (!editCategoryActive) {
+      <a
+        role="button"
+        class="p-2 px-3 text-sm bg-blue-500 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+        (click)="editCategoryActive = true"
+      >
+        ویرایش دسته بندی
+      </a>
+    }
+  </div>
+  @if (editCategoryActive) {
+    <div class="w-full flex flex-row items-center">
+      <form
+        [formGroup]="editCategoryFormGroup"
+        (ngSubmit)="onSubmit($event)"
+        class="w-full flex flex-row justify-between gap-4"
+      >
+        <div class="w-1/3 flex flex-col gap-2 items-start">
+          <label class="text-sm text-black/80" for="category-name">نام دسته بندی</label>
+          <input
+            class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+            id="category-name"
+            type="text"
+            formControlName="name"
+            maxlength="20"
+          />
+          @if (categoryNameInput.touched && categoryNameInput.hasError('required')) {
+            <span class="text-[11px] text-red-500">نام دسته بندی نباید خالی باشد</span>
+          }
+          @if (categoryNameInput.touched && categoryNameInput.hasError('minlength')) {
+            <span class="text-[11px] text-red-500">نام دسته بندی حداقل 3 کلمه</span>
+          }
+        </div>
+        <div class="w-1/3 flex flex-col gap-2 items-start">
+          <label class="text-sm text-black/80" for="category-urlHandle"
+            >مسیر دسته بندی (slug)</label
+          >
+          <input
+            class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+            id="category-urlHandle"
+            type="text"
+            formControlName="urlHandle"
+            maxlength="30"
+          />
+          @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+            <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+          }
+          @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+            <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+          }
+        </div>
+        <div class="w-1/3 h-[64px] items-end justify-end flex flex-row gap-2">
+          <button
+            class="p-2 px-3 text-sm bg-red-400 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+            [routerLink]="['../']"
+          >
+            بازگشت
+          </button>
+          <button
+            type="reset"
+            class="p-2 px-3 text-sm bg-slate-500 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+          >
+            پاک کردن
+          </button>
+          <button
+            type="submit"
+            [disabled]="!editCategoryFormGroup.valid"
+            class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+          >
+            ویرایش دسته بندی
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+</div>

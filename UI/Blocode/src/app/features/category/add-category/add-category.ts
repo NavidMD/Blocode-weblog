@@ -58,12 +58,13 @@ export class AddCategory {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    const addCategoryFormValue = this.addCategoryFormGroup.getRawValue();
-    const newCategoryDataByUserDTO: NewCategoryRequestValues = {
-      name: addCategoryFormValue.name,
-      urlHandle: addCategoryFormValue.urlHandle,
-    };
-    if (newCategoryDataByUserDTO && this.addCategoryFormGroup.valid) {
+    if (this.addCategoryFormGroup.valid) {
+      const addCategoryFormValue = this.addCategoryFormGroup.getRawValue();
+      const newCategoryDataByUserDTO: NewCategoryRequestValues = {
+        name: addCategoryFormValue.name,
+        urlHandle: addCategoryFormValue.urlHandle,
+      };
+
       this.categoryService.addCategory(newCategoryDataByUserDTO);
       this.addCategoryFormGroup.reset({ name: '', urlHandle: '' });
     }

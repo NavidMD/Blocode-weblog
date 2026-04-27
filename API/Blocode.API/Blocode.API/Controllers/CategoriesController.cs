@@ -23,7 +23,7 @@ namespace Blocode.API.Controllers
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
         {
             //تبدیل اطلاعات درخواست به مدل دیتابیس
-            var newCategory = new Category()
+            var newCategory = new Category()    
             {
                 Name = request.Name,
                 UrlHandle = request.UrlHandle
@@ -55,6 +55,21 @@ namespace Blocode.API.Controllers
             }
             //ارسال پاسخ به فرانت
             return Ok(response);
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<Category?>> GetCategoryById([FromRoute] Guid id)
+        {
+            var foundedCategory = await categoryRepository.GetCategoryAsync(id);
+            if (foundedCategory == null)
+            {
+                return NotFound($"Category with id {id} not found!");
+            }
+            else
+            {
+                var response = new CategoryDTO() { Id = id, Name = foundedCategory.Name, UrlHandle = foundedCategory.UrlHandle };
+                return Ok(response);
+            }
         }
     }
 }

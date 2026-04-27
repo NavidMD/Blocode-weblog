@@ -28,6 +28,7 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
+          [routerLink]="['/admin/categories', 'edit', category.id]"
           class="hover:-translate-y-1.5 transition cursor-pointer hover:shadow-lg hover:bg-blue-100 flex flex-col justify-between items-start gap-4 rounded-md shadow-md shadow-black/20 bg-white px-6 pt-6 pb-5"
         >
           <div class="w-full h-1/2 flex flex-row gap-3 justify-start items-center">
@@ -38,7 +39,7 @@
             <h3 class="text-lg text-black/90">{{ category.name }}</h3>
           </div>
           <div class="w-full h-1/2 flex flex-col justify-center items-start">
-            <span class="text-[11px] text-black/90 font-light flex flex-row gap-1 items-center">
+            <span class="text-[11px] text-black/90 font-light flex flex-row gap-1 items-start">
               <img src="assets/vectors/attach.svg" class="w-4 h-4 opacity-80" />
               مسیر (slug) : {{ category.urlHandle }}
             </span>

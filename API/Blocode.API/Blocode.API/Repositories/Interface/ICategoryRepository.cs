@@ -7,5 +7,7 @@ namespace Blocode.API.Repositories.Interface
         Task<Category> CreateCategoryAsync(Category category);
 
         Task<IEnumerable<Category>> GetAllCategoriesAsync();
+
+        Task<Category?> GetCategoryAsync(Guid id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Blocode.API.Data;
 using Blocode.API.Models.Domain;
 using Blocode.API.Repositories.Interface;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blocode.API.Repositories.Implementation
@@ -22,6 +23,11 @@ namespace Blocode.API.Repositories.Implementation
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
             return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<Category?> GetCategoryAsync(Guid id)
+        {
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }
