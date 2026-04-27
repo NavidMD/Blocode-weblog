@@ -1,5 +1,5 @@
 <div class="w-full h-auto flex flex-col justify-center items-start gap-5">
-  <div class="w-full flex flex-row justify-between items-center mb-10">
+  <div class="w-full flex flex-row justify-between items-center">
     <h1 class="text-[16px] font-bold">
       دسته بندی ها
       @if (addCategoryActive) {
@@ -19,7 +19,7 @@
   @if (addCategoryActive) {
     <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
   }
-  <div class="w-full grid grid-flow-row grid-cols-5 gap-4">
+  <div class="w-full grid grid-flow-row grid-cols-5 gap-4 mt-5">
     @if (isLoading()) {
       <span>درحال بارگذاری...</span>
     }
@@ -28,7 +28,7 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="w-full flex flex-col justify-between items-start gap-6 rounded-md shadow-md shadow-black/20 bg-white px-6 pt-6 pb-5"
+          class="w-full hover:-translate-y-1.5 transition cursor-pointer hover:shadow-lg hover:bg-blue-50 flex flex-col justify-between items-start gap-4 rounded-md shadow-md shadow-black/20 bg-white px-6 pt-6 pb-5"
         >
           <div class="w-full h-1/2 flex flex-row gap-3 justify-start items-center">
             <span
@@ -38,9 +38,10 @@
             <h3 class="text-lg text-black/90">{{ category.name }}</h3>
           </div>
           <div class="w-full h-1/2 flex flex-col justify-center items-start">
-            <span class="text-[11px] text-black/90 font-light"
-              >مسیر (slug) : {{ category.urlHandle }}</span
-            >
+            <span class="text-[11px] text-black/90 font-light flex flex-row gap-1 items-center">
+              <img src="../../../../assets/vectors/attach.svg" class="w-4 h-4 opacity-80">
+              مسیر (slug) : {{ category.urlHandle }}
+            </span>
           </div>
         </div>
       }

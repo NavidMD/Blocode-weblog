@@ -62,7 +62,7 @@ export class AddCategory {
       name: addCategoryFormValue.name,
       urlHandle: addCategoryFormValue.urlHandle,
     };
-    if (newCategoryDataByUserDTO) {
+    if (newCategoryDataByUserDTO && this.addCategoryFormGroup.valid) {
       this.categoryService.addCategory(newCategoryDataByUserDTO);
       this.addCategoryFormGroup.reset({ name: '', urlHandle: '' });
     }
