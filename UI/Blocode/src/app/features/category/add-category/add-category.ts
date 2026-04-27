@@ -56,7 +56,8 @@ export class AddCategory {
     return this.addCategoryFormGroup.controls.urlHandle;
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     const addCategoryFormValue = this.addCategoryFormGroup.getRawValue();
     const newCategoryDataByUserDTO: NewCategoryRequestValues = {
       name: addCategoryFormValue.name,

@@ -1,9 +1,7 @@
 import { Component, inject, Signal, WritableSignal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { AddCategory } from '../add-category/add-category';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../services/category-service';
-import { HttpResourceRef } from '@angular/common/http';
 import { Category } from '../models/category.model';
 
 @Component({
@@ -14,6 +12,7 @@ import { Category } from '../models/category.model';
 })
 export class CategoryList {
   private categoryService = inject(CategoryService);
+  //اینجا متد دریافت دسته بندی هارو از سرویس صدا زدیم
   private getAllCategoriesRef = this.categoryService.getAllCategories();
 
   isLoading: Signal<boolean> = this.getAllCategoriesRef.isLoading;

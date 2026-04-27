@@ -5,6 +5,7 @@ import {
   Category,
   NewCategoryRequestValues,
 } from '../models/category.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import {
 export class CategoryService {
   constructor(private http: HttpClient) {}
 
-  private readonly baseUrl: string = 'https://localhost:7143';
+  private readonly baseUrl = environment.apiBaseUrl;
 
   addCategoryStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
 
