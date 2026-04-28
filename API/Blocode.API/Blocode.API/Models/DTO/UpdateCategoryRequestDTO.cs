@@ -2,7 +2,7 @@
 
 namespace Blocode.API.Models.DTO
 {
-    public class CreateCategoryRequestDTO
+    public class UpdateCategoryRequestDTO
     {
         [Required]
         public string Name { get; set; }

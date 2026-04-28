@@ -2,6 +2,7 @@
 using Blocode.API.Models.Domain;
 using Blocode.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blocode.API.Repositories.Implementation
@@ -29,5 +30,18 @@ namespace Blocode.API.Repositories.Implementation
         {
             return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         }
+
+        public async Task<Category?> UpdateCategoryByIdAsync(Category updatedCategory)
+        {
+            var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Id == updatedCategory.Id);
+            if (existingCategory != null)
+            {
+                _context.Categories.Entry(existingCategory).CurrentValues.SetValues(updatedCategory);
+                await _context.SaveChangesAsync();
+                return updatedCategory;
+            }
+            return null;
+        }
+
     }
 }

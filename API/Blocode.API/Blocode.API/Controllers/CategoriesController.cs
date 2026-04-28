@@ -71,5 +71,32 @@ namespace Blocode.API.Controllers
                 return Ok(response);
             }
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<Category>> UpdateCategory([FromRoute] Guid id,[FromBody] UpdateCategoryRequestDTO updatedCategory)
+        {
+            //تبدیل به مدل دسته بندی
+            var updatingCategory = new Category()
+            {
+                Id = id,
+                Name = updatedCategory.Name,
+                UrlHandle = updatedCategory.UrlHandle,
+            };
+            var result = await categoryRepository.UpdateCategoryByIdAsync(updatingCategory);
+            if(result == null)
+            {
+                return NotFound($"Category With id {id} not found!");
+            }
+            else
+            {
+                var updateResultPayload = new CategoryDTO()
+                {
+                    Id = result.Id,
+                    Name = result.Name,
+                    UrlHandle = result.UrlHandle,
+                };
+                return Ok(updateResultPayload);
+            }
+        }
     }
 }
