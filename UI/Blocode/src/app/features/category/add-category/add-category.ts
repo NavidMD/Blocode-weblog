@@ -1,8 +1,7 @@
 import { Component, effect, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryService } from '../services/category-service';
-import { NewCategoryRequestValues } from '../models/category.model';
-import { HttpClient } from '@angular/common/http';
+import { NewCategoryRequestValuesDTO } from '../models/category.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -60,7 +59,7 @@ export class AddCategory {
     event.preventDefault();
     if (this.addCategoryFormGroup.valid) {
       const addCategoryFormValue = this.addCategoryFormGroup.getRawValue();
-      const newCategoryDataByUserDTO: NewCategoryRequestValues = {
+      const newCategoryDataByUserDTO: NewCategoryRequestValuesDTO = {
         name: addCategoryFormValue.name,
         urlHandle: addCategoryFormValue.urlHandle,
       };

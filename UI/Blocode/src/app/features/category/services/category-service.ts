@@ -3,7 +3,8 @@ import { Injectable, InputSignal, signal } from '@angular/core';
 
 import {
   Category,
-  NewCategoryRequestValues,
+  NewCategoryRequestValuesDTO,
+  UpdateCategoryRequestValuesDTO,
 } from '../models/category.model';
 import { environment } from '../../../../environments/environment';
 
@@ -16,11 +17,12 @@ export class CategoryService {
   private readonly baseUrl = environment.apiBaseUrl;
 
   addCategoryStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
+  updateCategoryStatusSignal = signal<'idle' | 'updating' | 'error' | 'success'>('idle');
 
-  //POST METHODS
-  addCategory(newCategory: NewCategoryRequestValues) {
+  //POST METHOD
+  addCategory(newCategoryDTO: NewCategoryRequestValuesDTO) {
     this.addCategoryStatusSignal.set('loading');
-    this.http.post<Category>(`${this.baseUrl}/api/categories`, newCategory).subscribe({
+    this.http.post<Category>(`${this.baseUrl}/api/categories`, newCategoryDTO).subscribe({
       next: (res) => {
         this.addCategoryStatusSignal.set('success');
         console.log(res);
@@ -33,11 +35,26 @@ export class CategoryService {
 
   //GET METHODS
   getAllCategories() {
-    return httpResource<Category[]>(() => `${this.baseUrl}/api/categories`)
+    return httpResource<Category[]>(() => `${this.baseUrl}/api/categories`);
   }
   getCategoryById(categoryId: InputSignal<string | undefined>) {
     return httpResource<Category>(() => `${this.baseUrl}/api/categories/${categoryId()}`);
   }
 
-  
+  //PUT METHOD
+  updateCategory(id: string | undefined, newCategoryDTO: UpdateCategoryRequestValuesDTO) {
+    if(!id) {
+      throw new Error("id is undefined!")
+    }
+    this.updateCategoryStatusSignal.set('updating');
+    this.http.put<Category>(`${this.baseUrl}/api/categories/${id}`, newCategoryDTO).subscribe({
+      next: (res) => {
+        this.updateCategoryStatusSignal.set('success');
+        console.log(res);
+      },
+      error: () => {
+        this.updateCategoryStatusSignal.set('error');
+      },
+    });
+  }
 }

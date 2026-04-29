@@ -4,9 +4,8 @@ import { CategoryList } from '../../../features/category/category-list/category-
 
 @Component({
   selector: 'app-navbar',
-  imports: [CategoryList, RouterLink],
+  imports: [RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar {
-}
+export class Navbar {}

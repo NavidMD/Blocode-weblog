@@ -1,9 +1,10 @@
 import { Component, effect, inject, input, signal, Signal } from '@angular/core';
 import { CategoryService } from '../services/category-service';
-import { Category } from '../models/category.model';
+import { Category, UpdateCategoryRequestValuesDTO } from '../models/category.model';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-category',
@@ -15,6 +16,23 @@ export class EditCategory {
   private categoryService = inject(CategoryService);
   editCategoryActive: boolean = false;
   id = input<string>();
+  changeState: boolean = false;
+
+  subscription = new Subscription();
+
+  constructor(private router: Router) {
+    effect(() => {
+      if (this.categoryService.updateCategoryStatusSignal() === 'success') {
+        this.categoryService.updateCategoryStatusSignal.set('idle');
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl(this.router.url);
+        });
+      }
+      if (this.categoryService.updateCategoryStatusSignal() === 'error') {
+        console.log('updating category failed in database!');
+      }
+    });
+  }
 
   getCategoryByIdReference = this.categoryService.getCategoryById(this.id);
 
@@ -48,8 +66,31 @@ export class EditCategory {
     );
   });
 
+  listenOnFormChange() {
+    this.subscription = this.editCategoryFormGroup.valueChanges.subscribe((value) => {
+      if (
+        value.name === this.categoryByIdValue()?.name! &&
+        value.urlHandle === this.categoryByIdValue()?.urlHandle!
+      ) {
+        return (this.changeState = false);
+      } else {
+        return (this.changeState = true);
+      }
+    });
+  }
+
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log(this.editCategoryFormGroup.getRawValue());
+    if (this.changeState === true && this.editCategoryFormGroup.valid && this.id()) {
+      const editCategoryFormValue = this.editCategoryFormGroup.getRawValue();
+      const newCategoryDataByUserDTO: UpdateCategoryRequestValuesDTO = {
+        name: editCategoryFormValue.name,
+        urlHandle: editCategoryFormValue.urlHandle,
+      };
+
+      this.categoryService.updateCategory(this.id(), newCategoryDataByUserDTO);
+      this.editCategoryFormGroup.reset({ name: '', urlHandle: '' });
+      this.subscription.unsubscribe();
+    }
   }
 }

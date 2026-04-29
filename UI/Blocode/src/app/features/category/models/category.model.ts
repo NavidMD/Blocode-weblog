@@ -5,8 +5,13 @@ export interface Category {
 }
 
 // creating category required data
-export interface NewCategoryRequestValues {
+export interface NewCategoryRequestValuesDTO {
   name: string;
   urlHandle: string;
 }
 
+// updating category required data
+export interface UpdateCategoryRequestValuesDTO {
+  name: string;
+  urlHandle: string;
+}
