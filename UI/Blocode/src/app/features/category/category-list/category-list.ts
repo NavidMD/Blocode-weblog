@@ -18,7 +18,11 @@ export class CategoryList {
 
   isLoading: Signal<boolean> = this.getAllCategoriesRef.isLoading;
   isError: Signal<Error | undefined> = this.getAllCategoriesRef.error;
-  value: WritableSignal<Category[] | undefined> = this.getAllCategoriesRef.value;
+  value: Signal<Category[] | undefined> = this.getAllCategoriesRef.value;
 
   addCategoryActive: boolean = false;
+
+  deleteCategory(id: string) {
+    console.log(id);
+  }
 }

@@ -28,7 +28,7 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="hover:-translate-y-1 overflow-hidden relative transition cursor-pointer hover:shadow-lg hover:bg-blue-100 flex flex-col justify-between items-center rounded-md shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
+          class="overflow-hidden relative transition cursor-pointer hover:shadow-lg hover:bg-blue-100 flex flex-col justify-between items-center rounded-md shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
         >
           <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
             <span
@@ -45,21 +45,42 @@
           </div>
           <div
             id="cards-buttonSection"
-            class="w-full absolute bottom-2.5 h-fit flex flex-row gap-1.5 justify-end items-start px-4"
+            class="w-full absolute flex justify-between bottom-2.5 h-fit px-4"
           >
-            <button class="ml-auto flex flex-row gap-0.5 justify-center items-center cursor-pointer opacity-70">
-              <span class="text-[11px] pt-1 text-black/70">12</span>
-              <img class="w-4 h-4" src="assets/vectors/eye.svg" alt="مشاهده" title="مشاهده" />
-            </button>
-            <button
-              class="cursor-pointer"
-              [routerLink]="['/admin/categories', 'edit', category.id]"
-            >
-              <img class="w-4 h-4" src="assets/vectors/edit.svg" alt="ویرایش" title="ویرایش" />
-            </button>
-            <button class="cursor-pointer">
-              <img class="w-4 h-4" src="assets/vectors/delete.svg" alt="حذف" title="حذف" />
-            </button>
+            <div class="w-fit items-center">
+              <button
+                class="ml-auto flex flex-row gap-0.5 justify-center items-center cursor-pointer opacity-70"
+              >
+                <span class="text-[11px] pt-1 text-black/70">12</span>
+                <img
+                  class="w-4 h-4 hover:scale-120 transition"
+                  src="assets/vectors/eye.svg"
+                  alt="مشاهده بلاگ ها"
+                  title="مشاهده بلاگ ها"
+                />
+              </button>
+            </div>
+            <div class="flex flex-row gap-1.5 justify-end">
+              <button
+                class="cursor-pointer"
+                [routerLink]="['/admin/categories', 'edit', category.id]"
+              >
+                <img
+                  class="w-4 h-4 hover:scale-120 transition"
+                  src="assets/vectors/edit.svg"
+                  alt="ویرایش"
+                  title="ویرایش"
+                />
+              </button>
+              <button class="cursor-pointer" (click)="deleteCategory(category.id)">
+                <img
+                  class="w-4 h-4 hover:scale-120 transition"
+                  src="assets/vectors/delete.svg"
+                  alt="حذف"
+                  title="حذف"
+                />
+              </button>
+            </div>
           </div>
         </div>
       }
