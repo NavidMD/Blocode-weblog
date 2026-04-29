@@ -19,7 +19,7 @@
   @if (addCategoryActive) {
     <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
   }
-  <div class="gap-4 mt-5" id="categories-container">
+  <div class="gap-4 mt-2" id="categories-container">
     @if (isLoading()) {
       <span>درحال بارگذاری...</span>
     }
@@ -28,21 +28,38 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          [routerLink]="['/admin/categories', 'edit', category.id]"
-          class="hover:-translate-y-1.5 transition cursor-pointer hover:shadow-lg hover:bg-blue-100 flex flex-col justify-between items-start gap-4 rounded-md shadow-md shadow-black/20 bg-white px-6 pt-6 pb-5"
+          class="hover:-translate-y-1 overflow-hidden relative transition cursor-pointer hover:shadow-lg hover:bg-blue-100 flex flex-col justify-between items-center rounded-md shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
         >
-          <div class="w-full h-1/2 flex flex-row gap-3 justify-start items-center">
+          <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
             <span
               class="shadow-md shadow-black/15 rounded-full text-xl text-white flex justify-center items-center w-10 h-10 pt-1 bg-blue-400/70"
               >{{ category.name[0].toUpperCase() }}</span
             >
-            <h3 class="text-lg text-black/90">{{ category.name }}</h3>
+            <div class="h-1/2 flex flex-col justify-center items-start">
+              <h3 class="text-lg text-black/90">{{ category.name }}</h3>
+              <span class="text-[11px] text-black/70 font-light flex flex-row gap-0.5 items-start">
+                <img src="assets/vectors/attach.svg" class="w-3.5 h-3.5 opacity-80" />
+                {{ category.urlHandle }}
+              </span>
+            </div>
           </div>
-          <div class="w-full h-1/2 flex flex-col justify-center items-start">
-            <span class="text-[11px] text-black/90 font-light flex flex-row gap-1 items-start">
-              <img src="assets/vectors/attach.svg" class="w-4 h-4 opacity-80" />
-              مسیر (slug) : {{ category.urlHandle }}
-            </span>
+          <div
+            id="cards-buttonSection"
+            class="w-full absolute bottom-2.5 h-fit flex flex-row gap-1.5 justify-end items-start px-4"
+          >
+            <button class="ml-auto flex flex-row gap-0.5 justify-center items-center cursor-pointer opacity-70">
+              <span class="text-[11px] pt-1 text-black/70">12</span>
+              <img class="w-4 h-4" src="assets/vectors/eye.svg" alt="مشاهده" title="مشاهده" />
+            </button>
+            <button
+              class="cursor-pointer"
+              [routerLink]="['/admin/categories', 'edit', category.id]"
+            >
+              <img class="w-4 h-4" src="assets/vectors/edit.svg" alt="ویرایش" title="ویرایش" />
+            </button>
+            <button class="cursor-pointer">
+              <img class="w-4 h-4" src="assets/vectors/delete.svg" alt="حذف" title="حذف" />
+            </button>
           </div>
         </div>
       }

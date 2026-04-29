@@ -1,4 +1,5 @@
 ﻿using Blocode.API.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blocode.API.Repositories.Interface
 {
@@ -11,5 +12,7 @@ namespace Blocode.API.Repositories.Interface
         Task<Category?> GetCategoryAsync(Guid id);
 
         Task<Category?> UpdateCategoryByIdAsync(Category updatedCategory);
+
+        Task<Category?> DeleteCategoryByIdAsync(Guid id);
     }
 }

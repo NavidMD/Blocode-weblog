@@ -1,5 +1,24 @@
 #categories-container {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+#categories-container #cards-buttonSection {
+  transform: translateX(-200%);
+  opacity: 0;
+  animation: move-to-right 1s ease .1s forwards;
+}
+
+@keyframes move-to-right {
+  0% {
+    transform: translateX(-200%);
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    transform: translateX(0);
+    display: flex;
+    opacity: 1;
+  }
 }

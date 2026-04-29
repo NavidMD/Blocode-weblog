@@ -98,5 +98,25 @@ namespace Blocode.API.Controllers
                 return Ok(updateResultPayload);
             }
         }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteCategoryById([FromRoute] Guid id)
+        {
+            var result = await categoryRepository.DeleteCategoryByIdAsync(id);
+            if(result != null)
+            {
+                var response = new CategoryDTO()
+                {
+                    Id = result.Id,
+                    Name = result.Name,
+                    UrlHandle = result.UrlHandle 
+                };
+                return Ok(response);
+            }
+            else
+            {
+                return NotFound($"Category with id {id} not found!");
+            }
+        }
     }
 }
