@@ -18,6 +18,7 @@ export class CategoryService {
 
   addCategoryStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
   updateCategoryStatusSignal = signal<'idle' | 'updating' | 'error' | 'success'>('idle');
+  deleteCategoryStatusSignal = signal<'idle' | 'deleting' | 'error' | 'success'>('idle');
 
   //POST METHOD
   addCategory(newCategoryDTO: NewCategoryRequestValuesDTO) {
@@ -56,5 +57,20 @@ export class CategoryService {
         this.updateCategoryStatusSignal.set('error');
       },
     });
+  }
+
+  //DELETE METHOD
+  deleteCategory(id: string) {
+    this.deleteCategoryStatusSignal.set('deleting');
+    this.http.delete<Category>(`${this.baseUrl}/api/categories/${id}`)
+    .subscribe({
+      next: (res) => {
+        this.deleteCategoryStatusSignal.set('success')
+        console.log('deleted successfully', res);
+      },
+      error: () => {
+        this.deleteCategoryStatusSignal.set('error');
+      }
+    })
   }
 }

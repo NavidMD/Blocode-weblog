@@ -28,7 +28,7 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="overflow-hidden relative transition cursor-pointer hover:shadow-lg hover:bg-blue-100 flex flex-col justify-between items-center rounded-md shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
+          class="overflow-hidden relative transition cursor-pointer hover:bg-blue-50 flex flex-col justify-between items-center rounded-md shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
         >
           <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
             <span
@@ -38,14 +38,14 @@
             <div class="h-1/2 flex flex-col justify-center items-start">
               <h3 class="text-lg text-black/90">{{ category.name }}</h3>
               <span class="text-[11px] text-black/70 font-light flex flex-row gap-0.5 items-start">
-                <img src="assets/vectors/attach.svg" class="w-3.5 h-3.5 opacity-80" />
                 {{ category.urlHandle }}
+                <img src="assets/vectors/attach.svg" class="w-3 h-3 opacity-80" />
               </span>
             </div>
           </div>
           <div
             id="cards-buttonSection"
-            class="w-full absolute flex justify-between bottom-2.5 h-fit px-4"
+            class="w-full absolute flex justify-between bottom-2 h-fit px-3"
           >
             <div class="w-fit items-center">
               <button
@@ -66,7 +66,7 @@
                 [routerLink]="['/admin/categories', 'edit', category.id]"
               >
                 <img
-                  class="w-4 h-4 hover:scale-120 transition"
+                  class="w-4 h-4 hover:scale-120 transition opacity-90"
                   src="assets/vectors/edit.svg"
                   alt="ویرایش"
                   title="ویرایش"
@@ -74,7 +74,7 @@
               </button>
               <button class="cursor-pointer" (click)="deleteCategory(category.id)">
                 <img
-                  class="w-4 h-4 hover:scale-120 transition"
+                  class="w-4 h-4 hover:scale-120 transition opacity-90"
                   src="assets/vectors/delete.svg"
                   alt="حذف"
                   title="حذف"
