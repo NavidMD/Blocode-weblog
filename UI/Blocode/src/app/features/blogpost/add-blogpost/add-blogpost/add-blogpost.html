@@ -6,112 +6,209 @@
     </h1>
   </div>
   <div class="w-full flex items-center">
-    <form [formGroup]="newBlogPostForm" class="w-full flex flex-wrap gap-4">
-      <div class="flex-1 flex flex-col gap-2 items-start">
+    <form [formGroup]="newBlogPostForm" class="w-full flex flex-wrap gap-x-4 gap-y-8">
+      <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-title">عنوان مقاله</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-title"
           type="text"
           formControlName="title"
         />
-        <!-- @if (categoryNameInput.touched && categoryNameInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">نام دسته بندی نباید خالی باشد</span>
+        @if (newBlogPostForm.controls.title.pristine || newBlogPostForm.controls.title.valid) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >عنوان مقاله را وارد کنید (حداقل 10 کلمه)</span
+          >
         }
-        @if (categoryNameInput.touched && categoryNameInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">نام دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.title.dirty &&
+          newBlogPostForm.controls.title.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >نام دسته بندی نباید خالی باشد</span
+          >
+        }
+        @if (
+          newBlogPostForm.controls.title.dirty &&
+          newBlogPostForm.controls.title.hasError('minlength')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >نام دسته بندی حداقل 10 کلمه باید باشد</span
+          >
+        }
       </div>
-      <div class="flex-1 flex flex-col gap-2 items-start">
+      <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
         />
-        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        @if (
+          newBlogPostForm.controls.urlHandle.untouched || newBlogPostForm.controls.urlHandle.valid
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >لینک مقاله یا slug را وارد کنید (حداقل 10 کلمه)</span
+          >
         }
-        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.urlHandle.touched &&
+          newBlogPostForm.controls.urlHandle.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >لینک یا slug نباید خالی باشد</span
+          >
+        }
+        @if (
+          newBlogPostForm.controls.urlHandle.touched &&
+          newBlogPostForm.controls.urlHandle.hasError('minlength')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >لینک مقاله یا slug حداقل 10 کلمه باید باشد</span
+          >
+        }
       </div>
-      <div class="flex-[100%] flex flex-col gap-2 items-start">
+      <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-shortDescription"
           type="text"
           formControlName="shortDescription"
         />
-        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        @if (
+          newBlogPostForm.controls.shortDescription.untouched ||
+          newBlogPostForm.controls.shortDescription.valid
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >چکیده مقاله را وارد کنید (حداقل 20 کلمه)</span
+          >
         }
-        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.shortDescription.touched &&
+          newBlogPostForm.controls.shortDescription.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >چکیده مقاله نباید خالی باشد</span
+          >
+        }
+        @if (
+          newBlogPostForm.controls.shortDescription.touched &&
+          newBlogPostForm.controls.shortDescription.hasError('minlength')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >چکیده مقاله حداقل 20 کلمه باید باشد</span
+          >
+        }
       </div>
-      <div class="flex-[100%] flex flex-col gap-2 items-start">
+      <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-content">متن کامل مقاله</label>
         <textarea
-          class="w-full border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-content"
           formControlName="content"
           rows="5"
         >
         </textarea>
-        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        @if (newBlogPostForm.controls.content.untouched || newBlogPostForm.controls.content.valid) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >متن کامل مقاله را وارد کنید (حداقل 50 کلمه)</span
+          >
         }
-        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.content.touched &&
+          newBlogPostForm.controls.content.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500">متن مقاله نباید خالی باشد</span>
+        }
+        @if (
+          newBlogPostForm.controls.content.touched &&
+          newBlogPostForm.controls.content.hasError('minlength')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >متن مقاله حداقل 50 کلمه باید باشد</span
+          >
+        }
       </div>
-      <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start">
+      <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-featuredImageUrl">لینک تصویر</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm text-left h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-featuredImageUrl"
           type="text"
           formControlName="featuredImageUrl"
+          placeholder="https://picture.com"
         />
-        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        @if (
+          newBlogPostForm.controls.featuredImageUrl.untouched ||
+          newBlogPostForm.controls.featuredImageUrl.valid
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >لینک مرتبط به تصویر مقاله را بطور کامل وارد کنید</span
+          >
         }
-        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.featuredImageUrl.touched &&
+          newBlogPostForm.controls.featuredImageUrl.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >وارد کردن لینک تصویر الزامی است</span
+          >
+        }
       </div>
-      <div class="grow shrink flex flex-col gap-2 items-start">
+      <div class="grow shrink flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-publishedDate">تاریخ انتشار</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 pt-2 px-2 outline-0"
           id="blog-publishedDate"
           type="date"
           formControlName="publishedDate"
         />
-        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        @if (
+          newBlogPostForm.controls.publishedDate.untouched ||
+          newBlogPostForm.controls.publishedDate.valid
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >تاریخ انتشار مقاله را انتخاب کنید</span
+          >
         }
-        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.publishedDate.touched &&
+          newBlogPostForm.controls.publishedDate.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >انتخاب تاریخ انتشار الزامی است</span
+          >
+        }
       </div>
-      <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start">
+      <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-author">نویسنده</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-author"
           type="text"
           formControlName="author"
         />
-        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >نام نویسنده مقاله را وارد کنید</span
+          >
         }
-        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
-          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
-        } -->
+        @if (
+          newBlogPostForm.controls.author.touched &&
+          newBlogPostForm.controls.author.hasError('minlength')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500"
+            >نام نویسنده مقاله حداقل 10 کلمه باید باشد</span
+          >
+        }
+        @if (
+          newBlogPostForm.controls.author.touched &&
+          newBlogPostForm.controls.author.hasError('required')
+        ) {
+          <span class="text-[10px] absolute -bottom-5 text-red-500">نام نویسنده الزامی است</span>
+        }
       </div>
       <div class="grow shrink h-full flex-[50%] flex flex-col gap-2 items-start">
         <label class="text-sm text-black/80">وضعیت نمایش مقاله</label>
@@ -142,12 +239,19 @@
           <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
         } -->
       </div>
-      <!-- <div class="h-[64px] items-end justify-end flex flex-row gap-2">
+      <div class="h-[64px] items-end justify-end flex flex-row gap-2">
+        <button
+          type="submit"
+          class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+        >
+          ایجاد مقاله
+        </button>
         <button
           class="p-2 px-3 text-sm bg-red-400 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
-          (click)="cancelAddingCategory()"
+          type="button"
+          [routerLink]="['/admin', 'blogs']"
         >
-          انصراف
+          بازگشت
         </button>
         <button
           type="reset"
@@ -155,14 +259,7 @@
         >
           پاک کردن
         </button>
-        <button
-          type="submit"
-          [disabled]="!addCategoryFormGroup.valid"
-          class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
-        >
-          ایجاد دسته بندی
-        </button>
-      </div> -->
+      </div>
     </form>
   </div>
 </div>
