@@ -9,10 +9,11 @@
     @if (!addCategoryActive) {
       <a
         role="button"
-        class="p-2 px-3 text-sm bg-blue-500 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-3 text-sm bg-blue-500 text-white flex flex-row justify-center items-center gap-1 rounded-md shadow-md shadow-black/20 cursor-pointer"
         (click)="addCategoryActive = true"
       >
-        افزودن دسته بندی
+        <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="">
+       دسته بندی جدید
       </a>
     }
   </div>

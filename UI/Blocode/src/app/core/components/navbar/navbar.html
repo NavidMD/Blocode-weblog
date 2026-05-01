@@ -1,23 +1,23 @@
-<nav class="w-full flex flex-row justify-between items-center py-5 px-6 bg-transparent mb-2">
+<nav class="w-full flex flex-row justify-between items-center py-4 px-6 bg-transparent mb-6 border-0 border-b border-black/15">
   <div class="w-auto flex flex-row gap-10 items-center">
     <h1 [routerLink]="['/']" class="font-extrabold text-[21px] text-blue-600 cursor-pointer">
       بلاکُد
     </h1>
     <div>
       <ul class="flex flex-row gap-7 text-sm font-semibold">
-        <li class="flex items-center cursor-pointer">
-          <a>مقالات</a>
+        <li class="flex items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black transition">
+          <a [routerLink]="['admin', 'blogs']">مقالات</a>
         </li>
-        <li class="flex items-center cursor-pointer">
+        <li class="flex items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black transition">
           <a>نویسندگان</a>
         </li>
-        <li class="flex items-center cursor-pointer">
+        <li class="flex items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black transition">
           <a [routerLink]="['admin', 'categories']">دسته بندی ها</a>
         </li>
       </ul>
     </div>
   </div>
-  <div class="w-auto flex flex-row gap-7 justify-end items-center">
+  <div class="w-auto flex flex-row gap-7 justify-end items-center ">
     <label class="ui-switch">
       <input type="checkbox" />
       <div class="slider">

@@ -1,0 +1,26 @@
+<div class="w-full h-auto flex flex-col justify-center items-start gap-5">
+  <div class="w-full flex flex-row justify-between items-center">
+    <h1 class="text-[16px] font-bold">
+      مقالات
+      @if (addBlogActive) {
+        <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد مقاله </span>
+      }
+    </h1>
+    @if (!addBlogActive) {
+      <a
+        role="button"
+        [routerLink]="['/admin','blogs','add']"
+        class="p-2 px-3 text-sm bg-blue-500 text-white flex flex-row justify-center items-center gap-1 rounded-md shadow-md shadow-black/20 cursor-pointer"
+        (click)="addBlogActive = true"
+      >
+        <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="">
+        مقاله جدید
+      </a>
+    }
+  </div>
+
+  <div class="gap-4 mt-2" id="categories-container">
+
+  </div>
+</div>
+

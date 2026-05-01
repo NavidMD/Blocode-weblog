@@ -1,0 +1,168 @@
+<div class="w-full h-auto flex flex-col justify-center items-start gap-5">
+  <div class="w-full flex flex-row justify-between items-center">
+    <h1 class="text-[16px] font-bold">
+      مقالات
+      <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد مقاله </span>
+    </h1>
+  </div>
+  <div class="w-full flex items-center">
+    <form [formGroup]="newBlogPostForm" class="w-full flex flex-wrap gap-4">
+      <div class="flex-1 flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-title">عنوان مقاله</label>
+        <input
+          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-title"
+          type="text"
+          formControlName="title"
+        />
+        <!-- @if (categoryNameInput.touched && categoryNameInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">نام دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryNameInput.touched && categoryNameInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">نام دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="flex-1 flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
+        <input
+          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-urlHandle"
+          type="text"
+          formControlName="urlHandle"
+        />
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="flex-[100%] flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
+        <input
+          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-shortDescription"
+          type="text"
+          formControlName="shortDescription"
+        />
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="flex-[100%] flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-content">متن کامل مقاله</label>
+        <textarea
+          class="w-full border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-content"
+          formControlName="content"
+          rows="5"
+        >
+        </textarea>
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-featuredImageUrl">لینک تصویر</label>
+        <input
+          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-featuredImageUrl"
+          type="text"
+          formControlName="featuredImageUrl"
+        />
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="grow shrink flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-publishedDate">تاریخ انتشار</label>
+        <input
+          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-publishedDate"
+          type="date"
+          formControlName="publishedDate"
+        />
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80" for="blog-author">نویسنده</label>
+        <input
+          class="w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          id="blog-author"
+          type="text"
+          formControlName="author"
+        />
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <div class="grow shrink h-full flex-[50%] flex flex-col gap-2 items-start">
+        <label class="text-sm text-black/80">وضعیت نمایش مقاله</label>
+        <div class="w-full h-9 flex flex-row items-center justify-start gap-5">
+          <label class="w-full flex flex-row justify-start items-center gap-2">
+            <input
+              class="h-4 border border-black/20 rounded-lg outline-0"
+              type="radio"
+              formControlName="isVisible"
+              [value]="true"
+            />
+            منتشر شده
+          </label>
+          <label class="w-full flex flex-row justify-start items-center gap-2">
+            <input
+              class="h-4 border border-black/20 rounded-lg outline-0"
+              type="radio"
+              formControlName="isVisible"
+              [value]="false"
+            />
+            مخفی
+          </label>
+        </div>
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
+      </div>
+      <!-- <div class="h-[64px] items-end justify-end flex flex-row gap-2">
+        <button
+          class="p-2 px-3 text-sm bg-red-400 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+          (click)="cancelAddingCategory()"
+        >
+          انصراف
+        </button>
+        <button
+          type="reset"
+          class="p-2 px-3 text-sm bg-slate-500 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+        >
+          پاک کردن
+        </button>
+        <button
+          type="submit"
+          [disabled]="!addCategoryFormGroup.valid"
+          class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+        >
+          ایجاد دسته بندی
+        </button>
+      </div> -->
+    </form>
+  </div>
+</div>
