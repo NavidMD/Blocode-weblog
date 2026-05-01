@@ -15,13 +15,13 @@
           type="text"
           formControlName="title"
         />
-        @if (newBlogPostForm.controls.title.pristine || newBlogPostForm.controls.title.valid) {
+        @if (newBlogPostForm.controls.title.untouched || newBlogPostForm.controls.title.valid) {
           <span class="text-[10px] absolute -bottom-5 text-black/50"
             >عنوان مقاله را وارد کنید (حداقل 10 کلمه)</span
           >
         }
         @if (
-          newBlogPostForm.controls.title.dirty &&
+          newBlogPostForm.controls.title.touched &&
           newBlogPostForm.controls.title.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500"
@@ -29,7 +29,7 @@
           >
         }
         @if (
-          newBlogPostForm.controls.title.dirty &&
+          newBlogPostForm.controls.title.touched &&
           newBlogPostForm.controls.title.hasError('minlength')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500"
@@ -242,6 +242,7 @@
       <div class="h-[64px] items-end justify-end flex flex-row gap-2">
         <button
           type="submit"
+          [disabled]="newBlogPostForm.invalid"
           class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
         >
           ایجاد مقاله
