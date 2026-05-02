@@ -13,8 +13,16 @@ export class BlogPostService {
   addBlogPostStatusSignal = signal<"idle" | "loading" | "error" | "success">("idle");
 
   //HTTP POST
-  // addBlogPost(newBlogPostDTO: NewBlogPostRequestValuesDTO) {
-  //   this.addBlogPostStatusSignal.set('loading');
-  //   this.http.post(`${}`)
-  // }
+  addBlogPost(newBlogPostDTO: NewBlogPostRequestValuesDTO) {
+    this.addBlogPostStatusSignal.set('loading');
+    this.http.post(`${this.baseUrl}/blogs`, newBlogPostDTO).subscribe({
+      next: (res) => {
+        console.log("blog added",res);
+        this.addBlogPostStatusSignal.set("success")
+      },
+      error: () => {
+        this.addBlogPostStatusSignal.set('error');
+      }
+    })
+  }
 }
