@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from '@angular/router';
+import { BlogPostService } from '../services/blog-post-service';
+import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -9,7 +11,20 @@ import { RouterLink } from "@angular/router";
   styleUrl: './add-blogpost.css',
 })
 export class AddBlogpost {
-  constructor() {}
+  constructor(
+    private blogpostService: BlogPostService,
+    private router: Router,
+  ) {
+    effect(() => {
+      if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
+        this.blogpostService.addBlogPostStatusSignal.set('idle');
+        this.router.navigate(['/admin', 'blogs']);
+      }
+      if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
+        console.log('error');
+      }
+    });
+  }
 
   newBlogPostForm = new FormGroup({
     title: new FormControl<string>('', {
@@ -45,4 +60,24 @@ export class AddBlogpost {
       validators: [Validators.required],
     }),
   });
+
+  createBlogPost(event: Event) {
+    event.preventDefault();
+    if (this.newBlogPostForm.valid) {
+      const formValues = this.newBlogPostForm.getRawValue();
+      const createdBlogDTO: NewBlogPostRequestValuesDTO = {
+        title: formValues.title,
+        shortDescription: formValues.shortDescription,
+        content: formValues.content,
+        urlHandle: formValues.urlHandle,
+        author: formValues.author,
+        featuredImageUrl: formValues.featuredImageUrl,
+        publishedDate: formValues.publishedDate,
+        isVisible: formValues.isVisible,
+      };
+
+      this.blogpostService.addBlogPost(createdBlogDTO);
+      this.newBlogPostForm.reset();
+    }
+  }
 }
