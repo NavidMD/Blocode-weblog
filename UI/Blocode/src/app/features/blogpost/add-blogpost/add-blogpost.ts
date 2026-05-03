@@ -3,10 +3,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { BlogPostService } from '../services/blog-post-service';
 import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-add-blogpost',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './add-blogpost.html',
   styleUrl: './add-blogpost.css',
 })
@@ -63,6 +64,8 @@ export class AddBlogpost {
 
   createBlogPost(event: Event) {
     event.preventDefault();
+    console.log(this.newBlogPostForm);
+    
     if (this.newBlogPostForm.valid) {
       const formValues = this.newBlogPostForm.getRawValue();
       const createdBlogDTO: NewBlogPostRequestValuesDTO = {

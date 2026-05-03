@@ -1,7 +1,7 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
+import { NewBlogPostRequestValuesDTO, BlogPost } from '../models/blogpost.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class BlogPostService {
   //HTTP POST
   addBlogPost(newBlogPostDTO: NewBlogPostRequestValuesDTO) {
     this.addBlogPostStatusSignal.set('loading');
-    this.http.post(`${this.baseUrl}/blogs`, newBlogPostDTO).subscribe({
+    this.http.post<BlogPost>(`${this.baseUrl}/api/blogs`, newBlogPostDTO).subscribe({
       next: (res) => {
         console.log("blog added",res);
         this.addBlogPostStatusSignal.set("success")

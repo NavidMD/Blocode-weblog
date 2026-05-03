@@ -6,9 +6,25 @@
     </h1>
   </div>
   <div class="w-full flex items-center">
-    <form [formGroup]="newBlogPostForm" class="w-full flex flex-wrap gap-x-4 gap-y-8" (ngSubmit)="createBlogPost($event)">
+    <form
+      [formGroup]="newBlogPostForm"
+      class="w-full flex flex-wrap gap-x-4 gap-y-8"
+      (ngSubmit)="createBlogPost($event)"
+    >
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-title">عنوان مقاله</label>
+        @if (newBlogPostForm.controls.title.invalid && newBlogPostForm.controls.title.touched) {
+          <img
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (newBlogPostForm.controls.title.valid && newBlogPostForm.controls.title.touched) {
+          <img
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
         <input
           class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-title"
@@ -39,6 +55,20 @@
       </div>
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
+        @if (
+          newBlogPostForm.controls.urlHandle.invalid && newBlogPostForm.controls.urlHandle.touched
+        ) {
+          <img
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (newBlogPostForm.controls.urlHandle.valid && newBlogPostForm.controls.urlHandle.touched) {
+          <img
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
         <input
           class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-urlHandle"
@@ -71,6 +101,24 @@
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
+        @if (
+          newBlogPostForm.controls.shortDescription.invalid &&
+          newBlogPostForm.controls.shortDescription.touched
+        ) {
+          <img
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (
+          newBlogPostForm.controls.shortDescription.valid &&
+          newBlogPostForm.controls.shortDescription.touched
+        ) {
+          <img
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
         <input
           class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-shortDescription"
@@ -104,6 +152,18 @@
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-content">متن کامل مقاله</label>
+        @if (newBlogPostForm.controls.content.invalid && newBlogPostForm.controls.content.touched) {
+          <img
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (newBlogPostForm.controls.content.valid && newBlogPostForm.controls.content.touched) {
+          <img
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
         <textarea
           class="focus:border-black/30 w-full border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-content"
@@ -133,8 +193,26 @@
       </div>
       <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-featuredImageUrl">لینک تصویر</label>
+        @if (
+          newBlogPostForm.controls.featuredImageUrl.invalid &&
+          newBlogPostForm.controls.featuredImageUrl.touched
+        ) {
+          <img
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (
+          newBlogPostForm.controls.featuredImageUrl.valid &&
+          newBlogPostForm.controls.featuredImageUrl.touched
+        ) {
+          <img
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
         <input
-          class="focus:border-black/30 w-full text-sm text-left h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full text-sm text-right h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-featuredImageUrl"
           type="text"
           formControlName="featuredImageUrl"
@@ -184,6 +262,18 @@
       </div>
       <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-author">نویسنده</label>
+        @if (newBlogPostForm.controls.author.invalid && newBlogPostForm.controls.author.touched) {
+          <img
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (newBlogPostForm.controls.author.valid && newBlogPostForm.controls.author.touched) {
+          <img
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
         <input
           class="focus:border-black/30 w-full text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-author"
