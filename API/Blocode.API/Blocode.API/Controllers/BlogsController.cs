@@ -38,7 +38,7 @@ namespace Blocode.API.Controllers
                 };
                 mappedResponse.Add(item);
             }
-            return Ok(mappedResponsen);
+            return Ok(mappedResponse);
         }
 
         [HttpPost]
