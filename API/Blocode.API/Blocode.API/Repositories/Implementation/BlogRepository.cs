@@ -1,6 +1,7 @@
 ﻿using Blocode.API.Data;
 using Blocode.API.Models.Domain;
 using Blocode.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blocode.API.Repositories.Implementation
 {
@@ -17,6 +18,11 @@ namespace Blocode.API.Repositories.Implementation
             await _context.BlogPosts.AddAsync(blogPost);
             await _context.SaveChangesAsync();
             return blogPost;
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetBlogsAsync()
+        {
+            return await _context.BlogPosts.ToListAsync(); 
         }
     }
 }

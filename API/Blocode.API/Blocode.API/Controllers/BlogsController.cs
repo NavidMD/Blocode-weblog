@@ -16,6 +16,31 @@ namespace Blocode.API.Controllers
         {
             this.blogRepository = blogRepository;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogs()
+        {
+            var response = await blogRepository.GetBlogsAsync();
+            var mappedResponse = new List<BlogPostDTO>();
+            foreach (var blog in response)
+            {
+                var item = new BlogPostDTO()
+                {
+                    Id = blog.Id,
+                    Title = blog.Title,
+                    ShortDescription = blog.ShortDescription,
+                    Content = blog.Content,
+                    UrlHandle = blog.UrlHandle,
+                    FeaturedImageUrl = blog.FeaturedImageUrl,
+                    PublishedDate = blog.PublishedDate,
+                    Author = blog.Author,
+                    IsVisible = blog.IsVisible
+                };
+                mappedResponse.Add(item);
+            }
+            return Ok(mappedResponsen);
+        }
+
         [HttpPost]
         public async Task<ActionResult<BlogPost>> CreateBlog(CreateBlogRequestDTO newBlogRequest)
         {

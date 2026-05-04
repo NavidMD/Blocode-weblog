@@ -9,18 +9,75 @@
     @if (!addBlogActive) {
       <a
         role="button"
-        [routerLink]="['/admin','blogs','add']"
+        [routerLink]="['/admin', 'blogs', 'add']"
         class="p-2 px-3 text-sm bg-blue-500 text-white flex flex-row justify-center items-center gap-1 rounded-md shadow-md shadow-black/20 cursor-pointer"
         (click)="addBlogActive = true"
       >
-        <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="">
+        <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
         مقاله جدید
       </a>
     }
   </div>
-
-  <div class="gap-4 mt-2" id="categories-container">
-
+  <div class="gap-5 mt-2" id="blogs-container">
+    @if (loading()) {
+      <p>درحل بارگذاری...</p>
+    }
+    @if (error()) {
+      <p>مشکل در بارگذاری...</p>
+    }
+    @if (value()) {
+      @for (blog of value(); track blog.id) {
+        <div
+          id="blog-card"
+          class="w-full h-80 rounded-md shadow-md shadow-black/15 overflow-hidden"
+        >
+          <div id="header" class="h-1/2 bg-gray-400 relative">
+            <div
+              class="w-full h-fit flex flex-row justify-between items-center absolute bottom-0 p-3"
+            >
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <div
+                  class="w-7 h-7 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
+                >
+                  <img />
+                </div>
+                <p class="text-[12px] text-white">{{ blog.author }}</p>
+              </div>
+              <p class="text-white text-[10px] pt-1">{{ blog.publishedDate }}</p>
+            </div>
+          </div>
+          <div id="main" class="w-full h-1/4 p-3 flex flex-col gap-1.5">
+            <h2 class="text-[15px] font-bold text-black/90">{{ blog.title }}</h2>
+            <p class="text-[12px] text-black/70">{{ blog.shortDescription }}</p>
+          </div>
+          <div id="footer" class="w-full h-1/4 p-3 flex flex-row items-end justify-between">
+            <div>
+              <button
+                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-3 bg-blue-500"
+              >
+                مشاهده
+              </button>
+            </div>
+            <div class="flex flex-row gap-1">
+              <button
+                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-3 bg-blue-500"
+              >
+                آرشیو
+              </button>
+              <button
+                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-2 bg-blue-400"
+              >
+                ویرایش
+              </button>
+              <button
+                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-2 bg-red-400"
+              >
+                حذف
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    }
   </div>
 </div>
-
