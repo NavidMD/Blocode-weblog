@@ -4,12 +4,14 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     CommonModule,
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient()
-  ]
+    provideHttpClient(),
+    provideMarkdown(),
+  ],
 };

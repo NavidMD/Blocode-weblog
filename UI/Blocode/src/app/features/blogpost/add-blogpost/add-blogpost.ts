@@ -4,10 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 import { BlogPostService } from '../services/blog-post-service';
 import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
 import { NgClass } from '@angular/common';
+import { MarkdownComponent, MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-add-blogpost',
-  imports: [ReactiveFormsModule, RouterLink, NgClass],
+  imports: [ReactiveFormsModule, RouterLink, NgClass, MarkdownModule],
   templateUrl: './add-blogpost.html',
   styleUrl: './add-blogpost.css',
 })

@@ -29,50 +29,54 @@
       @for (blog of value(); track blog.id) {
         <div
           id="blog-card"
-          class="w-full h-80 rounded-md shadow-md shadow-black/15 overflow-hidden"
+          class="w-full h-[305px] hover:-translate-y-1.5 hover:shadow-lg transition cursor-pointer rounded-md shadow-md shadow-black/15 overflow-hidden relative"
         >
-          <div id="header" class="h-1/2 bg-gray-400 relative">
+          <div id="header" class="h-[60%]">
             <div
-              class="w-full h-fit flex flex-row justify-between items-center absolute bottom-0 p-3"
+              class="w-full z-10 h-fit flex flex-row justify-between items-center absolute bottom-0 p-3 py-3.5"
             >
               <div class="flex flex-row gap-2 justify-center items-center">
                 <div
-                  class="w-7 h-7 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
+                  class="w-8 h-8 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
                 >
-                  <img />
+                  <img class="w-5 h-5 opacity-40" src="assets/vectors/male_user.svg" />
                 </div>
-                <p class="text-[12px] text-white">{{ blog.author }}</p>
+                <p class="text-[13px] text-white">{{ blog.author }}</p>
               </div>
-              <p class="text-white text-[10px] pt-1">{{ blog.publishedDate }}</p>
             </div>
           </div>
-          <div id="main" class="w-full h-1/4 p-3 flex flex-col gap-1.5">
-            <h2 class="text-[15px] font-bold text-black/90">{{ blog.title }}</h2>
-            <p class="text-[12px] text-black/70">{{ blog.shortDescription }}</p>
+          <div id="main" class="w-full h-[40%] p-3 flex flex-col gap-0.5">
+            <h2 id="title" class="text-[15px] font-bold text-black/90" >{{ blog.title }}</h2>
+            <p id="shortDescription" class="text-[12px] text-black/70">
+              {{ blog.shortDescription }}
+            </p>
           </div>
-          <div id="footer" class="w-full h-1/4 p-3 flex flex-row items-end justify-between">
-            <div>
+          <span class="text-[9px] text-black/50 absolute bottom-1.5 left-3">{{
+            toPersianFormatDate(blog.publishedDate)
+          }}</span>
+          <div
+            id="buttons"
+            class="w-full h-fit p-2 px-3 flex flex-row items-start justify-end absolute left-0 top-0"
+          >
+            <div class="flex flex-row bg-white shadow-md rounded-sm p-1">
               <button
-                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-3 bg-blue-500"
+                class="p-1 text-[13px] text-white rounded-md hover:bg-slate-100 cursor-pointer"
               >
-                مشاهده
-              </button>
-            </div>
-            <div class="flex flex-row gap-1">
-              <button
-                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-3 bg-blue-500"
-              >
-                آرشیو
-              </button>
-              <button
-                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-2 bg-blue-400"
-              >
-                ویرایش
+                <img
+                  class="w-4 h-4 opacity-90"
+                  alt="آرشیو"
+                  src="assets/vectors/filing_cabinet.svg"
+                />
               </button>
               <button
-                class="p-1 text-[13px] text-white shadow-md shadow-black/15 rounded-md px-2 bg-red-400"
+                class="p-1 text-[13px] text-white rounded-md hover:bg-slate-100 cursor-pointer"
               >
-                حذف
+                <img class="w-4 h-4 opacity-70" alt="ویرایش" src="assets/vectors/edit.svg" />
+              </button>
+              <button
+                class="p-1 text-[13px] text-white rounded-md hover:bg-slate-100 cursor-pointer"
+              >
+                <img class="w-4 h-4 opacity-70" alt="حذف" src="assets/vectors/delete.svg" />
               </button>
             </div>
           </div>

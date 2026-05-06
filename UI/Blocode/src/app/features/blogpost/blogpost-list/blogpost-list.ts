@@ -20,5 +20,14 @@ export class BlogpostList {
   error: Signal<Error | undefined> = this.getAllBlogPostsRef.error;
   value: WritableSignal<BlogPost[] | undefined> = this.getAllBlogPostsRef.value;
 
-
+  toPersianFormatDate(date: string) {
+    const convertingDate = new Date(date);
+    const result = new Intl.DateTimeFormat('fa-IR', {
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(convertingDate);
+    return result;
+  }
 }
