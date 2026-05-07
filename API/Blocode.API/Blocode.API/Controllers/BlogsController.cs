@@ -2,6 +2,7 @@
 using Blocode.API.Models.DTO;
 using Blocode.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blocode.API.Controllers
@@ -11,10 +12,12 @@ namespace Blocode.API.Controllers
     public class BlogsController : ControllerBase
     {
         private readonly IBlogRepository blogRepository;
+        private readonly ICategoryRepository categoryRepository;
 
-        public BlogsController(IBlogRepository blogRepository)
+        public BlogsController(IBlogRepository blogRepository, ICategoryRepository categoryRepository)
         {
             this.blogRepository = blogRepository;
+            this.categoryRepository = categoryRepository;
         }
 
         [HttpGet]
@@ -34,7 +37,14 @@ namespace Blocode.API.Controllers
                     FeaturedImageUrl = blog.FeaturedImageUrl,
                     PublishedDate = blog.PublishedDate,
                     Author = blog.Author,
-                    IsVisible = blog.IsVisible
+                    IsVisible = blog.IsVisible,
+                    Categories = blog.Categories.Select(c => new CategoryDTO()
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        UrlHandle = c.UrlHandle
+                    }).ToList()
+
                 };
                 mappedResponse.Add(item);
             }
@@ -42,7 +52,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BlogPost>> CreateBlog(CreateBlogRequestDTO newBlogRequest)
+        public async Task<ActionResult<BlogPost>> CreateBlog([FromBody] CreateBlogRequestDTO newBlogRequest)
         {
             var newBlog = new BlogPost()
             {
@@ -54,9 +64,23 @@ namespace Blocode.API.Controllers
                 Author = newBlogRequest.Author,
                 UrlHandle = newBlogRequest.UrlHandle,
                 IsVisible = newBlogRequest.IsVisible,
+                Categories = new List<Category>() { }
             };
 
+            if (newBlogRequest.Categories.Length > 0)
+            {
+                foreach (var category in newBlogRequest.Categories)
+                {
+                    var categoryModelInDB = await categoryRepository.GetCategoryAsync(category);
+                    if (categoryModelInDB != null)
+                    {
+                        newBlog.Categories.Add(categoryModelInDB);
+                    }
+                }
+
+            }
             var result = await blogRepository.CreateBlogAsync(newBlog);
+
             if (result == null)
             {
                 return BadRequest();
@@ -74,6 +98,12 @@ namespace Blocode.API.Controllers
                     Author = result.Author,
                     UrlHandle = result.UrlHandle,
                     IsVisible = result.IsVisible,
+                    Categories = result.Categories.Select(c => new CategoryDTO()
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        UrlHandle = c.UrlHandle
+                    }).ToList()
                 };
                 return Ok(response);
             }
