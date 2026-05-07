@@ -22,7 +22,7 @@ namespace Blocode.API.Repositories.Implementation
 
         public async Task<IEnumerable<BlogPost>> GetBlogsAsync()
         {
-            return await _context.BlogPosts.ToListAsync(); 
+            return await _context.BlogPosts.Include(b => b.Categories).ToListAsync(); 
         }
     }
 }
