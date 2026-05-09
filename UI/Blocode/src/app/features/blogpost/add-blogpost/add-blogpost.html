@@ -321,9 +321,62 @@
           <span class="text-[10px] absolute -bottom-5 text-red-500">نام نویسنده الزامی است</span>
         }
       </div>
-      <div class="grow shrink h-full flex-[50%] flex flex-col gap-2 items-start">
+      <div class="grow shrink flex-[50%] flex flex-col gap-2 items-start relative">
+        <label class="text-sm text-black/80" for="blog-author">دسته بندی ها</label>
+        @if (newBlogPostForm.controls.author.invalid && newBlogPostForm.controls.author.touched) {
+          <img
+            class="absolute left-4.5 opacity-60 top-8.5 w-6 h-6"
+            src="assets/vectors/box_important.svg"
+          />
+        }
+        @if (newBlogPostForm.controls.author.valid && newBlogPostForm.controls.author.touched) {
+          <img
+            class="absolute left-4.5 opacity-70 top-8.5 w-6 h-6"
+            src="assets/vectors/Check Circle.svg"
+          />
+        }
+        <div
+          id="category-select"
+          class="w-full relative flex flex-row items-center text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+        >
+          <div class="flex flex-row gap-1 justify-start items-center">
+            @for (item of categoriesSelected; track item.id) {
+              <span
+                #selectedSpan
+                class="text-blue-600 p-1 px-2 pl-1.5 pt-1.5 text-[11px] bg-blue-100 rounded-md cursor-pointer select-none"
+                >{{ item.name }}
+              </span>
+            }
+            <input
+              id="cat-select-input"
+              type="text"
+              class="focus:outline-0 w-fit text-sm h-full border-0 pr-0.5"
+              placeholder="جستجو..."
+            />
+          </div>
+          <div
+            id="category-list"
+            class="w-full bg-white absolute rounded-md right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
+          >
+            @for (category of allCategoriesValue(); track category.id) {
+              <span
+                #categorySpan
+                (click)="toggleCategorySelection(category, categorySpan)"
+                class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 flex flex-row items-start gap-1 rounded-md cursor-pointer select-none"
+                >{{ category.name }}
+              </span>
+            }
+          </div>
+        </div>
+        @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
+          <span class="text-[10px] absolute -bottom-5 text-black/50"
+            >دسته بندی مقاله را از بین دسته بندی های موجود انتخاب کنید</span
+          >
+        }
+      </div>
+      <div class="grow shrink h-full flex-[100%] flex flex-col gap-2 items-start">
         <label class="text-sm text-black/80">وضعیت نمایش مقاله</label>
-        <div class="w-full h-9 flex flex-row items-center justify-start gap-5">
+        <div class="w-1/4 h-9 flex flex-row items-center justify-start gap-5">
           <label class="w-full flex flex-row justify-start items-center gap-2">
             <input
               class="h-4 border border-black/20 rounded-lg outline-0"

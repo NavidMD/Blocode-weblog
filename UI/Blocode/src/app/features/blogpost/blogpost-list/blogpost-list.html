@@ -48,13 +48,18 @@
           </div>
           <div id="main" class="w-full h-[40%] p-3 flex flex-col gap-1">
             <h2 id="title" class="text-[15px] font-bold text-black/90" >{{ blog.title }}</h2>
-            <p id="shortDescription" class="text-[12px] text-black/60 leading-5">
+            <p id="shortDescription" class="text-[12px] text-black/60 leading-4.5">
               {{ blog.shortDescription }}
             </p>
           </div>
           <span class="text-[9px] text-black/50 absolute bottom-1.5 left-3">{{
             toPersianFormatDate(blog.publishedDate)
           }}</span>
+          <div id="categories" class="absolute flex flex-row justify-center items-center bottom-1.5 right-3 gap-1"> 
+            @for (category of blog.categories; track category.id) {
+              <span class="text-blue-600 text-[9px] pb-0.5 px-1.5 pt-1 bg-blue-100 rounded-md">{{category.name}}</span>
+            }
+          </div>
           <div
             id="buttons"
             class="w-full h-fit p-2 flex flex-row items-start justify-end absolute left-0 top-0"

@@ -1,10 +1,12 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, ElementRef, inject, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { BlogPostService } from '../services/blog-post-service';
 import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
 import { NgClass } from '@angular/common';
 import { MarkdownComponent, MarkdownModule } from 'ngx-markdown';
+import { CategoryService } from '../../category/services/category-service';
+import { Category } from '../../category/models/category.model';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -13,6 +15,7 @@ import { MarkdownComponent, MarkdownModule } from 'ngx-markdown';
   styleUrl: './add-blogpost.css',
 })
 export class AddBlogpost {
+  categoryService = inject(CategoryService)
   constructor(
     private blogpostService: BlogPostService,
     private router: Router,
@@ -27,6 +30,12 @@ export class AddBlogpost {
       }
     });
   }
+  
+  private getAllCategoriesRef = this.categoryService.getAllCategories();
+
+  allCategoriesValue: WritableSignal<Category[] | undefined> = this.getAllCategoriesRef.value;
+
+  categoriesSelected: Category[] = [];
 
   newBlogPostForm = new FormGroup({
     title: new FormControl<string>('', {
@@ -62,6 +71,18 @@ export class AddBlogpost {
       validators: [Validators.required],
     }),
   });
+
+  toggleCategorySelection(event: Category, span: HTMLSpanElement) {
+    if(this.categoriesSelected.some(i => i.id == event.id)) {
+      this.categoriesSelected = this.categoriesSelected.filter(i => i.id != event.id);
+      span.classList.remove('selected');
+    }
+    else {
+      this.categoriesSelected.push(event)
+      span.classList.add('selected');
+    }
+  }
+
 
   createBlogPost(event: Event) {
     event.preventDefault();

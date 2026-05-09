@@ -1,3 +1,23 @@
 textarea {
   resize: none;
 }
+#category-list::-webkit-scrollbar {
+  height: 2px;
+}
+#category-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+#category-list::-webkit-scrollbar-thumb {
+  background: #2b00ff3a;
+  border-radius: 10px;
+}
+#category-list span.selected {
+  background-color: #dbeafe;
+  color: #155dfc;
+}
+
+#cat-select-input::placeholder {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+}
