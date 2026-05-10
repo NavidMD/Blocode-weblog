@@ -12,12 +12,18 @@ textarea {
   background: #2b00ff3a;
   border-radius: 10px;
 }
-#category-list span.selected {
-  background-color: #dbeafe;
-  color: #155dfc;
-}
 
 #cat-select-input::placeholder {
   font-size: 13px;
   color: rgba(0, 0, 0, 0.5);
+}
+
+#category-list {
+  max-height: 0;
+  transition: .2s;
+  opacity: 0;
+}
+#category-list.show {
+  max-height: 400px;
+  opacity: 1;
 }

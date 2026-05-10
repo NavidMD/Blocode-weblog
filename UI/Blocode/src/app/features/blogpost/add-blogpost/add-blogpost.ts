@@ -1,4 +1,12 @@
-import { Component, effect, ElementRef, inject, WritableSignal } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  inject,
+  WritableSignal,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { BlogPostService } from '../services/blog-post-service';
@@ -15,7 +23,7 @@ import { Category } from '../../category/models/category.model';
   styleUrl: './add-blogpost.css',
 })
 export class AddBlogpost {
-  categoryService = inject(CategoryService)
+  categoryService = inject(CategoryService);
   constructor(
     private blogpostService: BlogPostService,
     private router: Router,
@@ -29,12 +37,18 @@ export class AddBlogpost {
         console.log('error');
       }
     });
+    effect(() => {
+      const data = this.allCategoriesValue();
+      if (data) {
+        this.filteredCategories.set(data);
+      }
+    });
   }
-  
+
   private getAllCategoriesRef = this.categoryService.getAllCategories();
 
   allCategoriesValue: WritableSignal<Category[] | undefined> = this.getAllCategoriesRef.value;
-
+  filteredCategories = signal<Category[] | undefined>([]);
   categoriesSelected: Category[] = [];
 
   newBlogPostForm = new FormGroup({
@@ -72,22 +86,31 @@ export class AddBlogpost {
     }),
   });
 
-  toggleCategorySelection(event: Category, span: HTMLSpanElement) {
-    if(this.categoriesSelected.some(i => i.id == event.id)) {
-      this.categoriesSelected = this.categoriesSelected.filter(i => i.id != event.id);
-      span.classList.remove('selected');
-    }
-    else {
-      this.categoriesSelected.push(event)
-      span.classList.add('selected');
+  toggleCategorySelection(event: Category) {
+    if (this.categoriesSelected.some((i) => i.id == event.id)) {
+      this.categoriesSelected = this.categoriesSelected.filter((i) => i.id != event.id);
+    } else {
+      this.categoriesSelected.push(event);
     }
   }
 
+  searchCategory(input: HTMLInputElement) {
+    const searchValue = input.value.toLowerCase();
+    const orgCategories = this.allCategoriesValue();
+    if (!orgCategories) return;
+    if (!searchValue) {
+      this.filteredCategories.set(orgCategories);
+      return;
+    } else {
+      const filtered = orgCategories.filter((c) => c.name.toLowerCase().startsWith(searchValue));
+      this.filteredCategories.set(filtered);
+    }
+  }
 
   createBlogPost(event: Event) {
     event.preventDefault();
     console.log(this.newBlogPostForm);
-    
+
     if (this.newBlogPostForm.valid) {
       const formValues = this.newBlogPostForm.getRawValue();
       const createdBlogDTO: NewBlogPostRequestValuesDTO = {
@@ -99,8 +122,9 @@ export class AddBlogpost {
         featuredImageUrl: formValues.featuredImageUrl,
         publishedDate: formValues.publishedDate,
         isVisible: formValues.isVisible,
+        categories: this.categoriesSelected.map(i => i.id)
       };
-
+      
       this.blogpostService.addBlogPost(createdBlogDTO);
       this.newBlogPostForm.reset();
     }

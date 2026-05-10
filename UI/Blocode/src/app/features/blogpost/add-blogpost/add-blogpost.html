@@ -32,7 +32,7 @@
           formControlName="title"
         />
         @if (newBlogPostForm.controls.title.untouched || newBlogPostForm.controls.title.valid) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >عنوان مقاله را وارد کنید (حداقل 10 کلمه)</span
           >
         }
@@ -40,7 +40,7 @@
           newBlogPostForm.controls.title.touched &&
           newBlogPostForm.controls.title.hasError('required')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام دسته بندی نباید خالی باشد</span
           >
         }
@@ -48,7 +48,7 @@
           newBlogPostForm.controls.title.touched &&
           newBlogPostForm.controls.title.hasError('minlength')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام دسته بندی حداقل 10 کلمه باید باشد</span
           >
         }
@@ -80,7 +80,7 @@
         @if (
           newBlogPostForm.controls.urlHandle.untouched || newBlogPostForm.controls.urlHandle.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >لینک مقاله یا slug را وارد کنید (حداقل 10 کلمه)</span
           >
         }
@@ -88,7 +88,7 @@
           newBlogPostForm.controls.urlHandle.touched &&
           newBlogPostForm.controls.urlHandle.hasError('required')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >لینک یا slug نباید خالی باشد</span
           >
         }
@@ -96,7 +96,7 @@
           newBlogPostForm.controls.urlHandle.touched &&
           newBlogPostForm.controls.urlHandle.hasError('minlength')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >لینک مقاله یا slug حداقل 10 کلمه باید باشد</span
           >
         }
@@ -131,7 +131,7 @@
           newBlogPostForm.controls.shortDescription.untouched ||
           newBlogPostForm.controls.shortDescription.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >چکیده مقاله را وارد کنید (حداقل 20 کلمه)</span
           >
         }
@@ -139,7 +139,7 @@
           newBlogPostForm.controls.shortDescription.touched &&
           newBlogPostForm.controls.shortDescription.hasError('required')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >چکیده مقاله نباید خالی باشد</span
           >
         }
@@ -147,7 +147,7 @@
           newBlogPostForm.controls.shortDescription.touched &&
           newBlogPostForm.controls.shortDescription.hasError('minlength')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >چکیده مقاله حداقل 20 کلمه باید باشد</span
           >
         }
@@ -179,7 +179,7 @@
           @if (
             newBlogPostForm.controls.content.untouched || newBlogPostForm.controls.content.valid
           ) {
-            <span class="text-[10px] absolute -bottom-5 text-black/50"
+            <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
               >متن کامل مقاله را وارد کنید (حداقل 50 کلمه)</span
             >
           }
@@ -187,7 +187,7 @@
             newBlogPostForm.controls.content.touched &&
             newBlogPostForm.controls.content.hasError('required')
           ) {
-            <span class="text-[10px] absolute -bottom-5 text-red-500"
+            <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
               >متن مقاله نباید خالی باشد</span
             >
           }
@@ -195,7 +195,7 @@
             newBlogPostForm.controls.content.touched &&
             newBlogPostForm.controls.content.hasError('minlength')
           ) {
-            <span class="text-[10px] absolute -bottom-5 text-red-500"
+            <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
               >متن مقاله حداقل 50 کلمه باید باشد</span
             >
           }
@@ -243,7 +243,7 @@
           newBlogPostForm.controls.featuredImageUrl.untouched ||
           newBlogPostForm.controls.featuredImageUrl.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >لینک مرتبط به تصویر مقاله را بطور کامل وارد کنید</span
           >
         }
@@ -251,7 +251,7 @@
           newBlogPostForm.controls.featuredImageUrl.touched &&
           newBlogPostForm.controls.featuredImageUrl.hasError('required')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >وارد کردن لینک تصویر الزامی است</span
           >
         }
@@ -268,7 +268,7 @@
           newBlogPostForm.controls.publishedDate.untouched ||
           newBlogPostForm.controls.publishedDate.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >تاریخ انتشار مقاله را انتخاب کنید</span
           >
         }
@@ -276,7 +276,7 @@
           newBlogPostForm.controls.publishedDate.touched &&
           newBlogPostForm.controls.publishedDate.hasError('required')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >انتخاب تاریخ انتشار الزامی است</span
           >
         }
@@ -302,7 +302,7 @@
           formControlName="author"
         />
         @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >نام نویسنده مقاله را وارد کنید</span
           >
         }
@@ -310,7 +310,7 @@
           newBlogPostForm.controls.author.touched &&
           newBlogPostForm.controls.author.hasError('minlength')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500"
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام نویسنده مقاله حداقل 10 کلمه باید باشد</span
           >
         }
@@ -318,20 +318,22 @@
           newBlogPostForm.controls.author.touched &&
           newBlogPostForm.controls.author.hasError('required')
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-red-500">نام نویسنده الزامی است</span>
+          <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
+            >نام نویسنده الزامی است</span
+          >
         }
       </div>
       <div class="grow shrink flex-[50%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-author">دسته بندی ها</label>
-        @if (newBlogPostForm.controls.author.invalid && newBlogPostForm.controls.author.touched) {
+        @if (!categoriesSelected.length) {
           <img
-            class="absolute left-4.5 opacity-60 top-8.5 w-6 h-6"
+            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
             src="assets/vectors/box_important.svg"
           />
         }
-        @if (newBlogPostForm.controls.author.valid && newBlogPostForm.controls.author.touched) {
+        @if (categoriesSelected.length) {
           <img
-            class="absolute left-4.5 opacity-70 top-8.5 w-6 h-6"
+            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
             src="assets/vectors/Check Circle.svg"
           />
         }
@@ -341,38 +343,50 @@
         >
           <div class="flex flex-row gap-1 justify-start items-center">
             @for (item of categoriesSelected; track item.id) {
-              <span
-                #selectedSpan
-                class="text-blue-600 p-1 px-2 pl-1.5 pt-1.5 text-[11px] bg-blue-100 rounded-md cursor-pointer select-none"
-                >{{ item.name }}
-              </span>
+              <div
+                (click)="toggleCategorySelection(item)"
+                class="text-blue-600 p-1 px-2 pl-1.5 pt-1.5 flex flex-row justify-center items-center gap-1.5 cursor-pointer text-[11px] bg-blue-100 rounded-md select-none"
+              >
+                {{ item.name }}
+                <img src="assets/vectors/multiply.svg" class="w-3.5 h-full" />
+              </div>
             }
             <input
               id="cat-select-input"
               type="text"
               class="focus:outline-0 w-fit text-sm h-full border-0 pr-0.5"
               placeholder="جستجو..."
+              (input)="searchCategory($event.target)"
+              (focus)="categoriesSearchBox.classList.add('show')"
+              (blur)="categoriesSearchBox.classList.remove('show')"
             />
           </div>
           <div
             id="category-list"
+            #categoriesSearchBox
             class="w-full bg-white absolute rounded-md right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
           >
-            @for (category of allCategoriesValue(); track category.id) {
+            @if (filteredCategories()?.length) {
+              @for (category of filteredCategories(); track category.id) {
+                <span
+                  (click)="toggleCategorySelection(category)"
+                  class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 flex flex-row items-start gap-1 rounded-md cursor-pointer select-none"
+                >
+                  {{ category.name }}
+                </span>
+              }
+            } @else {
               <span
-                #categorySpan
-                (click)="toggleCategorySelection(category, categorySpan)"
-                class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 flex flex-row items-start gap-1 rounded-md cursor-pointer select-none"
-                >{{ category.name }}
+                class="text-black/50 text-[11px] pb-0.5 px-2 pt-1 flex flex-row items-start gap-1 rounded-md cursor-pointer select-none"
+              >
+                موردی یافت نشد
               </span>
             }
           </div>
         </div>
-        @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50"
-            >دسته بندی مقاله را از بین دسته بندی های موجود انتخاب کنید</span
-          >
-        }
+        <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          >دسته بندی مقاله را از بین دسته بندی های موجود انتخاب کنید</span
+        >
       </div>
       <div class="grow shrink h-full flex-[100%] flex flex-col gap-2 items-start">
         <label class="text-sm text-black/80">وضعیت نمایش مقاله</label>
@@ -406,7 +420,7 @@
       <div class="h-[64px] items-end justify-end flex flex-row gap-2">
         <button
           type="submit"
-          [disabled]="newBlogPostForm.invalid"
+          [disabled]="newBlogPostForm.invalid || !categoriesSelected.length"
           class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
         >
           ایجاد مقاله

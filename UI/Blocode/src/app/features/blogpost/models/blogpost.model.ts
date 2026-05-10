@@ -1,7 +1,9 @@
-import { Category } from "../../category/models/category.model";
+import { Category } from '../../category/models/category.model';
+
+// دیتاهایی که از سرور میاد
 
 export interface BlogPost {
-  id: string,
+  id: string;
   title: string;
   shortDescription: string;
   content: string;
@@ -10,10 +12,11 @@ export interface BlogPost {
   publishedDate: string;
   author: string;
   isVisible: boolean;
-  categories: Category[]
+  categories: Category[];
 }
 
-// creating blogpost required data
+// اطلاعاتی که کاربر میفرسته به API
+
 export interface NewBlogPostRequestValuesDTO {
   title: string;
   shortDescription: string;
@@ -23,4 +26,5 @@ export interface NewBlogPostRequestValuesDTO {
   publishedDate: string;
   author: string;
   isVisible: boolean;
+  categories: string[];
 }
