@@ -1,33 +1,32 @@
-import { Component, effect, inject, WritableSignal, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Component, effect, inject, input, Signal, signal, WritableSignal } from '@angular/core';
 import { BlogPostService } from '../services/blog-post-service';
-import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
-import { MarkdownComponent, MarkdownModule } from 'ngx-markdown';
+import { BlogPost } from '../models/blogpost.model';
+import { Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { Category } from '../../category/models/category.model';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
-  selector: 'app-add-blogpost',
-  imports: [ReactiveFormsModule, RouterLink, MarkdownComponent],
-  templateUrl: './add-blogpost.html',
-  styleUrls: ['./add-blogpost.css'],
+  selector: 'app-edit-blogpost',
+  imports: [ReactiveFormsModule, MarkdownComponent],
+  templateUrl: './edit-blogpost.html',
+  styleUrls: ['./edit-blogpost.css'],
 })
-export class AddBlogpost {
+export class EditBlogpost {
+  id = input<string>();
+  blogpostService = inject(BlogPostService);
   categoryService = inject(CategoryService);
-  constructor(
-    private blogpostService: BlogPostService,
-    private router: Router,
-  ) {
-    effect(() => {
-      if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
-        this.blogpostService.addBlogPostStatusSignal.set('idle');
-        this.router.navigate(['/admin', 'blogs']);
-      }
-      if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
-        console.log('error');
-      }
-    });
+  constructor(private router: Router) {
+    // effect(() => {
+    //   if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
+    //     this.blogpostService.addBlogPostStatusSignal.set('idle');
+    //     this.router.navigate(['/admin', 'blogs']);
+    //   }
+    //   if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
+    //     console.log('error');
+    //   }
+    // });
     effect(() => {
       const data = this.allCategoriesValue();
       if (data) {
@@ -36,13 +35,19 @@ export class AddBlogpost {
     });
   }
 
+  private getBlogPostRef = this.blogpostService.getBlogPost(this.id);
+
+  isLoading: Signal<boolean> = this.getBlogPostRef.isLoading;
+  error: Signal<Error | undefined> = this.getBlogPostRef.error;
+  fetchedBlogPost: WritableSignal<BlogPost | undefined> = this.getBlogPostRef.value;
+
   private getAllCategoriesRef = this.categoryService.getAllCategories();
 
   allCategoriesValue: WritableSignal<Category[] | undefined> = this.getAllCategoriesRef.value;
   filteredCategories = signal<Category[] | undefined>([]);
-  categoriesSelected: Category[] = [];
+  categoriesSelected: Category[] | undefined;
 
-  newBlogPostForm = new FormGroup({
+  editBlogPostForm = new FormGroup({
     title: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(10), Validators.maxLength(100)],
@@ -77,11 +82,27 @@ export class AddBlogpost {
     }),
   });
 
+  patchValuesEffect = effect(() => {
+    if (this.fetchedBlogPost()) {
+      this.editBlogPostForm.patchValue({
+        title: this.fetchedBlogPost()?.title,
+        author: this.fetchedBlogPost()?.author,
+        content: this.fetchedBlogPost()?.content,
+        shortDescription: this.fetchedBlogPost()?.content,
+        urlHandle: this.fetchedBlogPost()?.urlHandle,
+        featuredImageUrl: this.fetchedBlogPost()?.featuredImageUrl,
+        publishedDate: new Date(this.fetchedBlogPost()?.publishedDate!).toISOString().split('T')[0],
+        isVisible: this.fetchedBlogPost()?.isVisible,
+      });
+      this.categoriesSelected = this.fetchedBlogPost()?.categories
+    }
+  });
+
   toggleCategorySelection(event: Category) {
-    if (this.categoriesSelected.some((i) => i.id == event.id)) {
+    if (this.categoriesSelected?.some((i) => i.id == event.id)) {
       this.categoriesSelected = this.categoriesSelected.filter((i) => i.id != event.id);
     } else {
-      this.categoriesSelected.push(event);
+      this.categoriesSelected?.push(event);
     }
   }
 
@@ -98,26 +119,5 @@ export class AddBlogpost {
     }
   }
 
-  createBlogPost(event: Event) {
-    event.preventDefault();
-    console.log(this.newBlogPostForm);
-
-    if (this.newBlogPostForm.valid) {
-      const formValues = this.newBlogPostForm.getRawValue();
-      const createdBlogDTO: NewBlogPostRequestValuesDTO = {
-        title: formValues.title,
-        shortDescription: formValues.shortDescription,
-        content: formValues.content,
-        urlHandle: formValues.urlHandle,
-        author: formValues.author,
-        featuredImageUrl: formValues.featuredImageUrl,
-        publishedDate: formValues.publishedDate,
-        isVisible: formValues.isVisible,
-        categories: this.categoriesSelected.map((i) => i.id),
-      };
-
-      this.blogpostService.addBlogPost(createdBlogDTO);
-      this.newBlogPostForm.reset();
-    }
-  }
+  editBlogPost($event: Event) {}
 }

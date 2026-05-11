@@ -1,52 +1,52 @@
-<div id="add-blog-page" class="w-full h-auto flex flex-col justify-center items-start gap-5">
+<div id="edit-blog-page" class="w-full h-auto flex flex-col justify-center items-start gap-5">
   <div class="w-full flex flex-row justify-between items-center">
     <h1 class="text-[16px] font-bold">
       مقالات
-      <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد مقاله </span>
+      <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ویرایش مقاله </span>
     </h1>
   </div>
   <div class="w-full flex items-center">
     <form
-      [formGroup]="newBlogPostForm"
+      [formGroup]="editBlogPostForm"
       class="w-full flex flex-wrap gap-x-4 gap-y-8"
-      (ngSubmit)="createBlogPost($event)"
+      (ngSubmit)="editBlogPost($event)"
     >
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-title">عنوان مقاله</label>
-        @if (newBlogPostForm.controls.title.invalid && newBlogPostForm.controls.title.touched) {
+        @if (editBlogPostForm.controls.title.invalid && editBlogPostForm.controls.title.touched) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
             src="assets/vectors/box_important.svg"
           />
         }
-        @if (newBlogPostForm.controls.title.valid && newBlogPostForm.controls.title.touched) {
+        @if (editBlogPostForm.controls.title.valid && editBlogPostForm.controls.title.touched) {
           <img
             class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
             src="assets/vectors/Check Circle.svg"
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="input-text-normal focus:border-black/30 w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-title"
           type="text"
           formControlName="title"
         />
-        @if (newBlogPostForm.controls.title.untouched || newBlogPostForm.controls.title.valid) {
+        @if (editBlogPostForm.controls.title.untouched || editBlogPostForm.controls.title.valid) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >عنوان مقاله را وارد کنید (حداقل 10 کلمه)</span
           >
         }
         @if (
-          newBlogPostForm.controls.title.touched &&
-          newBlogPostForm.controls.title.hasError('required')
+          editBlogPostForm.controls.title.touched &&
+          editBlogPostForm.controls.title.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام دسته بندی نباید خالی باشد</span
           >
         }
         @if (
-          newBlogPostForm.controls.title.touched &&
-          newBlogPostForm.controls.title.hasError('minlength')
+          editBlogPostForm.controls.title.touched &&
+          editBlogPostForm.controls.title.hasError('minlength')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام دسته بندی حداقل 10 کلمه باید باشد</span
@@ -56,7 +56,7 @@
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
         @if (
-          newBlogPostForm.controls.urlHandle.invalid && newBlogPostForm.controls.urlHandle.touched
+          editBlogPostForm.controls.urlHandle.invalid && editBlogPostForm.controls.urlHandle.touched
         ) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -64,7 +64,7 @@
           />
         }
         @if (
-          newBlogPostForm.controls.urlHandle.valid && newBlogPostForm.controls.urlHandle.touched
+          editBlogPostForm.controls.urlHandle.valid && editBlogPostForm.controls.urlHandle.touched
         ) {
           <img
             class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
@@ -72,29 +72,29 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="input-text-normal focus:border-black/30 w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
         />
         @if (
-          newBlogPostForm.controls.urlHandle.untouched || newBlogPostForm.controls.urlHandle.valid
+          editBlogPostForm.controls.urlHandle.untouched || editBlogPostForm.controls.urlHandle.valid
         ) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >لینک مقاله یا slug را وارد کنید (حداقل 10 کلمه)</span
           >
         }
         @if (
-          newBlogPostForm.controls.urlHandle.touched &&
-          newBlogPostForm.controls.urlHandle.hasError('required')
+          editBlogPostForm.controls.urlHandle.touched &&
+          editBlogPostForm.controls.urlHandle.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >لینک یا slug نباید خالی باشد</span
           >
         }
         @if (
-          newBlogPostForm.controls.urlHandle.touched &&
-          newBlogPostForm.controls.urlHandle.hasError('minlength')
+          editBlogPostForm.controls.urlHandle.touched &&
+          editBlogPostForm.controls.urlHandle.hasError('minlength')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >لینک مقاله یا slug حداقل 10 کلمه باید باشد</span
@@ -104,8 +104,8 @@
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
         @if (
-          newBlogPostForm.controls.shortDescription.invalid &&
-          newBlogPostForm.controls.shortDescription.touched
+          editBlogPostForm.controls.shortDescription.invalid &&
+          editBlogPostForm.controls.shortDescription.touched
         ) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -113,8 +113,8 @@
           />
         }
         @if (
-          newBlogPostForm.controls.shortDescription.valid &&
-          newBlogPostForm.controls.shortDescription.touched
+          editBlogPostForm.controls.shortDescription.valid &&
+          editBlogPostForm.controls.shortDescription.touched
         ) {
           <img
             class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
@@ -122,30 +122,30 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="input-text-normal focus:border-black/30 w-full h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
           id="blog-shortDescription"
           type="text"
           formControlName="shortDescription"
         />
         @if (
-          newBlogPostForm.controls.shortDescription.untouched ||
-          newBlogPostForm.controls.shortDescription.valid
+          editBlogPostForm.controls.shortDescription.untouched ||
+          editBlogPostForm.controls.shortDescription.valid
         ) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >چکیده مقاله را وارد کنید (حداقل 20 کلمه)</span
           >
         }
         @if (
-          newBlogPostForm.controls.shortDescription.touched &&
-          newBlogPostForm.controls.shortDescription.hasError('required')
+          editBlogPostForm.controls.shortDescription.touched &&
+          editBlogPostForm.controls.shortDescription.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >چکیده مقاله نباید خالی باشد</span
           >
         }
         @if (
-          newBlogPostForm.controls.shortDescription.touched &&
-          newBlogPostForm.controls.shortDescription.hasError('minlength')
+          editBlogPostForm.controls.shortDescription.touched &&
+          editBlogPostForm.controls.shortDescription.hasError('minlength')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >چکیده مقاله حداقل 20 کلمه باید باشد</span
@@ -156,14 +156,14 @@
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
           <label class="text-sm text-black/80" for="blog-content">متن کامل مقاله</label>
           @if (
-            newBlogPostForm.controls.content.invalid && newBlogPostForm.controls.content.touched
+            editBlogPostForm.controls.content.invalid && editBlogPostForm.controls.content.touched
           ) {
             <img
               class="absolute left-5 opacity-60 top-8.5 w-6 h-6"
               src="assets/vectors/box_important.svg"
             />
           }
-          @if (newBlogPostForm.controls.content.valid && newBlogPostForm.controls.content.touched) {
+          @if (editBlogPostForm.controls.content.valid && editBlogPostForm.controls.content.touched) {
             <img
               class="absolute left-5 opacity-70 top-8.5 w-6 h-6"
               src="assets/vectors/Check Circle.svg"
@@ -177,23 +177,23 @@
           >
           </textarea>
           @if (
-            newBlogPostForm.controls.content.untouched || newBlogPostForm.controls.content.valid
+            editBlogPostForm.controls.content.untouched || editBlogPostForm.controls.content.valid
           ) {
             <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
               >متن کامل مقاله را وارد کنید (حداقل 50 کلمه)</span
             >
           }
           @if (
-            newBlogPostForm.controls.content.touched &&
-            newBlogPostForm.controls.content.hasError('required')
+            editBlogPostForm.controls.content.touched &&
+            editBlogPostForm.controls.content.hasError('required')
           ) {
             <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
               >متن مقاله نباید خالی باشد</span
             >
           }
           @if (
-            newBlogPostForm.controls.content.touched &&
-            newBlogPostForm.controls.content.hasError('minlength')
+            editBlogPostForm.controls.content.touched &&
+            editBlogPostForm.controls.content.hasError('minlength')
           ) {
             <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
               >متن مقاله حداقل 50 کلمه باید باشد</span
@@ -206,17 +206,17 @@
           >
           <div
             id="blog-content-preview"
-            class="focus:border-black/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 rounded-lg py-1 px-2 outline-0"
+            class="focus:border-black/30 h-[210px] overflow-y-scroll input-text-normal w-full border border-dashed border-black/20 rounded-lg py-1 px-2 outline-0"
           >
-            <markdown [data]="newBlogPostForm.controls.content.getRawValue()"> </markdown>
+            <markdown [data]="editBlogPostForm.controls.content.getRawValue()"> </markdown>
           </div>
         </div>
       </div>
       <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-featuredImageUrl">لینک تصویر</label>
         @if (
-          newBlogPostForm.controls.featuredImageUrl.invalid &&
-          newBlogPostForm.controls.featuredImageUrl.touched
+          editBlogPostForm.controls.featuredImageUrl.invalid &&
+          editBlogPostForm.controls.featuredImageUrl.touched
         ) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -224,8 +224,8 @@
           />
         }
         @if (
-          newBlogPostForm.controls.featuredImageUrl.valid &&
-          newBlogPostForm.controls.featuredImageUrl.touched
+          editBlogPostForm.controls.featuredImageUrl.valid &&
+          editBlogPostForm.controls.featuredImageUrl.touched
         ) {
           <img
             class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
@@ -240,16 +240,16 @@
           placeholder="https://picture.com"
         />
         @if (
-          newBlogPostForm.controls.featuredImageUrl.untouched ||
-          newBlogPostForm.controls.featuredImageUrl.valid
+          editBlogPostForm.controls.featuredImageUrl.untouched ||
+          editBlogPostForm.controls.featuredImageUrl.valid
         ) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >لینک مرتبط به تصویر مقاله را بطور کامل وارد کنید</span
           >
         }
         @if (
-          newBlogPostForm.controls.featuredImageUrl.touched &&
-          newBlogPostForm.controls.featuredImageUrl.hasError('required')
+          editBlogPostForm.controls.featuredImageUrl.touched &&
+          editBlogPostForm.controls.featuredImageUrl.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >وارد کردن لینک تصویر الزامی است</span
@@ -265,16 +265,16 @@
           formControlName="publishedDate"
         />
         @if (
-          newBlogPostForm.controls.publishedDate.untouched ||
-          newBlogPostForm.controls.publishedDate.valid
+          editBlogPostForm.controls.publishedDate.untouched ||
+          editBlogPostForm.controls.publishedDate.valid
         ) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >تاریخ انتشار مقاله را انتخاب کنید</span
           >
         }
         @if (
-          newBlogPostForm.controls.publishedDate.touched &&
-          newBlogPostForm.controls.publishedDate.hasError('required')
+          editBlogPostForm.controls.publishedDate.touched &&
+          editBlogPostForm.controls.publishedDate.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >انتخاب تاریخ انتشار الزامی است</span
@@ -283,13 +283,13 @@
       </div>
       <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-author">نویسنده</label>
-        @if (newBlogPostForm.controls.author.invalid && newBlogPostForm.controls.author.touched) {
+        @if (editBlogPostForm.controls.author.invalid && editBlogPostForm.controls.author.touched) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
             src="assets/vectors/box_important.svg"
           />
         }
-        @if (newBlogPostForm.controls.author.valid && newBlogPostForm.controls.author.touched) {
+        @if (editBlogPostForm.controls.author.valid && editBlogPostForm.controls.author.touched) {
           <img
             class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
             src="assets/vectors/Check Circle.svg"
@@ -301,22 +301,22 @@
           type="text"
           formControlName="author"
         />
-        @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
+        @if (editBlogPostForm.controls.author.untouched || editBlogPostForm.controls.author.valid) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
             >نام نویسنده مقاله را وارد کنید</span
           >
         }
         @if (
-          newBlogPostForm.controls.author.touched &&
-          newBlogPostForm.controls.author.hasError('minlength')
+          editBlogPostForm.controls.author.touched &&
+          editBlogPostForm.controls.author.hasError('minlength')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام نویسنده مقاله حداقل 10 کلمه باید باشد</span
           >
         }
         @if (
-          newBlogPostForm.controls.author.touched &&
-          newBlogPostForm.controls.author.hasError('required')
+          editBlogPostForm.controls.author.touched &&
+          editBlogPostForm.controls.author.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
             >نام نویسنده الزامی است</span
@@ -325,13 +325,13 @@
       </div>
       <div class="grow shrink flex-[50%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-author">دسته بندی ها</label>
-        @if (!categoriesSelected.length) {
+        @if (!categoriesSelected?.length) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
             src="assets/vectors/box_important.svg"
           />
         }
-        @if (categoriesSelected.length) {
+        @if (categoriesSelected?.length) {
           <img
             class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
             src="assets/vectors/Check Circle.svg"
@@ -410,11 +410,17 @@
             مخفی
           </label>
         </div>
+        <!-- @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('required')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی نباید خالی باشد</span>
+        }
+        @if (categoryUrlHandleInput.touched && categoryUrlHandleInput.hasError('minlength')) {
+          <span class="text-[11px] text-red-500">مسیر دسته بندی حداقل 3 کلمه</span>
+        } -->
       </div>
       <div class="h-[64px] items-end justify-end flex flex-row gap-2">
         <button
           type="submit"
-          [disabled]="newBlogPostForm.invalid || !categoriesSelected.length"
+          [disabled]="editBlogPostForm.invalid || !categoriesSelected?.length"
           class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
         >
           ایجاد مقاله
@@ -422,7 +428,6 @@
         <button
           class="p-2 px-3 text-sm bg-red-400 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
           type="button"
-          [routerLink]="['/admin', 'blogs']"
         >
           بازگشت
         </button>
@@ -436,3 +441,4 @@
     </form>
   </div>
 </div>
+

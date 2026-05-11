@@ -108,5 +108,44 @@ namespace Blocode.API.Controllers
                 return Ok(response);
             }
         }
+
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<BlogPost?>> GetBlogById([FromRoute] Guid id)
+        {
+
+            var result = await blogRepository.GetBlogAsync(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var responseDTO = new BlogPostDTO()
+                {
+                    Author = result.Author,
+                    Id = result.Id,
+                    Title = result.Title,
+                    Content = result.Content,
+                    FeaturedImageUrl = result.FeaturedImageUrl,
+                    PublishedDate = result.PublishedDate,
+                    UrlHandle = result.UrlHandle,
+                    IsVisible = result.IsVisible,
+                    ShortDescription = result.ShortDescription,
+                    Categories = new List<CategoryDTO>()
+                };
+                foreach (var category in result.Categories)
+                {
+                    var categoryDTO = new CategoryDTO()
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        UrlHandle = category.UrlHandle,
+                    };
+                    responseDTO.Categories.Add(categoryDTO);
+                }
+                return Ok(responseDTO);
+            }
+        }
     }
 }

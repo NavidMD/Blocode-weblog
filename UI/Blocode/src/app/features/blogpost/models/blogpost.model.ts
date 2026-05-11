@@ -28,3 +28,15 @@ export interface NewBlogPostRequestValuesDTO {
   isVisible: boolean;
   categories: string[];
 }
+
+export interface EditBlogPostRequestValuesDTO {
+  title: string;
+  shortDescription: string;
+  content: string;
+  featuredImageUrl: string;
+  urlHandle: string;
+  publishedDate: string;
+  author: string;
+  isVisible: boolean;
+  categories: string[];
+}

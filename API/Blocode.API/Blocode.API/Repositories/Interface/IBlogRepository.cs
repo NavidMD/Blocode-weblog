@@ -7,5 +7,7 @@ namespace Blocode.API.Repositories.Interface
         Task<BlogPost> CreateBlogAsync(BlogPost blogPost);
 
         Task<IEnumerable<BlogPost>> GetBlogsAsync();
+
+        Task<BlogPost?> GetBlogAsync(Guid id);
     }
 }

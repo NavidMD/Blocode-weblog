@@ -1,6 +1,6 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, InputSignal, Signal, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { HttpClient, httpResource, HttpResponse } from '@angular/common/http';
+import { HttpClient, httpResource, HttpResourceRef, HttpResponse } from '@angular/common/http';
 import { NewBlogPostRequestValuesDTO, BlogPost } from '../models/blogpost.model';
 
 @Injectable({
@@ -14,8 +14,12 @@ export class BlogPostService {
   getAllBlogPostsStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
 
   //HTTP GET
-  getAllBlogPosts() {
+  getAllBlogPosts() : HttpResourceRef<BlogPost[] | undefined> {
     return httpResource<BlogPost[]>(() => `${this.baseUrl}/api/blogs`)
+  }
+
+  getBlogPost(id: InputSignal<string | undefined>) : HttpResourceRef<BlogPost | undefined> {
+    return httpResource<BlogPost>(() => `${this.baseUrl}/api/blogs/${id()}`);
   }
 
   //HTTP POST
@@ -30,5 +34,10 @@ export class BlogPostService {
         this.addBlogPostStatusSignal.set('error');
       },
     });
+  }
+
+  //HTTP PUT
+  editBlogPost(id: string, ) {
+
   }
 }

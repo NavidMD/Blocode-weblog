@@ -29,8 +29,25 @@ body {
 a {
   text-decoration: none;
 }
-/* main {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-} */
+
+button {
+  outline: 0;
+}
+
+@layer base {
+  .btn-mainBlue {
+    @apply bg-blue-600 shadow-md shadow-black/20 rounded-md text-white text-sm;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .text-description {
+    @apply text-black/65;
+  }
+  .text-title {
+    @apply text-black/80 font-bold;
+  }
+  .input-text-normal {
+    @apply text-black/70 text-[13px];
+  }
+}

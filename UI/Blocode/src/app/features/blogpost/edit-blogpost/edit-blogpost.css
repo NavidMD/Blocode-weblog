@@ -1,0 +1,29 @@
+textarea {
+  resize: none;
+}
+#edit-blog-page #category-list::-webkit-scrollbar {
+  height: 2px;
+}
+#edit-blog-page #category-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+#edit-blog-page #category-list::-webkit-scrollbar-thumb {
+  background: #2b00ff3a;
+  border-radius: 10px;
+}
+
+#edit-blog-page #cat-select-input::placeholder {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#edit-blog-page #category-list {
+  max-height: 0;
+  transition: .2s;
+  opacity: 0;
+}
+#edit-blog-page #category-list.show {
+  max-height: 400px;
+  opacity: 1;
+}
