@@ -7,12 +7,32 @@
 #categories-container #cards-buttonSection div:last-child {
   transform: translateX(-200%);
   opacity: 0;
-  animation: move-to-right .5s ease forwards;
+  animation: move-to-right 0.5s ease forwards;
 }
 #categories-container #cards-buttonSection div:first-child {
   transform: translateX(200%);
   opacity: 0;
-  animation: move-to-left .5s ease forwards;
+  animation: move-to-left 0.5s ease forwards;
+}
+
+#category-search-input {
+  width: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+}
+
+#category-open-search:checked + #category-search-input {
+  width: 200px; 
+  opacity: 1;
+  padding: 0 10px; 
+  margin-left: 10px;
+  transition: .2s;
+}
+
+#category-search-input::placeholder {
+  font-size: 13px;
+  font-weight: 200;
 }
 
 @keyframes move-to-right {

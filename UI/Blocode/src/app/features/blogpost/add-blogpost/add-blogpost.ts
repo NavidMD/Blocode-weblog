@@ -19,6 +19,7 @@ export class AddBlogpost {
     private blogpostService: BlogPostService,
     private router: Router,
   ) {
+    
     effect(() => {
       if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
         this.blogpostService.addBlogPostStatusSignal.set('idle');
@@ -33,7 +34,7 @@ export class AddBlogpost {
       if (data) {
         this.filteredCategories.set(data);
       }
-    });
+    }); 
   }
 
   private getAllCategoriesRef = this.categoryService.getAllCategories();
@@ -96,6 +97,10 @@ export class AddBlogpost {
       const filtered = orgCategories.filter((c) => c.name.toLowerCase().startsWith(searchValue));
       this.filteredCategories.set(filtered);
     }
+  }
+
+  clearSelectedCategories() {
+    this.categoriesSelected = [];
   }
 
   createBlogPost(event: Event) {

@@ -26,7 +26,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
           id="blog-title"
           type="text"
           formControlName="title"
@@ -72,7 +72,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
@@ -122,7 +122,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
           id="blog-shortDescription"
           type="text"
           formControlName="shortDescription"
@@ -170,7 +170,7 @@
             />
           }
           <textarea
-            class="focus:border-black/30 input-text-normal overflow-y-scroll w-full border border-black/20 rounded-lg py-1 px-2 pl-8 outline-0"
+            class="focus:border-black/30 input-text-normal overflow-y-scroll w-full border border-black/20 rounded-[15px] py-1 px-2 pl-8 outline-0"
             id="blog-content"
             formControlName="content"
             rows="10"
@@ -206,7 +206,7 @@
           >
           <div
             id="blog-content-preview"
-            class="focus:border-black/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 rounded-lg py-1 px-2 outline-0"
+            class="focus:border-black/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 rounded-[15px] py-1 px-2 outline-0"
           >
             <markdown [data]="newBlogPostForm.controls.content.getRawValue()"> </markdown>
           </div>
@@ -233,7 +233,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal text-right h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full input-text-normal text-right h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
           id="blog-featuredImageUrl"
           type="text"
           formControlName="featuredImageUrl"
@@ -259,7 +259,7 @@
       <div class="grow shrink flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-publishedDate">تاریخ انتشار</label>
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 pt-2 px-2 outline-0"
+          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 pt-2 px-2 outline-0"
           id="blog-publishedDate"
           type="date"
           formControlName="publishedDate"
@@ -296,7 +296,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
           id="blog-author"
           type="text"
           formControlName="author"
@@ -339,13 +339,13 @@
         }
         <div
           id="category-select"
-          class="w-full relative flex flex-row items-center text-sm h-9 border border-black/20 rounded-lg py-1 px-2 outline-0"
+          class="w-full relative flex flex-row items-center text-sm h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
         >
           <div class="flex flex-row gap-1 justify-start items-center">
             @for (item of categoriesSelected; track item.id) {
               <div
                 (click)="toggleCategorySelection(item)"
-                class="text-blue-600 p-1 px-2 pl-1.5 pt-1.5 flex flex-row justify-center items-center gap-1.5 cursor-pointer text-[11px] bg-blue-100 rounded-md select-none"
+                class="text-blue-600 p-1 px-2 pl-1.5 pt-1.5 flex flex-row justify-center items-center gap-1.5 cursor-pointer text-[11px] bg-blue-100 rounded-[10px] select-none"
               >
                 {{ item.name }}
                 <img src="assets/vectors/multiply.svg" class="w-3.5 h-full" />
@@ -364,36 +364,36 @@
           <div
             id="category-list"
             #categoriesSearchBox
-            class="w-full bg-white absolute rounded-md right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
+            class="w-full bg-white absolute rounded-[15px] right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
           >
             @if (filteredCategories()?.length) {
               @for (category of filteredCategories(); track category.id) {
                 <span
                   (click)="toggleCategorySelection(category)"
-                  class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 flex flex-row items-start gap-1 rounded-md cursor-pointer select-none"
+                  class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
                 >
                   {{ category.name }}
                 </span>
               }
             } @else {
               <span
-                class="text-black/50 text-[11px] pb-0.5 px-2 pt-1 flex flex-row items-start gap-1 rounded-md cursor-pointer select-none"
+                class="text-black/50 text-[11px] pb-0.5 px-2 pt-1 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
               >
                 موردی یافت نشد
               </span>
             }
           </div>
         </div>
-        <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+        <span class="text-[10px] absolute -bottom-5 text-black/50 pr-1"
           >دسته بندی مقاله را از بین دسته بندی های موجود انتخاب کنید</span
         >
       </div>
-      <div class="grow shrink h-full flex-[100%] flex flex-col gap-2 items-start">
+      <div class="grow shrink h-full flex-[40%] flex flex-col gap-2 items-start">
         <label class="text-sm text-black/80">وضعیت نمایش مقاله</label>
-        <div class="w-1/4 h-9 flex flex-row items-center justify-start gap-5">
+        <div class="w-full h-9 flex flex-row items-center justify-start gap-5">
           <label class="w-full flex flex-row justify-start items-center gap-2">
             <input
-              class="h-4 border border-black/20 rounded-lg outline-0"
+              class="h-4 border border-black/20 rounded-[15px] outline-0"
               type="radio"
               formControlName="isVisible"
               [value]="true"
@@ -402,7 +402,7 @@
           </label>
           <label class="w-full flex flex-row justify-start items-center gap-2">
             <input
-              class="h-4 border border-black/20 rounded-lg outline-0"
+              class="h-4 border border-black/20 rounded-[15px] outline-0"
               type="radio"
               formControlName="isVisible"
               [value]="false"
@@ -411,16 +411,9 @@
           </label>
         </div>
       </div>
-      <div class="h-[64px] items-end justify-end flex flex-row gap-2">
+      <div class="items-end justify-end flex flex-[50%] flex-row gap-2">
         <button
-          type="submit"
-          [disabled]="newBlogPostForm.invalid || !categoriesSelected.length"
-          class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
-        >
-          ایجاد مقاله
-        </button>
-        <button
-          class="p-2 px-3 text-sm bg-red-400 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+          class="p-2 px-3 text-sm bg-red-400 text-white rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
           type="button"
           [routerLink]="['/admin', 'blogs']"
         >
@@ -428,9 +421,18 @@
         </button>
         <button
           type="reset"
-          class="p-2 px-3 text-sm bg-slate-500 text-white rounded-md shadow-md shadow-black/20 cursor-pointer"
+          (click)="clearSelectedCategories()"
+          class="p-2 px-3 text-sm bg-slate-500 text-white rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         >
           پاک کردن
+        </button>
+        <button
+          type="submit"
+          [disabled]="newBlogPostForm.invalid || !categoriesSelected.length"
+          class="p-2 px-7 pl-7.5 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-[15px] flex flex-row gap-1 shadow-md shadow-black/20 cursor-pointer"
+        >
+        <img src="assets/vectors/done.svg" class="w-4 h-4" alt="" />   
+          ایجاد مقاله
         </button>
       </div>
     </form>

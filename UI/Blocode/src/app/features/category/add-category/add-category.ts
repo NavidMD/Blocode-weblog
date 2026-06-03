@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AddCategory {
   @Output() cancelAdding: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
   constructor(
     private categoryService: CategoryService,
     private router: Router,

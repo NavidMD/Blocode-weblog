@@ -1,19 +1,32 @@
 <div class="w-full h-auto flex flex-col justify-center items-start gap-5">
-  <div class="w-full flex flex-row justify-between items-center">
-    <h1 class="text-[16px] font-bold">
+  <div class="w-full flex flex-row items-center">
+    <h1 class="text-[18px] font-bold flex flex-row items-center gap-2">
       دسته بندی ها
       @if (addCategoryActive) {
         <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد دسته بندی </span>
       }
+      <label for="category-open-search">
+        <img
+        src="assets/vectors/search.svg"
+        class="w-5 h-5 cursor-pointer"
+        />
+      </label>
+      <input type="checkbox" class="hidden" id="category-open-search" />
+      <input
+        id="category-search-input"
+        type="text"
+        placeholder="جستجو ..."
+        class="input-text-normal font-light justify-right px-2 items-center rounded-[15px] mr-4 border border-gray-200 outline-0 h-[35px]"
+      />
     </h1>
     @if (!addCategoryActive) {
       <a
         role="button"
-        class="p-2 px-3 text-sm bg-blue-500 text-white flex flex-row justify-center items-center gap-1 rounded-md shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 text-sm mr-auto ml-0 bg-blue-500 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         (click)="addCategoryActive = true"
       >
-        <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="">
-       دسته بندی جدید
+        <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
+        دسته بندی جدید
       </a>
     }
   </div>
@@ -29,7 +42,7 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="overflow-hidden relative transition cursor-pointer hover:-translate-y-1.5 hover:shadow-lg flex flex-col justify-between items-center rounded-md shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
+          class="overflow-hidden relative transition cursor-pointer hover:-translate-y-1.5 hover:shadow-lg flex flex-col justify-between items-center rounded-[15px] shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
         >
           <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
             <span
@@ -50,15 +63,9 @@
           >
             <div class="w-fit items-center">
               <button
-                class="ml-auto flex flex-row gap-0.5 justify-center items-center cursor-pointer opacity-60"
+                class="ml-auto flex flex-row gap-1 text-[10px] justify-center items-center cursor-pointer opacity-60"
               >
-                <span class="text-[10px] pt-1 text-black/70">12</span>
-                <img
-                  class="w-3.5 h-3.5 hover:scale-120 transition"
-                  src="assets/vectors/eye.svg"
-                  alt="مشاهده بلاگ ها"
-                  title="مشاهده بلاگ ها"
-                />
+              <span class="text-[10px] text-black/70">12 مقاله مرتبط </span>
               </button>
             </div>
             <div class="flex flex-row justify-end">
@@ -73,7 +80,10 @@
                   title="ویرایش"
                 />
               </button>
-              <button class="cursor-pointer rounded-md p-0.5 hover:bg-slate-100 opacity-80" (click)="deleteCategory(category.id)">
+              <button
+                class="cursor-pointer rounded-md p-0.5 hover:bg-slate-100 opacity-80"
+                (click)="deleteCategory(category.id)"
+              >
                 <img
                   class="w-4 h-4 transition opacity-90"
                   src="assets/vectors/delete.svg"

@@ -98,6 +98,10 @@ export class EditBlogpost {
     }
   });
 
+  clearSelectedCategories() {
+    this.categoriesSelected = [];
+  }
+
   toggleCategorySelection(event: Category) {
     if (this.categoriesSelected?.some((i) => i.id == event.id)) {
       this.categoriesSelected = this.categoriesSelected.filter((i) => i.id != event.id);

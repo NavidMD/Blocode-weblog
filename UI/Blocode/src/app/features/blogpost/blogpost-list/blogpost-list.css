@@ -17,7 +17,7 @@
   height: 36%;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent , rgba(0, 0, 0, 1) 600%);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 600%);
 }
 
 #blog-card #buttons {
@@ -34,6 +34,11 @@
   line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#blog-card:hover#blog-card img {
+  scale: 110%;
+  transition: 0.2s ease-in-out;
 }
 
 @keyframes move-to-right {

@@ -13,6 +13,8 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class CategoryList {
   private categoryService = inject(CategoryService);
+
+
   constructor(private router: Router) {
     effect(() => {
       if(this.categoryService.deleteCategoryStatusSignal() === 'success') {
