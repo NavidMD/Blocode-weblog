@@ -4,6 +4,17 @@
       مقالات
       <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد مقاله </span>
     </h1>
+    <div
+      id="add-blog-hint"
+      class="group flex cursor-pointer relative flex-row items-center justify-end gap-1 w-fit overflow-hidden"
+    >
+      <span
+        class="text-[12px] whitespace-nowrap text-blue-500 transition-all duration-800 ease-in-out pt-0.5 max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-90"
+      >
+        راهنمای ایجاد مقاله
+      </span>
+      <img src="assets/vectors/help.svg" class="w-7 h-7  z-10 shrink-0 bg-white" alt="" />
+    </div>
   </div>
   <div class="w-full flex items-center">
     <form
@@ -431,7 +442,7 @@
           [disabled]="newBlogPostForm.invalid || !categoriesSelected.length"
           class="p-2 px-7 pl-7.5 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-[15px] flex flex-row gap-1 shadow-md shadow-black/20 cursor-pointer"
         >
-        <img src="assets/vectors/done.svg" class="w-4 h-4" alt="" />   
+          <img src="assets/vectors/done.svg" class="w-4 h-4" alt="" />
           ایجاد مقاله
         </button>
       </div>

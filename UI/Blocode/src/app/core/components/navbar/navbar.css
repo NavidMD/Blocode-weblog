@@ -5,7 +5,7 @@
   --switch-height: 18px;
   /* circle */
   --circle-diameter: 26px;
-  --circle-bg: #353535;
+  --circle-bg: #155dfc;
   --circle-inset: calc((var(--circle-diameter) - var(--switch-height)) / 2);
 }
 
