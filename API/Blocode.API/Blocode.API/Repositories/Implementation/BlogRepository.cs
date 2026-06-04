@@ -13,24 +13,20 @@ namespace Blocode.API.Repositories.Implementation
         {
             _context = database;
         }
-
         public async Task<BlogPost> CreateBlogAsync(BlogPost blogPost)
         {
             await _context.BlogPosts.AddAsync(blogPost);
             await _context.SaveChangesAsync();
             return blogPost;
         }
-
         public async Task<BlogPost?> GetBlogAsync(Guid id)
         {
             return await _context.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.Id == id);
         }
-
         public async Task<IEnumerable<BlogPost>> GetBlogsAsync()
         {
             return await _context.BlogPosts.Include(b => b.Categories).ToListAsync(); 
         }
-
         public async Task<BlogPost?> UpdateBlogAsync(BlogPost newblogPost)
         {
             var existingBlog = await _context.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.Id == newblogPost.Id);
@@ -42,6 +38,17 @@ namespace Blocode.API.Repositories.Implementation
             existingBlog.Categories = newblogPost.Categories;
             _context.SaveChanges();
             return newblogPost;
+        }
+        public async Task<BlogPost?> DeleteBlogAsync(Guid id)
+        {
+            var exisitingBlog = await _context.BlogPosts.FirstOrDefaultAsync(b => b.Id == id);
+            if(exisitingBlog == null)
+            {
+                return null;
+            }
+            _context.BlogPosts.Remove(exisitingBlog);
+            await _context.SaveChangesAsync();
+            return exisitingBlog;
         }
     }
 }

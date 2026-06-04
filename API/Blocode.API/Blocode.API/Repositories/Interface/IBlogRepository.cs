@@ -11,5 +11,7 @@ namespace Blocode.API.Repositories.Interface
         Task<BlogPost?> GetBlogAsync(Guid id);
 
         Task<BlogPost?> UpdateBlogAsync(BlogPost blogPost);
+
+        Task<BlogPost?> DeleteBlogAsync(Guid id);
     }
 }

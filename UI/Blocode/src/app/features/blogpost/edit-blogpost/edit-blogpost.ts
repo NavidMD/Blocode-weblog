@@ -94,7 +94,7 @@ export class EditBlogpost {
         publishedDate: new Date(this.fetchedBlogPost()?.publishedDate!).toISOString().split('T')[0],
         isVisible: this.fetchedBlogPost()?.isVisible,
       });
-      this.categoriesSelected = this.fetchedBlogPost()?.categories
+      this.categoriesSelected = this.fetchedBlogPost()?.categories;
     }
   });
 
@@ -126,7 +126,7 @@ export class EditBlogpost {
   editBlogPost() {
     const id = this.id();
     const formValues = this.editBlogPostForm.getRawValue();
-    if(this.editBlogPostForm.valid && id) {
+    if (this.editBlogPostForm.valid && id) {
       const editedBlogPost: EditBlogPostRequestValuesDTO = {
         title: formValues.title,
         author: formValues.author,
@@ -136,19 +136,34 @@ export class EditBlogpost {
         isVisible: formValues.isVisible,
         featuredImageUrl: formValues.featuredImageUrl,
         urlHandle: formValues.urlHandle,
-        categories: this.categoriesSelected?.map(c => c.id) ?? []
-      }
+        categories: this.categoriesSelected?.map((c) => c.id) ?? [],
+      };
 
       this.blogpostService.editBlogPost(id, editedBlogPost).subscribe({
         next: (response) => {
-          if(response) {
-            this.router.navigate(['/','admin','blogs']);
+          if (response) {
+            this.router.navigate(['/', 'admin', 'blogs']);
           }
         },
         error: (err) => {
           console.log(err);
-        }
-      })
+        },
+      });
+    }
+  }
+
+  deleteBlog() {
+    const id = this.id();
+    if (id) {
+      this.blogpostService.deleteBlogPost(id).subscribe({
+        next: (response) => {
+          this.router.navigate(['/admin/blogs'])
+          console.log('deleted', response);
+        },
+        error: () => {
+          console.log('something went wrong');
+        },
+      });
     }
   }
 }

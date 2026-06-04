@@ -40,4 +40,9 @@ export class BlogPostService {
   editBlogPost(id: string, editedBlogPostDTO: EditBlogPostRequestValuesDTO) {
     return this.http.put<BlogPost>(`${this.baseUrl}/api/blogs/${id}`, editedBlogPostDTO);
   }
+
+  //HTTP DELETE
+  deleteBlogPost(id: string) {
+    return this.http.delete<BlogPost>(`${this.baseUrl}/api/blogs/${id}`);
+  }
 }

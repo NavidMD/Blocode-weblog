@@ -126,6 +126,7 @@
           id="blog-shortDescription"
           type="text"
           formControlName="shortDescription"
+          maxlength="150"
         />
         @if (
           editBlogPostForm.controls.shortDescription.untouched ||
@@ -423,8 +424,9 @@
         <button
           class="p-2 px-3 text-sm bg-red-400 text-white rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
           type="button"
+          (click)="deleteBlog()"
         >
-          بازگشت
+          حذف مقاله
         </button>
         <button
           type="reset"

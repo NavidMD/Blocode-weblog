@@ -22,22 +22,18 @@ namespace Blocode.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
         {
-            //تبدیل اطلاعات درخواست به مدل دیتابیس
             var newCategory = new Category()    
             {
                 Name = request.Name,
                 UrlHandle = request.UrlHandle
             };
-            // ارسال نمونه ساخته شده از مدل به ریپازیتوری برای افزودن به دیتابیس
             await categoryRepository.CreateCategoryAsync(newCategory);
-            // DTO تبدیل مدل ساخته شده به
             var response = new CategoryDTO()
             {
                 Id = newCategory.Id,
                 Name = newCategory.Name,
                 UrlHandle = newCategory.UrlHandle
             };
-            //ارسال پاسخ به فرانت
             return Ok(response);
         }
 
@@ -45,15 +41,12 @@ namespace Blocode.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            //گرفتن دسته بندی ها از دیتابیس از طریق ریپازیتوری
             var categoriesFromDb = await categoryRepository.GetAllCategoriesAsync();
-            //  DTO مپ کردن دسته بندی های دیتابیس به
             var response = new List<CategoryDTO>();
             foreach (var category in categoriesFromDb)
             {
                 response.Add(new CategoryDTO() { Id = category.Id, Name = category.Name, UrlHandle = category.UrlHandle });
             }
-            //ارسال پاسخ به فرانت
             return Ok(response);
         }
 
@@ -75,7 +68,6 @@ namespace Blocode.API.Controllers
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<Category>> UpdateCategory([FromRoute] Guid id,[FromBody] UpdateCategoryRequestDTO updatedCategory)
         {
-            //تبدیل به مدل دسته بندی
             var updatingCategory = new Category()
             {
                 Id = id,

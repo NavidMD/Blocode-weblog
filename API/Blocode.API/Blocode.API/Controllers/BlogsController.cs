@@ -21,7 +21,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogs()
+        public async Task<ActionResult> GetBlogs()
         {
             var response = await blogRepository.GetBlogsAsync();
             var mappedResponse = new List<BlogPostDTO>();
@@ -52,7 +52,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BlogPost>> CreateBlog([FromBody] CreateBlogRequestDTO newBlogRequest)
+        public async Task<ActionResult> CreateBlog([FromBody] CreateBlogRequestDTO newBlogRequest)
         {
             var newBlog = new BlogPost()
             {
@@ -110,7 +110,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<BlogPost?>> GetBlogById([FromRoute] Guid id)
+        public async Task<ActionResult> GetBlogById([FromRoute] Guid id)
         {
 
             var result = await blogRepository.GetBlogAsync(id);
@@ -149,7 +149,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<BlogPost?>> UpdateBlogAsync([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDTO request)
+        public async Task<ActionResult> UpdateBlogAsync([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDTO request)
         {
             var updatedBlog = new BlogPost()
             {
@@ -199,6 +199,29 @@ namespace Blocode.API.Controllers
                 }).ToList()
             };
             return Ok(responseDto);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> DeleteBlogAsync([FromRoute] Guid id)
+        {
+            var deletedBlog = await blogRepository.DeleteBlogAsync(id);
+            if (deletedBlog == null)
+            {
+                return NotFound("blog not found!");
+            }
+            var response = new BlogPostDTO()
+            {
+                Id = deletedBlog.Id,
+                Title = deletedBlog.Title,
+                ShortDescription = deletedBlog.ShortDescription,
+                Content = deletedBlog.Content,
+                FeaturedImageUrl = deletedBlog.FeaturedImageUrl,
+                PublishedDate = deletedBlog.PublishedDate,
+                Author = deletedBlog.Author,
+                UrlHandle = deletedBlog.UrlHandle,
+                IsVisible = deletedBlog.IsVisible,
+            };
+            return Ok(response);
         }
     }
 }

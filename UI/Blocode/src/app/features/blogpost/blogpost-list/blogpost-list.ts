@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { BlogPostService } from '../services/blog-post-service';
 import { BlogPost } from '../models/blogpost.model';
@@ -13,6 +13,7 @@ import { BlogPost } from '../models/blogpost.model';
 export class BlogpostList {
   blogpostService = inject(BlogPostService);
   addBlogActive: boolean = false;
+  router = inject(Router);
 
   private getAllBlogPostsRef = this.blogpostService.getAllBlogPosts();
 
@@ -25,9 +26,25 @@ export class BlogpostList {
     const result = new Intl.DateTimeFormat('fa-IR', {
       month: 'long',
       day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+      weekday: 'long'
     }).format(convertingDate);
     return result;
+  }
+
+  deleteBlog(id: string) {
+    if (id) {
+      this.blogpostService.deleteBlogPost(id).subscribe({
+        next: (response) => {
+          const currentUrl = this.router.url;
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigateByUrl(currentUrl);
+          });
+          console.log('deleted', response);
+        },
+        error: () => {
+          console.log('something went wrong');
+        },
+      });
+    }
   }
 }
