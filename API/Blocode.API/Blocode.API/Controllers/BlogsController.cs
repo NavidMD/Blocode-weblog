@@ -147,5 +147,58 @@ namespace Blocode.API.Controllers
                 return Ok(responseDTO);
             }
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<BlogPost?>> UpdateBlogAsync([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDTO request)
+        {
+            var updatedBlog = new BlogPost()
+            {
+                Id = id,
+                Title = request.Title,
+                ShortDescription = request.ShortDescription,
+                Content = request.Content,
+                FeaturedImageUrl = request.FeaturedImageUrl,
+                PublishedDate = request.PublishedDate,
+                Author = request.Author,
+                UrlHandle = request.UrlHandle,
+                IsVisible = request.IsVisible,
+                Categories = new List<Category>() { }
+            };
+            foreach (var category in request.Categories)
+            {
+                var existOrNot = await categoryRepository.GetCategoryAsync(category);
+                if (existOrNot == null)
+                {
+                    return BadRequest("one or more categories selected are not available!");
+                }
+                if (existOrNot != null)
+                {
+                    updatedBlog.Categories.Add(existOrNot);
+                }
+            }
+            var response = await blogRepository.UpdateBlogAsync(updatedBlog);
+            if (response == null) {
+                return BadRequest("error occured while updating blogpost");
+            }
+            var responseDto = new BlogPostDTO
+            {
+                Id = id,
+                Title = updatedBlog.Title,
+                ShortDescription = updatedBlog.ShortDescription,
+                Content = updatedBlog.Content,
+                FeaturedImageUrl = updatedBlog.FeaturedImageUrl,
+                PublishedDate = updatedBlog.PublishedDate,
+                Author = updatedBlog.Author,
+                UrlHandle = updatedBlog.UrlHandle,
+                IsVisible = updatedBlog.IsVisible,
+                Categories = updatedBlog.Categories.Select(c => new CategoryDTO()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    UrlHandle = c.UrlHandle
+                }).ToList()
+            };
+            return Ok(responseDto);
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace Blocode.API.Repositories.Interface
         Task<IEnumerable<BlogPost>> GetBlogsAsync();
 
         Task<BlogPost?> GetBlogAsync(Guid id);
+
+        Task<BlogPost?> UpdateBlogAsync(BlogPost blogPost);
     }
 }

@@ -9,7 +9,7 @@
     <form
       [formGroup]="editBlogPostForm"
       class="w-full flex flex-wrap gap-x-4 gap-y-8"
-      (ngSubmit)="editBlogPost($event)"
+      (ngSubmit)="editBlogPost()"
     >
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-title">عنوان مقاله</label>
@@ -438,7 +438,7 @@
           [disabled]="editBlogPostForm.invalid || !categoriesSelected?.length"
           class="p-2 px-7 pl-7.5 text-sm bg-green-600 disabled:opacity-60 flex flex-row gap-1 text-white rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         >
-          <img src="assets/vectors/done.svg" class="w-4 h-4" alt="" />  
+          <img src="assets/vectors/done.svg" class="w-4 h-4" alt="" />
           ویرایش مقاله
         </button>
       </div>

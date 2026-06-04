@@ -1,6 +1,6 @@
 import { Component, effect, inject, input, Signal, signal, WritableSignal } from '@angular/core';
 import { BlogPostService } from '../services/blog-post-service';
-import { BlogPost } from '../models/blogpost.model';
+import { BlogPost, EditBlogPostRequestValuesDTO } from '../models/blogpost.model';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { Category } from '../../category/models/category.model';
@@ -123,5 +123,32 @@ export class EditBlogpost {
     }
   }
 
-  editBlogPost($event: Event) {}
+  editBlogPost() {
+    const id = this.id();
+    const formValues = this.editBlogPostForm.getRawValue();
+    if(this.editBlogPostForm.valid && id) {
+      const editedBlogPost: EditBlogPostRequestValuesDTO = {
+        title: formValues.title,
+        author: formValues.author,
+        content: formValues.content,
+        shortDescription: formValues.shortDescription,
+        publishedDate: new Date(formValues.publishedDate),
+        isVisible: formValues.isVisible,
+        featuredImageUrl: formValues.featuredImageUrl,
+        urlHandle: formValues.urlHandle,
+        categories: this.categoriesSelected?.map(c => c.id) ?? []
+      }
+
+      this.blogpostService.editBlogPost(id, editedBlogPost).subscribe({
+        next: (response) => {
+          if(response) {
+            this.router.navigate(['/','admin','blogs']);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable, InputSignal, Signal, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, httpResource, HttpResourceRef, HttpResponse } from '@angular/common/http';
-import { NewBlogPostRequestValuesDTO, BlogPost } from '../models/blogpost.model';
+import { NewBlogPostRequestValuesDTO, BlogPost, EditBlogPostRequestValuesDTO } from '../models/blogpost.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class BlogPostService {
   }
 
   //HTTP PUT
-  editBlogPost(id: string, ) {
-
+  editBlogPost(id: string, editedBlogPostDTO: EditBlogPostRequestValuesDTO) {
+    return this.http.put<BlogPost>(`${this.baseUrl}/api/blogs/${id}`, editedBlogPostDTO);
   }
 }

@@ -35,7 +35,7 @@ export interface EditBlogPostRequestValuesDTO {
   content: string;
   featuredImageUrl: string;
   urlHandle: string;
-  publishedDate: string;
+  publishedDate: Date;
   author: string;
   isVisible: boolean;
   categories: string[];

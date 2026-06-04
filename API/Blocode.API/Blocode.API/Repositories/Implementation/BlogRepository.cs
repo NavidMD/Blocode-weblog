@@ -1,6 +1,7 @@
 ﻿using Blocode.API.Data;
 using Blocode.API.Models.Domain;
 using Blocode.API.Repositories.Interface;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blocode.API.Repositories.Implementation
@@ -28,6 +29,19 @@ namespace Blocode.API.Repositories.Implementation
         public async Task<IEnumerable<BlogPost>> GetBlogsAsync()
         {
             return await _context.BlogPosts.Include(b => b.Categories).ToListAsync(); 
+        }
+
+        public async Task<BlogPost?> UpdateBlogAsync(BlogPost newblogPost)
+        {
+            var existingBlog = await _context.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.Id == newblogPost.Id);
+            if (existingBlog == null)
+            {
+                return null;
+            }
+            _context.BlogPosts.Entry(existingBlog).CurrentValues.SetValues(newblogPost);
+            existingBlog.Categories = newblogPost.Categories;
+            _context.SaveChanges();
+            return newblogPost;
         }
     }
 }
