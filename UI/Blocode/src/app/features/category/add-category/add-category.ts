@@ -1,18 +1,20 @@
-import { Component, effect, EventEmitter, Output } from '@angular/core';
+import { Component, effect, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryService } from '../services/category-service';
 import { NewCategoryRequestValuesDTO } from '../models/category.model';
 import { Router } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-category',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass, NgIf],
   templateUrl: './add-category.html',
   styleUrl: './add-category.css',
 })
 export class AddCategory {
   @Output() cancelAdding: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  toastService = inject(ToastrService);
 
   constructor(
     private categoryService: CategoryService,
@@ -26,10 +28,16 @@ export class AddCategory {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigateByUrl(currentUrl);
         });
-        console.log('adding category succeeded in database');
+        this.toastService.success('دسته بندی با موفقیت ایجاد شد','',{
+          progressBar: true,
+          timeOut: 3000,
+        })
       }
       if (this.categoryService.addCategoryStatusSignal() === 'error') {
-        console.log('adding category failed in database!');
+        this.toastService.error('خطا در ارتباط با سرور','',{
+          progressBar: true,
+          timeOut: 3000,
+        })
       }
     });
   }

@@ -30,6 +30,7 @@
           id="blog-title"
           type="text"
           formControlName="title"
+          maxlength="80"
         />
         @if (editBlogPostForm.controls.title.untouched || editBlogPostForm.controls.title.valid) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
@@ -52,6 +53,16 @@
             >نام دسته بندی حداقل 10 کلمه باید باشد</span
           >
         }
+        <span
+          class="absolute left-1 -bottom-5 text-[10px]"
+          [ngClass]="{
+            'text-green-500': editBlogPostForm.controls.title.value.length >= 10,
+            'text-black/50': editBlogPostForm.controls.title.value.length <= 10,
+          }"
+          *ngIf="editBlogPostForm.controls.title.dirty"
+        >
+          10 / {{ editBlogPostForm.controls.title.value.length }}
+        </span>
       </div>
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
@@ -76,6 +87,7 @@
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
+          maxlength="50"
         />
         @if (
           editBlogPostForm.controls.urlHandle.untouched || editBlogPostForm.controls.urlHandle.valid
@@ -100,6 +112,16 @@
             >لینک مقاله یا slug حداقل 10 کلمه باید باشد</span
           >
         }
+        <span
+          class="absolute left-1 -bottom-5 text-[10px]"
+          [ngClass]="{
+            'text-green-500': editBlogPostForm.controls.urlHandle.value.length >= 10,
+            'text-black/50': editBlogPostForm.controls.urlHandle.value.length <= 10,
+          }"
+          *ngIf="editBlogPostForm.controls.urlHandle.dirty"
+        >
+          10 / {{ editBlogPostForm.controls.urlHandle.value.length }}
+        </span>
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
@@ -152,6 +174,16 @@
             >چکیده مقاله حداقل 20 کلمه باید باشد</span
           >
         }
+        <span
+          class="absolute left-1 -bottom-5 text-[10px]"
+          [ngClass]="{
+            'text-green-500': editBlogPostForm.controls.shortDescription.value.length >= 20,
+            'text-black/50': editBlogPostForm.controls.shortDescription.value.length <= 20,
+          }"
+          *ngIf="editBlogPostForm.controls.shortDescription.dirty"
+        >
+          20 / {{ editBlogPostForm.controls.shortDescription.value.length }}
+        </span>
       </div>
       <div class="flex-[100%] flex flex-row gap-x-4 items-start relative">
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
@@ -202,6 +234,16 @@
               >متن مقاله حداقل 50 کلمه باید باشد</span
             >
           }
+          <span
+            class="absolute left-1 -bottom-5 text-[10px]"
+            [ngClass]="{
+              'text-green-500': editBlogPostForm.controls.content.value.length >= 50,
+              'text-black/50': editBlogPostForm.controls.content.value.length <= 50,
+            }"
+            *ngIf="editBlogPostForm.controls.content.dirty"
+          >
+            50 / {{ editBlogPostForm.controls.content.value.length }}
+          </span>
         </div>
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
           <label class="text-sm text-black/80" for="blog-content-preview"

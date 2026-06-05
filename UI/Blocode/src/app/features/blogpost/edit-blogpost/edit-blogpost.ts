@@ -6,10 +6,12 @@ import { CategoryService } from '../../category/services/category-service';
 import { Category } from '../../category/models/category.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MarkdownComponent } from 'ngx-markdown';
+import { ToastrService } from 'ngx-toastr';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-blogpost',
-  imports: [ReactiveFormsModule, MarkdownComponent],
+  imports: [ReactiveFormsModule, MarkdownComponent, NgClass, NgIf],
   templateUrl: './edit-blogpost.html',
   styleUrls: ['./edit-blogpost.css'],
 })
@@ -17,16 +19,8 @@ export class EditBlogpost {
   id = input<string>();
   blogpostService = inject(BlogPostService);
   categoryService = inject(CategoryService);
+  toastService = inject(ToastrService);
   constructor(private router: Router) {
-    // effect(() => {
-    //   if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
-    //     this.blogpostService.addBlogPostStatusSignal.set('idle');
-    //     this.router.navigate(['/admin', 'blogs']);
-    //   }
-    //   if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
-    //     console.log('error');
-    //   }
-    // });
     effect(() => {
       const data = this.allCategoriesValue();
       if (data) {
@@ -50,7 +44,7 @@ export class EditBlogpost {
   editBlogPostForm = new FormGroup({
     title: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(10), Validators.maxLength(100)],
+      validators: [Validators.required, Validators.minLength(10), Validators.maxLength(80)],
     }),
     shortDescription: new FormControl<string>('', {
       nonNullable: true,
@@ -143,10 +137,17 @@ export class EditBlogpost {
         next: (response) => {
           if (response) {
             this.router.navigate(['/', 'admin', 'blogs']);
+            this.toastService.success('مقاله با موفقیت ویرایش شد', '', {
+              progressBar: true,
+              timeOut: 3000,
+            });
           }
         },
         error: (err) => {
-          console.log(err);
+          this.toastService.error('خطا در ارتباط با سرور', `${err.status}`, {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
       });
     }
@@ -157,11 +158,17 @@ export class EditBlogpost {
     if (id) {
       this.blogpostService.deleteBlogPost(id).subscribe({
         next: (response) => {
-          this.router.navigate(['/admin/blogs'])
-          console.log('deleted', response);
+          this.router.navigate(['/admin/blogs']);
+          this.toastService.success('مقاله با موفقیت حذف شد', '', {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
-        error: () => {
-          console.log('something went wrong');
+        error: (err) => {
+          this.toastService.error('خطا در ارتباط با سرور', `${err.status}`, {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
       });
     }

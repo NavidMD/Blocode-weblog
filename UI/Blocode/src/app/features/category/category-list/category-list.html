@@ -33,7 +33,7 @@
   @if (addCategoryActive) {
     <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
   }
-  <div class="gap-4 mt-2" id="categories-container">
+  <div class="gap-4 mt-4" id="categories-container">
     @if (isLoading()) {
       <span>درحال بارگذاری...</span>
     }

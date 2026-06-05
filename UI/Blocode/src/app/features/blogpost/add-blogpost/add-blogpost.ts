@@ -6,27 +6,37 @@ import { NewBlogPostRequestValuesDTO } from '../models/blogpost.model';
 import { MarkdownComponent, MarkdownModule } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category-service';
 import { Category } from '../../category/models/category.model';
+import { ToastrService } from 'ngx-toastr';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-blogpost',
-  imports: [ReactiveFormsModule, RouterLink, MarkdownComponent],
+  imports: [ReactiveFormsModule, RouterLink, MarkdownComponent, NgClass, NgIf],
   templateUrl: './add-blogpost.html',
   styleUrls: ['./add-blogpost.css'],
 })
 export class AddBlogpost {
+  toastService = inject(ToastrService);
   categoryService = inject(CategoryService);
   constructor(
     private blogpostService: BlogPostService,
     private router: Router,
   ) {
-    
+
     effect(() => {
       if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
         this.blogpostService.addBlogPostStatusSignal.set('idle');
         this.router.navigate(['/admin', 'blogs']);
+        this.toastService.success('مقاله با موفقیت ایجاد شد','',{
+          progressBar: true,
+          timeOut: 3000,
+        })
       }
       if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
-        console.log('error');
+        this.toastService.success('خطا در ارتباط با سرور','',{
+          progressBar: true,
+          timeOut: 3000,
+        })
       }
     });
     effect(() => {
@@ -34,7 +44,7 @@ export class AddBlogpost {
       if (data) {
         this.filteredCategories.set(data);
       }
-    }); 
+    });
   }
 
   private getAllCategoriesRef = this.categoryService.getAllCategories();
@@ -46,7 +56,7 @@ export class AddBlogpost {
   newBlogPostForm = new FormGroup({
     title: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(10), Validators.maxLength(100)],
+      validators: [Validators.required, Validators.minLength(10), Validators.maxLength(80)],
     }),
     shortDescription: new FormControl<string>('', {
       nonNullable: true,

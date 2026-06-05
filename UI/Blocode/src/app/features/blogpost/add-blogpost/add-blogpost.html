@@ -44,6 +44,7 @@
           id="blog-title"
           type="text"
           formControlName="title"
+          maxlength="80"
         />
         @if (newBlogPostForm.controls.title.untouched || newBlogPostForm.controls.title.valid) {
           <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
@@ -55,7 +56,7 @@
           newBlogPostForm.controls.title.hasError('required')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
-            >نام دسته بندی نباید خالی باشد</span
+            >عنوان مقاله نباید خالی باشد</span
           >
         }
         @if (
@@ -63,9 +64,19 @@
           newBlogPostForm.controls.title.hasError('minlength')
         ) {
           <span class="text-[10px] absolute -bottom-5 text-red-500 pr-0.5"
-            >نام دسته بندی حداقل 10 کلمه باید باشد</span
+            >عنوان مقاله حداقل 10 کلمه باید باشد</span
           >
         }
+        <span
+          class="absolute left-1 -bottom-5 text-[10px]"
+          [ngClass]="{
+            'text-green-500': newBlogPostForm.controls.title.value.length >= 10,
+            'text-black/50': newBlogPostForm.controls.title.value.length <= 10,
+          }"
+          *ngIf="newBlogPostForm.controls.title.dirty"
+        >
+          10 / {{ newBlogPostForm.controls.title.value.length }}
+        </span>
       </div>
       <div class="flex-1 flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
@@ -90,6 +101,7 @@
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
+          maxlength="50"
         />
         @if (
           newBlogPostForm.controls.urlHandle.untouched || newBlogPostForm.controls.urlHandle.valid
@@ -114,6 +126,16 @@
             >لینک مقاله یا slug حداقل 10 کلمه باید باشد</span
           >
         }
+        <span
+          class="absolute left-1 -bottom-5 text-[10px]"
+          [ngClass]="{
+            'text-green-500': newBlogPostForm.controls.urlHandle.value.length >= 10,
+            'text-black/50': newBlogPostForm.controls.urlHandle.value.length <= 10,
+          }"
+          *ngIf="newBlogPostForm.controls.urlHandle.dirty"
+        >
+          10 / {{ newBlogPostForm.controls.urlHandle.value.length }}
+        </span>
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
@@ -166,6 +188,16 @@
             >چکیده مقاله حداقل 20 کلمه باید باشد</span
           >
         }
+        <span
+          class="absolute left-1 -bottom-5 text-[10px]"
+          [ngClass]="{
+            'text-green-500': newBlogPostForm.controls.shortDescription.value.length >= 20,
+            'text-black/50': newBlogPostForm.controls.shortDescription.value.length <= 20,
+          }"
+          *ngIf="newBlogPostForm.controls.shortDescription.dirty"
+        >
+          20 / {{ newBlogPostForm.controls.shortDescription.value.length }}
+        </span>
       </div>
       <div class="flex-[100%] flex flex-row gap-x-4 items-start relative">
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
@@ -214,6 +246,16 @@
               >متن مقاله حداقل 50 کلمه باید باشد</span
             >
           }
+          <span
+            class="absolute left-1 -bottom-5 text-[10px]"
+            [ngClass]="{
+              'text-green-500': newBlogPostForm.controls.content.value.length >= 50,
+              'text-black/50': newBlogPostForm.controls.content.value.length <= 50,
+            }"
+            *ngIf="newBlogPostForm.controls.content.dirty"
+          >
+            50 / {{ newBlogPostForm.controls.content.value.length }}
+          </span>
         </div>
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
           <label class="text-sm text-black/80" for="blog-content-preview"

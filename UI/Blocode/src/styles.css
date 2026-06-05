@@ -1,5 +1,5 @@
 @import './font.css';
-
+@import 'ngx-toastr/toastr';
 @import 'tailwindcss';
 
 * {
