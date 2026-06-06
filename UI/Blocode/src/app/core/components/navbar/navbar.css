@@ -1,6 +1,7 @@
 .ui-switch {
   /* switch */
   --switch-bg: rgb(229, 229, 229);
+  --switch-bg-dark: rgb(84, 84, 84);
   --switch-width: 45px;
   --switch-height: 18px;
   /* circle */
@@ -19,7 +20,7 @@
   appearance: none;
   width: var(--switch-width);
   height: var(--switch-height);
-  background: var(--switch-bg);
+  /* background: var(--switch-bg); */
   border-radius: 999px;
   position: relative;
   cursor: pointer;

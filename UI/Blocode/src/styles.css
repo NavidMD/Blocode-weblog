@@ -2,6 +2,8 @@
 @import 'ngx-toastr/toastr';
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 * {
   box-sizing: border-box;
 }
@@ -32,6 +34,23 @@ a {
 
 button {
   outline: 0;
+}
+
+@layer base {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* پی‌فرض لایت */
+    -webkit-text-fill-color: black !important;
+  }
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover,
+  .dark input:-webkit-autofill:focus,
+  .dark input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #000000 inset !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
+  }
 }
 
 @layer base {

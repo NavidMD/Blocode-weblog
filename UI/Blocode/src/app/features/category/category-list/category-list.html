@@ -1,22 +1,19 @@
 <div class="w-full h-auto flex flex-col justify-center items-start gap-5">
   <div class="w-full flex flex-row items-center">
-    <h1 class="text-[18px] font-bold flex flex-row items-center gap-2">
+    <h1 class="text-[18px] font-bold flex flex-row items-center gap-2 dark:text-white/95">
       دسته بندی ها
       @if (addCategoryActive) {
-        <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد دسته بندی </span>
+        <span class="inline-block text-sm text-black/60 dark:text-white/95 mr-2"> > &nbsp; ایجاد دسته بندی </span>
       }
       <label for="category-open-search">
-        <img
-        src="assets/vectors/search.svg"
-        class="w-5 h-5 cursor-pointer"
-        />
+        <img src="assets/vectors/search.svg" class="w-5 h-5 cursor-pointer" />
       </label>
       <input type="checkbox" class="hidden" id="category-open-search" />
       <input
         id="category-search-input"
         type="text"
         placeholder="جستجو ..."
-        class="input-text-normal font-light justify-right px-2 items-center rounded-[15px] mr-4 border border-gray-200 outline-0 h-[35px]"
+        class="input-text-normal dark:text-white/95 font-light justify-right px-2 items-center rounded-[15px] mr-4 border dark:border-white/20 border-gray-200 outline-0 h-[35px]"
       />
     </h1>
     @if (!addCategoryActive) {
@@ -42,54 +39,46 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="overflow-hidden relative transition cursor-pointer hover:-translate-y-1.5 hover:shadow-lg flex flex-col justify-between items-center rounded-[15px] shadow-md shadow-black/20 bg-white px-4 pt-6 pb-8"
+          class="overflow-hidden glass-card bg-white dark:bg-black/80 relative transition cursor-pointer hover:-translate-y-1.5 hover:shadow-lg flex flex-col justify-between items-center px-4 pt-6 pb-8"
         >
           <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
             <span
               class="shadow-md shadow-black/15 rounded-full text-xl text-white flex justify-center items-center w-10 h-10 pt-1 bg-blue-400/70"
               >{{ category.name[0].toUpperCase() }}</span
             >
-            <div class="h-1/2 flex flex-col justify-center items-start">
-              <h3 class="text-lg text-black/90">{{ category.name }}</h3>
-              <span class="text-[11px] text-black/70 font-light flex flex-row gap-0.5 items-start">
+            <div class="h-1/2 flex flex-col justify-center items-start ">
+              <h3 class="text-lg text-black/90 dark:text-white/95">{{ category.name }}</h3>
+              <span
+                class="text-[11px] text-black/70 dark:text-white/95 font-light flex flex-row gap-0.5 items-start"
+              >
                 {{ category.urlHandle }}
-                <img src="assets/vectors/attach.svg" class="w-3 h-3 opacity-80" />
+                <i class="fa-solid fa-link"></i>
               </span>
             </div>
           </div>
           <div
             id="cards-buttonSection"
-            class="w-full absolute flex justify-between bottom-1.5 h-fit px-2 pr-3"
+            class="w-full absolute flex justify-between bottom-1 h-fit px-3 pr-4"
           >
             <div class="w-fit items-center">
               <button
                 class="ml-auto flex flex-row gap-1 text-[10px] justify-center items-center cursor-pointer opacity-60"
               >
-              <span class="text-[10px] text-black/70">12 مقاله مرتبط </span>
+                <span class="text-[9px] font-thin text-black/70 dark:text-white/95">12 مقاله مرتبط </span>
               </button>
             </div>
             <div class="flex flex-row justify-end">
               <button
-                class="cursor-pointer rounded-md p-0.5 hover:bg-slate-100 opacity-80"
+                class="cursor-pointer p-1"
                 [routerLink]="['/admin/categories', 'edit', category.id]"
               >
-                <img
-                  class="w-4 h-4 transition opacity-90"
-                  src="assets/vectors/edit.svg"
-                  alt="ویرایش"
-                  title="ویرایش"
-                />
+                <i class="fa-regular fa-pen-to-square" style="color: rgb(65, 160, 233)"></i>
               </button>
               <button
-                class="cursor-pointer rounded-md p-0.5 hover:bg-slate-100 opacity-80"
+                class="cursor-pointer p-1"
                 (click)="deleteCategory(category.id)"
               >
-                <img
-                  class="w-4 h-4 transition opacity-90"
-                  src="assets/vectors/delete.svg"
-                  alt="حذف"
-                  title="حذف"
-                />
+                <i class="fa-regular fa-trash-can" style="color: rgb(255, 80, 80)"></i>
               </button>
             </div>
           </div>

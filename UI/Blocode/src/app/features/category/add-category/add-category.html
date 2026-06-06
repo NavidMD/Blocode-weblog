@@ -6,9 +6,9 @@
       class="w-full flex flex-row justify-between gap-4"
     >
       <div class="grow flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="category-name">نام دسته بندی جدید</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="category-name">نام دسته بندی جدید</label>
         <input
-          class="w-full h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="w-full h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="category-name"
           type="text"
           formControlName="name"
@@ -18,7 +18,7 @@
           categoryNameInput.untouched ||
           categoryNameInput.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >نام دسته بندی را وارد کنید (حداقل 3 کلمه)</span
           >
         }
@@ -40,11 +40,11 @@
         </span>
       </div>
       <div class="grow flex flex-col gap-2 items-start relative" >
-        <label class="text-sm text-black/80" for="category-urlHandle"
+        <label class="text-sm text-black/80 dark:text-white/95" for="category-urlHandle"
           >مسیر دسته بندی جدید (slug)</label
         >
         <input
-          class="w-full h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="w-full h-9 border autofill:bg-transparent! dark:autofill:text-white/95 border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="category-urlHandle"
           type="text"
           formControlName="urlHandle"
@@ -54,7 +54,7 @@
           categoryUrlHandleInput.untouched ||
           categoryUrlHandleInput.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >مسیر دسته بندی را وارد کنید (حداقل 3 کلمه)</span
           >
         }
