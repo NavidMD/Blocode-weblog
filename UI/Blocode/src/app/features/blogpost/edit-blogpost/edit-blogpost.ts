@@ -1,7 +1,7 @@
 import { Component, effect, inject, input, Signal, signal, WritableSignal } from '@angular/core';
 import { BlogPostService } from '../services/blog-post-service';
 import { BlogPost, EditBlogPostRequestValuesDTO } from '../models/blogpost.model';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { Category } from '../../category/models/category.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-blogpost',
-  imports: [ReactiveFormsModule, MarkdownComponent, NgClass, NgIf],
+  imports: [ReactiveFormsModule, MarkdownComponent, NgClass, NgIf, RouterLink],
   templateUrl: './edit-blogpost.html',
   styleUrls: ['./edit-blogpost.css'],
 })

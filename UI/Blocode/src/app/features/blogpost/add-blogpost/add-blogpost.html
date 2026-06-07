@@ -1,14 +1,14 @@
 <div id="add-blog-page" class="w-full h-auto flex flex-col justify-center items-start gap-5">
   <div class="w-full flex flex-row justify-start items-center">
-    <h1 class="text-[16px] font-bold">
+    <h1 class="text-[18px] font-bold dark:text-white/95">
       مقالات
-      <span class="inline-block text-sm text-black/60 mr-2"> > &nbsp; ایجاد مقاله </span>
+      <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95"> > &nbsp; ایجاد مقاله </span>
     </h1>
     <div
       id="add-blog-hint"
       class="group flex cursor-pointer relative flex-row items-center justify-end gap-1 w-fit overflow-hidden mr-1"
     >
-      <img src="assets/vectors/help.svg" class="w-6.5 h-6.5 z-10 shrink-0 bg-white" alt="" />
+      <img src="assets/vectors/help.svg" class="w-6.5 h-6.5 z-10 shrink-0" alt="" />
       <span
         class="text-[12px] whitespace-nowrap text-blue-500 transition-all duration-500 ease-in-out pt-0.5 max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-90"
       >
@@ -26,7 +26,7 @@
       (ngSubmit)="createBlogPost($event)"
     >
       <div class="flex-1 flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-title">عنوان مقاله</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-title">عنوان مقاله</label>
         @if (newBlogPostForm.controls.title.invalid && newBlogPostForm.controls.title.touched) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -40,14 +40,14 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-title"
           type="text"
           formControlName="title"
           maxlength="80"
         />
         @if (newBlogPostForm.controls.title.untouched || newBlogPostForm.controls.title.valid) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >عنوان مقاله را وارد کنید (حداقل 10 کلمه)</span
           >
         }
@@ -70,8 +70,8 @@
         <span
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
-            'text-green-500': newBlogPostForm.controls.title.value.length >= 10,
-            'text-black/50': newBlogPostForm.controls.title.value.length <= 10,
+            'text-green-500/70': newBlogPostForm.controls.title.value.length >= 10,
+            'text-black/50 dark:text-white/50': newBlogPostForm.controls.title.value.length <= 10,
           }"
           *ngIf="newBlogPostForm.controls.title.dirty"
         >
@@ -79,7 +79,7 @@
         </span>
       </div>
       <div class="flex-1 flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-urlHandle">لینک مقاله (slug)</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-urlHandle">لینک مقاله (slug)</label>
         @if (
           newBlogPostForm.controls.urlHandle.invalid && newBlogPostForm.controls.urlHandle.touched
         ) {
@@ -97,7 +97,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
@@ -106,7 +106,7 @@
         @if (
           newBlogPostForm.controls.urlHandle.untouched || newBlogPostForm.controls.urlHandle.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >لینک مقاله یا slug را وارد کنید (حداقل 10 کلمه)</span
           >
         }
@@ -129,8 +129,8 @@
         <span
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
-            'text-green-500': newBlogPostForm.controls.urlHandle.value.length >= 10,
-            'text-black/50': newBlogPostForm.controls.urlHandle.value.length <= 10,
+            'text-green-500/70': newBlogPostForm.controls.urlHandle.value.length >= 10,
+            'text-black/50 dark:text-white/50': newBlogPostForm.controls.urlHandle.value.length <= 10,
           }"
           *ngIf="newBlogPostForm.controls.urlHandle.dirty"
         >
@@ -138,7 +138,7 @@
         </span>
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-shortDescription">چکیده مقاله</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-shortDescription">چکیده مقاله</label>
         @if (
           newBlogPostForm.controls.shortDescription.invalid &&
           newBlogPostForm.controls.shortDescription.touched
@@ -158,7 +158,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-shortDescription"
           type="text"
           formControlName="shortDescription"
@@ -168,7 +168,7 @@
           newBlogPostForm.controls.shortDescription.untouched ||
           newBlogPostForm.controls.shortDescription.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >چکیده مقاله را وارد کنید (حداقل 20 کلمه)</span
           >
         }
@@ -191,17 +191,17 @@
         <span
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
-            'text-green-500': newBlogPostForm.controls.shortDescription.value.length >= 20,
-            'text-black/50': newBlogPostForm.controls.shortDescription.value.length <= 20,
+            'text-green-500/70': newBlogPostForm.controls.shortDescription.value.length >= 20,
+            'text-black/50 dark:text-white/50': newBlogPostForm.controls.shortDescription.value.length <= 20,
           }"
           *ngIf="newBlogPostForm.controls.shortDescription.dirty"
         >
           20 / {{ newBlogPostForm.controls.shortDescription.value.length }}
         </span>
       </div>
-      <div class="flex-[100%] flex flex-row gap-x-4 items-start relative">
+      <div class="flex-[100%] flex flex-row gap-x-4 items-start relative" id="content-input">
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
-          <label class="text-sm text-black/80" for="blog-content">متن کامل مقاله</label>
+          <label class="text-sm text-black/80 dark:text-white/95" for="blog-content">متن کامل مقاله</label>
           @if (
             newBlogPostForm.controls.content.invalid && newBlogPostForm.controls.content.touched
           ) {
@@ -217,7 +217,7 @@
             />
           }
           <textarea
-            class="focus:border-black/30 input-text-normal overflow-y-scroll w-full border border-black/20 rounded-[15px] py-1 px-2 pl-8 outline-0"
+            class="focus:border-black/30 dark:focus:border-white/30 input-text-normal overflow-y-scroll w-full border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 pl-8 outline-0"
             id="blog-content"
             formControlName="content"
             rows="10"
@@ -226,7 +226,7 @@
           @if (
             newBlogPostForm.controls.content.untouched || newBlogPostForm.controls.content.valid
           ) {
-            <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+            <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
               >متن کامل مقاله را وارد کنید (حداقل 50 کلمه)</span
             >
           }
@@ -249,8 +249,8 @@
           <span
             class="absolute left-1 -bottom-5 text-[10px]"
             [ngClass]="{
-              'text-green-500': newBlogPostForm.controls.content.value.length >= 50,
-              'text-black/50': newBlogPostForm.controls.content.value.length <= 50,
+              'text-green-500/70': newBlogPostForm.controls.content.value.length >= 50,
+              'text-black/50 dark:text-white/50': newBlogPostForm.controls.content.value.length <= 50,
             }"
             *ngIf="newBlogPostForm.controls.content.dirty"
           >
@@ -258,19 +258,19 @@
           </span>
         </div>
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
-          <label class="text-sm text-black/80" for="blog-content-preview"
+          <label class="text-sm text-black/80 dark:text-white/95" for="blog-content-preview"
             >پیش نمایش متن مقاله</label
           >
           <div
             id="blog-content-preview"
-            class="focus:border-black/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 rounded-[15px] py-1 px-2 outline-0"
+            class="focus:border-black/30 dark:focus:border-white/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           >
             <markdown [data]="newBlogPostForm.controls.content.getRawValue()"> </markdown>
           </div>
         </div>
       </div>
       <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-featuredImageUrl">لینک تصویر</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-featuredImageUrl">لینک تصویر</label>
         @if (
           newBlogPostForm.controls.featuredImageUrl.invalid &&
           newBlogPostForm.controls.featuredImageUrl.touched
@@ -290,7 +290,7 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal text-right h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal text-right h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-featuredImageUrl"
           type="text"
           formControlName="featuredImageUrl"
@@ -300,7 +300,7 @@
           newBlogPostForm.controls.featuredImageUrl.untouched ||
           newBlogPostForm.controls.featuredImageUrl.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >لینک مرتبط به تصویر مقاله را بطور کامل وارد کنید</span
           >
         }
@@ -314,9 +314,9 @@
         }
       </div>
       <div class="grow shrink flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-publishedDate">تاریخ انتشار</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-publishedDate">تاریخ انتشار</label>
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 pt-2 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 pt-2 px-2 outline-0"
           id="blog-publishedDate"
           type="date"
           formControlName="publishedDate"
@@ -325,7 +325,7 @@
           newBlogPostForm.controls.publishedDate.untouched ||
           newBlogPostForm.controls.publishedDate.valid
         ) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >تاریخ انتشار مقاله را انتخاب کنید</span
           >
         }
@@ -339,7 +339,7 @@
         }
       </div>
       <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-author">نویسنده</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-author">نویسنده</label>
         @if (newBlogPostForm.controls.author.invalid && newBlogPostForm.controls.author.touched) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -353,13 +353,13 @@
           />
         }
         <input
-          class="focus:border-black/30 w-full input-text-normal h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-author"
           type="text"
           formControlName="author"
         />
         @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
-          <span class="text-[10px] absolute -bottom-5 text-black/50 pr-0.5"
+          <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-0.5"
             >نام نویسنده مقاله را وارد کنید</span
           >
         }
@@ -381,7 +381,7 @@
         }
       </div>
       <div class="grow shrink flex-[50%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80" for="blog-author">دسته بندی ها</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-author">دسته بندی ها</label>
         @if (!categoriesSelected.length) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -396,22 +396,22 @@
         }
         <div
           id="category-select"
-          class="w-full relative flex flex-row items-center text-sm h-9 border border-black/20 rounded-[15px] py-1 px-2 outline-0"
+          class="w-full relative flex flex-row items-center text-sm h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
         >
           <div class="flex flex-row gap-1 justify-start items-center">
             @for (item of categoriesSelected; track item.id) {
               <div
                 (click)="toggleCategorySelection(item)"
-                class="text-blue-600 p-1 px-2 pl-1.5 pt-1.5 flex flex-row justify-center items-center gap-1.5 cursor-pointer text-[11px] bg-blue-100 rounded-[10px] select-none"
+                class="text-blue-500 glass-card pb-0.5 px-2.5 pl-2.5 pt-1.5 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-[11px] select-none"
               >
                 {{ item.name }}
-                <img src="assets/vectors/multiply.svg" class="w-3.5 h-full" />
+                <i class="fa-solid fa-xmark pb-0.5" style="color: rgb(32, 84, 240);"></i>
               </div>
             }
             <input
               id="cat-select-input"
               type="text"
-              class="focus:outline-0 w-fit input-text-normal h-full border-0 pr-0.5"
+              class="focus:outline-0 w-fit input-text-normal dark:text-white/95 h-full border-0 pr-0.5"
               placeholder="جستجو..."
               (input)="searchCategory($event.target)"
               (focus)="categoriesSearchBox.classList.add('show')"
@@ -421,45 +421,45 @@
           <div
             id="category-list"
             #categoriesSearchBox
-            class="w-full bg-white absolute rounded-[15px] right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
+            class="w-full bg-white dark:bg-blue-950 glass-card absolute rounded-[15px] right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
           >
             @if (filteredCategories()?.length) {
               @for (category of filteredCategories(); track category.id) {
                 <span
                   (click)="toggleCategorySelection(category)"
-                  class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
+                  class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 dark:bg-white/10 dark:text-white/90 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
                 >
                   {{ category.name }}
                 </span>
               }
             } @else {
               <span
-                class="text-black/50 text-[11px] pb-0.5 px-2 pt-1 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
+                class="text-black/50 dark:text-white/50 text-[11px] pb-0.5 px-2 pt-1 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
               >
                 موردی یافت نشد
               </span>
             }
           </div>
         </div>
-        <span class="text-[10px] absolute -bottom-5 text-black/50 pr-1"
+        <span class="text-[10px] absolute -bottom-5 text-black/50 dark:text-white/50 pr-1"
           >دسته بندی مقاله را از بین دسته بندی های موجود انتخاب کنید</span
         >
       </div>
       <div class="grow shrink h-full flex-[40%] flex flex-col gap-2 items-start">
-        <label class="text-sm text-black/80">وضعیت نمایش مقاله</label>
+        <label class="text-sm text-black/80 dark:text-white/95">وضعیت نمایش مقاله</label>
         <div class="w-full h-9 flex flex-row items-center justify-start gap-5">
-          <label class="w-full flex flex-row justify-start items-center gap-2">
+          <label class="w-full text-black/80 dark:text-white/95 flex flex-row justify-start items-center gap-2">
             <input
-              class="h-4 border border-black/20 rounded-[15px] outline-0"
+              class="h-4 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] outline-0 cursor-pointer"
               type="radio"
               formControlName="isVisible"
               [value]="true"
             />
             منتشر شده
           </label>
-          <label class="w-full flex flex-row justify-start items-center gap-2">
+          <label class="w-full text-black/80 dark:text-white/95 flex flex-row justify-start items-center gap-2">
             <input
-              class="h-4 border border-black/20 rounded-[15px] outline-0"
+              class="h-4 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] outline-0 cursor-pointer"
               type="radio"
               formControlName="isVisible"
               [value]="false"
@@ -486,7 +486,7 @@
         <button
           type="submit"
           [disabled]="newBlogPostForm.invalid || !categoriesSelected.length"
-          class="p-2 px-7 pl-7.5 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-[15px] flex flex-row gap-1 shadow-md shadow-black/20 cursor-pointer"
+          class="p-2 px-7 pl-7.5 text-sm bg-blue-600 disabled:opacity-60 text-white rounded-[15px] flex flex-row gap-1 shadow-md shadow-black/20 cursor-pointer"
         >
           <img src="assets/vectors/done.svg" class="w-4 h-4" alt="" />
           ایجاد مقاله

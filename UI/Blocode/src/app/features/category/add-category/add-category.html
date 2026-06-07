@@ -8,7 +8,7 @@
       <div class="grow flex flex-col gap-2 items-start relative">
         <label class="text-sm text-black/80 dark:text-white/95" for="category-name">نام دسته بندی جدید</label>
         <input
-          class="w-full h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="category-name"
           type="text"
           formControlName="name"
@@ -31,7 +31,7 @@
         <span
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
-            'text-green-500': categoryNameInput.value.length >= 3,
+            'text-green-500/70': categoryNameInput.value.length >= 3,
             'text-black/50': categoryNameInput.value.length <= 3,
           }"
           *ngIf="categoryNameInput.dirty"
@@ -40,11 +40,11 @@
         </span>
       </div>
       <div class="grow flex flex-col gap-2 items-start relative" >
-        <label class="text-sm text-black/80 dark:text-white/95" for="category-urlHandle"
+        <label class="text-sm border-black/20 dark:border-white/20 dark:text-white/95" for="category-urlHandle"
           >مسیر دسته بندی جدید (slug)</label
         >
         <input
-          class="w-full h-9 border autofill:bg-transparent! dark:autofill:text-white/95 border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="category-urlHandle"
           type="text"
           formControlName="urlHandle"
@@ -67,7 +67,7 @@
         <span
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
-            'text-green-500': categoryUrlHandleInput.value.length >= 3,
+            'text-green-500/70': categoryUrlHandleInput.value.length >= 3,
             'text-black/50': categoryUrlHandleInput.value.length <= 3,
           }"
           *ngIf="categoryUrlHandleInput.dirty"
@@ -91,7 +91,7 @@
         <button
           type="submit"
           [disabled]="!addCategoryFormGroup.valid"
-          class="p-2 px-3 text-sm bg-blue-500 disabled:opacity-60 text-white rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+          class="p-2 px-3 text-sm bg-blue-600 disabled:opacity-60 text-white rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         >
           ایجاد دسته بندی
         </button>

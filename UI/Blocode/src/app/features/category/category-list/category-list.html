@@ -19,7 +19,7 @@
     @if (!addCategoryActive) {
       <a
         role="button"
-        class="p-2 px-4 text-sm mr-auto ml-0 bg-blue-500 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 text-sm mr-auto ml-0 bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         (click)="addCategoryActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
@@ -30,7 +30,9 @@
   @if (addCategoryActive) {
     <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
   }
-  <div class="gap-4 mt-4" id="categories-container">
+  <div class="gap-4" id="categories-container"
+    [ngClass]="addCategoryActive === true ? 'mt-6': 'mt-2'"
+  >
     @if (isLoading()) {
       <span>درحال بارگذاری...</span>
     }

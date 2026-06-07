@@ -52,6 +52,11 @@ button {
     -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
   }
 }
+@layer base {
+  .dark * {
+    scrollbar-color: #5e5e5e #151515; /* رنگ دسته و پس‌زمینه در حالت دارک */
+  }
+}
 
 @layer base {
   .btn-mainBlue {
