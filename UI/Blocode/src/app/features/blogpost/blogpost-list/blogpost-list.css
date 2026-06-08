@@ -14,10 +14,10 @@
   content: '';
   position: absolute;
   width: 100%;
-  height: 36%;
+  height: 45%;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 600%);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 300%);
 }
 
 #blog-card #buttons {
@@ -38,23 +38,30 @@
 
 #blog-card:hover#blog-card img {
   scale: 110%;
-  transition: 0.2s ease-in-out;
+  transition: 0.8s 0.3s all ease-out;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.09);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 2px 8px 0px rgba(0, 0, 0, 0.1),
+    0 2px 8px 0px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
+    inset 0 0 4px 2px rgba(255, 255, 255, 0.2);
   overflow: hidden;
 }
 
+.glass-card:hover {
+  box-shadow:
+    0 7px 11px 0px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 4px 2px rgba(255, 255, 255, 0.2);
+}
 .glass-card::before {
   content: '';
   position: absolute;
@@ -62,12 +69,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.6),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
 .glass-card::after {

@@ -26,10 +26,11 @@ export class BlogpostList {
     const result = new Intl.DateTimeFormat('fa-IR', {
       month: 'long',
       day: 'numeric',
-      weekday: 'long'
+      weekday: 'long',
     }).format(convertingDate);
     return result;
   }
+
 
   deleteBlog(id: string) {
     if (id) {
