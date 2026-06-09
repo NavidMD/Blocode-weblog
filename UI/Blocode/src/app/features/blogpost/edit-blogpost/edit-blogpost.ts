@@ -9,11 +9,12 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { ToastrService } from 'ngx-toastr';
 import { NgClass, NgIf } from '@angular/common';
 import { ImageSelector } from '../../../shared/components/image-selector/image-selector';
+import { ImageSelectorService } from '../../../shared/services/image-selector-service';
 
 @Component({
   selector: 'app-edit-blogpost',
   imports: [ReactiveFormsModule, MarkdownComponent, NgClass, NgIf, RouterLink, ImageSelector],
-  templateUrl: './edit-blogpost.html',  
+  templateUrl: './edit-blogpost.html',
   styleUrls: ['./edit-blogpost.css'],
 })
 export class EditBlogpost {
@@ -21,6 +22,8 @@ export class EditBlogpost {
   blogpostService = inject(BlogPostService);
   categoryService = inject(CategoryService);
   toastService = inject(ToastrService);
+  imageSelectorService = inject(ImageSelectorService);
+
   constructor(private router: Router) {
     effect(() => {
       const data = this.allCategoriesValue();
@@ -173,5 +176,9 @@ export class EditBlogpost {
         },
       });
     }
+  }
+
+  openImageSelector() {
+    this.imageSelectorService.display();
   }
 }

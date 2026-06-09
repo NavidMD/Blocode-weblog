@@ -2,7 +2,9 @@
   <div class="w-full flex flex-row justify-between items-center">
     <h1 class="text-[16px] font-bold dark:text-white/95">
       مقالات
-      <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95"> > &nbsp; ویرایش مقاله </span>
+      <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95">
+        > &nbsp; ویرایش مقاله
+      </span>
     </h1>
     <button class="ml-0 mr-auto cursor-pointer" [routerLink]="['/admin/blogs']">
       <img src="assets/vectors/left.svg" class="w-7.5 h-7.5" alt="" />
@@ -68,7 +70,9 @@
         </span>
       </div>
       <div class="flex-1 flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80 dark:text-white/95" for="blog-urlHandle">لینک مقاله (slug)</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-urlHandle"
+          >لینک مقاله (slug)</label
+        >
         @if (
           editBlogPostForm.controls.urlHandle.invalid && editBlogPostForm.controls.urlHandle.touched
         ) {
@@ -119,7 +123,8 @@
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
             'text-green-500/70': editBlogPostForm.controls.urlHandle.value.length >= 10,
-            'text-black/50 dark:text-white/50': editBlogPostForm.controls.urlHandle.value.length <= 10,
+            'text-black/50 dark:text-white/50':
+              editBlogPostForm.controls.urlHandle.value.length <= 10,
           }"
           *ngIf="editBlogPostForm.controls.urlHandle.dirty"
         >
@@ -127,7 +132,9 @@
         </span>
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80 dark:text-white/95" for="blog-shortDescription">چکیده مقاله</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-shortDescription"
+          >چکیده مقاله</label
+        >
         @if (
           editBlogPostForm.controls.shortDescription.invalid &&
           editBlogPostForm.controls.shortDescription.touched
@@ -181,7 +188,8 @@
           class="absolute left-1 -bottom-5 text-[10px]"
           [ngClass]="{
             'text-green-500/70': editBlogPostForm.controls.shortDescription.value.length >= 20,
-            'text-black/50 dark:text-white/50': editBlogPostForm.controls.shortDescription.value.length <= 20,
+            'text-black/50 dark:text-white/50':
+              editBlogPostForm.controls.shortDescription.value.length <= 20,
           }"
           *ngIf="editBlogPostForm.controls.shortDescription.dirty"
         >
@@ -190,7 +198,9 @@
       </div>
       <div class="flex-[100%] flex flex-row gap-x-4 items-start relative">
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
-          <label class="text-sm text-black/80 dark:text-white/95" for="blog-content">متن کامل مقاله</label>
+          <label class="text-sm text-black/80 dark:text-white/95" for="blog-content"
+            >متن کامل مقاله</label
+          >
           @if (
             editBlogPostForm.controls.content.invalid && editBlogPostForm.controls.content.touched
           ) {
@@ -241,7 +251,8 @@
             class="absolute left-1 -bottom-5 text-[10px]"
             [ngClass]="{
               'text-green-500/70': editBlogPostForm.controls.content.value.length >= 50,
-              'text-black/50 dark:text-white/50': editBlogPostForm.controls.content.value.length <= 50,
+              'text-black/50 dark:text-white/50':
+                editBlogPostForm.controls.content.value.length <= 50,
             }"
             *ngIf="editBlogPostForm.controls.content.dirty"
           >
@@ -261,7 +272,16 @@
         </div>
       </div>
       <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80 dark:text-white/95" for="blog-featuredImageUrl">لینک تصویر</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-featuredImageUrl"
+          >لینک تصویر
+          <button
+            class="px-2 py-1 absolute left-0 top-0 text-[10px] text-blue-600 dark:text-blue-500 rounded-full cursor-pointer"
+            (click)="openImageSelector()"
+          >
+            <i class="fa-regular fa-image fa-lg mx-0.5" style="color: #1962ff"></i>
+            انتخاب فایل
+          </button>
+        </label>
         @if (
           editBlogPostForm.controls.featuredImageUrl.invalid &&
           editBlogPostForm.controls.featuredImageUrl.touched
@@ -305,7 +325,9 @@
         }
       </div>
       <div class="grow shrink flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80 dark:text-white/95" for="blog-publishedDate">تاریخ انتشار</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-publishedDate"
+          >تاریخ انتشار</label
+        >
         <input
           class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 pt-2 px-2 outline-0"
           id="blog-publishedDate"
@@ -372,7 +394,9 @@
         }
       </div>
       <div class="grow shrink flex-[50%] flex flex-col gap-2 items-start relative">
-        <label class="text-sm text-black/80 dark:text-white/95" for="blog-author">دسته بندی ها</label>
+        <label class="text-sm text-black/80 dark:text-white/95" for="blog-author"
+          >دسته بندی ها</label
+        >
         @if (!categoriesSelected?.length) {
           <img
             class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
@@ -391,12 +415,12 @@
         >
           <div class="flex flex-row gap-1 justify-start items-center">
             @for (item of categoriesSelected; track item.id) {
-               <div
+              <div
                 (click)="toggleCategorySelection(item)"
                 class="text-blue-500 glass-card pb-0.5 px-2.5 pl-2.5 pt-1.5 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-[11px] select-none"
               >
                 {{ item.name }}
-                <i class="fa-solid fa-xmark pb-0.5" style="color: rgb(32, 84, 240);"></i>
+                <i class="fa-solid fa-xmark pb-0.5" style="color: rgb(32, 84, 240)"></i>
               </div>
             }
             <input
@@ -439,7 +463,9 @@
       <div class="grow shrink h-full flex-[40%] flex flex-col gap-2 items-start">
         <label class="text-sm text-black/80 dark:text-white/95">وضعیت نمایش مقاله</label>
         <div class="w-full h-9 flex flex-row items-center justify-start gap-5">
-          <label class="w-full text-black/80 dark:text-white/95 flex flex-row justify-start items-center gap-2">
+          <label
+            class="w-full text-black/80 dark:text-white/95 flex flex-row justify-start items-center gap-2"
+          >
             <input
               class="h-4 border border-black/20 dark:border-white/20 rounded-lg outline-0"
               type="radio"
@@ -448,7 +474,9 @@
             />
             منتشر شده
           </label>
-          <label class="w-full text-black/80 dark:text-white/95 flex flex-row justify-start items-center gap-2">
+          <label
+            class="w-full text-black/80 dark:text-white/95 flex flex-row justify-start items-center gap-2"
+          >
             <input
               class="h-4 border border-black/20 dark:border-white/20 rounded-lg outline-0"
               type="radio"
