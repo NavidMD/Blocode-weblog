@@ -1,16 +1,18 @@
 @if (showImageSelector() == true) {
   <div class="image-selector-container">
-    <div
-    class="w-full max-w-[1000px] glass-card p-5 px-5.5 pb-6 scaleInCenter"
-    >
+    <div class="w-full max-w-[1000px] glass-card p-5 px-5.5 pb-6 scaleInCenter">
       <div
         class="flex flex-row justify-between items-center mb-5 border-0 border-b dark:border-white/15 border-black/10 pb-4"
       >
         <h3 class="text-[16px] font-bold text-white/95">انتخاب تصویر</h3>
-        <i class="fa-solid fa-xmark fa-lg cursor-pointer" (click)="closeImageSelector()" style="color: rgb(255, 255, 255)"></i>
+        <i
+          class="fa-solid fa-xmark fa-lg cursor-pointer"
+          (click)="closeImageSelector()"
+          style="color: rgb(255, 255, 255)"
+        ></i>
       </div>
       <div class="grid grid-cols-2 gap-6">
-        <div>
+        <form [formGroup]="imageSelectorUploadForm" (ngSubmit)="submitImages()">
           <p class="text-xs font-medium text-white/95 mb-2 text-right">بارگذاری تصویر</p>
           <div
             id="drop-zone"
@@ -33,57 +35,124 @@
               accept="image/*"
               multiple=""
               class="hidden"
-              onchange="handleFiles(this.files)"
+              (change)="onFileSelect($event)"
             />
           </div>
-          <div class="mt-3 flex flex-col gap-2">
+          <div class="mt-3 flex flex-col gap-2.5">
+            <div class="w-full flex flex-row justify-between items-center">
+              <span class="text-[11px] text-white/50">فایل انتخاب شده :</span>
+              <span class="text-[11px] text-white/70">
+                @if (imageSelectorUploadForm.controls.file.value) {
+                  {{ imageSelectorUploadForm.controls.file.value.name }}
+                } @else {
+                  فایلی انتخاب نشده است
+                }
+              </span>
+            </div>
             <div class="relative">
-              <i
-                class="ti ti-file-description absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"
-              ></i>
+              @if (
+                imageSelectorUploadForm.controls.file.value &&
+                imageSelectorUploadForm.controls.name.invalid
+              ) {
+                <i
+                  class="fa-solid fa-circle-exclamation absolute left-2 top-2.5"
+                  style="color: rgb(172, 172, 172)"
+                ></i>
+              }
+              @if (
+                imageSelectorUploadForm.controls.file.value &&
+                imageSelectorUploadForm.controls.name.valid
+              ) {
+                <i
+                  class="fa-solid fa-check absolute left-2 top-2.5"
+                  style="color: rgb(150, 177, 124)"
+                ></i>
+              }
               <input
                 id="file-name"
                 type="text"
-                placeholder="نام فایل"
+                placeholder="نام جدید"
+                formControlName="name"
                 class="focus:border-white/60 dark:focus:border-white/30 w-full input-text-normal h-9 border border-white/40 dark:border-white/20 text-white/95 rounded-[15px] py-1 px-2 outline-0"
               />
             </div>
             <div class="relative">
-              <i
-                class="ti ti-tag absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"
-              ></i>
+              @if (
+                imageSelectorUploadForm.controls.file.value &&
+                imageSelectorUploadForm.controls.title.invalid
+              ) {
+                <i
+                  class="fa-solid fa-circle-exclamation absolute left-2 top-2.5"
+                  style="color: rgb(172, 172, 172)"
+                ></i>
+              }
+              @if (
+                imageSelectorUploadForm.controls.file.value &&
+                imageSelectorUploadForm.controls.title.valid
+              ) {
+                <i
+                  class="fa-solid fa-check absolute left-2 top-2.5"
+                  style="color: rgb(150, 177, 124)"
+                ></i>
+              }
               <input
                 id="file-title"
                 type="text"
-                placeholder="عنوان"
+                placeholder="عنوان جدید"
+                formControlName="title"
                 class="focus:border-white/60 dark:focus:border-white/30 w-full input-text-normal h-9 border border-white/40 dark:border-white/20 text-white/95 rounded-[15px] py-1 px-2 outline-0"
               />
             </div>
             <button
-              onclick="uploadImage()"
-              class="w-full cursor-pointer bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white text-sm font-medium py-2 rounded-[16px] shadow-md shadow-black/20 transition-all"
+              [disabled]="imageSelectorUploadForm.invalid"
+              class="w-full cursor-pointer bg-blue-600 disabled:opacity-60 active:scale-[0.98] text-white text-sm font-medium py-2 rounded-[16px] shadow-md shadow-black/15 transition-all"
             >
               <i class="ti ti-upload text-sm align-[-2px] ml-1"></i>
               بارگذاری
             </button>
           </div>
-        </div>
+        </form>
         <div class="h-full flex flex-col">
           <p class="text-xs font-medium text-white/95 mb-2 text-right">تصاویر انتخاب‌شده</p>
           <div
             id="gallery"
-            class="bg-transparen border border-white/30 dark:border-white/20 rounded-[16px] p-2 min-h-[240px] h-full grid grid-cols-2 gap-2 content-start"
+            class="bg-transparent border w-full border-white/30 dark:border-white/20 rounded-[16px] p-3 h-full"
           >
-            <div
-              id="empty-state"
-              class="col-span-2 flex flex-col items-center justify-center min-h-[200px] text-white/95"
-            >
-              <i class="fa-regular fa-eye-slash fa-xl mb-5" style="color: rgb(158, 158, 158)"></i>
-              <p class="text-xs text-white/50">هنوز تصویری انتخاب نشده</p>
-            </div>
+            @if (isloading()) {
+              <app-loader></app-loader>
+            }
+            @if (allImages()) {
+              <div class="w-full flex flex-wrap justify-end gap-3">
+                @for (image of allImages(); track image.id) {
+                  <div
+                    class="flex flex-col justify-center items-center gap-1 flex-[90px] max-w-1/2 shrink grow h-fit overflow-hidden"
+                  >
+                    <div
+                      class="w-full h-[80px] overflow-hidden p-2 rounded-lg border border-white/30"
+                    >
+                      <img
+                        class="w-full h-full object-contain"
+                        [src]="image.url"
+                        [alt]="image.title"
+                      />
+                    </div>
+                    <span class="text-[10px] text-white/80 font-thin">{{ image.fileName }}</span>
+                  </div>
+                }
+              </div>
+            }
+            @if (!allImages()) {
+              <div
+                id="empty-state"
+                class="w-full h-full flex flex-col items-center justify-center min-h-[200px] text-white/95"
+              >
+                <i class="fa-regular fa-eye-slash fa-xl mb-5" style="color: rgb(158, 158, 158)"></i>
+                <p class="text-xs text-white/50">هنوز تصویری انتخاب نشده</p>
+              </div>
+            }
           </div>
           <div class="mt-2 flex justify-between items-center">
-            <span id="count-label" class="text-[11px] text-white/70">۰ تصویر</span>
+            <span id="count-label" class="text-[11px] text-white/70">{{ 0 }} تصویر</span>
             <button
               onclick="clearAll()"
               class="text-[10px] cursor-pointer hover:bg-red-600/50 px-3 py-1 rounded-full bg-red-500/70 text-white/80 shadow-md shadow-black/15 transition-colors"

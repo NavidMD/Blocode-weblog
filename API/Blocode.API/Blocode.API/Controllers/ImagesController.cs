@@ -16,7 +16,29 @@ namespace Blocode.API.Controllers
         {
             this.imageRepository = imageRepository;
         }
-       
+
+        // Get: {apibaseurl}/api/images
+        [HttpGet]
+        public async Task<IActionResult> GetAllImages()
+        {
+            var images = await imageRepository.GetAll();
+            var response = new List<BlogImageDTO>();
+            foreach (var image in images)
+            {
+                var imageDTO = new BlogImageDTO()
+                {
+                    Id = image.Id,
+                    Title = image.Title,
+                    DateCreated = image.DateCreated,
+                    FileExtension = image.FileExtension,
+                    FileName = image.FileName,
+                    Url = image.Url
+                };
+                response.Add(imageDTO);
+            }
+            return Ok(response);
+        }
+
         // Post: {apibaseurl}/api/images
         [HttpPost]
         public async Task<IActionResult> UploadImage([FromForm] IFormFile file, [FromForm] string fileName, [FromForm] string title )

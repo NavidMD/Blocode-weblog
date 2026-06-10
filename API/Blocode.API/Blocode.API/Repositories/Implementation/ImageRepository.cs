@@ -1,6 +1,7 @@
 ﻿using Blocode.API.Data;
 using Blocode.API.Models.Domain;
 using Blocode.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blocode.API.Repositories.Implementation
 {
@@ -17,6 +18,12 @@ namespace Blocode.API.Repositories.Implementation
             this.httpContextAccessor = httpContextAccessor;
             this.context = context;
         }
+
+        public async Task<IEnumerable<BlogImage>> GetAll()
+        {
+           return await context.BlogImages.ToListAsync();
+        }
+
         public async Task<BlogImage> Upload(IFormFile file, BlogImage blogImage)
         {
             //Upload file to images folder
