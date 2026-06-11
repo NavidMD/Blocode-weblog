@@ -67,7 +67,7 @@ button {
 }
 @layer base {
   .dark * {
-    scrollbar-color: #5e5e5e #151515; /* رنگ دسته و پس‌زمینه در حالت دارک */
+    scrollbar-color: #5e5e5e #151515;
   }
 }
 
@@ -118,3 +118,27 @@ button {
   }
 }
 
+
+*:not(html) {
+  scrollbar-width: thin;
+  scrollbar-color: #929292a8 transparent;
+}
+
+*:not(html)::-webkit-scrollbar {
+  width: 4px;
+}
+
+*:not(html)::-webkit-scrollbar-button {
+  display: none;
+}
+
+*:not(html)::-webkit-scrollbar-thumb {
+  background-color: #0369a1;
+  border-radius: 9999px;
+}
+
+*:not(html)::-webkit-scrollbar-track {
+  margin-block: 8px !important;
+  background-color: #e0f2fe;
+  border-radius: 9999px;
+}

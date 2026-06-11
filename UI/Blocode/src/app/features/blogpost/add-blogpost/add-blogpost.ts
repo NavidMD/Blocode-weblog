@@ -8,16 +8,19 @@ import { CategoryService } from '../../category/services/category-service';
 import { Category } from '../../category/models/category.model';
 import { ToastrService } from 'ngx-toastr';
 import { NgClass, NgIf } from '@angular/common';
+import { ImageSelectorService } from '../../../shared/services/image-selector-service';
+import { ImageSelector } from "../../../shared/components/image-selector/image-selector";
 
 @Component({
   selector: 'app-add-blogpost',
-  imports: [ReactiveFormsModule, RouterLink, MarkdownComponent, NgClass, NgIf],
+  imports: [ReactiveFormsModule, RouterLink, MarkdownComponent, NgClass, NgIf, ImageSelector],
   templateUrl: './add-blogpost.html',
   styleUrls: ['./add-blogpost.css'],
 })
 export class AddBlogpost {
   toastService = inject(ToastrService);
   categoryService = inject(CategoryService);
+  imageSelectorService = inject(ImageSelectorService);
   constructor(
     private blogpostService: BlogPostService,
     private router: Router,
@@ -112,6 +115,17 @@ export class AddBlogpost {
   clearSelectedCategories() {
     this.categoriesSelected = [];
   }
+
+  openImageSelector() {
+    this.imageSelectorService.display();
+  }
+
+  selectedImageEffect = effect(() => {
+    const selectedImageUrl = this.imageSelectorService.selectedImage();
+    if (selectedImageUrl) {
+      this.newBlogPostForm.patchValue({ featuredImageUrl: selectedImageUrl });
+    }
+  });
 
   createBlogPost(event: Event) {
     event.preventDefault();

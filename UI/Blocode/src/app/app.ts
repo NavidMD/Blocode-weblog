@@ -2,10 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from "./core/components/navbar/navbar";
 import { Footer } from "./core/components/footer/footer";
+import { ImageSelector } from "./shared/components/image-selector/image-selector";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Footer],
+  imports: [RouterOutlet, Navbar, Footer, ImageSelector],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

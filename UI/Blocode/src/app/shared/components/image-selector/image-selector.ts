@@ -52,6 +52,10 @@ export class ImageSelector {
     });
   }
 
+  onSelectImage(image: BlogImage) {
+    this.imageSelectorService.selectImage(image.url);
+  }
+
   submitImages() {
     if (this.imageSelectorUploadForm.valid) {
       const formRawValues = this.imageSelectorUploadForm.getRawValue();

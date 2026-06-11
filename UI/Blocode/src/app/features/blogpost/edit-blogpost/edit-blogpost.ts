@@ -96,6 +96,13 @@ export class EditBlogpost {
     }
   });
 
+  selectedImageEffect = effect(() => {
+    const selectedImageUrl = this.imageSelectorService.selectedImage();
+    if (selectedImageUrl) {
+      this.editBlogPostForm.patchValue({ featuredImageUrl: selectedImageUrl });
+    }
+  });
+
   clearSelectedCategories() {
     this.categoriesSelected = [];
   }

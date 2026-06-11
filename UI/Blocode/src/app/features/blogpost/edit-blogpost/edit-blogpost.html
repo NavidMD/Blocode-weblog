@@ -205,7 +205,7 @@
             editBlogPostForm.controls.content.invalid && editBlogPostForm.controls.content.touched
           ) {
             <img
-              class="absolute left-5 opacity-60 top-8.5 w-6 h-6"
+              class="absolute left-0 opacity-60 top-0 w-6 h-6"
               src="assets/vectors/box_important.svg"
             />
           }
@@ -213,12 +213,12 @@
             editBlogPostForm.controls.content.valid && editBlogPostForm.controls.content.touched
           ) {
             <img
-              class="absolute left-5 opacity-70 top-8.5 w-6 h-6"
+              class="absolute left-0 opacity-70 top-0 w-6 h-6"
               src="assets/vectors/Check Circle.svg"
             />
           }
           <textarea
-            class="focus:border-black/30 dark:focus:border-white/30 input-text-normal overflow-y-scroll w-full border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 pl-8 outline-0"
+            class="focus:border-black/30 scrollbar-thin scrollbar-thumb-sky-700 scrollbar-track-sky-100 dark:focus:border-white/30 input-text-normal overflow-auto w-full border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] p-2 px-3 outline-0"
             id="blog-content"
             formControlName="content"
             rows="10"
@@ -265,7 +265,7 @@
           >
           <div
             id="blog-content-preview"
-            class="focus:border-black/30 dark:focus:border-white/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+            class="focus:border-black/30 dark:focus:border-white/30 h-[210px] input-text-normal overflow-y-scroll w-full border border-dashed border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] p-2 px-3 outline-0"
           >
             <markdown [data]="editBlogPostForm.controls.content.getRawValue()"> </markdown>
           </div>
@@ -304,6 +304,7 @@
           class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal text-right h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-featuredImageUrl"
           type="text"
+          dir="ltr"
           formControlName="featuredImageUrl"
           placeholder="https://picture.com"
         />
@@ -520,4 +521,3 @@
     </form>
   </div>
 </div>
-<app-image-selector></app-image-selector>

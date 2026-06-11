@@ -116,19 +116,20 @@
           <p class="text-xs font-medium text-white/95 mb-2 text-right">تصاویر انتخاب‌شده</p>
           <div
             id="gallery"
-            class="bg-transparent border w-full border-white/30 dark:border-white/20 rounded-[16px] p-3 h-full"
+            class="bg-transparent border w-full border-white/30 dark:border-white/30 rounded-[16px] p-3 h-full"
           >
             @if (isloading()) {
               <app-loader></app-loader>
             }
             @if (allImages()) {
-              <div class="w-full flex flex-wrap justify-end gap-3">
+              <div class="images-container">
                 @for (image of allImages(); track image.id) {
                   <div
-                    class="flex flex-col justify-center items-center gap-1 flex-[90px] max-w-1/2 shrink grow h-fit overflow-hidden"
+                    class="flex flex-col justify-center items-center gap-1 flex-[90px] shrink grow h-fit overflow-hidden cursor-pointer"
+                    (click)="onSelectImage(image)"
                   >
                     <div
-                      class="w-full h-[80px] overflow-hidden p-2 rounded-lg border border-white/30"
+                      class="w-full h-[80px] hover:bg-white/20 transition overflow-hidden p-2 rounded-lg border border-white/20"
                     >
                       <img
                         class="w-full h-full object-contain"
@@ -152,7 +153,7 @@
             }
           </div>
           <div class="mt-2 flex justify-between items-center">
-            <span id="count-label" class="text-[11px] text-white/70">{{ 0 }} تصویر</span>
+            <span id="count-label" class="text-[11px] text-white/70">{{ allImages()?.length }} تصویر</span>
             <button
               onclick="clearAll()"
               class="text-[10px] cursor-pointer hover:bg-red-600/50 px-3 py-1 rounded-full bg-red-500/70 text-white/80 shadow-md shadow-black/15 transition-colors"

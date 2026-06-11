@@ -1,23 +1,26 @@
 <nav class="w-full flex flex-row justify-between items-center py-4 px-6 bg-transparent mb-2">
   <div class="w-auto flex flex-row gap-10 items-center">
-    <h1 [routerLink]="['/']" class="font-extrabold text-[21px] text-blue-600 cursor-pointer">
-      بلاکُد
+    <h1 [routerLink]="['/']" class="font-extrabold text-[23px] text-blue-600 cursor-pointer">
+     بلاکُد <span class="font-extrabold text-[16px] text-blue-500/70 cursor-pointer">وبلاگ</span>
     </h1>
     <div>
       <ul class="flex flex-row gap-7 text-sm font-semibold">
         <li
-          class="flex items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
+          <i class="fa-brands fa-buffer mb-0.5" style="color: rgb(155, 155, 155)"></i>
           <a [routerLink]="['admin', 'blogs']">مقالات</a>
         </li>
         <li
-          class="flex items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
+          <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: rgb(155, 155, 155)"></i>
           <a>نویسندگان</a>
         </li>
         <li
-          class="flex items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
+          <i class="fa-solid fa-grip-vertical fa-sm mb-0.5" style="color: rgb(155, 155, 155)"></i>
           <a [routerLink]="['admin', 'categories']">دسته بندی ها</a>
         </li>
       </ul>
@@ -33,7 +36,7 @@
     <button
       class="cursor-pointer glass-card text-sm flex flex-row items-center gap-2 font-semibold bg-black/10 dark:bg-white/15 px-4 py-2 text-blue-700 dark:text-blue-500"
     >
-      <i class="fa-solid fa-user" style="color: rgb(32, 83, 236);"></i>
+      <i class="fa-solid fa-user" style="color: rgb(32, 83, 236)"></i>
       ورود / ثبت نام
     </button>
   </div>

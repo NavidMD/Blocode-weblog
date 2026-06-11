@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ImageSelectorService {
   showImageSelector = signal<boolean>(false);
+  selectedImage = signal<string | null>(null);
   http = inject(HttpClient);
 
   display() {
@@ -25,6 +26,11 @@ export class ImageSelectorService {
     formData.append('title', title);
 
     return this.http.post<BlogImage>(`${environment.apiBaseUrl}/api/images`, formData);
+  }
+
+  selectImage(imageUrl: string) {
+    this.selectedImage.set(imageUrl);
+    this.close();
   }
 
   getAllImages(id: WritableSignal<string | undefined>): HttpResourceRef<BlogImage[] | undefined> {
