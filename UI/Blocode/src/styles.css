@@ -1,6 +1,10 @@
 @import './font.css';
 @import 'ngx-toastr/toastr';
 @import 'tailwindcss';
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -110,6 +114,19 @@ button {
     }
   }
 
+  @keyframes zoomIn {
+    0% {
+      transform: scale(100%);
+    }
+
+    100% {
+      transform: scale(110%);
+    }
+  }
+
+  .zoomIn {
+    animation: zoomIn 10s ease 0.2s normal forwards;
+  }
   .scaleInCenter {
     animation: scaleIn 0.3s ease 0s 1 normal forwards;
   }

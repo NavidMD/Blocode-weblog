@@ -1,0 +1,30 @@
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  width: 30px;
+  height: 30px;
+  padding: 0 20px;
+  color: #ffffff;
+}
+swiper-container::part(bullet-active) {
+  background-color: #c2cdff;
+}
+
+
+.hero-blog-card::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 45%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 200%);
+}
+#categories-container {
+  scrollbar-width: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  grid-template-rows: 135px;
+}
+
+
