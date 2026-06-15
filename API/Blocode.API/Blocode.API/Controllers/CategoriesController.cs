@@ -25,14 +25,16 @@ namespace Blocode.API.Controllers
             var newCategory = new Category()    
             {
                 Name = request.Name,
-                UrlHandle = request.UrlHandle
+                UrlHandle = request.UrlHandle,
+                ParentCategoryId = request.ParentCategoryId,
             };
             await categoryRepository.CreateCategoryAsync(newCategory);
             var response = new CategoryDTO()
             {
                 Id = newCategory.Id,
                 Name = newCategory.Name,
-                UrlHandle = newCategory.UrlHandle
+                UrlHandle = newCategory.UrlHandle,
+                ParentCategoryId = newCategory.ParentCategoryId
             };
             return Ok(response);
         }
@@ -45,7 +47,19 @@ namespace Blocode.API.Controllers
             var response = new List<CategoryDTO>();
             foreach (var category in categoriesFromDb)
             {
-                response.Add(new CategoryDTO() { Id = category.Id, Name = category.Name, UrlHandle = category.UrlHandle });
+                response.Add(new CategoryDTO()
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle,
+                    ParentCategoryId = category.ParentCategoryId,
+                    SubCategories = category.SubCategories?.Select(c => new CategoryDTO(){
+                        Id = c.Id,
+                        Name = c.Name,
+                        UrlHandle = c.UrlHandle,
+                        ParentCategoryId = c.ParentCategoryId,
+                    }).ToList()
+                });
             }
             return Ok(response);
         }

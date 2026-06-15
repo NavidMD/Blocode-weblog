@@ -9,16 +9,61 @@ swiper-container::part(bullet-active) {
   background-color: #c2cdff;
 }
 
+.glass-card {
+  /* background: rgba(255, 255, 255, 0.1); */
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
 
 .hero-blog-card::after {
   content: '';
   position: absolute;
   width: 100%;
-  height: 45%;
+  height: 50%;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 200%);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 170%);
 }
+
 #categories-container {
   scrollbar-width: none;
   display: grid;
@@ -27,4 +72,60 @@ swiper-container::part(bullet-active) {
   grid-template-rows: 135px;
 }
 
+#entertainment:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#entertainment:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
+#learnings:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#learnings:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
+#trick:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#trick:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
+#overview:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#overview:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
+#science:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#science:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
+#news:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#news:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
+#technology:checked ~ i {
+  rotate: 180deg;
+  transition: 0.3s;
+}
+#technology:not(:checked) ~ i {
+  rotate: 0;
+  transition: 0.3s;
+}
 

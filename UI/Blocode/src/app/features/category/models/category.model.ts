@@ -8,6 +8,7 @@ export interface Category {
 export interface NewCategoryRequestValuesDTO {
   name: string;
   urlHandle: string;
+  parentCategoryId: string | null;
 }
 
 // updating category required data

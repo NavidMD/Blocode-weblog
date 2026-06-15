@@ -1,4 +1,4 @@
-import { Component, effect, inject, Signal, WritableSignal } from '@angular/core';
+import { Component, effect, inject, OnInit, Signal, WritableSignal } from '@angular/core';
 import { AddCategory } from '../add-category/add-category';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../services/category-service';

@@ -8,5 +8,6 @@ namespace Blocode.API.Models.DTO
         public string Name { get; set; }
         [Required]
         public string UrlHandle { get; set; }
+        public Guid? ParentCategoryId { get; set; }
     }
 }

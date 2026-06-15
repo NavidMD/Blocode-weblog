@@ -42,7 +42,7 @@
           />
         }
         <input
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border dark:bg-white/5 border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-title"
           type="text"
           formControlName="title"
@@ -101,7 +101,7 @@
           />
         }
         <input
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 dark:bg-white/5 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-urlHandle"
           type="text"
           formControlName="urlHandle"
@@ -165,7 +165,7 @@
           />
         }
         <input
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 dark:bg-white/5 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-shortDescription"
           type="text"
           formControlName="shortDescription"
@@ -227,7 +227,7 @@
             />
           }
           <textarea
-            class="focus:border-black/30 dark:focus:border-white/30 input-text-normal overflow-auto w-full border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] p-2 px-3 outline-0"
+            class="focus:border-black/30 dark:focus:border-white/30 dark:bg-white/5 input-text-normal overflow-auto w-full border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] p-2 px-3 outline-0"
             id="blog-content"
             formControlName="content"
             rows="10"
@@ -274,7 +274,7 @@
           >
           <div
             id="blog-content-preview"
-            class="focus:border-black/30 dark:focus:border-white/30 h-[210px] input-text-normal overflow-auto w-full border border-dashed border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] p-2 px-3 outline-0"
+            class="focus:border-black/30 dark:focus:border-white/30 h-[210px] dark:bg-white/5 input-text-normal overflow-auto w-full border border-dashed border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] p-2 px-3 outline-0"
           >
             <markdown [data]="newBlogPostForm.controls.content.getRawValue()"> </markdown>
           </div>
@@ -310,7 +310,7 @@
           />
         }
         <input
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal text-right h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 dark:bg-white/5 w-full input-text-normal text-right h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-featuredImageUrl"
           dir="ltr"
           type="text"
@@ -339,7 +339,7 @@
           >تاریخ انتشار</label
         >
         <input
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 pt-2 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 w-full dark:bg-white/5 input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 pt-2 px-2 outline-0"
           id="blog-publishedDate"
           type="date"
           formControlName="publishedDate"
@@ -376,7 +376,7 @@
           />
         }
         <input
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="focus:border-black/30 dark:focus:border-white/30 dark:bg-white/5 w-full input-text-normal h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
           id="blog-author"
           type="text"
           formControlName="author"
@@ -421,7 +421,7 @@
         }
         <div
           id="category-select"
-          class="w-full relative flex flex-row items-center text-sm h-9 border border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
+          class="w-full relative flex flex-row items-center text-sm h-9 border dark:bg-white/5 border-black/20 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-2 outline-0"
         >
           <div class="flex flex-row gap-1 justify-start items-center">
             @for (item of categoriesSelected; track item.id) {

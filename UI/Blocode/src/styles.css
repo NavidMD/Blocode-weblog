@@ -5,7 +5,6 @@
 @import 'swiper/css/pagination';
 @import 'swiper/css/navigation';
 
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 * {
@@ -32,6 +31,7 @@ body {
   text-align: right;
   font-family: 'IranSansX';
 }
+
 a {
   text-decoration: none;
 }
@@ -68,12 +68,48 @@ button {
     padding: 0 20px;
     background-color: rgba(0, 0, 0, 0.5);
   }
+  .button-glass {
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 2px 8px 0px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .button-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  }
+  .button-glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3),
+      transparent,
+      rgba(255, 255, 255, 0.2)
+    );
+  }
 }
 @layer base {
   .dark * {
     scrollbar-color: #5e5e5e #151515;
   }
 }
+
 
 @layer base {
   .btn-mainBlue {
@@ -135,7 +171,6 @@ button {
   }
 }
 
-
 *:not(html) {
   scrollbar-width: thin;
   scrollbar-color: #929292a8 transparent;
@@ -146,7 +181,7 @@ button {
 }
 
 *:not(html)::-webkit-scrollbar-button {
-  display: none;
+  display: none !important;
 }
 
 *:not(html)::-webkit-scrollbar-thumb {

@@ -12,7 +12,7 @@
       <a
         role="button"
         [routerLink]="['/admin', 'blogs', 'add']"
-        class="p-2 px-4 text-sm bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 text-sm  bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         (click)="addBlogActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
@@ -20,7 +20,7 @@
       </a>
     }
   </div>
-  <div class="gap-4 mt-2" id="blogs-container">
+  <div class="gap-5 mt-2" id="blogs-container">
     @if (loading()) {
       <p>درحل بارگذاری...</p>
     }

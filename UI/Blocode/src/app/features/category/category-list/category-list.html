@@ -28,7 +28,7 @@
     }
   </div>
   @if (addCategoryActive) {
-    <app-add-category (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
+    <app-add-category [categories]="value()" [categoriesLoading]="isLoading()" [categoriesError]="isError()" (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
   }
   <div class="gap-4" id="categories-container"
     [ngClass]="addCategoryActive === true ? 'mt-6': 'mt-2'"
