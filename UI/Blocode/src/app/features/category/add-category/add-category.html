@@ -123,14 +123,14 @@
           } @else {
             <ul class="py-1 h-full overflow-y-auto">
               <li
-                (click)="selectParentCategory($event, '')"
+                (click)="selectParentCategory('بدون دسته بندی اصلی', '')"
                 class="px-4 py-2 input-text-normal hover:bg-black/5 dark:hover:bg-white/10 rounded-xl cursor-pointer transition-colors flex items-center justify-end"
               >
                 <span class="text-black/60 dark:text-white/80 parentCatOptionName">بدون دسته بندی اصلی</span>
               </li>
               @for (cat of categories; track cat.id) {
                 <li
-                  (click)="selectParentCategory($event, cat.id)"
+                  (click)="selectParentCategory(cat.name, cat.id)"
                   class="px-4 py-2 input-text-normal hover:bg-black/5 dark:hover:bg-white/10 rounded-xl cursor-pointer transition-colors flex items-center justify-between"
                 >
                   <span class="text-xs text-gray-400">

@@ -65,7 +65,7 @@
             </p>
           </div>
           <span class="text-[9px] text-black/50 dark:text-white/50 absolute bottom-1.5 left-4.5">{{
-            toPersianFormatDate(blog.publishedDate)
+            blog.publishedDate | persianDate
           }}</span>
           <div
             id="categories"
@@ -73,7 +73,7 @@
           >
             @for (category of blog.categories; track category.id) {
               <span
-                class="text-blue-600 dark:text-blue-400 text-[9px] pb-0.5 px-1.5 pt-1 bg-blue-100 dark:bg-transparent rounded-md opacity-80"
+                class="text-blue-600 dark:text-blue-400 text-[9px] pb-0.5 px-1.5 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
                 >{{ category.name }}</span
               >
             }

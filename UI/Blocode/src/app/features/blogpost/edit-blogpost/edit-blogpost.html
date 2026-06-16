@@ -437,16 +437,16 @@
           <div
             id="category-list"
             #categoriesSearchBox
-            class="w-full bg-white dark:bg-blue-950 glass-card absolute rounded-[15px] right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
+            class="w-full bg-white dark:bg-gray-900 absolute rounded-[15px] right-0 top-[120%] z-10 shadow-sm shadow-black/20 gap-1 py-1.5 pt-2 px-2 flex overflow-x-auto!"
           >
             @if (filteredCategories()?.length) {
               @for (category of filteredCategories(); track category.id) {
-                <span
+                <p
                   (click)="toggleCategorySelection(category)"
-                  class="text-black/50 text-[10px] pb-0.5 px-2 pt-1 bg-blue-50 dark:bg-white/10 dark:text-white/90 flex flex-row items-start gap-1 rounded-[15px] cursor-pointer select-none"
+                  class="text-black/50 text-[10px] shrink-0 pb-1 px-3 pt-1.5 bg-black/5 dark:bg-white/10 dark:text-white/90 w-fit inline-block whitespace-nowrap gap-1 rounded-[15px] cursor-pointer select-none"
                 >
                   {{ category.name }}
-                </span>
+                </p>
               }
             } @else {
               <span

@@ -2,14 +2,19 @@ textarea {
   resize: none;
 }
 #edit-blog-page #category-list::-webkit-scrollbar {
-  height: 2px;
+  /* display: block; */
+  width: 1px !important;
+  height: 1px !important;
+}
+#edit-blog-page #category-list::-webkit-scrollbar-button {
+  display: none !important;
 }
 #edit-blog-page #category-list::-webkit-scrollbar-track {
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 
 #edit-blog-page #category-list::-webkit-scrollbar-thumb {
-  background: #2b00ff3a;
+  background: #2b00ff3a !important;
   border-radius: 10px;
 }
 

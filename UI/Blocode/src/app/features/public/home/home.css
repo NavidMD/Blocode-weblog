@@ -9,6 +9,18 @@ swiper-container::part(bullet-active) {
   background-color: #c2cdff;
 }
 
+#subCategoryBox {
+  transition: max-height 0.5s ease-in-out;
+  max-height: 0px;
+  overflow: hidden;
+}
+#hint:checked ~ #main-hint {
+  max-height: 500px;
+}
+#main-hint p {
+  margin: 0;
+}
+
 .glass-card {
   /* background: rgba(255, 255, 255, 0.1); */
   backdrop-filter: blur(9px);
@@ -16,7 +28,7 @@ swiper-container::part(bullet-active) {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 5px 15px rgba(0, 0, 0, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.13),
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
@@ -34,7 +46,7 @@ swiper-container::part(bullet-active) {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.5),
     transparent
   );
 }
@@ -72,60 +84,5 @@ swiper-container::part(bullet-active) {
   grid-template-rows: 135px;
 }
 
-#entertainment:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#entertainment:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
-#learnings:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#learnings:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
-#trick:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#trick:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
-#overview:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#overview:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
-#science:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#science:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
-#news:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#news:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
-#technology:checked ~ i {
-  rotate: 180deg;
-  transition: 0.3s;
-}
-#technology:not(:checked) ~ i {
-  rotate: 0;
-  transition: 0.3s;
-}
+
 

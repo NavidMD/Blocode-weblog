@@ -86,7 +86,7 @@ export class EditBlogpost {
         title: this.fetchedBlogPost()?.title,
         author: this.fetchedBlogPost()?.author,
         content: this.fetchedBlogPost()?.content,
-        shortDescription: this.fetchedBlogPost()?.content,
+        shortDescription: this.fetchedBlogPost()?.shortDescription,
         urlHandle: this.fetchedBlogPost()?.urlHandle,
         featuredImageUrl: this.fetchedBlogPost()?.featuredImageUrl,
         publishedDate: new Date(this.fetchedBlogPost()?.publishedDate!).toISOString().split('T')[0],

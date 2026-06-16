@@ -2,6 +2,8 @@ export interface Category {
   id: string;
   name: string;
   urlHandle: string;
+  parentCategoryId: string | null;
+  subCategories: Category[] | null;
 }
 
 // creating category required data

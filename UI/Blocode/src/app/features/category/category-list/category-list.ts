@@ -46,6 +46,10 @@ export class CategoryList {
 
   addCategoryActive: boolean = false;
 
+  isPersian(char: string): boolean {
+    return /[\u0600-\u06FF]/.test(char);
+  }
+
   deleteCategory(id: string) {
     if (!id) {
       this.toastService.error('دسته بندی یافت نشد', '', {

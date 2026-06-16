@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { BlogPostService } from '../services/blog-post-service';
 import { BlogPost } from '../models/blogpost.model';
+import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
 
 @Component({
   selector: 'app-blogpost-list',
-  imports: [RouterLink],
+  imports: [RouterLink, PersianDatePipe],
   templateUrl: './blogpost-list.html',
   styleUrl: './blogpost-list.css',
 })

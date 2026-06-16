@@ -45,13 +45,14 @@
         >
           <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
             <span
-              class="shadow-md shadow-black/15 rounded-full text-xl text-white flex justify-center items-center w-10 h-10 pt-1 bg-blue-400/70"
+              [class.pb-0.5]="isPersian(category.name[0])"
+              class="shadow-md glass-card shadow-black/15 rounded-full! text-[19px] text-white flex justify-center items-center w-10 h-10 bg-blue-400! pt-1 dark:bg-blue-500!"
               >{{ category.name[0].toUpperCase() }}</span
             >
-            <div class="h-1/2 flex flex-col justify-center items-start ">
-              <h3 class="text-lg text-black/90 dark:text-white/95">{{ category.name }}</h3>
+            <div class="h-1/2 gap-0.5 flex flex-col justify-center items-start ">
+              <h3 class="text-[16px] text-black/90 dark:text-white/95">{{ category.name }}</h3>
               <span
-                class="text-[11px] text-black/70 dark:text-white/95 font-light flex flex-row gap-0.5 items-start"
+                class="text-[11px] text-black/60 dark:text-white/70 font-light flex flex-row gap-0.5 items-start"
               >
                 {{ category.urlHandle }}
                 <i class="fa-solid fa-link"></i>

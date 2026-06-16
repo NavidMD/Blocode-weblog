@@ -89,7 +89,6 @@ export class AddCategory {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3)],
     }),
-
   });
   parentCategoryId: string = '';
   parentCategoryName: string | undefined = 'بدون دسته بندی اصلی';
@@ -115,14 +114,17 @@ export class AddCategory {
     }
   }
 
-  selectParentCategory(event: Event, id: string | '') {
-    const selectedElm = event.target as HTMLElement;
-    if(id == '') {
+  selectParentCategory(name: string, id: string | '') {
+    if(id == '' || name == 'بدون دسته بندی اصلی') {
       this.parentCategoryName = 'بدون دسته بندی اصلی';
       return;
     }
-    this.parentCategoryName = selectedElm.querySelector('.parentCatOptionName')?.textContent;
-    this.parentCategoryId = id;
+    else {
+      this.parentCategoryName = name;
+      this.parentCategoryId = id;
+    }
+    console.log(this.parentCategoryName);
+    console.log(this.parentCategoryId);
   }
 
   onSubmit(event: Event) {

@@ -8,108 +8,81 @@
       navigation="true"
       autoplay-delay="5000"
     >
-      <swiper-slide>
-        <div
-          class="h-[450px] relative rounded-2xl hero-blog-card"
-        >
-          <img src="assets/vectors/image.webp" class="w-full h-full object-cover" alt="" />
-          <div
-            class="absolute right-5 bottom-5 w-full flex flex-col items-start gap-1 text-xs text-white/95 z-999"
-          >
-            <p class="font-bold text-[24px] mb-2">تو این گرما با گوشیت نسوزه!!!</p>
-            <div class="flex flex-row gap-4">
-              <span>۳ هفته پیش</span>
-              <span>۸۱۲ بازدید</span>
-              <span>دسته: ترند</span>
+      @for (blog of blogPosts()?.slice(-3); track blog.id) {
+        <swiper-slide>
+          <div class="h-[450px] relative rounded-2xl hero-blog-card">
+            <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
+            <div
+              class="absolute px-5 bottom-5 w-full flex flex-col items-start gap-1 text-xs text-white/95 z-999"
+            >
+              <p class="font-bold text-[24px] mb-2">{{ blog.title }}</p>
+              <div class="w-full flex flex-row gap-5">
+                <span class="text-[13px] text-white/80">{{ blog.publishedDate | persianDate }}</span>
+                <span class="text-[13px] text-white/80">{{ blog.author }}</span>
+                <div class="flex flex-row items-center gap-1 text-[13px] text-white/80 mr-auto ml-0">
+                  @for (category of blog.categories; track category.id) {
+                    <span
+                      class="text-white/70 text-[11px] pb-1 px-2.5 pt-1.5 bg-white/15 rounded-full"
+                      >{{ category.name }}</span
+                    >
+                  }
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div
-          class="h-[450px] rounded-2xl hero-blog-card"
-        >
-          <img src="assets/vectors/image.webp" class="w-full h-full object-cover" alt="" />
-          <div
-            class="absolute right-5 bottom-5 w-full flex flex-col items-start gap-1 text-xs text-white/95 z-999"
-          >
-            <p class="font-bold text-[24px] mb-2">تو این گرما با گوشیت نسوزه!!!</p>
-            <div class="flex flex-row gap-4">
-              <span>۳ هفته پیش</span>
-              <span>۸۱۲ بازدید</span>
-              <span>دسته: ترند</span>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div
-          class="h-[450px] rounded-2xl hero-blog-card"
-        >
-          <img src="assets/vectors/image.webp" class="w-full h-full object-cover" alt="" />
-          <div
-            class="absolute right-5 bottom-5 w-full flex flex-col items-start gap-1 text-xs text-white/95 z-999"
-          >
-            <p class="font-bold text-[24px] mb-2">تو این گرما با گوشیت نسوزه!!!</p>
-            <div class="flex flex-row gap-4">
-              <span>۳ هفته پیش</span>
-              <span>۸۱۲ بازدید</span>
-              <span>دسته: ترند</span>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
+        </swiper-slide>
+      }
     </swiper-container>
   </div>
 
   <!-- CATEGORIES -->
-  <div id="categories-container" class="w-full overflow-visible gap-3.5 min-h-[100px] pb-6 pt-3">
+  <div id="categories-container" class="w-full overflow-visible gap-4.5 min-h-[100px] pb-6 pt-3">
     <div
-      class="rounded-2xl glass-card bg-[rgba(142,121,217,0.85)] hover:bg-[rgba(142,121,217)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(142,121,217,0.95)] hover:bg-[rgba(142,121,217)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-gamepad fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">سرگرمی</span>
+      <span class="text-white text-[14px] font-thin text-center">سرگرمی</span>
     </div>
     <div
-      class="rounded-2xl glass-card bg-[rgba(87,86,86,0.85)] hover:bg-[rgba(87,86,86)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(87,86,86,0.95)] hover:bg-[rgba(87,86,86)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-microchip fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">تکنولوژی</span>
+      <span class="text-white text-[14px] font-thin text-center">تکنولوژی</span>
     </div>
     <div
-      class="rounded-2xl glass-card bg-[rgba(92,158,85,0.85)] hover:bg-[rgba(92,158,85)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(92,158,85,0.95)] hover:bg-[rgba(92,158,85)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-microscope fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">علمی</span>
+      <span class="text-white text-[14px] font-thin text-center">علمی</span>
     </div>
     <div
-      class="rounded-2xl glass-card bg-[rgba(77,85,255,0.85)] hover:bg-[rgba(77,85,255)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(77,85,255,0.95)] hover:bg-[rgba(77,85,255)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-chalkboard-user fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">آموزشی</span>
+      <span class="text-white text-[14px] font-thin text-center">آموزشی</span>
     </div>
     <div
-      class="rounded-2xl glass-card bg-[rgba(181,102,42,0.85)] hover:bg-[rgba(181,102,42)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(181,102,42,0.95)] hover:bg-[rgba(181,102,42)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-star-half-stroke fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">نقد و بررسی</span>
+      <span class="text-white text-[14px] font-thin text-center">نقد و بررسی</span>
     </div>
     <div
-      class="rounded-2xl glass-card bg-[rgba(176,158,0,0.85)] hover:bg-[rgba(176,158,0)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(176,158,0,0.95)] hover:bg-[rgba(176,158,0)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-newspaper fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">اخبار</span>
+      <span class="text-white text-[14px] font-thin text-center">اخبار</span>
     </div>
     <div
-      class="rounded-2xl glass-card bg-[rgba(214,39,39,0.75)] hover:bg-[rgba(214,39,39)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
+      class="rounded-2xl glass-card bg-[rgba(214,39,39,0.9)] hover:bg-[rgba(214,39,39)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-wand-magic-sparkles fa-3x" style="color: rgb(255, 255, 255)"></i>
-      <span class="text-white text-[12px] font-thin text-center">ترفند</span>
+      <span class="text-white text-[14px] font-thin text-center">ترفند</span>
     </div>
   </div>
 
   <!-- ABOUT BANNER -->
-  <div class="bg-transparent rounded-2xl px-6 py-4 text-center">
+  <div class="bg-transparent rounded-2xl px-6 py-2 pb-5 text-center">
     <h3 class="text-md font-bold text-blue-500 mb-2">
       بلاکد یه کنجکاوی رسانه‌ای در حوزه برنامه نویسی و تکنولوژیه
     </h3>
@@ -121,7 +94,6 @@
   </div>
 
   <div class="w-full flex flex-row gap-10">
-    <!-- VIDEO SECTION -->
     <div class="w-2/3">
       <div class="flex items-center gap-3 mb-3.5">
         <h1 class="text-[16px] font-bold dark:text-white/95">جدید ترین مقاله ها</h1>
@@ -147,32 +119,50 @@
       </div>
 
       <!-- BLOGS LIST -->
-      <div class="flex flex-col gap-5">
-        <div
-          class="bg-white/5 rounded-2xl overflow-hidden flex cursor-pointer glass-card h-40"
-        >
-          <div
-            class="w-1/4 shrink-0 bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center"
-          >
-            <img src="" alt="">
-          </div>
-          <div class="w-3/4 p-4 flex flex-col justify-between flex-1">
-            <div>
-              <p class="text-sm text-black/80 dark:text-white/95 font-bold mb-1.5 leading-6">
-                لورم ایپسوم متن ساختگی تیم طراحی سهر پلاس برای قسمت عنوان وبلاگ
-              </p>
-              <p class="text-[11px] text-black/60 dark:text-white/60 leading-6 line-clamp-2">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ. گرافیک است برای زیبا سازی
-                مطالب.
-              </p>
+      <div class="flex flex-col gap-4">
+        @if (blogsLoading()) {
+          <app-loader></app-loader>
+        } @else {
+          @for (blog of blogPosts(); track blog.id) {
+            <div class="bg-white/5 rounded-2xl overflow-hidden flex cursor-pointer glass-card h-40">
+              <div
+                class="w-1/4 shrink-0 flex items-center justify-center rounded-r-xl overflow-hidden"
+              >
+                <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
+              </div>
+              <div class="w-3/4 p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <p class="text-sm text-black/80 dark:text-white/95 font-bold mb-1.5 leading-6">
+                    {{ blog.title }}
+                  </p>
+                  <p class="text-[12px] text-black/60 dark:text-white/60 leading-6 line-clamp-2">
+                    {{ blog.shortDescription }}
+                  </p>
+                </div>
+                <div
+                  class="flex flex-row items-center gap-4 mt-2.5 text-[11px] text-black/50 dark:text-white/50"
+                >
+                  <span class="flex flex-row items-center gap-1.5">
+                    <i class="fa-regular fa-clock fa-sm" style="color: rgb(175, 130, 130)"></i>
+                    {{ blog.publishedDate | persianDate }}
+                  </span>
+                  <span class="flex flex-row items-center gap-1.5">
+                    <i class="fa-regular fa-user fa-sm" style="color: rgb(175, 130, 130)"></i>
+                    {{ blog.author }}
+                  </span>
+                  <div class="flex flex-row justify-center items-center mb-0.5 mr-auto ml-0 gap-1">
+                    @for (category of blog.categories; track category.id) {
+                      <span
+                        class="text-blue-600 dark:text-blue-400 text-[9px] pb-0.5 px-2 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
+                        >{{ category.name }}</span
+                      >
+                    }
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="flex items-center gap-4 mt-2.5 text-[11px] text-black/50 dark:text-white/50">
-              <span>۳ هفته پیش</span>
-              <span>۸۱۲ بازدید</span>
-              <span>۱۲ نظر</span>
-            </div>
-          </div>
-        </div>
+          }
+        }
       </div>
     </div>
     <!-- SIDEBAR -->
@@ -180,98 +170,58 @@
       <!-- CATEGORIES LIST -->
       <div class="glass-card bg-white/5 rounded-2xl p-6">
         <h3 class="text-[15px] font-bold dark:text-white/95 mb-2">دسته بندی ها</h3>
-        <ul class="flex flex-col list-unstyled">
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="entertainment" class="cursor-pointer">
-              <input type="checkbox" id="entertainment" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              سرگرمی
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">12 دسته بندی</span>
-          </div>
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="technology" class="cursor-pointer">
-              <input type="checkbox" id="technology" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <input type="checkbox" id="entertainment" class="hidden" />
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              تکنولوژی
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">22 دسته بندی</span>
-          </div>
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="science" class="cursor-pointer">
-              <input type="checkbox" id="science" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <input type="checkbox" id="entertainment" class="hidden" />
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              علمی
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">3 دسته بندی</span>
-          </div>
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="learnings" class="cursor-pointer">
-              <input type="checkbox" id="learnings" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <input type="checkbox" id="entertainment" class="hidden" />
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              آموزشی
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">56 دسته بندی</span>
-          </div>
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="overview" class="cursor-pointer">
-              <input type="checkbox" id="overview" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <input type="checkbox" id="entertainment" class="hidden" />
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              نقد و بررسی
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">32 دسته بندی</span>
-          </div>
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="news" class="cursor-pointer">
-              <input type="checkbox" id="news" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <input type="checkbox" id="entertainment" class="hidden" />
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              اخبار
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">21 دسته بندی</span>
-          </div>
-          <div class="w-full flex justify-between items-center gap-2">
-            <label for="trick" class="cursor-pointer">
-              <input type="checkbox" id="trick" class="hidden" />
-              <i class="fa-solid fa-chevron-down fa-sm" style="color: #ababab"></i>
-            </label>
-            <input type="checkbox" id="entertainment" class="hidden" />
-            <p
-              class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-            >
-              ترفند
-            </p>
-            <span class="text-[10px] text-black/80 dark:text-blue-400 ml-0 mr-auto">6 دسته بندی</span>
-          </div>
-        </ul>
+        @if (categoriesLoading()) {
+          <app-loader></app-loader>
+        } @else {
+          <ul class="flex flex-col list-unstyled">
+            @for (
+              mainCategory of categories()?.filter(c => c.parentCategoryId == null);
+              track mainCategory.id
+            ) {
+              <div class="w-full flex flex-col">
+                <div
+                  class="w-full flex justify-between items-center gap-2 cursor-pointer"
+                  (click)="toggleCategory(mainCategory.id)"
+                >
+                  <i
+                    class="fa-solid fa-chevron-down fa-sm transition-transform duration-300"
+                    [class.rotate-180]="isOpen(mainCategory.id)"
+                    style="color: #ababab"
+                  ></i>
+                  <p
+                    class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
+                  >
+                    {{ mainCategory.name }}
+                  </p>
+                  <span class="text-[10px] text-blue-800/80 dark:text-blue-400/80 ml-0 mr-auto"
+                    >{{ mainCategory.subCategories?.length }} دسته بندی</span
+                  >
+                </div>
+                <div
+                  class="overflow-hidden transition-all duration-300"
+                  [class.max-h-0]="!isOpen(mainCategory.id)"
+                  [class.max-h-96]="isOpen(mainCategory.id)"
+                >
+                  <ul class="flex flex-col pr-4 py-1 gap-1">
+                    @for (sub of mainCategory.subCategories; track sub.id) {
+                      <li
+                        class="w-max flex flex-row items-center justify-between py-2 text-[12px] text-black/70 dark:text-white/80 gap-1.5"
+                      >
+                        {{ sub.name }}
+                        <span
+                          class="text-blue-600 dark:text-blue-400 text-[9px] px-2 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
+                        >
+                          <!-- {{blogPosts()?.filter(b => b.categories.find(c => c.id == sub.id))?.length}} -->
+                          2
+                        </span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            }
+          </ul>
+        }
       </div>
 
       <!-- ADS -->
@@ -286,9 +236,7 @@
 
       <!-- LEADERBOARD -->
       <div class="bg-white/5 glass-card rounded-2xl p-6">
-        <h3 class="text-[15px] font-bold dark:text-white/95 mb-2.5">
-          جدول امتیازات
-        </h3>
+        <h3 class="text-[15px] font-bold dark:text-white/95 mb-2.5">جدول امتیازات</h3>
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2.5 py-2">
             <div
