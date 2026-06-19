@@ -2,16 +2,26 @@ import {
   AfterViewInit,
   Component,
   DOCUMENT,
+  HostListener,
+  inject,
   Inject,
   Input,
   OnInit,
+  signal,
+  Signal,
   ViewChild,
+  WritableSignal,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { BlogPostService } from '../../../features/blogpost/services/blog-post-service';
+import { CategoryService } from '../../../features/category/services/category-service';
+import { BlogPost } from '../../../features/blogpost/models/blogpost.model';
+import { Category } from '../../../features/category/models/category.model';
+import { Loader } from '../../../shared/components/loader/loader';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  imports: [RouterLink, Loader],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
@@ -19,6 +29,34 @@ export class Navbar implements OnInit {
   isDarkMode: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
+
+  blogPostService = inject(BlogPostService);
+  categoryService = inject(CategoryService);
+
+  //Blogs
+  blogPostsRef = this.blogPostService.getAllBlogPosts();
+  blogsLoading: Signal<boolean> = this.blogPostsRef.isLoading;
+  blogPosts: WritableSignal<BlogPost[] | undefined> = this.blogPostsRef.value;
+
+  //Categories
+  categoriesRef = this.categoryService.getAllCategories();
+  categoriesLoading: Signal<boolean> = this.categoriesRef.isLoading;
+  categories: WritableSignal<Category[] | undefined> = this.categoriesRef.value;
+
+  openCategories = signal<Set<string>>(new Set());
+  categoriesDropDownOpen: boolean = false;
+
+  toggleCategory(id: string) {
+    this.openCategories.update((set) => {
+      const newSet = new Set(set);
+      newSet.has(id) ? newSet.delete(id) : newSet.add(id);
+      return newSet;
+    });
+  }
+
+  isOpen(id: string) {
+    return this.openCategories().has(id);
+  }
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;

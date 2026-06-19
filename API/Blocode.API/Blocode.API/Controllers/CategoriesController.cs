@@ -18,6 +18,19 @@ namespace Blocode.API.Controllers
         {
             this.categoryRepository = categoryRepository;
         }
+        private CategoryDTO MapCategoryToDTO(Category category)
+        {
+            return new CategoryDTO()
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle,
+                ParentCategoryId = category.ParentCategoryId,
+                SubCategories = category.SubCategories?
+                    .Select(c => MapCategoryToDTO(c)) 
+                    .ToList()
+            };
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
@@ -44,23 +57,11 @@ namespace Blocode.API.Controllers
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
             var categoriesFromDb = await categoryRepository.GetAllCategoriesAsync();
-            var response = new List<CategoryDTO>();
-            foreach (var category in categoriesFromDb)
-            {
-                response.Add(new CategoryDTO()
-                {
-                    Id = category.Id,
-                    Name = category.Name,
-                    UrlHandle = category.UrlHandle,
-                    ParentCategoryId = category.ParentCategoryId,
-                    SubCategories = category.SubCategories?.Select(c => new CategoryDTO(){
-                        Id = c.Id,
-                        Name = c.Name,
-                        UrlHandle = c.UrlHandle,
-                        ParentCategoryId = c.ParentCategoryId,
-                    }).ToList()
-                });
-            }
+
+            var response = categoriesFromDb
+                .Select(c => MapCategoryToDTO(c))
+                .ToList();
+
             return Ok(response);
         }
 

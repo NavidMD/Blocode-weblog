@@ -23,22 +23,16 @@ namespace Blocode.API.Repositories.Implementation
 
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
-            var categoriesQuery = await (
-                from c in _context.Categories
-                select new Category
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    UrlHandle = c.UrlHandle,
-                    ParentCategoryId = c.ParentCategoryId,
-                    SubCategories = (
-                        from sub in _context.Categories
-                        where sub.ParentCategoryId == c.Id
-                        select sub
-                    ).ToList()
-                }
-            ).ToListAsync();
-            return categoriesQuery;
+            var allCategories = await _context.Categories.ToListAsync();
+
+            foreach (var category in allCategories)
+            {
+                category.SubCategories = allCategories
+                    .Where(c => c.ParentCategoryId == category.Id)
+                    .ToList();
+            }
+
+            return allCategories.Where(c => c.ParentCategoryId == null);
         }
 
         public async Task<Category?> GetCategoryAsync(Guid id)

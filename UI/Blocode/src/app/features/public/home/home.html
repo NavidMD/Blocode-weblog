@@ -1,6 +1,6 @@
 <div class="w-full flex flex-col gap-6">
   <!-- HERO -->
-  <div class="rounded-[16px] overflow-hidden relative" id="hero-section">
+  <div class="rounded-[16px] overflow-hidden relative shadow-[0px_3px_10px_0px] shadow-black/25" id="hero-section">
     <swiper-container
       slides-per-view="1"
       loop="true"
@@ -13,13 +13,22 @@
           <div class="h-[450px] relative rounded-2xl hero-blog-card">
             <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
             <div
-              class="absolute px-5 bottom-5 w-full flex flex-col items-start gap-1 text-xs text-white/95 z-999"
+              class="absolute px-5 bottom-5 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
             >
+              <div class="flex flex-row gap-1.5 justify-center items-center">
+                <div
+                  class="w-6 h-6 mb-1 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
+                >
+                  <img class="w-5 h-5 opacity-50" src="assets/vectors/male_user.svg" />
+                </div>
+                <p class="text-[11px] text-white/95 text-shadow-lg text-shadow-black/10">
+                  {{ blog.author }}
+                </p>
+              </div>
               <p class="font-bold text-[24px] mb-2">{{ blog.title }}</p>
-              <div class="w-full flex flex-row gap-5">
-                <span class="text-[13px] text-white/80">{{ blog.publishedDate | persianDate }}</span>
-                <span class="text-[13px] text-white/80">{{ blog.author }}</span>
-                <div class="flex flex-row items-center gap-1 text-[13px] text-white/80 mr-auto ml-0">
+              <p class="font-thin text-white/80 text-[13px] mb-2">{{ blog.shortDescription }}</p>
+              <div class="w-full flex flex-row justify-between items-center">
+                <div class="flex flex-row items-center gap-1 text-[13px] text-white/80">
                   @for (category of blog.categories; track category.id) {
                     <span
                       class="text-white/70 text-[11px] pb-1 px-2.5 pt-1.5 bg-white/15 rounded-full"
@@ -27,6 +36,9 @@
                     >
                   }
                 </div>
+                <span class="text-[13px] text-white/80 ml-0 mr-auto">{{
+                  blog.publishedDate | persianDate
+                }}</span>
               </div>
             </div>
           </div>
@@ -178,7 +190,7 @@
               mainCategory of categories()?.filter(c => c.parentCategoryId == null);
               track mainCategory.id
             ) {
-              <div class="w-full flex flex-col">
+              <li class="w-full flex flex-col">
                 <div
                   class="w-full flex justify-between items-center gap-2 cursor-pointer"
                   (click)="toggleCategory(mainCategory.id)"
@@ -193,7 +205,7 @@
                   >
                     {{ mainCategory.name }}
                   </p>
-                  <span class="text-[10px] text-blue-800/80 dark:text-blue-400/80 ml-0 mr-auto"
+                  <span class="text-[11px] text-blue-800/80 dark:text-blue-400/80 ml-0 mr-auto"
                     >{{ mainCategory.subCategories?.length }} دسته بندی</span
                   >
                 </div>
@@ -205,20 +217,24 @@
                   <ul class="flex flex-col pr-4 py-1 gap-1">
                     @for (sub of mainCategory.subCategories; track sub.id) {
                       <li
-                        class="w-max flex flex-row items-center justify-between py-2 text-[12px] text-black/70 dark:text-white/80 gap-1.5"
+                        (click)="toggleCategory(sub.id)"
+                        class="w-full flex flex-row items-center justify-between py-2 text-[12px] text-black/70 dark:text-white/80 gap-1.5"
                       >
+                        <i
+                          class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 cursor-pointer"
+                          [class.rotate-180]="isOpen(sub.id)"
+                          style="color: #ababab"
+                        ></i>
                         {{ sub.name }}
                         <span
-                          class="text-blue-600 dark:text-blue-400 text-[9px] px-2 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
+                          class="text-[9px] text-blue-800/80 dark:text-blue-400/80 ml-0 mr-auto"
+                          >{{ sub.subCategories?.length }} دسته بندی</span
                         >
-                          <!-- {{blogPosts()?.filter(b => b.categories.find(c => c.id == sub.id))?.length}} -->
-                          2
-                        </span>
                       </li>
                     }
                   </ul>
                 </div>
-              </div>
+              </li>
             }
           </ul>
         }

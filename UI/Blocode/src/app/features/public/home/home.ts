@@ -2,6 +2,7 @@ import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   inject,
+  OnInit,
   Signal,
   signal,
   WritableSignal,
@@ -51,4 +52,5 @@ export class Home {
   isOpen(id: string) {
     return this.openCategories().has(id);
   }
+
 }

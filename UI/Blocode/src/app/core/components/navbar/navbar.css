@@ -94,12 +94,12 @@
 
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 2px 10px -1px rgba(0, 0, 0, 0.18),
+    0 2px 10px 0px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
@@ -116,12 +116,12 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.4),
     transparent
   );
 }
 
-.glass-card::after {
+/* .glass-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -134,4 +134,4 @@
     transparent,
     rgba(255, 255, 255, 0.2)
   );
-}
+} */

@@ -1,27 +1,125 @@
 <nav class="w-full flex flex-row justify-between items-center py-4 px-6 bg-transparent mb-2">
   <div class="w-auto flex flex-row gap-8 items-center">
     <h1 [routerLink]="['/']" class="font-extrabold text-[23px] text-blue-600 cursor-pointer">
-     بلاکُد <span class="font-extrabold text-[15px] text-blue-500/70 cursor-pointer">وبلاگ</span>
+      بلاکُد <span class="font-extrabold text-[15px] text-blue-500/70 cursor-pointer">وبلاگ</span>
     </h1>
     <div>
       <ul class="flex flex-row gap-6 text-sm font-semibold">
         <li
-          class="flex justify-center gap-1.5 items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
           <i class="fa-brands fa-buffer mb-0.5" style="color: rgb(155, 155, 155)"></i>
           <a [routerLink]="['admin', 'blogs']">مقالات</a>
         </li>
         <li
-          class="flex justify-center gap-1.5 items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
           <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: rgb(155, 155, 155)"></i>
           <a>نویسندگان</a>
         </li>
         <li
-          class="flex justify-center gap-1.5 items-center cursor-pointer hover:-translate-y-0.5 text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+
+          (mouseenter)="categoriesDropDownOpen ? '' : (categoriesDropDownOpen = true)"
+          (mouseleave)="categoriesDropDownOpen = false"
+          class="relative flex justify-center gap-1.5 items-center py-2 cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
           <i class="fa-solid fa-grip-vertical fa-sm mb-0.5" style="color: rgb(155, 155, 155)"></i>
-          <a [routerLink]="['admin', 'categories']">دسته بندی ها</a>
+          <a>دسته بندی ها</a>
+          @if (categoriesDropDownOpen) {
+            <div
+              class="w-72 glass-card bg-white/35! dark:bg-black/30! py-3 px-4 absolute top-full right-0 z-50 scaleInFromTop"
+            >
+              @if (categoriesLoading()) {
+                <app-loader></app-loader>
+              } @else {
+                <ul class="flex flex-col list-unstyled">
+                  @for (
+                    mainCategory of categories()?.filter(c => c.parentCategoryId == null);
+                    track mainCategory.id
+                  ) {
+                    <li class="w-full flex flex-col">
+                      <div
+                        class="w-full flex justify-between items-center gap-2 cursor-pointer"
+                        (click)="toggleCategory(mainCategory.id)"
+                      >
+                        <i
+                          class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 text-black/90 dark:text-white/90"
+                          [class.rotate-180]="isOpen(mainCategory.id)"
+                        ></i>
+                        <p
+                          class="w-max flex items-center justify-between py-[7px] text-[12px] text-black/90 dark:text-white/90"
+                        >
+                          {{ mainCategory.name }}
+                        </p>
+                        <span class="text-[9px] ml-0 mr-auto text-black/70 dark:text-white/70"
+                          >{{ mainCategory.subCategories?.length }} زیر دسته</span
+                        >
+                      </div>
+                      <div
+                        class="overflow-hidden transition-all duration-200 bg-white/20! dark:bg-white/10! rounded-xl"
+                        [class.max-h-0]="!isOpen(mainCategory.id)"
+                        [class.max-h-96]="isOpen(mainCategory.id)"
+                        [class.opacity-0]="!isOpen(mainCategory.id)"
+                        [class.opacity-100]="isOpen(mainCategory.id)"
+                        [class.p-0]="!isOpen(mainCategory.id)"
+                        [class.p-2]="isOpen(mainCategory.id)"
+                      >
+                        <ul class="flex flex-col gap-[7px]">
+                          @for (sub of mainCategory.subCategories; track sub.id) {
+                            <li
+                              (click)="toggleCategory(sub.id)"
+                              class="w-full flex flex-col justify-between items-center"
+                            >
+                              <div class="w-full flex flex-row items-center justify-between p-1 text-[11px] text-black/80 dark:text-white/80 gap-2">
+                                <i
+                                  class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 cursor-pointer text-black/80! dark:text-white/80!"
+                                  [class.rotate-180]="isOpen(sub.id)"
+                                  style="color: #ababab"
+                                ></i>
+                                {{ sub.name }}
+                                <span
+                                  class="text-[8px] text-black/60 dark:text-white/60 ml-0 mr-auto"
+                                  >{{ sub.subCategories?.length }} زیر دسته</span
+                                >
+                              </div>
+                              <div
+                                class="overflow-hidden transition-all duration-200"
+                                [class.max-h-0]="!isOpen(sub.id)"
+                                [class.max-h-96]="isOpen(sub.id)"
+                                [class.opacity-0]="!isOpen(sub.id)"
+                                [class.opacity-100]="isOpen(sub.id)"
+                              >
+                                <ul class="flex flex-row flex-wrap gap-2 py-1.5 px-0.5">
+                                  @for (sub1 of sub.subCategories; track sub1.id) {
+                                    <li
+                                      (click)="toggleCategory(sub1.id)"
+                                      class="w-fit flex items-center shadow-sm shadow-black/20 bg-white/15 dark:bg-black/15 justify-center p-1 px-2 text-[9px] rounded-xl text-black/80 dark:text-white/80"
+                                    >
+                                      {{ sub1.name }}
+                                    </li>
+                                  }
+                                </ul>
+                              </div>
+                            </li>
+                          }
+                        </ul>
+                      </div>
+                    </li>
+                  }
+                  <li class="w-full flex flex-row">
+                    <p
+                      class="w-max flex items-center justify-between pt-[7px] text-[11px] text-blue-600 dark:text-blue-300 gap-2"
+                    >
+                      <i
+                        class="fa-regular fa-pen-to-square fa-[10px] text-blue-600 dark:text-blue-300"
+                      ></i>
+                      ویرایش دسته بندی ها
+                    </p>
+                  </li>
+                </ul>
+              }
+            </div>
+          }
         </li>
       </ul>
     </div>
