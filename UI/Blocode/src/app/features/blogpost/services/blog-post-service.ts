@@ -22,6 +22,10 @@ export class BlogPostService {
     return httpResource<BlogPost>(() => `${this.baseUrl}/api/blogs/${id()}`);
   }
 
+  getBlogPostsByCategoryName(categoryName: InputSignal<string | undefined>) : HttpResourceRef<BlogPost[] | undefined> {
+    return httpResource<BlogPost[]>(() => `${this.baseUrl}/api/blogs/byCategory/${categoryName()}`);
+  }
+
   //HTTP POST
   addBlogPost(newBlogPostDTO: NewBlogPostRequestValuesDTO) {
     this.addBlogPostStatusSignal.set('loading');

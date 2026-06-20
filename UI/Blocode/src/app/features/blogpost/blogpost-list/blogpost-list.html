@@ -2,6 +2,12 @@
   <div class="w-full flex flex-row justify-between items-center">
     <h1 class="text-[18px] font-bold dark:text-white/95">
       مقالات
+      @if (categoryName()) {
+        <p class="inline-block text-[16px] mr-2 text-blue-600 dark:text-blue-400 gap-1">
+          > &nbsp; {{categoryName()}}
+          <span class="inline-block text-[11px] mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-2 text-blue-600 dark:text-blue-400">{{byCatValue()?.length}} مقاله</span>
+        </p>
+      }
       @if (addBlogActive) {
         <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95">
           > &nbsp; ایجاد مقاله
@@ -12,7 +18,7 @@
       <a
         role="button"
         [routerLink]="['/admin', 'blogs', 'add']"
-        class="p-2 px-4 text-sm  bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 text-sm bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         (click)="addBlogActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
@@ -28,16 +34,13 @@
       <p>مشکل در بارگذاری...</p>
     }
     @if (value()) {
-      @for (blog of value(); track blog.id) {
+      @for (blog of categoryName() ? byCatValue() : value(); track blog.id) {
         <div
           id="blog-card"
           class="w-full glass-card h-[320px] hover:-translate-y-1.5 hover:shadow-lg transition cursor-pointer overflow-hidden relative"
         >
           <div id="header" class="h-[65%] bg-blue-200 dark:bg-white/15 overflow-hidden">
-            <img
-              [src]="blog.featuredImageUrl"
-              class="w-full h-full object-cover"
-            />
+            <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" />
             <div
               class="w-full z-10 h-fit flex flex-row justify-between items-center absolute bottom-0 px-3.5 py-3.5"
             >
@@ -83,16 +86,17 @@
             class="w-full h-fit p-2 flex flex-row items-start justify-end absolute left-0 top-0"
           >
             <div
-              class="flex flex-row bg-white dark:bg-gray-900 shadow-md shadow-black/20 rounded-[14px] py-1 pb-0.5 px-2"
+              class="flex flex-row bg-white dark:bg-gray-900 shadow-md shadow-black/20 rounded-[14px] py-1 pb-0.5 px-2 gap-1.5"
             >
-              <button class="p-1 text-white cursor-pointer">
-                <i title="آرشیو" class="fa-solid fa-box" style="color: rgb(177, 177, 177)"></i>
-              </button>
               <button
                 [routerLink]="['/admin/blogs', 'edit', blog.id]"
                 class="p-1 text-white cursor-pointer"
               >
-                <i title="ویرایش" class="fa-regular fa-pen-to-square" style="color: rgb(65, 160, 233)"></i>
+                <i
+                  title="ویرایش"
+                  class="fa-regular fa-pen-to-square"
+                  style="color: rgb(65, 160, 233)"
+                ></i>
               </button>
               <button class="p-1 text-white cursor-pointer" (click)="deleteBlog(blog.id)">
                 <i title="حذف" class="fa-regular fa-trash-can" style="color: rgb(255, 80, 80)"></i>

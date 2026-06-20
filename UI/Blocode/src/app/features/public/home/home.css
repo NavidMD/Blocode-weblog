@@ -46,7 +46,7 @@ swiper-container::part(bullet-active) {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3),
     transparent
   );
 }
@@ -60,9 +60,9 @@ swiper-container::part(bullet-active) {
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.2),
     transparent,
-    rgba(255, 255, 255, 0.3)
+    rgba(255, 255, 255, 0.2)
   );
 }
 

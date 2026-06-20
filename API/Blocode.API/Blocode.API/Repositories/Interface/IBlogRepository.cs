@@ -13,5 +13,7 @@ namespace Blocode.API.Repositories.Interface
         Task<BlogPost?> UpdateBlogAsync(BlogPost blogPost);
 
         Task<BlogPost?> DeleteBlogAsync(Guid id);
+
+        Task<IEnumerable<BlogPost>> GetBlogsByCategoryAsync(string categoryName);
     }
 }

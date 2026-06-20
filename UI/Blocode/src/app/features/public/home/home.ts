@@ -15,12 +15,13 @@ import { Loader } from '../../../shared/components/loader/loader';
 import { register } from 'swiper/element/bundle';
 import { ɵInternalFormsSharedModule } from '@angular/forms';
 import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
+import { RouterLink } from "@angular/router";
 
 register();
 
 @Component({
   selector: 'app-home',
-  imports: [Loader, ɵInternalFormsSharedModule, PersianDatePipe],
+  imports: [Loader, ɵInternalFormsSharedModule, PersianDatePipe, RouterLink],
   templateUrl: './home.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './home.css',

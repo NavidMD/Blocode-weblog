@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { BlogPostService } from '../services/blog-post-service';
@@ -12,15 +12,21 @@ import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
   styleUrl: './blogpost-list.css',
 })
 export class BlogpostList {
+  categoryName = input<string>();
   blogpostService = inject(BlogPostService);
   addBlogActive: boolean = false;
   router = inject(Router);
 
   private getAllBlogPostsRef = this.blogpostService.getAllBlogPosts();
+  private getAllBlogPostsByCategoryNameRef = this.blogpostService.getBlogPostsByCategoryName(this.categoryName)
 
   loading: Signal<boolean> = this.getAllBlogPostsRef.isLoading;
   error: Signal<Error | undefined> = this.getAllBlogPostsRef.error;
   value: WritableSignal<BlogPost[] | undefined> = this.getAllBlogPostsRef.value;
+
+  byCatLoading: Signal<boolean> = this.getAllBlogPostsByCategoryNameRef.isLoading;
+  byCatError: Signal<Error | undefined> = this.getAllBlogPostsByCategoryNameRef.error;
+  byCatValue: WritableSignal<BlogPost[] | undefined> = this.getAllBlogPostsByCategoryNameRef.value;
 
   toPersianFormatDate(date: string) {
     const convertingDate = new Date(date);

@@ -1,4 +1,5 @@
-﻿using Blocode.API.Models.Domain;
+﻿using Azure;
+using Blocode.API.Models.Domain;
 using Blocode.API.Models.DTO;
 using Blocode.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
@@ -107,6 +108,41 @@ namespace Blocode.API.Controllers
                 };
                 return Ok(response);
             }
+        }
+
+        [HttpGet("byCategory/{categoryName}")]
+        public async Task<ActionResult> GetBlogsByCategory([FromRoute] string categoryName)
+        {
+            var result = await blogRepository.GetBlogsByCategoryAsync(categoryName);
+            if (result == null || !result.Any())
+            {
+                return NotFound();
+            }
+            var mappedResponse = new List<BlogPostDTO>();
+            foreach (var blog in result)
+            {
+                var item = new BlogPostDTO()
+                {
+                    Id = blog.Id,
+                    Title = blog.Title,
+                    ShortDescription = blog.ShortDescription,
+                    Content = blog.Content,
+                    UrlHandle = blog.UrlHandle,
+                    FeaturedImageUrl = blog.FeaturedImageUrl,
+                    PublishedDate = blog.PublishedDate,
+                    Author = blog.Author,
+                    IsVisible = blog.IsVisible,
+                    Categories = blog.Categories.Select(c => new CategoryDTO()
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        UrlHandle = c.UrlHandle
+                    }).ToList()
+
+                };
+                mappedResponse.Add(item);
+            };
+            return Ok(mappedResponse);
         }
 
         [HttpGet("{id:guid}")]

@@ -1,6 +1,9 @@
 <div class="w-full flex flex-col gap-6">
   <!-- HERO -->
-  <div class="rounded-[16px] overflow-hidden relative shadow-[0px_3px_10px_0px] shadow-black/25" id="hero-section">
+  <div
+    class="rounded-[16px] overflow-hidden relative shadow-[0px_3px_10px_0px] shadow-black/25"
+    id="hero-section"
+  >
     <swiper-container
       slides-per-view="1"
       loop="true"
@@ -50,42 +53,49 @@
   <!-- CATEGORIES -->
   <div id="categories-container" class="w-full overflow-visible gap-4.5 min-h-[100px] pb-6 pt-3">
     <div
+      [routerLink]="['/admin','blogs','byCategory','سرگرمی']"
       class="rounded-2xl glass-card bg-[rgba(142,121,217,0.95)] hover:bg-[rgba(142,121,217)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-gamepad fa-3x" style="color: rgb(255, 255, 255)"></i>
       <span class="text-white text-[14px] font-thin text-center">سرگرمی</span>
     </div>
     <div
+      [routerLink]="['/admin','blogs','byCategory','تکنولوژی']"
       class="rounded-2xl glass-card bg-[rgba(87,86,86,0.95)] hover:bg-[rgba(87,86,86)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-microchip fa-3x" style="color: rgb(255, 255, 255)"></i>
       <span class="text-white text-[14px] font-thin text-center">تکنولوژی</span>
     </div>
     <div
+      [routerLink]="['/admin','blogs','byCategory','علمی']"
       class="rounded-2xl glass-card bg-[rgba(92,158,85,0.95)] hover:bg-[rgba(92,158,85)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-microscope fa-3x" style="color: rgb(255, 255, 255)"></i>
       <span class="text-white text-[14px] font-thin text-center">علمی</span>
     </div>
     <div
+      [routerLink]="['/admin','blogs','byCategory','آموزشی']"
       class="rounded-2xl glass-card bg-[rgba(77,85,255,0.95)] hover:bg-[rgba(77,85,255)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-chalkboard-user fa-3x" style="color: rgb(255, 255, 255)"></i>
       <span class="text-white text-[14px] font-thin text-center">آموزشی</span>
     </div>
     <div
+      [routerLink]="['/admin','blogs','byCategory','نقد و بررسی']"
       class="rounded-2xl glass-card bg-[rgba(181,102,42,0.95)] hover:bg-[rgba(181,102,42)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-star-half-stroke fa-3x" style="color: rgb(255, 255, 255)"></i>
       <span class="text-white text-[14px] font-thin text-center">نقد و بررسی</span>
     </div>
     <div
+      [routerLink]="['/admin','blogs','byCategory','اخبار']"
       class="rounded-2xl glass-card bg-[rgba(176,158,0,0.95)] hover:bg-[rgba(176,158,0)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-newspaper fa-3x" style="color: rgb(255, 255, 255)"></i>
       <span class="text-white text-[14px] font-thin text-center">اخبار</span>
     </div>
     <div
+      [routerLink]="['/admin','blogs','byCategory','ترفند']"
       class="rounded-2xl glass-card bg-[rgba(214,39,39,0.9)] hover:bg-[rgba(214,39,39)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
     >
       <i class="fa-solid fa-wand-magic-sparkles fa-3x" style="color: rgb(255, 255, 255)"></i>
@@ -179,62 +189,47 @@
     </div>
     <!-- SIDEBAR -->
     <div class="w-1/3 flex flex-col gap-5">
-      <!-- CATEGORIES LIST -->
       <div class="glass-card bg-white/5 rounded-2xl p-6">
-        <h3 class="text-[15px] font-bold dark:text-white/95 mb-2">دسته بندی ها</h3>
+        <h3 class="text-[15px] font-bold dark:text-white/95 mb-5">جدید ترین اخبار</h3>
         @if (categoriesLoading()) {
           <app-loader></app-loader>
         } @else {
-          <ul class="flex flex-col list-unstyled">
-            @for (
-              mainCategory of categories()?.filter(c => c.parentCategoryId == null);
-              track mainCategory.id
-            ) {
-              <li class="w-full flex flex-col">
+          <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto">
+            @for (blog of blogPosts(); track blog.id) {
+              <div
+                class="overflow-hidden flex cursor-pointer h-16"
+              >
                 <div
-                  class="w-full flex justify-between items-center gap-2 cursor-pointer"
-                  (click)="toggleCategory(mainCategory.id)"
+                  class="w-1/4 shrink-0 flex items-center justify-center rounded-xl overflow-hidden border border-gray-200 overflow-hidden"
                 >
-                  <i
-                    class="fa-solid fa-chevron-down fa-sm transition-transform duration-300"
-                    [class.rotate-180]="isOpen(mainCategory.id)"
-                    style="color: #ababab"
-                  ></i>
-                  <p
-                    class="w-max flex items-center justify-between py-2 text-sm dark:text-white/80"
-                  >
-                    {{ mainCategory.name }}
-                  </p>
-                  <span class="text-[11px] text-blue-800/80 dark:text-blue-400/80 ml-0 mr-auto"
-                    >{{ mainCategory.subCategories?.length }} دسته بندی</span
-                  >
+                  <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover " alt="" />
                 </div>
-                <div
-                  class="overflow-hidden transition-all duration-300"
-                  [class.max-h-0]="!isOpen(mainCategory.id)"
-                  [class.max-h-96]="isOpen(mainCategory.id)"
-                >
-                  <ul class="flex flex-col pr-4 py-1 gap-1">
-                    @for (sub of mainCategory.subCategories; track sub.id) {
-                      <li
-                        (click)="toggleCategory(sub.id)"
-                        class="w-full flex flex-row items-center justify-between py-2 text-[12px] text-black/70 dark:text-white/80 gap-1.5"
+                <div class="w-3/4 pr-3 flex flex-col justify-between flex-1">
+                  <div class="h-full flex flex-col justify-between">
+                    <p class="text-xs text-black/80 dark:text-white/95 font-bold mb-1 leading-6">
+                      {{ blog.title }}
+                    </p>
+                    <div
+                      class="flex flex-row items-center gap-4 text-[10px] text-black/50 dark:text-white/50"
+                    >
+                      <span class="flex flex-row items-center gap-1.5">
+                        <i class="fa-regular fa-clock fa-sm" style="color: rgb(175, 130, 130)"></i>
+                        {{ blog.publishedDate | persianDate }}
+                      </span>
+                      <div
+                        class="flex flex-row justify-center items-center mb-0.5 mr-auto ml-0 gap-1"
                       >
-                        <i
-                          class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 cursor-pointer"
-                          [class.rotate-180]="isOpen(sub.id)"
-                          style="color: #ababab"
-                        ></i>
-                        {{ sub.name }}
-                        <span
-                          class="text-[9px] text-blue-800/80 dark:text-blue-400/80 ml-0 mr-auto"
-                          >{{ sub.subCategories?.length }} دسته بندی</span
-                        >
-                      </li>
-                    }
-                  </ul>
+                        @for (category of blog.categories; track category.id) {
+                          <span
+                            class="text-blue-600 dark:text-blue-400 text-[8px] pb-0.5 px-2 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
+                            >{{ category.name }}</span
+                          >
+                        }
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </li>
+              </div>
             }
           </ul>
         }

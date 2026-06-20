@@ -8,6 +8,10 @@ import { Home } from './features/public/home/home';
 
 export const routes: Routes = [
   {
+    path: 'admin/blogs/byCategory/:categoryName',
+    component: BlogpostList
+  },
+  {
     path: 'admin/blogs/edit/:id',
     component: EditBlogpost
   },

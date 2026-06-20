@@ -16,6 +16,8 @@ export class CategoryService {
 
   private readonly baseUrl = environment.apiBaseUrl;
 
+  categoriesDropDownInHeader: boolean = false;
+
   addCategoryStatusSignal = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
   updateCategoryStatusSignal = signal<'idle' | 'updating' | 'error' | 'success'>('idle');
   deleteCategoryStatusSignal = signal<'idle' | 'deleting' | 'error' | 'success'>('idle');

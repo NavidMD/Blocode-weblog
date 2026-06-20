@@ -12,12 +12,14 @@ import {
   ViewChild,
   WritableSignal,
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { BlogPostService } from '../../../features/blogpost/services/blog-post-service';
 import { CategoryService } from '../../../features/category/services/category-service';
 import { BlogPost } from '../../../features/blogpost/models/blogpost.model';
 import { Category } from '../../../features/category/models/category.model';
 import { Loader } from '../../../shared/components/loader/loader';
+import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +30,12 @@ import { Loader } from '../../../shared/components/loader/loader';
 export class Navbar implements OnInit {
   isDarkMode: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+  ) {
+
+  }
 
   blogPostService = inject(BlogPostService);
   categoryService = inject(CategoryService);
@@ -44,7 +51,6 @@ export class Navbar implements OnInit {
   categories: WritableSignal<Category[] | undefined> = this.categoriesRef.value;
 
   openCategories = signal<Set<string>>(new Set());
-  categoriesDropDownOpen: boolean = false;
 
   toggleCategory(id: string) {
     this.openCategories.update((set) => {
@@ -60,7 +66,6 @@ export class Navbar implements OnInit {
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
-
     if (this.isDarkMode) {
       this.document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -72,7 +77,6 @@ export class Navbar implements OnInit {
 
   ngOnInit(): void {
     this.isDarkMode = localStorage.getItem('theme') === 'dark';
-
     if (this.isDarkMode) {
       this.document.documentElement.classList.add('dark');
     }
