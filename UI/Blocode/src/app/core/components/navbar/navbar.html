@@ -55,7 +55,7 @@
                         >
                       </div>
                       <div
-                        class="overflow-hidden transition-all duration-200 bg-white/20! dark:bg-white/10! rounded-xl"
+                        class="overflow-hidden transition-all duration-200 bg-black/5! dark:bg-white/10! rounded-xl"
                         [class.max-h-0]="!isOpen(mainCategory.id)"
                         [class.max-h-96]="isOpen(mainCategory.id)"
                         [class.opacity-0]="!isOpen(mainCategory.id)"
@@ -98,7 +98,7 @@
                                       (click)="toggleCategory(sub1.id)"
                                       [routerLink]="['/admin', 'blogs', 'byCategory', sub1.name]"
                                       (click)="categoryService.categoriesDropDownInHeader = false"
-                                      class="w-fit flex items-center shadow-sm shadow-black/20 bg-white/15 dark:bg-black/15 justify-center p-1 px-2 text-[9px] rounded-xl text-black/80 dark:text-white/80"
+                                      class="w-fit flex items-center shadow-sm shadow-black/20 bg-white/30 dark:bg-black/20 justify-center p-1 px-2 text-[9px] rounded-xl text-black/80 dark:text-white/80"
                                     >
                                       {{ sub1.name }}
                                     </li>

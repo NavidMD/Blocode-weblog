@@ -1,37 +1,58 @@
 <div class="w-full h-auto flex flex-col justify-center items-start gap-5">
   <div class="w-full flex flex-row items-center">
-    <h1 class="text-[18px] font-bold flex flex-row items-center gap-2 dark:text-white/95">
-      دسته بندی ها
-      @if (addCategoryActive) {
-        <span class="inline-block text-sm text-black/60 dark:text-white/95 mr-2"> > &nbsp; ایجاد دسته بندی </span>
-      }
-      <label for="category-open-search">
-        <img src="assets/vectors/search.svg" class="w-5 h-5 cursor-pointer" />
-      </label>
-      <input type="checkbox" class="hidden" id="category-open-search" />
-      <input
-        id="category-search-input"
-        type="text"
-        placeholder="جستجو ..."
-        class="input-text-normal dark:text-white/95 font-light justify-right px-2 items-center rounded-[15px] mr-4 border dark:border-white/20 border-gray-200 outline-0 h-[35px]"
-      />
-    </h1>
+    <div
+      class="w-14 h-14 p-2 rounded-3xl bg-gradient-to-br from-violet-300 to-blue-400 shadow-lg shadow-black/15 dark:shadow-white/15 dark:shadow-xl"
+    >
+      <img src="assets/vectors/diversity3.svg" class="w-full h-full" alt="">
+    </div>
+    <div class="flex flex-col pr-4 gap-1">
+      <h1 class="text-[18px] font-bold flex flex-row items-center gap-2 dark:text-white/95">
+        دسته بندی ها
+        @if (addCategoryActive) {
+          <span class="inline-block text-sm text-black/60 dark:text-white/95 mr-2">
+            > &nbsp; ایجاد دسته بندی
+          </span>
+        }
+        <label for="category-open-search">
+          <img src="assets/vectors/search.svg" class="w-5 h-5 cursor-pointer" />
+        </label>
+        <input type="checkbox" class="hidden" id="category-open-search" />
+        <input
+          id="category-search-input"
+          type="text"
+          placeholder="جستجو ..."
+          class="input-text-normal dark:text-white/95 font-light justify-right px-2 items-center rounded-[15px] mr-4 border dark:border-white/20 border-gray-200 outline-0 h-[30px]"
+        />
+      </h1>
+      <span class="text-[12px] text-black/55 dark:text-white/65 mt-1">
+        دسته‌بندی‌های سایت خود را مدیریت و سازماندهی نمایید.
+      </span>
+    </div>
     @if (!addCategoryActive) {
       <a
         role="button"
-        class="p-2 px-4 text-sm mr-auto ml-0 bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 relative text-sm mr-auto ml-0 bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
         (click)="addCategoryActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
+        <img src="assets/vectors/arrow (1).png" class="absolute left-full w-8 ml-2.5 bottom-2 opacity-90 animate-pulse rotate-110 -scale-y-100" alt="">
         دسته بندی جدید
       </a>
     }
   </div>
   @if (addCategoryActive) {
-    <app-add-category [categories]="value()" [categoriesLoading]="isLoading()" [categoriesError]="isError()" (cancelAdding)="addCategoryActive = $event" class="w-full"></app-add-category>
+    <app-add-category
+      [categories]="value()"
+      [categoriesLoading]="isLoading()"
+      [categoriesError]="isError()"
+      (cancelAdding)="addCategoryActive = $event"
+      class="w-full"
+    ></app-add-category>
   }
-  <div class="gap-4" id="categories-container"
-    [ngClass]="addCategoryActive === true ? 'mt-6': 'mt-2'"
+  <div
+    class="gap-4"
+    id="categories-container"
+    [ngClass]="addCategoryActive === true ? 'mt-6' : 'mt-2'"
   >
     @if (isLoading()) {
       <span>درحال بارگذاری...</span>
@@ -41,48 +62,70 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="overflow-hidden glass-card bg-white dark:bg-black/80 relative transition cursor-pointer hover:-translate-y-1.5 hover:shadow-lg flex flex-col justify-between items-center px-4 pt-6 pb-8"
+          class="overflow-hidden glass-card bg-white dark:bg-black/80 relative transition-all duration-300 cursor-pointer hover:-translate-y-1.5 hover:shadow-xl flex flex-col rounded-3xl"
         >
-          <div class="w-full h-1/2 flex flex-row gap-2 justify-start items-center">
-            <span
-              [class.pb-0.5]="isPersian(category.name[0])"
-              class="shadow-md glass-card shadow-black/15 rounded-full! text-[19px] text-white flex justify-center items-center w-10 h-10 bg-blue-400! pt-1 dark:bg-blue-500!"
-              >{{ category.name[0].toUpperCase() }}</span
-            >
-            <div class="h-1/2 gap-0.5 flex flex-col justify-center items-start ">
-              <h3 class="text-[16px] text-black/90 dark:text-white/95">{{ category.name }}</h3>
-              <span
-                class="text-[11px] text-black/60 dark:text-white/70 font-light flex flex-row gap-0.5 items-start"
+          <!-- Content -->
+          <div class="px-4 py-4 flex flex-col gap-3 flex-1">
+            <!-- Header -->
+            <div class="flex justify-between items-start">
+              <div
+                class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-500/20 flex justify-center items-center"
               >
-                {{ category.urlHandle }}
-                <i class="fa-solid fa-link"></i>
+                <span
+                  [class.pb-0.5]="isPersian(category.name[0])"
+                  class="text-[24px] font-bold text-blue-500 dark:text-blue-300"
+                >
+                  {{ category.name[0].toUpperCase() }}
+                </span>
+              </div>
+
+              <span
+                class="px-3 py-1 rounded-full text-[10px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
+              >
+                12 مقاله مرتبط
               </span>
             </div>
-          </div>
-          <div
-            id="cards-buttonSection"
-            class="w-full absolute flex justify-between bottom-1 h-fit px-3 pr-4"
-          >
-            <div class="w-fit items-center">
-              <button
-                class="ml-auto flex flex-row gap-1 text-[10px] justify-center items-center cursor-pointer opacity-60"
-              >
-                <span class="text-[9px] font-thin text-black/70 dark:text-white/95">12 مقاله مرتبط </span>
-              </button>
+
+            <!-- Title -->
+            <div class="flex flex-col gap-1">
+              <h3 class="text-[18px] font-semibold text-black/90 dark:text-white/95">
+                {{ category.name }}
+              </h3>
+
+              <span class="text-[12px] text-black/55 dark:text-white/65 flex items-center gap-1">
+                <i class="fa-solid fa-link text-[10px]"></i>
+                {{ category.urlHandle }}
+              </span>
             </div>
-            <div class="flex flex-row justify-end">
-              <button
-                class="cursor-pointer p-1"
-                [routerLink]="['/admin/categories', 'edit', category.id]"
-              >
-                <i class="fa-regular fa-pen-to-square" style="color: rgb(65, 160, 233)"></i>
+
+            <!-- Description -->
+            <p class="text-[11px] leading-5 text-black/60 dark:text-white/70 line-clamp-2">
+              مقالات و مطالب مرتبط با حوزه {{ category.name }} در این دسته‌بندی قرار می‌گیرند.
+            </p>
+
+            <!-- Footer -->
+            <div
+              class="mt-auto pt-3 border-t border-black/5 dark:border-white/10 flex justify-between items-center"
+            >
+              <button class="px-3 py-1 rounded-full bg-slate-100 dark:bg-white/10 text-[11px] text-black/70 dark:text-white/70">
+                مشاهده
               </button>
-              <button
-                class="cursor-pointer p-1"
-                (click)="deleteCategory(category.id)"
-              >
-                <i class="fa-regular fa-trash-can" style="color: rgb(255, 80, 80)"></i>
-              </button>
+
+              <div class="flex gap-2">
+                <button
+                  class="w-8 h-8 flex justify-center items-center rounded-xl bg-blue-50 dark:bg-blue-500/15 hover:scale-105 transition"
+                  [routerLink]="['/admin/categories', 'edit', category.id]"
+                >
+                  <i class="fa-regular fa-pen-to-square fa-sm" style="color: rgb(65, 160, 233)"></i>
+                </button>
+
+                <button
+                  class="w-8 h-8 flex justify-center items-center rounded-xl bg-red-50 dark:bg-red-500/15 hover:scale-105 transition"
+                  (click)="deleteCategory(category.id)"
+                >
+                  <i class="fa-regular fa-trash-can fa-sm" style="color: rgb(255, 80, 80)"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,27 +1,42 @@
 <div class="w-full h-auto flex flex-col justify-center items-start gap-5">
-  <div class="w-full flex flex-row justify-between items-center">
-    <h1 class="text-[18px] font-bold dark:text-white/95">
-      مقالات
-      @if (categoryName()) {
-        <p class="inline-block text-[16px] mr-2 text-blue-600 dark:text-blue-400 gap-1">
-          > &nbsp; {{categoryName()}}
-          <span class="inline-block text-[11px] mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-2 text-blue-600 dark:text-blue-400">{{byCatValue()?.length}} مقاله</span>
-        </p>
-      }
-      @if (addBlogActive) {
-        <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95">
-          > &nbsp; ایجاد مقاله
-        </span>
-      }
-    </h1>
+  <div class="w-full flex flex-row items-center">
+    <div
+      class="w-14 h-14 p-2 rounded-3xl bg-gradient-to-br from-violet-300 to-blue-400 shadow-lg shadow-black/15 dark:shadow-white/15 dark:shadow-xl"
+    >
+      <img src="assets/vectors/magazine2.svg" class="w-full h-full" alt="" />
+    </div>
+    <div class="flex flex-col pr-4 gap-1">
+      <h1 class="text-[18px] flex items-center font-bold dark:text-white/95">
+        مقالات
+        @if (categoryName()) {
+          <p class="inline-block text-[16px] mr-2 text-blue-600 dark:text-blue-400 gap-1">
+            > &nbsp; {{ categoryName() }}
+            <span
+              class="inline-block text-[10px] mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-3 text-blue-600 dark:text-blue-400"
+              >{{ byCatValue()?.length }} مقاله مرتبط</span
+            >
+          </p>
+        }
+        @if (addBlogActive) {
+          <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95">
+            > &nbsp; ایجاد مقاله
+          </span>
+        }
+      </h1>
+      <span class="text-[12px] text-black/55 dark:text-white/65 mt-1">
+        مشاهده جدیدترین و مفید ترین مقالات در زمینه
+        {{ categoryName() ? categoryName() : 'آموزشی، علمی، خبری و ..' }}.
+      </span>
+    </div>
     @if (!addBlogActive) {
       <a
         role="button"
         [routerLink]="['/admin', 'blogs', 'add']"
-        class="p-2 px-4 text-sm bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 text-sm relative bg-blue-600 text-white flex mr-auto ml-0 flex-row justify-center items-center gap-1 rounded-[16px] shadow-md shadow-black/20 cursor-pointer"
         (click)="addBlogActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
+        <img src="assets/vectors/arrow (1).png" class="absolute left-full w-8 ml-2.5 bottom-2 opacity-90 animate-pulse rotate-110 -scale-y-100" alt="">
         مقاله جدید
       </a>
     }
