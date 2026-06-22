@@ -1,0 +1,28 @@
+/* gradient خطی زیر عنوان ستون‌ها — تیلویند نمیتونه from/to داینامیک بزنه */
+.divider-purple {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, #6c63ff, #a78bfa);
+  border-radius: 2px;
+  margin: 8px 0;
+}
+
+/* دکمه ثبت نام — gradient روی background */
+.btn-submit {
+  background: linear-gradient(135deg, #155dfc 0%, #8b5cf6 100%);
+}
+
+/* اورب‌های دکوراتیو دارک — حلقه دوبل با pseudo-element */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(108, 99, 255, 0.3);
+  pointer-events: none;
+}
+.orb::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(108, 99, 255, 0.2);
+}
