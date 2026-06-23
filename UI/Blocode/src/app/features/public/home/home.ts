@@ -1,6 +1,7 @@
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
+  effect,
   inject,
   OnInit,
   Signal,
@@ -15,13 +16,22 @@ import { Loader } from '../../../shared/components/loader/loader';
 import { register } from 'swiper/element/bundle';
 import { ɵInternalFormsSharedModule } from '@angular/forms';
 import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
+import { LoaderMagazine } from '../../../shared/components/loader-magazine/loader-magazine';
+import { LoadError } from '../../../shared/components/load-error/load-error';
 
 register();
 
 @Component({
   selector: 'app-home',
-  imports: [Loader, ɵInternalFormsSharedModule, PersianDatePipe, RouterLink],
+  imports: [
+    Loader,
+    ɵInternalFormsSharedModule,
+    PersianDatePipe,
+    RouterLink,
+    LoaderMagazine,
+    LoadError,
+  ],
   templateUrl: './home.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './home.css',
@@ -33,7 +43,9 @@ export class Home {
   //Blogs
   blogPostsRef = this.blogPostService.getAllBlogPosts();
   blogsLoading: Signal<boolean> = this.blogPostsRef.isLoading;
+  blogsError: Signal<Error | undefined> = this.blogPostsRef.error;
   blogPosts: WritableSignal<BlogPost[] | undefined> = this.blogPostsRef.value;
+  blogsStatus = this.blogPostsRef.status;
 
   //Categories
   categoriesRef = this.categoryService.getAllCategories();
@@ -54,4 +66,9 @@ export class Home {
     return this.openCategories().has(id);
   }
 
+  constructor() {
+    effect(() => {
+      console.log('status:', this.blogsStatus());
+    });
+  }
 }

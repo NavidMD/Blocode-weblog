@@ -1,54 +1,71 @@
 <div class="w-full flex flex-col gap-7">
   <!-- HERO -->
-  <div
-    class="rounded-[20px] overflow-hidden relative shadow-[0px_3px_10px_0px] shadow-black/25"
-    id="hero-section"
-  >
-    <swiper-container
-      slides-per-view="1"
-      loop="true"
-      pagination="true"
-      navigation="true"
-      autoplay-delay="5000"
+  @if (blogsStatus() === 'loading') {
+    <div
+      class="rounded-[20px] bg-black/5 dark:bg-white/5 h-[450px] flex justify-center items-center overflow-hidden relative"
     >
-      @for (blog of blogPosts()?.slice(-3); track blog.id) {
-        <swiper-slide>
-          <div class="h-[450px] relative rounded-[20px] hero-blog-card">
-            <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
-            <div
-              class="absolute px-6 bottom-6 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
-            >
-              <div class="flex flex-row gap-1.5 justify-center items-center">
-                <div
-                  class="w-6 h-6 mb-1 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
-                >
-                  <img class="w-5 h-5 opacity-50" src="assets/vectors/male_user.svg" />
+      <app-loader-magazine class="scale-60"></app-loader-magazine>
+    </div>
+  }
+  @if (blogsStatus() === 'error') {
+    <div
+      class="rounded-[20px] bg-black/5 dark:bg-white/5 h-[450px] flex flex-col gap-3 justify-center items-center overflow-hidden relative"
+    >
+      <app-load-error></app-load-error>
+      <span class="text-[12px] font-thin text-gray-400 dark:text-gray-500">مشکل در بارگذاری</span>
+    </div>
+  }
+  @if (blogsStatus() === 'resolved') {
+    <div
+      class="rounded-[20px] overflow-hidden relative shadow-[0px_3px_10px_0px] shadow-black/25"
+      id="hero-section"
+    >
+      <swiper-container
+        slides-per-view="1"
+        loop="true"
+        pagination="true"
+        navigation="true"
+        autoplay-delay="5000"
+      >
+        @for (blog of blogPosts()?.slice(-3); track blog.id) {
+          <swiper-slide>
+            <div class="h-[450px] relative rounded-[20px] hero-blog-card">
+              <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
+              <div
+                class="absolute px-6 bottom-6 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
+              >
+                <div class="flex flex-row gap-1.5 justify-center items-center">
+                  <div
+                    class="w-6 h-6 mb-1 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
+                  >
+                    <img class="w-5 h-5 opacity-50" src="assets/vectors/male_user.svg" />
+                  </div>
+                  <p class="text-[11px] text-white/95 text-shadow-lg text-shadow-black/10">
+                    {{ blog.author }}
+                  </p>
                 </div>
-                <p class="text-[11px] text-white/95 text-shadow-lg text-shadow-black/10">
-                  {{ blog.author }}
-                </p>
-              </div>
-              <p class="font-bold text-[26px] mb-1">{{ blog.title }}</p>
-              <p class="font-thin text-white/80 text-[13px] mb-2">{{ blog.shortDescription }}</p>
-              <div class="w-full flex flex-row justify-between items-center">
-                <div class="flex flex-row items-center gap-1 text-[13px] text-white/80">
-                  @for (category of blog.categories; track category.id) {
-                    <span
-                      class="px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1 text-[10px] bg-blue-400/35 text-blue-300"
-                      >{{ category.name }}</span
-                    >
-                  }
+                <p class="font-bold text-[26px] mb-1">{{ blog.title }}</p>
+                <p class="font-thin text-white/80 text-[13px] mb-2">{{ blog.shortDescription }}</p>
+                <div class="w-full flex flex-row justify-between items-center">
+                  <div class="flex flex-row items-center gap-1 text-[13px] text-white/80">
+                    @for (category of blog.categories; track category.id) {
+                      <span
+                        class="px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1 text-[10px] bg-blue-400/35 text-blue-300"
+                        >{{ category.name }}</span
+                      >
+                    }
+                  </div>
+                  <span class="text-[13px] text-white/80 ml-0 mr-auto">{{
+                    blog.publishedDate | persianDate
+                  }}</span>
                 </div>
-                <span class="text-[13px] text-white/80 ml-0 mr-auto">{{
-                  blog.publishedDate | persianDate
-                }}</span>
               </div>
             </div>
-          </div>
-        </swiper-slide>
-      }
-    </swiper-container>
-  </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  }
 
   <!-- CATEGORIES -->
   <div id="categories-container" class="w-full overflow-visible gap-5 min-h-[100px] pb-3 pt-2">
@@ -122,8 +139,10 @@
     <div
       class="flex items-center justify-center gap-5 p-6 border-b xl:border-b-0 border-black/5 dark:border-white/10"
     >
-      <div class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950">
-        <img src="assets/vectors/renew.svg" class="w-full h-full object-contain" alt="">
+      <div
+        class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950"
+      >
+        <img src="assets/vectors/renew.svg" class="w-full h-full object-contain" alt="" />
       </div>
       <div class="flex flex-col gap-1">
         <h3 class="text-[15px] font-semibold dark:text-white/95">بروزرسانی روزانه</h3>
@@ -135,8 +154,10 @@
     <div
       class="flex items-center justify-center gap-5 p-6 border-b xl:border-b-0 border-black/5 dark:border-white/10"
     >
-      <div class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950">
-        <img src="assets/vectors/diversity3.svg" class="w-full h-full object-contain" alt="">
+      <div
+        class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950"
+      >
+        <img src="assets/vectors/diversity3.svg" class="w-full h-full object-contain" alt="" />
       </div>
       <div class="flex flex-col gap-1">
         <h3 class="text-[15px] font-semibold dark:text-white/95">دسته بندی متنوع</h3>
@@ -148,8 +169,10 @@
     <div
       class="flex items-center justify-center gap-5 p-6 border-b xl:border-b-0 border-black/5 dark:border-white/10"
     >
-      <div class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950">
-        <img src="assets/vectors/teacher.svg" class="w-full h-full object-contain" alt="">
+      <div
+        class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950"
+      >
+        <img src="assets/vectors/teacher.svg" class="w-full h-full object-contain" alt="" />
       </div>
       <div class="flex flex-col gap-1">
         <h3 class="text-[15px] font-semibold dark:text-white/95">نویسندگان برتر</h3>
@@ -161,8 +184,10 @@
 
     <!-- Item 4 -->
     <div class="flex items-center justify-center gap-5 p-6">
-      <div class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950">
-        <img src="assets/vectors/web.svg" class="w-full h-full object-contain" alt="">
+      <div
+        class="w-12 h-12 p-2 rounded-2xl bg-gradient-to-br from-violet-200 to-blue-400 dark:from-violet-600 dark:to-blue-950"
+      >
+        <img src="assets/vectors/web.svg" class="w-full h-full object-contain" alt="" />
       </div>
       <div class="flex flex-col gap-1">
         <h3 class="text-[15px] font-semibold dark:text-white/95">محتوای با کیفیت</h3>
@@ -187,7 +212,9 @@
     <div class="w-2/3">
       <div class="flex items-center gap-3 mb-3.5">
         <h1 class="text-[16px] font-bold dark:text-white/95">جدید ترین مقاله ها</h1>
-        <div class="flex-1 h-0.5 bg-gradient-to-l from-transparent to-blue-500/90 dark:to-blue-600/90 rounded"></div>
+        <div
+          class="flex-1 h-0.5 bg-gradient-to-l from-transparent to-blue-500/90 dark:to-blue-600/90 rounded"
+        ></div>
       </div>
 
       <!-- SEARCH -->
@@ -209,19 +236,31 @@
       </div>
 
       <!-- BLOGS LIST -->
-      <div class="flex flex-col gap-4">
-        @if (blogsLoading()) {
-          <app-loader></app-loader>
-        } @else {
+      <div class="flex flex-col gap-4 items-center">
+        @if (blogsStatus() === 'loading') {
+          <app-loader-magazine class="scale-50 mt-20"></app-loader-magazine>
+        } @else if (blogsStatus() === 'error') {
+          <div class="flex flex-col gap-1 items-center">
+            <app-load-error class="scale-80 mt-20"></app-load-error>
+            <span class="text-[12px] font-thin text-gray-400 dark:text-gray-500"
+              >مشکل در بارگذاری</span
+            >
+          </div>
+        } @else if (blogsStatus() === 'resolved') {
           @for (blog of blogPosts(); track blog.id) {
-            <div class="bg-white/5 rounded-2xl overflow-hidden flex cursor-pointer glass-card h-42">
+            <div
+              class="bg-white/5 rounded-2xl overflow-hidden flex cursor-pointer glass-card h-42 w-full"
+            >
               <div
                 class="w-1/4 shrink-0 flex items-center justify-center rounded-r-xl overflow-hidden"
               >
                 <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
               </div>
               <div class="w-3/4 p-4 flex flex-col justify-between flex-1 relative">
-                <i class="fa-regular fa-bookmark absolute left-4 top-6.5 fa-sm" style="color: rgb(175, 130, 130);"></i>
+                <i
+                  class="fa-regular fa-bookmark absolute left-4 top-6.5 fa-sm"
+                  style="color: rgb(175, 130, 130)"
+                ></i>
                 <div>
                   <p class="text-sm text-black/80 dark:text-white/95 font-bold mb-1 leading-6">
                     {{ blog.title }}
@@ -258,7 +297,7 @@
     </div>
     <!-- SIDEBAR -->
     <div class="w-1/3 flex flex-col gap-5">
-      <div class="glass-card bg-white/5 rounded-2xl p-6">
+      <div class="glass-card bg-white/5 rounded-2xl flex flex-col items-center p-6">
         <div class="w-full flex flex-row justify-start items-center mb-5 gap-1.5">
           <i class="fa-solid fa-bullhorn fa-sm" style="color: rgb(155, 155, 155)"></i>
           <h3 class="text-[15px] font-bold dark:text-white/95">جدید ترین اخبار</h3>
@@ -269,12 +308,19 @@
             <i class="fa-solid fa-arrow-left" style="color: rgb(65, 160, 233)"></i>
           </span>
         </div>
-        @if (categoriesLoading()) {
-          <app-loader></app-loader>
+        @if (blogsStatus() === 'loading') {
+          <app-loader-magazine class="scale-30"></app-loader-magazine>
+        } @else if (blogsStatus() === 'error') {
+          <div class="flex flex-col gap-1 items-center scale-70">
+            <app-load-error class="scale-80"></app-load-error>
+            <span class="text-[13px] font-thin text-gray-400 dark:text-gray-500"
+              >مشکل در بارگذاری</span
+            >
+          </div>
         } @else {
-          <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto">
+          <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto w-full">
             @for (blog of blogPosts(); track blog.id) {
-              <div class="overflow-hidden flex cursor-pointer h-16">
+              <div class="overflow-hidden flex cursor-pointer h-16 w-full">
                 <div
                   class="w-1/4 shrink-0 flex items-center justify-center rounded-xl overflow-hidden overflow-hidden"
                 >
@@ -312,16 +358,18 @@
       </div>
 
       <!-- ADS -->
-      <div
-        class="rounded-2xl p-5 relative h-50 text-center glass-card border-0! text-white"
-      >
+      <div class="rounded-2xl p-5 relative h-50 text-center glass-card border-0! text-white">
         <div class="absolute w-[150px] bottom-4 right-4">
           <h4 class="text-[16px] font-bold mb-1.5 text-right">تبلیغات</h4>
           <p class="text-[11px] text-right leading-6 opacity-100">
             جای تبلیغات شما اینجاست. برای ثبت آگهی با ما تماس بگیرید.
           </p>
         </div>
-        <img class="absolute -left-10 brightness-90 bottom-0 object-cover scale-120 -z-10" src="assets/vectors/vecteezy_unique-realistic-3d-megaphone-speaker-loudspeaker-bullhorn_8096000.jpg" alt="">
+        <img
+          class="absolute -left-10 brightness-90 bottom-0 object-cover scale-120 -z-10"
+          src="assets/vectors/vecteezy_unique-realistic-3d-megaphone-speaker-loudspeaker-bullhorn_8096000.jpg"
+          alt=""
+        />
       </div>
 
       <!-- LEADERBOARD -->
