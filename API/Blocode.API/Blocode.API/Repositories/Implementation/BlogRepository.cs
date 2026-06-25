@@ -58,5 +58,10 @@ namespace Blocode.API.Repositories.Implementation
                     .Where(b => b.Categories.Any(c => c.Name == categoryName))
                     .ToListAsync();
         }
+
+        public async Task<BlogPost?> GetBlogByUrlHandleAsync(string urlHandle)
+        {
+            return await _context.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.UrlHandle == urlHandle);
+        }
     }
 }

@@ -184,6 +184,39 @@ namespace Blocode.API.Controllers
             }
         }
 
+        [HttpGet("{urlHandle}")]
+        public async Task<ActionResult> GetBlogByUrlHandle([FromRoute] string urlHandle)
+        {
+            var result = await blogRepository.GetBlogByUrlHandleAsync(urlHandle);
+            if(result == null) { 
+                return NotFound(); 
+            }
+            var responseDTO = new BlogPostDTO()
+            {
+                Author = result.Author,
+                Id = result.Id,
+                Title = result.Title,
+                Content = result.Content,
+                FeaturedImageUrl = result.FeaturedImageUrl,
+                PublishedDate = result.PublishedDate,
+                UrlHandle = result.UrlHandle,
+                IsVisible = result.IsVisible,
+                ShortDescription = result.ShortDescription,
+                Categories = new List<CategoryDTO>()
+            };
+            foreach (var category in result.Categories)
+            {
+                var categoryDTO = new CategoryDTO()
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle,
+                };
+                responseDTO.Categories.Add(categoryDTO);
+            }
+            return Ok(responseDTO);
+        }
+
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateBlogAsync([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDTO request)
         {
