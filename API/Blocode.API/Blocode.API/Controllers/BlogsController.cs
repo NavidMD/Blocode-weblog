@@ -21,6 +21,7 @@ namespace Blocode.API.Controllers
             this.categoryRepository = categoryRepository;
         }
 
+        // GET : {apibaseurl}/api/blogs
         [HttpGet]
         public async Task<ActionResult> GetBlogs()
         {
@@ -52,6 +53,7 @@ namespace Blocode.API.Controllers
             return Ok(mappedResponse);
         }
 
+        // POST : {apibaseurl}/api/blogs
         [HttpPost]
         public async Task<ActionResult> CreateBlog([FromBody] CreateBlogRequestDTO newBlogRequest)
         {
@@ -110,6 +112,7 @@ namespace Blocode.API.Controllers
             }
         }
 
+        // GET : {apibaseurl}/api/blogs/byCategory/{categoryName}
         [HttpGet("byCategory/{categoryName}")]
         public async Task<ActionResult> GetBlogsByCategory([FromRoute] string categoryName)
         {
@@ -145,6 +148,7 @@ namespace Blocode.API.Controllers
             return Ok(mappedResponse);
         }
 
+        // GET : {apibaseurl}/api/blogs/{id}
         [HttpGet("{id:guid}")]
         public async Task<ActionResult> GetBlogById([FromRoute] Guid id)
         {
@@ -184,6 +188,7 @@ namespace Blocode.API.Controllers
             }
         }
 
+        // GET : {apibaseurl}/api/blogs/{urlHandle}
         [HttpGet("{urlHandle}")]
         public async Task<ActionResult> GetBlogByUrlHandle([FromRoute] string urlHandle)
         {
@@ -217,6 +222,7 @@ namespace Blocode.API.Controllers
             return Ok(responseDTO);
         }
 
+        // PUT : {apibaseurl}/api/blogs/{id}
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> UpdateBlogAsync([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDTO request)
         {
@@ -270,6 +276,7 @@ namespace Blocode.API.Controllers
             return Ok(responseDto);
         }
 
+        // DELETE : {apibaseurl}/api/blogs/{id}
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> DeleteBlogAsync([FromRoute] Guid id)
         {

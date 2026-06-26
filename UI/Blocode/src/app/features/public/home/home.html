@@ -212,7 +212,7 @@
         <div class="flex items-center gap-3 mb-3.5">
           <h1 class="text-[16px] font-bold dark:text-white/95">جدید ترین مقاله ها</h1>
           <div
-            class="flex-1 h-0.5 bg-gradient-to-l from-transparent to-blue-500/90 dark:to-blue-600/90 rounded"
+            class="flex-1 h-0.5 bg-gradient-to-l from-transparent to-blue-500/90 dark:to-blue-600/90 rounded-full"
           ></div>
         </div>
 
@@ -246,17 +246,17 @@
                 [routerLink]="['/blogs',`${blog.urlHandle}`]"
               >
                 <div
-                  class="w-1/4 shrink-0 flex items-center justify-center rounded-r-xl overflow-hidden"
+                  class="w-[35%] relative shrink-0 flex items-center justify-center rounded-r-xl overflow-hidden"
                 >
-                  <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
+                  <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover "  alt="" />
                 </div>
-                <div class="w-3/4 p-4 flex flex-col justify-between flex-1 relative">
+                <div class="w-[65%] p-4 flex flex-col justify-between flex-1 relative">
                   <i
                     class="fa-regular fa-bookmark absolute left-4 top-6.5 fa-sm"
                     style="color: rgb(175, 130, 130)"
                   ></i>
                   <div>
-                    <p class="text-sm text-black/80 dark:text-white/95 font-bold mb-1 leading-6">
+                    <p class="text-[15px] text-black/90 dark:text-white/95 font-bold mb-1 leading-6">
                       {{ blog.title }}
                     </p>
                     <p class="text-[12px] text-black/60 dark:text-white/60 leading-6 line-clamp-2">

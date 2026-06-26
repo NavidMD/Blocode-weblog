@@ -1,11 +1,41 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, Signal, WritableSignal } from '@angular/core';
+import { LoaderMagazine } from '../../../shared/components/loader-magazine/loader-magazine';
+import { BlogPostService } from '../../blogpost/services/blog-post-service';
+import { CategoryService } from '../../category/services/category-service';
+import { BlogPost } from '../../blogpost/models/blogpost.model';
+import { Category } from '../../category/models/category.model';
+import { RouterLink } from '@angular/router';
+import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
+import { LoadError } from "../../../shared/components/load-error/load-error";
 
 @Component({
   selector: 'app-blog-details',
-  imports: [],
+  imports: [LoaderMagazine, RouterLink, PersianDatePipe, LoadError],
   templateUrl: './blog-details.html',
   styleUrl: './blog-details.css',
 })
 export class BlogDetails {
   url = input<string | undefined>();
+
+  blogPostService = inject(BlogPostService);
+  categoryService = inject(CategoryService);
+
+  // Blog Detail
+  blogDetailRef = this.blogPostService.getBlogPostByUrlHandle(this.url);
+  blogDetailLoading: Signal<boolean> = this.blogDetailRef.isLoading;
+  blogDetailError: Signal<Error | undefined> = this.blogDetailRef.error;
+  blogDetail: WritableSignal<BlogPost | undefined> = this.blogDetailRef.value;
+  blogDetailStatus = this.blogDetailRef.status;
+
+  //Blogs
+  blogPostsRef = this.blogPostService.getAllBlogPosts();
+  blogsLoading: Signal<boolean> = this.blogPostsRef.isLoading;
+  blogsError: Signal<Error | undefined> = this.blogPostsRef.error;
+  blogPosts: WritableSignal<BlogPost[] | undefined> = this.blogPostsRef.value;
+  blogsStatus = this.blogPostsRef.status;
+
+  //Categories
+  categoriesRef = this.categoryService.getAllCategories();
+  categoriesLoading: Signal<boolean> = this.categoriesRef.isLoading;
+  categories: WritableSignal<Category[] | undefined> = this.categoriesRef.value;
 }
