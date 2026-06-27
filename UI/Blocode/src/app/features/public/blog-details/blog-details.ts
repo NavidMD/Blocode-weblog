@@ -40,16 +40,32 @@ export class BlogDetails {
   categories: WritableSignal<Category[] | undefined> = this.categoriesRef.value;
 
   relatedBlogs: WritableSignal<BlogPost[] | undefined> = signal(undefined);
+  relatedCategories: WritableSignal<Category[] | null | undefined> = signal(undefined);
 
   constructor() {
     effect(() => {
       if (this.url()) {
         const currentBlogCategories = this.blogDetail()?.categories.map((c) => c.name);
         if (currentBlogCategories?.length) {
-          const related = this.blogPosts()?.filter((b) =>
+          // یافتن مقاله های مرتبط
+          const relatedBlogs = this.blogPosts()?.filter((b) =>
             b.categories.some((c) => currentBlogCategories.includes(c.name)),
           );
-          this.relatedBlogs.set(related);
+          this.relatedBlogs.set(relatedBlogs);
+
+          // یافتن دسته بندی های مرتبط
+          const mainCategory = this.categories()?.find((c) =>
+            currentBlogCategories.includes(c.name),
+          );
+          const subCategory = mainCategory?.subCategories?.find((sc) =>
+            currentBlogCategories.includes(sc.name),
+          );
+
+          const relatedCategories = subCategory?.subCategories?.length
+            ? subCategory.subCategories // سطح آخر
+            : mainCategory?.subCategories; // سطح 2
+
+          this.relatedCategories.set(relatedCategories)
         }
       }
     });
@@ -62,7 +78,7 @@ export class BlogDetails {
       categories: related
         .map((b) => b.categories.map((c) => c.urlHandle))
         .flat()
-        .join(',')
+        .join(','),
     };
   }
 }

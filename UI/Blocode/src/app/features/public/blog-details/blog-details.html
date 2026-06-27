@@ -114,7 +114,7 @@
 
                     <div class="flex flex-col gap-1 flex-1">
                       <h3 class="text-[15px] font-extrabold text-black/80 dark:text-white/95">
-                        نوید معین درباری
+                        {{blogDetail()?.author}}
                       </h3>
                       <p class="leading-6 text-[13px] text-black/60 dark:text-white/60">
                         نویسنده و توسعه‌دهنده وب، علاقه‌مند به آموزش برنامه‌نویسی، معماری نرم‌افزار
@@ -130,6 +130,7 @@
                       <i class="fa-brands fa-telegram"></i>
                     </div>
                     <button
+                      [routerLink]="['/blogs',`${blogDetail()?.author}`]"
                       class="px-3 py-1 cursor-pointer w-fit rounded-full flex flex-row items-center gap-2 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
                     >
                       مشاهده همه مقالات
@@ -148,10 +149,11 @@
                   <i class="fa-brands fa-hubspot mb-1" style="color: rgb(175, 130, 130)"></i>
                   <h3 class="text-[15px] font-bold dark:text-white/95">مقالات مرتبط</h3>
                   <span
-                    [routerLink]="['/','admin','blogs']" [queryParams]="getQueryParams()"
-                    class="cursor-pointer  px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1.5 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
+                    [routerLink]="['/', 'admin', 'blogs']"
+                    [queryParams]="getQueryParams()"
+                    class="cursor-pointer px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1.5 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
                   >
-                    {{ relatedBlogs()?.length ? 'بیشتر' : 'همه مقالات'}}
+                    {{ relatedBlogs()?.length ? 'بیشتر' : 'همه مقالات' }}
                     <i class="fa-solid fa-arrow-left fa-sm" style="color: rgb(65, 160, 233)"></i>
                   </span>
                 </div>
@@ -160,7 +162,10 @@
                 } @else {
                   <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto w-full">
                     @if (!relatedBlogs()?.length) {
-                      <span class="w-full text-[12px] text-black/60 dark:text-white/60 text-center py-6">نتیجه ای یافت نشد!</span>
+                      <span
+                        class="w-full text-[12px] text-black/60 dark:text-white/60 text-center py-6"
+                        >نتیجه ای یافت نشد!</span
+                      >
                     }
                     @for (blog of relatedBlogs()?.slice(-3); track blog.id) {
                       <div
@@ -221,9 +226,15 @@
                 <div class="w-full flex justify-center items-center">
                   @if (categoriesLoading()) {
                     <app-loader-magazine class="scale-30 my-10"></app-loader-magazine>
+                  }
+                  @if (!relatedCategories()?.length) {
+                    <span
+                      class="w-full text-[12px] text-black/60 dark:text-white/60 text-center py-6"
+                      >نتیجه ای یافت نشد!</span
+                    >
                   } @else {
                     <ul class="flex flex-wrap list-unstyled gap-1.5 overflow-visible w-full">
-                      @for (cat of categories(); track cat.id) {
+                      @for (cat of relatedCategories(); track cat.id) {
                         <li
                           class="w-fit px-3 py-1 rounded-2xl text-[11px] bg-blue-50 dark:bg-blue-500/20 text-blue-600 dark:text-blue-500"
                         >
@@ -237,7 +248,7 @@
 
               <!-- Purple Card -->
               <div
-                class="overflow-hidden rounded-[20px] h-80 flex flex-col relative bg-transparent p-6 text-white"
+                class="overflow-hidden rounded-[20px] h-76 flex flex-col relative bg-transparent p-6 text-white"
               >
                 <img
                   class="absolute w-full top-0 -left-4 scale-110 object-cover -z-10"
@@ -247,18 +258,11 @@
                 <h3 class="text-[18px] font-bold mb-5 text-right text-white">
                   از جدیدترین مقالات باخبر شو!
                 </h3>
-                <p class="text-[13px] w-[50%] text-right leading-6 opacity-100">
+                <p class="text-sm w-[50%] text-right leading-6 opacity-100">
                   مقالات جدید، اخبار تکنولوژی و آموزش‌های کاربردی را مستقیم دریافت کن.
                 </p>
-
-                <input
-                  type="email"
-                  placeholder="ایمیل شما"
-                  class="mt-auto mb-0 w-full outline-0! rounded-2xl! border-0 bg-white/20 px-4 py-2.5 text-sm placeholder-white/70 backdrop-blur-[4px]! glass-card"
-                />
-
                 <button
-                  class="cursor-pointer w-full bg-white mt-3 rounded-2xl py-2.5 text-sm font-semibold text-blue-600 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                  class="cursor-pointer w-full bg-white mt-auto mb-0 rounded-2xl py-2.5 text-sm font-semibold text-blue-600 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
                 >
                   عضویت رایگان
                 </button>
