@@ -1,4 +1,4 @@
-import { Component, inject, input, Signal, WritableSignal } from '@angular/core';
+import { Component, effect, inject, input, signal, Signal, WritableSignal } from '@angular/core';
 import { LoaderMagazine } from '../../../shared/components/loader-magazine/loader-magazine';
 import { BlogPostService } from '../../blogpost/services/blog-post-service';
 import { CategoryService } from '../../category/services/category-service';
@@ -6,7 +6,7 @@ import { BlogPost } from '../../blogpost/models/blogpost.model';
 import { Category } from '../../category/models/category.model';
 import { RouterLink } from '@angular/router';
 import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
-import { LoadError } from "../../../shared/components/load-error/load-error";
+import { LoadError } from '../../../shared/components/load-error/load-error';
 
 @Component({
   selector: 'app-blog-details',
@@ -38,4 +38,31 @@ export class BlogDetails {
   categoriesRef = this.categoryService.getAllCategories();
   categoriesLoading: Signal<boolean> = this.categoriesRef.isLoading;
   categories: WritableSignal<Category[] | undefined> = this.categoriesRef.value;
+
+  relatedBlogs: WritableSignal<BlogPost[] | undefined> = signal(undefined);
+
+  constructor() {
+    effect(() => {
+      if (this.url()) {
+        const currentBlogCategories = this.blogDetail()?.categories.map((c) => c.name);
+        if (currentBlogCategories?.length) {
+          const related = this.blogPosts()?.filter((b) =>
+            b.categories.some((c) => currentBlogCategories.includes(c.name)),
+          );
+          this.relatedBlogs.set(related);
+        }
+      }
+    });
+  }
+
+  getQueryParams() {
+    const related = this.relatedBlogs();
+    if (!related?.length) return {};
+    return {
+      categories: related
+        .map((b) => b.categories.map((c) => c.urlHandle))
+        .flat()
+        .join(',')
+    };
+  }
 }

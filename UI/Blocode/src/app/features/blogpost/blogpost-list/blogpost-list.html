@@ -16,6 +16,15 @@
               >{{ byCatValue()?.length }} مقاله مرتبط</span
             >
           </p>
+        } @else if (queryParamCategoryUrlHandles()?.length) {
+          <p class="inline-block text-[16px] mr-2 text-blue-600 dark:text-blue-400 gap-1">
+            > &nbsp; {{ categoryNamesFromQueryParams().join(' , ') }}
+            <span
+              class="inline-block text-[10px] mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-3 text-blue-600 dark:text-blue-400"
+            >
+              {{ filteredPosts()?.length }} مقاله مرتبط
+            </span>
+          </p>
         }
         @if (addBlogActive) {
           <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95">
@@ -25,7 +34,7 @@
       </h1>
       <span class="text-[12px] text-black/55 dark:text-white/65 mt-1">
         مشاهده جدیدترین و مفید ترین مقالات در زمینه
-        {{ categoryName() ? categoryName() : 'آموزشی، علمی، خبری و ..' }}.
+        {{ categoryName() ? categoryName() : queryParamCategoryUrlHandles()?.length ? categoryNamesFromQueryParams().join(' , ') : 'آموزشی، علمی، خبری و ..' }}
       </span>
     </div>
     @if (!addBlogActive) {
@@ -36,7 +45,11 @@
         (click)="addBlogActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
-        <img src="assets/vectors/arrow (1).png" class="absolute left-full w-9 ml-2.5 bottom-2 opacity-90 animate-pulse rotate-110 -scale-y-100" alt="">
+        <img
+          src="assets/vectors/arrow (1).png"
+          class="absolute left-full w-9 ml-2.5 bottom-2 opacity-90 animate-pulse rotate-110 -scale-y-100"
+          alt=""
+        />
         مقاله جدید
       </a>
     }
@@ -49,7 +62,7 @@
       <p>مشکل در بارگذاری...</p>
     }
     @if (value()) {
-      @for (blog of categoryName() ? byCatValue() : value(); track blog.id) {
+      @for (blog of filteredPosts(); track blog.id) {
         <div
           id="blog-card"
           class="w-full glass-card h-[320px] hover:-translate-y-1.5 hover:shadow-lg transition cursor-pointer overflow-hidden relative"

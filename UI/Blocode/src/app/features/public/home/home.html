@@ -307,7 +307,7 @@
           }
           @else {
             <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto w-full">
-              @for (blog of blogPosts(); track blog.id) {
+              @for (blog of blogPosts()?.slice(-3); track blog.id) {
                 <div class="overflow-hidden flex cursor-pointer h-16 w-full" [routerLink]="['/blogs',`${blog.urlHandle}`]">
                   <div
                     class="w-1/4 shrink-0 flex items-center justify-center rounded-xl overflow-hidden"

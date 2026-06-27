@@ -148,17 +148,21 @@
                   <i class="fa-brands fa-hubspot mb-1" style="color: rgb(175, 130, 130)"></i>
                   <h3 class="text-[15px] font-bold dark:text-white/95">مقالات مرتبط</h3>
                   <span
-                    class="px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
+                    [routerLink]="['/','admin','blogs']" [queryParams]="getQueryParams()"
+                    class="cursor-pointer  px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1.5 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
                   >
-                    بیشتر
-                    <i class="fa-solid fa-arrow-left" style="color: rgb(65, 160, 233)"></i>
+                    {{ relatedBlogs()?.length ? 'بیشتر' : 'همه مقالات'}}
+                    <i class="fa-solid fa-arrow-left fa-sm" style="color: rgb(65, 160, 233)"></i>
                   </span>
                 </div>
                 @if (blogsStatus() === 'loading') {
                   <app-loader-magazine class="scale-30 my-10"></app-loader-magazine>
                 } @else {
                   <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto w-full">
-                    @for (blog of blogPosts(); track blog.id) {
+                    @if (!relatedBlogs()?.length) {
+                      <span class="w-full text-[12px] text-black/60 dark:text-white/60 text-center py-6">نتیجه ای یافت نشد!</span>
+                    }
+                    @for (blog of relatedBlogs()?.slice(-3); track blog.id) {
                       <div
                         class="overflow-hidden flex cursor-pointer h-16 w-full"
                         [routerLink]="['/blogs', `${blog.urlHandle}`]"

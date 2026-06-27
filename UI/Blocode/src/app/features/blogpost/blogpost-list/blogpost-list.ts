@@ -1,9 +1,20 @@
-import { Component, inject, input, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../category/services/category-service';
 import { BlogPostService } from '../services/blog-post-service';
 import { BlogPost } from '../models/blogpost.model';
 import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
+import { map } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-blogpost-list',
@@ -16,9 +27,33 @@ export class BlogpostList {
   blogpostService = inject(BlogPostService);
   addBlogActive: boolean = false;
   router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
 
   private getAllBlogPostsRef = this.blogpostService.getAllBlogPosts();
-  private getAllBlogPostsByCategoryNameRef = this.blogpostService.getBlogPostsByCategoryName(this.categoryName)
+  private getAllBlogPostsByCategoryNameRef = this.blogpostService.getBlogPostsByCategoryName(
+    this.categoryName,
+  );
+
+  queryParamCategoryUrlHandles = toSignal(
+    this.activatedRoute.queryParamMap.pipe(
+      map((params) => params.get('categories')?.split(',') ?? []),
+    ),
+  );
+
+  categoryNamesFromQueryParams = computed(() => {
+    const urlHandles = this.queryParamCategoryUrlHandles();
+    const posts = this.value();
+    if (!urlHandles?.length) return [];
+
+    return [
+      ...new Set(
+        posts
+          ?.flatMap((b) => b.categories)
+          .filter((c) => urlHandles.includes(c.urlHandle))
+          .map((c) => c.name),
+      ),
+    ];
+  });
 
   loading: Signal<boolean> = this.getAllBlogPostsRef.isLoading;
   error: Signal<Error | undefined> = this.getAllBlogPostsRef.error;
@@ -27,6 +62,19 @@ export class BlogpostList {
   byCatLoading: Signal<boolean> = this.getAllBlogPostsByCategoryNameRef.isLoading;
   byCatError: Signal<Error | undefined> = this.getAllBlogPostsByCategoryNameRef.error;
   byCatValue: WritableSignal<BlogPost[] | undefined> = this.getAllBlogPostsByCategoryNameRef.value;
+
+  filteredPosts = computed(() => {
+    const posts = this.value();
+    if (this.categoryName()) {
+      return this.byCatValue();
+    }
+    const handles = this.queryParamCategoryUrlHandles();
+    if (handles?.length) {
+      return posts?.filter((b) => b.categories.some((c) => handles.includes(c.urlHandle)));
+    }
+
+    return posts;
+  });
 
   toPersianFormatDate(date: string) {
     const convertingDate = new Date(date);
@@ -37,7 +85,6 @@ export class BlogpostList {
     }).format(convertingDate);
     return result;
   }
-
 
   deleteBlog(id: string) {
     if (id) {
