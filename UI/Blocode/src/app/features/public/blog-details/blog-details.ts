@@ -7,10 +7,11 @@ import { Category } from '../../category/models/category.model';
 import { RouterLink } from '@angular/router';
 import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
 import { LoadError } from '../../../shared/components/load-error/load-error';
+import { MarkdownComponent } from "ngx-markdown";
 
 @Component({
   selector: 'app-blog-details',
-  imports: [LoaderMagazine, RouterLink, PersianDatePipe, LoadError],
+  imports: [LoaderMagazine, RouterLink, PersianDatePipe, LoadError, MarkdownComponent],
   templateUrl: './blog-details.html',
   styleUrl: './blog-details.css',
 })

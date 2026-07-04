@@ -2,6 +2,7 @@
 using Blocode.API.Models.Domain;
 using Blocode.API.Models.DTO;
 using Blocode.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
         {
             var newCategory = new Category()    
@@ -81,6 +83,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<ActionResult<Category>> UpdateCategory([FromRoute] Guid id,[FromBody] UpdateCategoryRequestDTO updatedCategory)
         {
             var updatingCategory = new Category()
@@ -107,6 +110,7 @@ namespace Blocode.API.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteCategoryById([FromRoute] Guid id)
         {
             var result = await categoryRepository.DeleteCategoryByIdAsync(id);

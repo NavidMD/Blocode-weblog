@@ -3,9 +3,8 @@
     <app-load-error></app-load-error>
     <span class="text-black/60 dark:text-white/60 mt-3 text-sm">خطا در اتصال به سرور!</span>
   </div>
-}
-@else {
-  <div class="w-full flex flex-col gap-7">
+} @else {
+  <div class="w-full flex flex-col gap-6">
     <!-- HERO -->
     @if (blogsStatus() === 'loading') {
       <div
@@ -28,10 +27,20 @@
         >
           @for (blog of blogPosts()?.slice(-3); track blog.id) {
             <swiper-slide>
-              <div class="h-[450px] relative rounded-[20px] cursor-pointer hero-blog-card" [routerLink]="['/blogs',`${blog.urlHandle}`]">
-                <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover hover:scale-105 transition duration-800" alt="" />
+              <div
+                class="h-[420px] relative rounded-[20px] cursor-pointer hero-blog-card"
+                [routerLink]="['/blogs', `${blog.urlHandle}`]"
+              >
                 <div
-                  class="absolute px-6 bottom-6 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
+                  class="w-full absolute top-0 left-0 z-3 px-2 h-[1px] bg-gradient-to-r from-transparent via-blue-500 dark:via-blue-600 to-transparent rounded-full"
+                ></div>
+                <img
+                  [src]="blog.featuredImageUrl"
+                  class="w-full h-full object-cover"
+                  alt=""
+                />
+                <div
+                  class="absolute px-6 bottom-5 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
                 >
                   <div class="flex flex-row gap-1.5 justify-center items-center">
                     <div
@@ -39,12 +48,14 @@
                     >
                       <img class="w-5 h-5 opacity-50" src="assets/vectors/male_user.svg" />
                     </div>
-                    <p class="text-[11px] text-white/95 text-shadow-lg text-shadow-black/10">
+                    <p class="text-[14px] text-white/95 text-shadow-lg text-shadow-black/10">
                       {{ blog.author }}
                     </p>
                   </div>
-                  <p class="font-bold text-[26px] mb-1">{{ blog.title }}</p>
-                  <p class="font-thin text-white/80 text-[13px] mb-2">{{ blog.shortDescription }}</p>
+                  <p class="font-bold text-[27px] mb-1 w-1/2">{{ blog.title }}</p>
+                  <p class="font-thin leading-6 text-white/80 text-sm mb-2 w-1/2">
+                    {{ blog.shortDescription }}
+                  </p>
                   <div class="w-full flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center gap-1 text-[13px] text-white/80">
                       @for (category of blog.categories; track category.id) {
@@ -145,7 +156,9 @@
         </div>
         <div class="flex flex-col gap-1">
           <h3 class="text-[15px] font-semibold dark:text-white/95">بروزرسانی روزانه</h3>
-          <span class="text-[12px] text-black/55 dark:text-white/65"> جدیدترین مقالات و اخبار </span>
+          <span class="text-[12px] text-black/55 dark:text-white/65">
+            جدیدترین مقالات و اخبار
+          </span>
         </div>
       </div>
 
@@ -238,17 +251,16 @@
         <div class="flex flex-col gap-4 items-center">
           @if (blogsStatus() === 'loading') {
             <app-loader-magazine class="scale-50 mt-20"></app-loader-magazine>
-          }
-          @else {
+          } @else {
             @for (blog of blogPosts(); track blog.id) {
               <div
                 class="bg-white/5 rounded-2xl overflow-hidden flex cursor-pointer glass-card h-42 w-full"
-                [routerLink]="['/blogs',`${blog.urlHandle}`]"
+                [routerLink]="['/blogs', `${blog.urlHandle}`]"
               >
                 <div
                   class="w-[35%] relative shrink-0 flex items-center justify-center rounded-r-xl overflow-hidden"
                 >
-                  <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover "  alt="" />
+                  <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
                 </div>
                 <div class="w-[65%] p-4 flex flex-col justify-between flex-1 relative">
                   <i
@@ -256,10 +268,12 @@
                     style="color: rgb(175, 130, 130)"
                   ></i>
                   <div>
-                    <p class="text-[15px] text-black/90 dark:text-white/95 font-bold mb-1 leading-6">
+                    <p
+                      class="text-[15px] text-black/90 dark:text-white/95 font-bold mb-1 leading-6"
+                    >
                       {{ blog.title }}
                     </p>
-                    <p class="text-[12px] text-black/60 dark:text-white/60 leading-6 line-clamp-2">
+                    <p class="text-[13px] text-black/60 dark:text-white/60 leading-6 line-clamp-2">
                       {{ blog.shortDescription }}
                     </p>
                   </div>
@@ -274,7 +288,9 @@
                       <i class="fa-regular fa-user fa-sm" style="color: rgb(175, 130, 130)"></i>
                       {{ blog.author }}
                     </span>
-                    <div class="flex flex-row justify-center items-center mb-0.5 mr-auto ml-0 gap-1">
+                    <div
+                      class="flex flex-row justify-center items-center mb-0.5 mr-auto ml-0 gap-1"
+                    >
                       @for (category of blog.categories; track category.id) {
                         <span
                           class="text-blue-600 dark:text-blue-400 text-[9px] pb-0.5 px-2 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
@@ -304,11 +320,13 @@
           </div>
           @if (blogsStatus() === 'loading') {
             <app-loader-magazine class="scale-30 my-10"></app-loader-magazine>
-          }
-          @else {
+          } @else {
             <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto w-full">
               @for (blog of blogPosts()?.slice(-3); track blog.id) {
-                <div class="overflow-hidden flex cursor-pointer h-16 w-full" [routerLink]="['/blogs',`${blog.urlHandle}`]">
+                <div
+                  class="overflow-hidden flex cursor-pointer h-16 w-full"
+                  [routerLink]="['/blogs', `${blog.urlHandle}`]"
+                >
                   <div
                     class="w-1/4 shrink-0 flex items-center justify-center rounded-xl overflow-hidden"
                   >
@@ -323,7 +341,10 @@
                         class="flex flex-row items-center gap-4 text-[10px] text-black/50 dark:text-white/50"
                       >
                         <span class="flex flex-row items-center gap-1.5">
-                          <i class="fa-regular fa-clock fa-sm" style="color: rgb(175, 130, 130)"></i>
+                          <i
+                            class="fa-regular fa-clock fa-sm"
+                            style="color: rgb(175, 130, 130)"
+                          ></i>
                           {{ blog.publishedDate | persianDate }}
                         </span>
                         <div
@@ -347,9 +368,9 @@
 
         <!-- ADS -->
         <div class="rounded-2xl p-5 relative h-50 text-center glass-card border-0! text-white">
-          <div class="absolute w-[150px] bottom-4 right-4">
-            <h4 class="text-[17px] font-bold mb-1.5 text-right">تبلیغات</h4>
-            <p class="text-[11px] text-right leading-5 opacity-100">
+          <div class="absolute w-[200px] bottom-4 right-4">
+            <h4 class="text-[18px] font-bold mb-1.5 text-right">تبلیغات</h4>
+            <p class="text-sm text-right leading-6 opacity-100">
               جای تبلیغات شما اینجاست. برای ثبت آگهی با ما تماس بگیرید.
             </p>
           </div>

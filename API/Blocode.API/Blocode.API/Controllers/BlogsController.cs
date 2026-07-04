@@ -2,6 +2,7 @@
 using Blocode.API.Models.Domain;
 using Blocode.API.Models.DTO;
 using Blocode.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,7 @@ namespace Blocode.API.Controllers
 
         // POST : {apibaseurl}/api/blogs
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<ActionResult> CreateBlog([FromBody] CreateBlogRequestDTO newBlogRequest)
         {
             var newBlog = new BlogPost()
@@ -224,6 +226,7 @@ namespace Blocode.API.Controllers
 
         // PUT : {apibaseurl}/api/blogs/{id}
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<ActionResult> UpdateBlogAsync([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDTO request)
         {
             var updatedBlog = new BlogPost()
@@ -278,6 +281,7 @@ namespace Blocode.API.Controllers
 
         // DELETE : {apibaseurl}/api/blogs/{id}
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<ActionResult> DeleteBlogAsync([FromRoute] Guid id)
         {
             var deletedBlog = await blogRepository.DeleteBlogAsync(id);

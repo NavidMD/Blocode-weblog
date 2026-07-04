@@ -1,10 +1,10 @@
-<nav class="w-full flex flex-row justify-between items-center py-5 pb-4 px-6 bg-transparent mb-2">
+<nav class="w-full flex flex-row justify-between items-center py-5 pb-3 px-6 bg-transparent mb-2">
   <div class="w-auto flex flex-row gap-8 items-center">
     <h1 [routerLink]="['/']" class="font-extrabold text-[23px] text-blue-600 cursor-pointer">
       بلاکُد
     </h1>
     <div>
-      <ul class="flex flex-row gap-6 text-sm font-semibold">
+      <ul class="flex flex-row gap-7 text-sm font-semibold">
         <li
           class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
@@ -130,7 +130,7 @@
       </ul>
     </div>
   </div>
-  <div class="w-auto flex flex-row gap-5 justify-end items-center">
+  <div class="w-auto flex flex-row gap-3 justify-end items-center">
     <label class="ui-switch">
       <input type="checkbox" [checked]="isDarkMode" (change)="toggleTheme()" />
       <div class="slider bg-black/10 dark:bg-white/15">
@@ -138,7 +138,8 @@
       </div>
     </label>
     <button
-      class="cursor-pointer rounded-2xl shadow-lg shadow-black/20 bg-blue-600 dark:bg-blue-600/90 text-white text-sm flex flex-row items-center gap-2 font-semibold px-4 py-2"
+      [routerLink]="['/admin','login']"
+      class="cursor-pointer rounded-2xl bg-transparent text-blue-600 dark:text-blue-500 text-sm flex flex-row items-center gap-2 font-semibold px-4 py-2"
     >
       <i class="fa-solid fa-user"></i>
       ورود / ثبت نام
