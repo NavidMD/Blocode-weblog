@@ -30,7 +30,7 @@ export class Login {
   }
 
   onSubmit() {
-    if(this.loginFormGroup.valid) {
+    if (this.loginFormGroup.valid) {
       const rawValues = this.loginFormGroup.getRawValue();
       this.authService.login(rawValues.email, rawValues.password).subscribe({
         next: (response) => {
@@ -38,9 +38,8 @@ export class Login {
         },
         error: () => {
           console.log('error');
-
-        }
-      })
+        },
+      });
     }
   }
 }

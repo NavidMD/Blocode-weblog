@@ -37,8 +37,16 @@ namespace Blocode.API.Controllers
                     {
                         Email = request.Email,
                         Roles = userRoles.ToList(),
-                        Token = jwtToken
                     };
+
+                    // appending jwt to cookie and sending cookie instead of jwt
+                    Response.Cookies.Append("access_token", jwtToken, new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Secure = true,
+                        SameSite = SameSiteMode.Lax,
+                        Expires = DateTime.UtcNow.AddMinutes(20)
+                    });
                     return Ok(response);
                 }
             }

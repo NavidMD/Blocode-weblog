@@ -32,7 +32,8 @@
 
 /* Layer 1: Small fast twinkling stars - High density */
 .uiverse-midnight-sky .stars-1 {
-  background-image: radial-gradient(1px 1px at 10% 10%, #fff, transparent),
+  background-image:
+    radial-gradient(1px 1px at 10% 10%, #fff, transparent),
     radial-gradient(1px 1px at 30% 20%, #fff, transparent),
     radial-gradient(1px 1px at 50% 50%, #fff, transparent),
     radial-gradient(1px 1px at 70% 30%, #fff, transparent),
@@ -43,7 +44,8 @@
 
 /* Layer 2: Medium slower twinkling stars */
 .uiverse-midnight-sky .stars-2 {
-  background-image: radial-gradient(1.5px 1.5px at 20% 40%, #fff, transparent),
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 40%, #fff, transparent),
     radial-gradient(1.5px 1.5px at 60% 85%, #fff, transparent),
     radial-gradient(1.5px 1.5px at 85% 65%, #fff, transparent);
   background-size: 300px 300px;
@@ -52,7 +54,8 @@
 
 /* Layer 3: Larger, very slow twinkling stars */
 .uiverse-midnight-sky .stars-3 {
-  background-image: radial-gradient(2px 2px at 40% 70%, #fff, transparent),
+  background-image:
+    radial-gradient(2px 2px at 40% 70%, #fff, transparent),
     radial-gradient(2px 2px at 10% 80%, #fff, transparent),
     radial-gradient(2px 2px at 80% 40%, #fff, transparent);
   background-size: 400px 400px;
@@ -73,7 +76,7 @@
 
 /* Meteor Tail */
 .uiverse-midnight-sky .meteor::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -104,8 +107,8 @@
   position: absolute;
   top: 2%;
   right: 12%;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: transparent;
   box-shadow: 10px 10px 0 0 #e3daff;
@@ -140,5 +143,214 @@
   100% {
     transform: translateX(-1500px) translateY(1000px) rotate(-35deg);
     opacity: 0;
+  }
+}
+
+/* CLOUDS */
+.sky {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  border-radius: 20px;
+  background: transparent;
+}
+
+/* ===== Cloud ===== */
+
+.cloud {
+  position: absolute;
+  width: 64px;
+  height: 18px;
+  background: #f0eaff;
+  border-radius: 20px;
+  opacity: 0.95;
+  animation: float 1s ease-in-out infinite alternate;
+}
+
+.cloud::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #f0eaff;
+  border-radius: 50%;
+  left: 8px;
+  top: -10px;
+}
+
+.cloud::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #f0eaff;
+  border-radius: 50%;
+  right: 8px;
+  top: -15px;
+}
+
+/* حرکت آرام */
+
+@keyframes float {
+  from {
+    transform: translateX(-25px);
+  }
+  to {
+    transform: translateX(25px);
+  }
+}
+
+/* ===== Position ===== */
+
+.c1 {
+  top: 40px;
+  left: 35px;
+  animation-duration: 9s;
+  transform: scale(0.8);
+}
+
+.c2 {
+  top: 70px;
+  left: 250px;
+  animation-duration: 12s;
+  transform: scale(0.6);
+}
+
+.c3 {
+  top: 140px;
+  left: 120px;
+  animation-duration: 10s;
+  transform: scale(1);
+}
+
+.c4 {
+  top: 160px;
+  left: 300px;
+  animation-duration: 13s;
+  transform: scale(0.7);
+}
+
+.c5 {
+  top: 220px;
+  left: 45px;
+  animation-duration: 11s;
+  transform: scale(0.4);
+}
+
+.c6 {
+  top: 285px;
+  left: 210px;
+  animation-duration: 9s;
+  transform: scale(0.8);
+}
+
+.c7 {
+  top: 340px;
+  left: 150px;
+  animation-duration: 14s;
+  transform: scale(0.65);
+}
+
+.c8 {
+  top: 390px;
+  left: 290px;
+  animation-duration: 8s;
+  transform: scale(0.9);
+}
+
+.c9 {
+  top: 430px;
+  left: 70px;
+  animation-duration: 10s;
+  transform: scale(0.55);
+}
+
+.c10 {
+  top: 455px;
+  left: 230px;
+  animation-duration: 13s;
+  transform: scale(0.45);
+}
+
+/* SUN */
+
+.sun {
+  top: -10px;
+  right: 0;
+  width: 110px;
+  height: 110px;
+  z-index: -10;
+  position: absolute;
+  background:
+    radial-gradient(transparent 50%, white), radial-gradient(rgb(255, 255, 0), transparent 70%);
+  -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+  mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+  border-radius: 50%;
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    border-radius: 50%;
+    -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+    mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+    opacity: 40%;
+  }
+
+  &::before {
+    background: repeating-conic-gradient(
+      from 0deg,
+      yellow 0deg 20deg,
+      transparent 20deg 40deg
+    );
+    animation:
+      rotate 1s linear,
+      scale 3s linear infinite;
+  }
+
+  &::after {
+    background:
+      radial-gradient(
+        rgb(255, 255, 0),
+        rgba(255, 188, 63, 0.604) 27%,
+        transparent calc(27% + 3px) 100%
+      ),
+      radial-gradient(rgb(255, 225, 53), transparent 70%),
+      repeating-conic-gradient(from 0deg, rgb(255, 225, 53) 0deg 5deg, transparent 5deg 10deg);
+    transform: rotate(15deg);
+    animation: rotate 80s linear;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }

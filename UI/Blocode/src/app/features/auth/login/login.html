@@ -1,7 +1,15 @@
 <div
   class="bg-transparent w-full min-h-[calc(100vh-68px)] flex flex-col justify-center items-center overflow-hidden pb-5"
 >
-  <div class="relative w-full max-w-[400px]">
+  <div class="relative w-full max-w-[390px]">
+    <div class="sky dark:opacity-10">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3 dark:hidden"></div>
+      <div class="cloud c4 dark:top-[100px]!"></div>
+      <div class="cloud c5 dark:hidden"></div>
+    </div>
+    <div class="sun dark:hidden"></div>
     <div class="uiverse-midnight-sky dark:flex hidden">
       <div class="sky-canvas">
         <div class="stars stars-1"></div>
@@ -45,7 +53,7 @@
         <input
           type="email"
           email
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-11 border dark:bg-white/5 border-black/15 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-4 outline-0"
+          class="focus:border-black/30 bg-white/60 dark:focus:border-white/30 w-full input-text-normal h-11 border dark:bg-white/5 border-black/15 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-4 outline-0"
           placeholder="example@gmail.com"
           id="login-email"
           formControlName="email"
@@ -85,10 +93,17 @@
         }
         <input
           type="password"
-          class="focus:border-black/30 dark:focus:border-white/30 w-full input-text-normal h-11 border dark:bg-white/5 border-black/15 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-4 outline-0"
+          class="focus:border-black/30 bg-white/60 dark:focus:border-white/30 w-full input-text-normal h-11 border dark:bg-white/5 border-black/15 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-4 outline-0"
           placeholder="********"
           formControlName="password"
+          #passwordInput
         />
+        @if (passwordInput.type === 'text') {
+          <i (click)="passwordInput.type = 'password'" class="fa-regular fa-eye-slash absolute right-13 top-2.5 fa-sm cursor-pointer" style="color: rgba(175, 130, 130, 0.75);"></i>
+        }
+        @if (passwordInput.type === 'password') {
+          <i (click)="passwordInput.type = 'text'" class="fa-regular fa-eye absolute right-13 top-2.5 fa-sm cursor-pointer" style="color: rgba(175, 130, 130, 0.75);"></i>
+        }
         @if (
           loginFormGroup.controls.password.touched &&
           loginFormGroup.controls.password.hasError('required')

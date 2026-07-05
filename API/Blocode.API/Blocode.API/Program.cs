@@ -80,8 +80,12 @@ app.UseHttpsRedirection();
 app.UseCors(options =>
 {
     options.AllowAnyHeader();
-    options.AllowAnyMethod();
-    options.AllowAnyOrigin();
+    // ینی فقط درخواستهایی که از این آدرس میان مجاز هستند
+    options.WithOrigins("http://localhost:4200");
+    // اگر کوکی نداشتی
+    //options.AllowAnyMethod();
+    options.AllowCredentials();
+    // وقتی اینو میزاری باید از ادرس های خاص درخواست بفرستی
 });
 
 app.UseAuthentication();
