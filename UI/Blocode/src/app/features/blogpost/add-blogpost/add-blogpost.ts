@@ -36,7 +36,7 @@ export class AddBlogpost {
         })
       }
       if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
-        this.toastService.success('خطا در ارتباط با سرور','',{
+        this.toastService.error('خطا در ارتباط با سرور','',{
           progressBar: true,
           timeOut: 3000,
         })

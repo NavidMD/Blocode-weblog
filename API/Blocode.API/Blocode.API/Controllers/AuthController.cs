@@ -49,10 +49,14 @@ namespace Blocode.API.Controllers
                     });
                     return Ok(response);
                 }
+                else
+                {
+                    ModelState.AddModelError("message", "کلمه عبور اشتباه است!");
+                }
             }
             else
             {
-                ModelState.AddModelError("", "کاربری با این ایمیل یافت نشد!");
+                ModelState.AddModelError("message", "کاربری با این ایمیل یافت نشد!");
             }
             return ValidationProblem(ModelState);
         }

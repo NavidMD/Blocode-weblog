@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth-service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,7 @@ import { AuthService } from '../services/auth-service';
 })
 export class Login {
   authService = inject(AuthService);
+  toastService = inject(ToastrService);
 
   loginFormGroup = new FormGroup({
     email: new FormControl<string>('', {
@@ -34,10 +37,17 @@ export class Login {
       const rawValues = this.loginFormGroup.getRawValue();
       this.authService.login(rawValues.email, rawValues.password).subscribe({
         next: (response) => {
-          console.log(response);
+          this.toastService.success(`خوش اومدی ، ${response.email}`, '', {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
-        error: () => {
-          console.log('error');
+        error: (err: HttpErrorResponse) => {
+          const errorMessage = err.error.errors.message[0];
+          this.toastService.error(`خطا : ${errorMessage}`, '', {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
       });
     }
