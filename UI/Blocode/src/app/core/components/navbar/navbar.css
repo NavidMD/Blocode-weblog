@@ -113,12 +113,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 }
 
 /* .glass-card::after {
@@ -135,3 +130,75 @@
     rgba(255, 255, 255, 0.2)
   );
 } */
+
+.role-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #6db7ff;
+  background: rgba(30, 144, 255, 0.12);
+  font-weight: 600;
+  overflow: hidden;
+  cursor: default;
+
+  box-shadow:
+    0 0 10px rgba(0, 140, 255, 0.45),
+    inset 0 0 10px rgba(0, 140, 255, 0.15);
+
+  transition: 0.3s;
+}
+/* افکت نور رد شونده */
+.role-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 70%
+  );
+  transform: translateX(-150%);
+  animation: shine 3s linear infinite;
+}
+
+
+.role-badge:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 18px rgba(0, 140, 255, 0.65),
+    inset 0 0 15px rgba(0, 140, 255, 0.2);
+}
+
+@keyframes shine {
+  100% {
+    transform: translateX(150%);
+  }
+}
+
+@keyframes star1 {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 1;
+  }
+}
+
+@keyframes star2 {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.4);
+    opacity: 1;
+  }
+}

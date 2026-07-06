@@ -4,11 +4,11 @@
     <span class="text-black/60 dark:text-white/60 mt-3 text-sm">خطا در اتصال به سرور!</span>
   </div>
 } @else {
-  <div class="w-full flex flex-col gap-6">
+  <div class="w-full flex flex-col gap-7">
     <!-- HERO -->
     @if (blogsStatus() === 'loading') {
       <div
-        class="rounded-[20px] bg-black/5 dark:bg-white/5 h-[450px] flex justify-center items-center overflow-hidden relative"
+        class="rounded-[20px] bg-black/5 dark:bg-white/5 h-[420px] flex justify-center items-center overflow-hidden relative"
       >
         <app-loader-magazine class="scale-60"></app-loader-magazine>
       </div>
@@ -31,14 +31,7 @@
                 class="h-[420px] relative rounded-[20px] cursor-pointer hero-blog-card"
                 [routerLink]="['/blogs', `${blog.urlHandle}`]"
               >
-                <div
-                  class="w-full absolute top-0 left-0 z-3 px-2 h-[1px] bg-gradient-to-r from-transparent via-blue-500 dark:via-blue-600 to-transparent rounded-full"
-                ></div>
-                <img
-                  [src]="blog.featuredImageUrl"
-                  class="w-full h-full object-cover"
-                  alt=""
-                />
+                <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
                 <div
                   class="absolute px-6 bottom-5 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
                 >

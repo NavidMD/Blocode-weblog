@@ -20,6 +20,7 @@ import { Category } from '../../../features/category/models/category.model';
 import { Loader } from '../../../shared/components/loader/loader';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from '../../../features/auth/services/auth-service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,13 +30,12 @@ import { filter } from 'rxjs';
 })
 export class Navbar implements OnInit {
   isDarkMode: boolean = false;
+  authService = inject(AuthService);
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
-  ) {
-
-  }
+  ) {}
 
   blogPostService = inject(BlogPostService);
   categoryService = inject(CategoryService);

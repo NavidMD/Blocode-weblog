@@ -1,6 +1,9 @@
-<nav class="w-full flex flex-row justify-between items-center py-5 pb-3 px-6 bg-transparent mb-2">
-  <div class="w-auto flex flex-row gap-8 items-center">
-    <h1 [routerLink]="['/']" class="font-extrabold text-[23px] text-blue-600 cursor-pointer">
+<nav class="w-full flex flex-row justify-between items-center py-5 pb-3 px-6 bg-transparent mb-3">
+  <div class="w-auto flex flex-row gap-7 items-center">
+    <h1
+      [routerLink]="['/']"
+      class="font-extrabold text-[24px] flex flex-row items-center text-blue-600 cursor-pointer"
+    >
       بلاکُد
     </h1>
     <div>
@@ -137,12 +140,35 @@
         <div class="circle"></div>
       </div>
     </label>
-    <button
-      [routerLink]="['/admin','login']"
-      class="cursor-pointer rounded-2xl bg-transparent text-blue-600 dark:text-blue-500 text-sm flex flex-row items-center gap-2 font-semibold px-4 py-2"
-    >
-      <i class="fa-solid fa-user"></i>
-      ورود / ثبت نام
-    </button>
+    <!-- <span class="role-badge rounded-xl px-2 py-1 text-[10px] border border-blue-500/35">
+      <i class="fa-solid fa-feather-pointed"></i>
+      نویسنده
+    </span> -->
+    @if (!authService.loggedUser()) {
+      <div
+        class="cursor-pointer flex flex-row gap-2 relative items-center rounded-xl h-8 text-xs border dark:border-blue-500/35 border-blue-600/50"
+      >
+        <span
+          class="w-8 h-8 rounded-xl flex justify-center items-center bg-blue-600/30 hover:bg-blue-600/20 transition bg overflow-hidden"
+        >
+          <i class="fa-solid fa-user-tie fa-2xl mt-2 text-[#155dfc]"></i>
+          <!-- <i class="fa-solid fa-user fa-2xl mt-2" style="color: #155dfc"></i> -->
+        </span>
+      </div>
+      <button
+        class="dark:bg-red-600/90 bg-red-500/90 rounded-xl w-8 text-sm h-8 flex justify-center items-center gap-2"
+      >
+        <i class="fa-solid fa-right-from-bracket" style="color: rgb(255, 255, 255)"></i>
+      </button>
+    }
+    @if (authService.loggedUser()) {
+      <button
+        [routerLink]="['/admin', 'login']"
+        class="cursor-pointer rounded-2xl bg-transparent text-blue-600 dark:text-blue-500 text-sm flex flex-row items-center gap-2 font-semibold px-4 py-2"
+      >
+        <i class="fa-solid fa-user"></i>
+        ورود / ثبت نام
+      </button>
+    }
   </div>
 </nav>
