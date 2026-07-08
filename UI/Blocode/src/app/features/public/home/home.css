@@ -94,7 +94,7 @@ swiper-container::part(bullet-active) {
   scrollbar-width: none;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   grid-template-rows: 140px;
 }
 

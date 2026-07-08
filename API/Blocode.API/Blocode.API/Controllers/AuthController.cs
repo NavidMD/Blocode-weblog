@@ -1,8 +1,10 @@
 ﻿using Blocode.API.Models.DTO;
 using Blocode.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Blocode.API.Controllers
 {
@@ -104,5 +106,24 @@ namespace Blocode.API.Controllers
             }
             return ValidationProblem(ModelState);
         }
-    }
+
+        // GET : {apibaseurl}/api/auth/me
+        [Authorize]
+        [HttpGet]
+        [Route("me")]
+        public IActionResult UserDetails()
+        {
+            if (User.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+            var response = new LoginResponseDTO
+            {
+                Email = User.FindFirst(ClaimTypes.Email)?.Value,
+                Roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList()
+            };
+
+            return Ok(response);
+        }
+    } 
 }

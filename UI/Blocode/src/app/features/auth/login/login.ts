@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../services/auth-service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class Login {
   authService = inject(AuthService);
   toastService = inject(ToastrService);
+  router = inject(Router);
 
   loginFormGroup = new FormGroup({
     email: new FormControl<string>('', {
@@ -41,6 +43,7 @@ export class Login {
             progressBar: true,
             timeOut: 3000,
           });
+          this.router.navigate(['/']);  
         },
         error: (err: HttpErrorResponse) => {
           const errorMessage = err.error.errors.message[0];

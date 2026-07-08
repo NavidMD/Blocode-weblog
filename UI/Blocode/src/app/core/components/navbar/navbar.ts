@@ -31,7 +31,8 @@ import { AuthService } from '../../../features/auth/services/auth-service';
 export class Navbar implements OnInit {
   isDarkMode: boolean = false;
   authService = inject(AuthService);
-
+  userInfoBoxOpen: boolean = false;
+  
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,

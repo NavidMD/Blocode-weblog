@@ -11,13 +11,13 @@
         <li
           class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
-          <i class="fa-brands fa-buffer mb-0.5" style="color: rgb(155, 155, 155)"></i>
+          <i class="fa-brands fa-buffer mb-0.5" style="color: #155efce1"></i>
           <a [routerLink]="['admin', 'blogs']">مقالات</a>
         </li>
         <li
           class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
-          <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: rgb(155, 155, 155)"></i>
+          <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: #155efce1"></i>
           <a>نویسندگان</a>
         </li>
         <li
@@ -25,7 +25,7 @@
           (mouseleave)="categoryService.categoriesDropDownInHeader = false"
           class="relative flex justify-center gap-1.5 items-center py-2 cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
         >
-          <i class="fa-solid fa-grip-vertical fa-sm mb-0.5" style="color: rgb(155, 155, 155)"></i>
+          <i class="fa-solid fa-grip-vertical fa-sm mb-0.5" style="color: #155efce1"></i>
           <a>دسته بندی ها</a>
           @if (categoryService.categoriesDropDownInHeader === true) {
             <div
@@ -140,28 +140,50 @@
         <div class="circle"></div>
       </div>
     </label>
-    <!-- <span class="role-badge rounded-xl px-2 py-1 text-[10px] border border-blue-500/35">
-      <i class="fa-solid fa-feather-pointed"></i>
-      نویسنده
-    </span> -->
-    @if (!authService.loggedUser()) {
+
+    @if (authService.loggedUser()) {
       <div
-        class="cursor-pointer flex flex-row gap-2 relative items-center rounded-xl h-8 text-xs border dark:border-blue-500/35 border-blue-600/50"
+        class="cursor-pointer flex flex-row relative items-center rounded-xl shadow-md shadow-black/15 h-8 text-xs border dark:border-blue-500/35 border-blue-600/50"
+        (click)="userInfoBoxOpen = !userInfoBoxOpen"
       >
+        <span class="w-1.5 h-1.5 absolute top-0 left-0 bg-green-600 rounded-full"></span>
         <span
           class="w-8 h-8 rounded-xl flex justify-center items-center bg-blue-600/30 hover:bg-blue-600/20 transition bg overflow-hidden"
         >
-          <i class="fa-solid fa-user-tie fa-2xl mt-2 text-[#155dfc]"></i>
-          <!-- <i class="fa-solid fa-user fa-2xl mt-2" style="color: #155dfc"></i> -->
+          @if (authService.loggedUser()?.roles!.includes('Writer')) {
+            <i class="fa-solid fa-user-tie fa-2xl mt-2 text-[#155dfc]"></i>
+          } @else {
+            <i class="fa-solid fa-user fa-2xl mt-2" style="color: #155dfc"></i>
+          }
         </span>
+        @if (userInfoBoxOpen) {
+          <div
+            class="w-fit max-w-[240px] glass-card flex flex-col justify-center items-center gap-2 bg-white/45! dark:bg-black/30! py-3 px-4 absolute top-full mt-2 left-0 z-50 scaleInFromTop"
+          >
+            <div class="flex flex-col items-center gap-2">
+              @if (authService.loggedUser()?.roles!.includes('Writer')) {
+                <span
+                  class="role-badge bg-[rgba(30, 144, 255, 0.12)] bg-blue-600/70 text-blue-100 rounded-xl px-2 py-1 text-[10px] w-fit border dark:border-blue-500/35 border-blue-600/30"
+                >
+                  <i class="fa-solid fa-feather-pointed"></i>
+                  نویسنده
+                </span>
+              }
+              <span class="dark:text-white/90 text-black/80 text-center text-[12px]">{{
+                authService.loggedUser()?.email
+              }}</span>
+            </div>
+          </div>
+        }
       </div>
       <button
-        class="dark:bg-red-600/90 bg-red-500/90 rounded-xl w-8 text-sm h-8 flex justify-center items-center gap-2"
+        title="خروج از حساب"
+        class="cursor-pointer bg-red-500/80 shadow-md shadow-black/15 rounded-xl h-8 w-8 text-sm py-1.5 flex justify-center items-center gap-2"
       >
-        <i class="fa-solid fa-right-from-bracket" style="color: rgb(255, 255, 255)"></i>
+        <i class="fa-solid fa-power-off" style="color: rgba(255, 255, 255, 0.9)"></i>
       </button>
     }
-    @if (authService.loggedUser()) {
+    @if (!authService.loggedUser()) {
       <button
         [routerLink]="['/admin', 'login']"
         class="cursor-pointer rounded-2xl bg-transparent text-blue-600 dark:text-blue-500 text-sm flex flex-row items-center gap-2 font-semibold px-4 py-2"
