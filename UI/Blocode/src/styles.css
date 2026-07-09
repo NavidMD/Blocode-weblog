@@ -7,6 +7,100 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  /*MASTER */
+  --color-brandPurple: #6c63ff;
+  --color-brandPurpleLight: #a78bfa;
+  --color-brandPurple08: rgba(108, 99, 255, 0.08);
+  --color-brandPurple15: rgba(108, 99, 255, 0.15);
+  --color-brandPurple18: rgba(108, 99, 255, 0.18);
+  --color-brandPurple20: rgba(108, 99, 255, 0.2);
+  --color-brandPurple25: rgba(108, 99, 255, 0.25);
+  --color-brandPurple30: rgba(108, 99, 255, 0.3);
+  --color-brandPurple60: rgba(108, 99, 255, 0.6);
+  --color-brandPurple70: rgba(108, 99, 255, 0.7);
+  --color-brandBlue: #155dfc;
+  --color-brandViolet: #8b5cf6;
+  --color-divider-blue500: rgba(59, 130, 246, 0.9);
+  --color-divider-blue600: rgba(37, 99, 235, 0.9);
+  --color-mainLogo: rgb(37, 99, 235);
+  --textBlack05: rgba(0, 0, 0, 0.05);
+  --textBlack10: rgba(0, 0, 0, 0.1);
+  --textBlack12: rgba(0, 0, 0, 0.12);
+  --textBlack14: rgba(0, 0, 0, 0.14);
+  --textBlack15: rgba(0, 0, 0, 0.15);
+  --textBlack20: rgba(0, 0, 0, 0.2);
+  --textBlack25: rgba(0, 0, 0, 0.25);
+  --textBlack30: rgba(0, 0, 0, 0.3);
+  --textBlack50: rgba(0, 0, 0, 0.5);
+  --textBlack60: rgba(0, 0, 0, 0.6);
+  --textBlack70: rgba(0, 0, 0, 0.7);
+  --textBlack80: rgba(0, 0, 0, 0.8);
+  --textBlack90: rgba(0, 0, 0, 0.9);
+  --textWhite05: rgba(255, 255, 255, 0.05);
+  --textWhite08: rgba(255, 255, 255, 0.08);
+  --textWhite10: rgba(255, 255, 255, 0.1);
+  --textWhite15: rgba(255, 255, 255, 0.15);
+  --textWhite20: rgba(255, 255, 255, 0.2);
+  --textWhite30: rgba(255, 255, 255, 0.3);
+  --textWhite35: rgba(255, 255, 255, 0.35);
+  --textWhite40: rgba(255, 255, 255, 0.4);
+  --textWhite45: rgba(255, 255, 255, 0.45);
+  --textWhite50: rgba(255, 255, 255, 0.5);
+  --textWhite60: rgba(255, 255, 255, 0.6);
+  --textWhite70: rgba(255, 255, 255, 0.7);
+  --textWhite75: rgba(255, 255, 255, 0.75);
+  --textWhite80: rgba(255, 255, 255, 0.8);
+  --textWhite90: rgba(255, 255, 255, 0.9);
+  --textWhite95: rgba(255, 255, 255, 0.95);
+  --small-text14: 14px;
+  --leading-sm: 1.25rem;
+  --divider-width: 48px;
+  --divider-height: 3px;
+  /*FOOTER*/
+  --footer-logoSize: 28px;
+  --footer-descLineHeight: 1.625rem;
+  --footer-descColorDark: #8884bb;
+  --footer-socialIconHoverDark: #a99fff;
+  --footer-linkHoverDark: #c4bfff;
+  --footer-inputTextDark: #d4d0ff;
+  --footer-placeholderDark: #6a6690;
+  --footer-copyrightDark: #5e5a8c;
+  /*NAVBAR */
+  --navbar-logoSize: 24px;
+  --navbar-dropdownXs: 8px;
+  --navbar-dropdownSm: 9px;
+  --navbar-dropdownBase: 10px;
+  --navbar-dropdownMd: 11px;
+  --navbar-dropdownLg: 12px;
+  --navbar-dropdownXl: 13px;
+  --navbar-badgeWriterGlow: 0 140 255;
+  /*LOGIN*/
+  --login-headingSize: 23px;
+  --login-errorTextSize: 10px;
+  --login-errorIcon: rgba(254, 110, 110, 0.8);
+  --login-successIcon: rgb(150, 177, 124);
+  --login-eyeIcon: rgba(175, 130, 130, 0.75);
+  --login-starColor: #fff;
+  --login-meteorGlow: rgba(255, 255, 255, 0.5);
+  --login-moonColor: #e3daff;
+  --login-moonGlow: rgba(227, 218, 255, 0.87);
+  --login-cloudColor: #f0eaff;
+  --login-sunYellow: rgb(255, 255, 0);
+  --login-sunGlowOrange: rgba(255, 188, 63, 0.604);
+  --login-sunGlowYellow: rgb(255, 225, 53);
+  /*ADDBLOG*/
+  --addblog-headingSize: 18px;
+  --addblog-hintSize: 12px;
+  --addblog-helperTextSize: 10px;
+  --addblog-badgeTextSize: 11px;
+  --addblog-placeholderSize: 13px;
+  --addblog-inputRadius: 15px;
+  --addblog-previewHeight: 210px;
+  --addblog-scrollThumb: rgba(43, 0, 255, 0.227);
+  --addblog-searchPlaceholder: rgba(132, 132, 132, 0.878);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -208,4 +302,3 @@ button {
   background-color: #e0f2fe;
   border-radius: 9999px;
 }
-

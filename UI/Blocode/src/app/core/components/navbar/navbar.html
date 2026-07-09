@@ -2,34 +2,34 @@
   <div class="w-auto flex flex-row gap-7 items-center">
     <h1
       [routerLink]="['/']"
-      class="font-extrabold text-[24px] flex flex-row items-center text-blue-600 cursor-pointer"
+      class="font-extrabold text-(length:--navbar-logoSize) flex flex-row items-center text-blue-600 cursor-pointer"
     >
       بلاکُد
     </h1>
     <div>
       <ul class="flex flex-row gap-7 text-sm font-semibold">
         <li
-          class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer text-(--textBlack90) hover:text-black dark:text-(--textWhite90) dark:hover:text-white transition"
         >
-          <i class="fa-brands fa-buffer mb-0.5" style="color: #155efce1"></i>
+          <i class="fa-brands fa-buffer mb-0.5" style="color: var(--color-brandBlue)"></i>
           <a [routerLink]="['admin', 'blogs']">مقالات</a>
         </li>
         <li
-          class="flex justify-center gap-1.5 items-center cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="flex justify-center gap-1.5 items-center cursor-pointer text-(--textBlack90) hover:text-black dark:text-(--textWhite90) dark:hover:text-white transition"
         >
-          <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: #155efce1"></i>
+          <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: var(--color-brandBlue)"></i>
           <a>نویسندگان</a>
         </li>
         <li
           (mouseenter)="categoryService.categoriesDropDownInHeader = true"
           (mouseleave)="categoryService.categoriesDropDownInHeader = false"
-          class="relative flex justify-center gap-1.5 items-center py-2 cursor-pointer text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition"
+          class="relative flex justify-center gap-1.5 items-center py-2 cursor-pointer text-(--textBlack90) hover:text-black dark:text-(--textWhite90) dark:hover:text-white transition"
         >
-          <i class="fa-solid fa-grip-vertical fa-sm mb-0.5" style="color: #155efce1"></i>
+          <i class="fa-solid fa-grip-vertical fa-sm mb-0.5" style="color: var(--color-brandBlue)"></i>
           <a>دسته بندی ها</a>
           @if (categoryService.categoriesDropDownInHeader === true) {
             <div
-              class="w-72 glass-card bg-white/35! dark:bg-black/30! py-3 px-4 absolute top-full right-0 z-50 scaleInFromTop"
+              class="w-72 glass-card bg-(--textWhite35)! dark:bg-(--textBlack30)! py-3 px-4 absolute top-full right-0 z-50 scaleInFromTop"
             >
               @if (categoriesLoading()) {
                 <app-loader></app-loader>
@@ -42,23 +42,23 @@
                     <li class="w-full flex flex-col">
                       <div class="w-full flex justify-between items-center gap-2 cursor-pointer">
                         <i
-                          class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 text-black/80 dark:text-white/80"
+                          class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 text-(--textBlack80) dark:text-(--textWhite80)"
                           [class.rotate-180]="isOpen(mainCategory.id)"
                           (click)="toggleCategory(mainCategory.id)"
                         ></i>
                         <p
-                          class="w-max flex items-center justify-between py-[7px] text-[13px] text-black/90 dark:text-white/90"
+                          class="w-max flex items-center justify-between py-[7px] text-(length:--navbar-dropdownXl) text-(--textBlack90) dark:text-(--textWhite90)"
                           [routerLink]="['/admin', 'blogs', 'byCategory', mainCategory.name]"
                           (click)="categoryService.categoriesDropDownInHeader = false"
                         >
                           {{ mainCategory.name }}
                         </p>
-                        <span class="text-[9px] ml-0 mr-auto text-black/70 dark:text-white/70"
+                        <span class="text-(length:--navbar-dropdownSm) ml-0 mr-auto text-(--textBlack70) dark:text-(--textWhite70)"
                           >{{ mainCategory.subCategories?.length }} زیر دسته</span
                         >
                       </div>
                       <div
-                        class="overflow-hidden transition-all duration-200 bg-black/5! dark:bg-white/10! rounded-xl"
+                        class="overflow-hidden transition-all duration-200 bg-(--textBlack05)! dark:bg-(--textWhite10)! rounded-xl"
                         [class.max-h-0]="!isOpen(mainCategory.id)"
                         [class.max-h-96]="isOpen(mainCategory.id)"
                         [class.opacity-0]="!isOpen(mainCategory.id)"
@@ -70,10 +70,10 @@
                           @for (sub of mainCategory.subCategories; track sub.id) {
                             <li class="w-full flex flex-col justify-between items-center">
                               <div
-                                class="w-full flex flex-row items-center justify-between p-1 text-[11px] text-black/80 dark:text-white/80 gap-2"
+                                class="w-full flex flex-row items-center justify-between p-1 text-(length:--navbar-dropdownMd) text-(--textBlack80) dark:text-(--textWhite80) gap-2"
                               >
                                 <i
-                                  class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 cursor-pointer text-black/80! dark:text-white/80!"
+                                  class="fa-solid fa-chevron-down fa-sm transition-transform duration-300 cursor-pointer text-(--textBlack80)! dark:text-(--textWhite80)!"
                                   [class.rotate-180]="isOpen(sub.id)"
                                   (click)="toggleCategory(sub.id)"
                                 ></i>
@@ -84,7 +84,7 @@
                                   {{ sub.name }}
                                 </p>
                                 <span
-                                  class="text-[8px] text-black/60 dark:text-white/60 ml-0 mr-auto"
+                                  class="text-(length:--navbar-dropdownXs) text-(--textBlack60) dark:text-(--textWhite60) ml-0 mr-auto"
                                   >{{ sub.subCategories?.length }} زیر دسته</span
                                 >
                               </div>
@@ -101,7 +101,7 @@
                                       (click)="toggleCategory(sub1.id)"
                                       [routerLink]="['/admin', 'blogs', 'byCategory', sub1.name]"
                                       (click)="categoryService.categoriesDropDownInHeader = false"
-                                      class="w-fit flex items-center shadow-sm shadow-black/20 bg-white/30 dark:bg-black/20 justify-center p-1 px-2 text-[9px] rounded-xl text-black/80 dark:text-white/80"
+                                      class="w-fit flex items-center shadow-sm shadow-(--textBlack20) bg-(--textWhite30) dark:bg-(--textBlack20) justify-center p-1 px-2 text-(length:--navbar-dropdownSm) rounded-xl text-(--textBlack80) dark:text-(--textWhite80)"
                                     >
                                       {{ sub1.name }}
                                     </li>
@@ -116,7 +116,7 @@
                   }
                   <li class="w-full flex flex-row">
                     <p
-                      class="w-max flex items-center justify-between pt-[7px] text-[11px] text-blue-600 dark:text-blue-300 gap-2"
+                      class="w-max flex items-center justify-between pt-[7px] text-(length:--navbar-dropdownMd) text-blue-600 dark:text-blue-300 gap-2"
                       [routerLink]="['/admin', 'categories']"
                     >
                       <i
@@ -136,14 +136,14 @@
   <div class="w-auto flex flex-row gap-3 justify-end items-center">
     <label class="ui-switch">
       <input type="checkbox" [checked]="isDarkMode" (change)="toggleTheme()" />
-      <div class="slider bg-black/10 dark:bg-white/15">
+      <div class="slider bg-(--textBlack10) dark:bg-(--textWhite15)">
         <div class="circle"></div>
       </div>
     </label>
 
     @if (authService.loggedUser()) {
       <div
-        class="cursor-pointer flex flex-row relative items-center rounded-xl shadow-md shadow-black/15 h-8 text-xs border dark:border-blue-500/35 border-blue-600/50"
+        class="cursor-pointer flex flex-row relative items-center rounded-xl shadow-md shadow-(--textBlack15) h-8 text-xs border dark:border-blue-500/35 border-blue-600/50"
         (click)="userInfoBoxOpen = !userInfoBoxOpen"
       >
         <span class="w-1.5 h-1.5 absolute top-0 left-0 bg-green-600 rounded-full"></span>
@@ -151,25 +151,25 @@
           class="w-8 h-8 rounded-xl flex justify-center items-center bg-blue-600/30 hover:bg-blue-600/20 transition bg overflow-hidden"
         >
           @if (authService.loggedUser()?.roles!.includes('Writer')) {
-            <i class="fa-solid fa-user-tie fa-2xl mt-2 text-[#155dfc]"></i>
+            <i class="fa-solid fa-user-tie fa-2xl mt-2" style="color: var(--color-brandBlue)"></i>
           } @else {
-            <i class="fa-solid fa-user fa-2xl mt-2" style="color: #155dfc"></i>
+            <i class="fa-solid fa-user fa-2xl mt-2" style="color: var(--color-brandBlue)"></i>
           }
         </span>
         @if (userInfoBoxOpen) {
           <div
-            class="w-fit max-w-[240px] glass-card flex flex-col justify-center items-center gap-2 bg-white/45! dark:bg-black/30! py-3 px-4 absolute top-full mt-2 left-0 z-50 scaleInFromTop"
+            class="w-fit max-w-[240px] glass-card flex flex-col justify-center items-center gap-2 bg-(--textWhite45)! dark:bg-(--textBlack30)! py-3 px-4 absolute top-full mt-2 left-0 z-50 scaleInFromTop"
           >
             <div class="flex flex-col items-center gap-2">
               @if (authService.loggedUser()?.roles!.includes('Writer')) {
                 <span
-                  class="role-badge bg-[rgba(30, 144, 255, 0.12)] bg-blue-600/70 text-blue-100 rounded-xl px-2 py-1 text-[10px] w-fit border dark:border-blue-500/35 border-blue-600/30"
+                  class="role-badge bg-blue-600/70 text-blue-100 rounded-xl px-2 py-1 text-(length:--navbar-dropdownBase) w-fit border dark:border-blue-500/35 border-blue-600/30"
                 >
                   <i class="fa-solid fa-feather-pointed"></i>
                   نویسنده
                 </span>
               }
-              <span class="dark:text-white/90 text-black/80 text-center text-[12px]">{{
+              <span class="dark:text-(--textWhite90) text-(--textBlack80) text-center text-(length:--navbar-dropdownLg)">{{
                 authService.loggedUser()?.email
               }}</span>
             </div>
@@ -178,9 +178,9 @@
       </div>
       <button
         title="خروج از حساب"
-        class="cursor-pointer bg-red-500/80 shadow-md shadow-black/15 rounded-xl h-8 w-8 text-sm py-1.5 flex justify-center items-center gap-2"
+        class="cursor-pointer bg-red-500/80 shadow-md shadow-(--textBlack15) rounded-xl h-8 w-8 text-sm py-1.5 flex justify-center items-center gap-2"
       >
-        <i class="fa-solid fa-power-off" style="color: rgba(255, 255, 255, 0.9)"></i>
+        <i class="fa-solid fa-power-off" style="color: var(--textWhite90)"></i>
       </button>
     }
     @if (!authService.loggedUser()) {

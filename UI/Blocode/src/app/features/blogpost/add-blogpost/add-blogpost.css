@@ -10,18 +10,18 @@ textarea {
 }
 
 #add-blog-page #category-list::-webkit-scrollbar-thumb {
-  background: #2b00ff3a;
+  background: var(--addblog-scrollThumb);
   border-radius: 10px;
 }
 
 #add-blog-page #cat-select-input::placeholder {
-  font-size: 13px;
-  color: rgba(132, 132, 132, 0.878);
+  font-size: var(--addblog-placeholderSize);
+  color: var(--addblog-searchPlaceholder);
 }
 
 #add-blog-page #category-list {
   max-height: 0;
-  transition: .2s;
+  transition: 0.2s;
   opacity: 0;
 }
 #add-blog-page #category-list.show {
@@ -30,16 +30,16 @@ textarea {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--textWhite05);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--addblog-inputRadius);
+  border: 1px solid var(--textWhite20);
   box-shadow:
-    0 2px 8px 0px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
+    0 2px 8px 0px var(--textBlack10),
+    inset 0 1px 0 var(--textWhite50),
+    inset 0 -1px 0 var(--textWhite10),
+    inset 0 0 2px 1px var(--textWhite10);
   overflow: hidden;
 }
 
@@ -50,12 +50,7 @@ textarea {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--textWhite30), transparent);
 }
 
 .glass-card::after {
@@ -65,49 +60,44 @@ textarea {
   left: 0;
   width: 1px;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.3),
-    transparent,
-    rgba(255, 255, 255, 0.2)
-  );
+  background: linear-gradient(180deg, var(--textWhite30), transparent, var(--textWhite20));
 }
 
 #add-blog-hint img {
   animation: myAnim 2s ease 0s normal infinite;
 }
 @keyframes myAnim {
-	0%,
-	100% {
-		transform: rotate(0deg);
-		transform-origin: 50% 50%;
-	}
+  0%,
+  100% {
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+  }
 
-	10% {
-		transform: rotate(8deg);
-	}
+  10% {
+    transform: rotate(8deg);
+  }
 
   50% {
     scale: 110%;
   }
 
-	20%,
-	40%,
-	60% {
-		transform: rotate(-10deg);
-	}
+  20%,
+  40%,
+  60% {
+    transform: rotate(-10deg);
+  }
 
-	30%,
-	50%,
-	70% {
-		transform: rotate(10deg);
-	}
+  30%,
+  50%,
+  70% {
+    transform: rotate(10deg);
+  }
 
-	80% {
-		transform: rotate(-8deg);
-	}
+  80% {
+    transform: rotate(-8deg);
+  }
 
-	90% {
-		transform: rotate(8deg);
-	}
+  90% {
+    transform: rotate(8deg);
+  }
 }

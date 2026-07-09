@@ -27,32 +27,32 @@
         <img src="assets/vectors/loginkey.svg" class="w-full h-full object-contain" alt="" />
       </div>
 
-      <h1 class="mt-4 text-[23px] font-bold text-blue-900 dark:text-blue-200">ورود به حساب</h1>
+      <h1 class="mt-4 text-(length:--login-headingSize) font-bold text-blue-900 dark:text-blue-200">ورود به حساب</h1>
 
-      <p class="mt-2 text-sm text-black/60 dark:text-white/60">برای ادامه وارد حساب خود شوید</p>
+      <p class="mt-2 text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) dark:text-(--textWhite60)">برای ادامه وارد حساب خود شوید</p>
     </div>
 
     <form class="flex flex-col gap-4" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
       <div class="flex-1 flex flex-col gap-3 items-start relative">
-        <label class="text-sm font-bold text-black/80 dark:text-white/95" for="login-email">
+        <label class="text-(length:--small-text14) leading-(--leading-sm) font-bold text-(--textBlack80) dark:text-(--textWhite95)" for="login-email">
           ایمیل
         </label>
         @if (loginFormGroup.controls.email.invalid && loginFormGroup.controls.email.dirty) {
           <i
             class="fa-solid fa-circle-exclamation absolute left-3.5 top-11.5"
-            style="color: rgba(254, 110, 110, 0.8)"
+            style="color: var(--login-errorIcon)"
           ></i>
         }
         @if (loginFormGroup.controls.email.valid && loginFormGroup.controls.email.dirty) {
           <i
             class="fa-solid fa-check absolute left-3.5 top-11.5"
-            style="color: rgb(150, 177, 124)"
+            style="color: var(--login-successIcon)"
           ></i>
         }
         <input
           type="email"
           email
-          class="focus:border-black/30 bg-white/60 dark:focus:border-white/30 w-full input-text-normal h-11 border dark:bg-white/5 border-black/15 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-4 outline-0"
+          class="focus:border-(--textBlack30) bg-(--textWhite60) dark:focus:border-(--textWhite30) w-full input-text-normal h-11 border dark:bg-(--textWhite05) border-(--textBlack15) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-[15px] py-1 px-4 outline-0"
           placeholder="example@gmail.com"
           id="login-email"
           formControlName="email"
@@ -61,60 +61,60 @@
           loginFormGroup.controls.email.touched &&
           loginFormGroup.controls.email.hasError('required')
         ) {
-          <span class="text-[10px] absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+          <span class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
             >وارد کردن ایمیل الزامی است</span
           >
         }
         @if (
           loginFormGroup.controls.email.value.length > 5 && loginFormGroup.controls.email.invalid
         ) {
-          <span class="text-[10px] absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+          <span class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
             >فرمت ایمیل اشتباه است</span
           >
         }
       </div>
 
       <div class="flex-1 flex flex-col gap-3 items-start relative">
-        <label class="text-sm font-bold text-black/80 dark:text-white/95" for="login-password"
+        <label class="text-(length:--small-text14) leading-(--leading-sm) font-bold text-(--textBlack80) dark:text-(--textWhite95)" for="login-password"
           >رمز عبور</label
         >
         @if (loginFormGroup.controls.password.invalid && loginFormGroup.controls.password.dirty) {
           <i
             class="fa-solid fa-circle-exclamation absolute left-3.5 top-11.5"
-            style="color: rgba(254, 110, 110, 0.8)"
+            style="color: var(--login-errorIcon)"
           ></i>
         }
         @if (loginFormGroup.controls.password.valid && loginFormGroup.controls.password.dirty) {
           <i
             class="fa-solid fa-check absolute left-3.5 top-11.5"
-            style="color: rgb(150, 177, 124)"
+            style="color: var(--login-successIcon)"
           ></i>
         }
         <input
           type="password"
-          class="focus:border-black/30 bg-white/60 dark:focus:border-white/30 w-full input-text-normal h-11 border dark:bg-white/5 border-black/15 dark:border-white/20 dark:text-white/95 rounded-[15px] py-1 px-4 outline-0"
+          class="focus:border-(--textBlack30) bg-(--textWhite60) dark:focus:border-(--textWhite30) w-full input-text-normal h-11 border dark:bg-(--textWhite05) border-(--textBlack15) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-[15px] py-1 px-4 outline-0"
           placeholder="********"
           formControlName="password"
           #passwordInput
         />
         @if (passwordInput.type === 'text') {
-          <i (click)="passwordInput.type = 'password'" class="fa-regular fa-eye-slash absolute right-13 top-2.5 fa-sm cursor-pointer" style="color: rgba(175, 130, 130, 0.75);"></i>
+          <i (click)="passwordInput.type = 'password'" class="fa-regular fa-eye-slash absolute right-13 top-2.5 fa-sm cursor-pointer" style="color: var(--login-eyeIcon);"></i>
         }
         @if (passwordInput.type === 'password') {
-          <i (click)="passwordInput.type = 'text'" class="fa-regular fa-eye absolute right-13 top-2.5 fa-sm cursor-pointer" style="color: rgba(175, 130, 130, 0.75);"></i>
+          <i (click)="passwordInput.type = 'text'" class="fa-regular fa-eye absolute right-13 top-2.5 fa-sm cursor-pointer" style="color: var(--login-eyeIcon);"></i>
         }
         @if (
           loginFormGroup.controls.password.touched &&
           loginFormGroup.controls.password.hasError('required')
         ) {
-          <span class="text-[10px] absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+          <span class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
             >وارد کردن رمز عبور الزامی است</span
           >
         }
       </div>
 
-      <div class="flex justify-between text-sm my-1">
-        <label class="flex gap-2 items-center text-sm text-black/80 dark:text-white/95">
+      <div class="flex justify-between text-(length:--small-text14) leading-(--leading-sm) my-1">
+        <label class="flex gap-2 items-center text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)">
           <input type="checkbox" />
           مرا به خاطر بسپار
         </label>
@@ -123,13 +123,13 @@
 
       <button
         type="submit"
-        class="w-full h-12 cursor-pointer hover:to-blue-700 transition rounded-2xl shadow-lg shadow-black/15 bg-gradient-to-r from-violet-500/80 to-blue-500/80 dark:to-blue-600 text-white font-bold"
+        class="w-full h-12 cursor-pointer hover:to-blue-700 transition rounded-2xl shadow-lg shadow-(--textBlack15) bg-gradient-to-r from-violet-500/80 to-blue-500/80 dark:to-blue-600 text-white font-bold"
       >
         ورود
       </button>
     </form>
 
-    <p class="mt-6 text-center text-sm text-black/60 dark:text-white/60">
+    <p class="mt-6 text-center text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) dark:text-(--textWhite60)">
       حساب ندارید؟
 
       <a class="text-blue-600 dark:text-blue-500"> ثبت نام </a>
