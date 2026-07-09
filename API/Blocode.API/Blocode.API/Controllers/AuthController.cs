@@ -1,4 +1,5 @@
-﻿using Blocode.API.Models.DTO;
+﻿using Azure;
+using Blocode.API.Models.DTO;
 using Blocode.API.Repositories.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +21,20 @@ namespace Blocode.API.Controllers
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
         }
-
+        // POST : {apibaseurl}/api/auth/logout
+        [HttpPost]
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Append("access_token", "", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTime.UtcNow.AddDays(-1)
+            });
+            return Ok();
+        }
         // POST : {apibaseurl}/api/auth/login
         [HttpPost]
         [Route("login")]

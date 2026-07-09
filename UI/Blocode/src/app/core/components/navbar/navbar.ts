@@ -32,7 +32,7 @@ export class Navbar implements OnInit {
   isDarkMode: boolean = false;
   authService = inject(AuthService);
   userInfoBoxOpen: boolean = false;
-  
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
@@ -74,6 +74,10 @@ export class Navbar implements OnInit {
       this.document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   ngOnInit(): void {

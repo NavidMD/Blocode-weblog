@@ -8,12 +8,16 @@ import {
   HttpResourceRequest,
 } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   http = inject(HttpClient);
+  toastService = inject(ToastrService);
+  router = inject(Router);
 
   loggedUser: WritableSignal<LoggedUser | null> = signal(null);
 
@@ -39,5 +43,31 @@ export class AuthService {
         },
       )
       .pipe(tap((user) => this.loggedUser.set(user)));
+  }
+  logout() {
+    this.http
+      .post<void>(
+        `${environment.apiBaseUrl}/api/auth/logout`,
+        {},
+        {
+          withCredentials: true,
+        },
+      )
+      .subscribe({
+        next: () => {
+          this.loggedUser.set(null);
+          this.toastService.success(`از حساب کاربری خارج شدید`, '', {
+            progressBar: true,
+            timeOut: 3000,
+          });
+          this.router.navigate(['/admin','login']);
+        },
+        error: () => {
+          this.toastService.error(`خطا`, 'دوباره تلاش کنید', {
+            progressBar: true,
+            timeOut: 3000,
+          });
+        }
+      });
   }
 }
