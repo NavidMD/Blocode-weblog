@@ -1,47 +1,63 @@
-<div class="w-full h-auto flex flex-col justify-center items-start gap-5">
+<div class="w-full h-auto min-h-[calc(100vh-68px)] flex flex-col justify-start items-start gap-5">
   <div class="w-full flex flex-row items-center">
     <div
-      class="w-14 h-14 p-2 rounded-3xl bg-gradient-to-br from-violet-300 to-blue-400 shadow-lg shadow-black/15 dark:shadow-white/15 dark:shadow-xl"
+      class="w-14 h-14 p-2 rounded-3xl bg-gradient-to-br from-violet-300 to-blue-400 shadow-lg shadow-(--textBlack15) dark:shadow-(--textWhite15) dark:shadow-xl"
     >
       <img src="assets/vectors/magazine2.svg" class="w-full h-full" alt="" />
     </div>
     <div class="flex flex-col pr-4 gap-1">
-      <h1 class="text-[18px] flex items-center font-bold dark:text-white/95">
+      <h1
+        class="text-(length:--blogcard-headingSize) flex items-center font-bold dark:text-(--textWhite95)"
+      >
         مقالات
         @if (categoryName()) {
-          <p class="inline-block text-[16px] mr-2 text-blue-600 dark:text-blue-400 gap-1">
+          <p
+            class="inline-block text-(length:--blogcard-categoryLabelSize) mr-2 text-blue-600 dark:text-blue-400 gap-1"
+          >
             > &nbsp; {{ categoryName() }}
             <span
-              class="inline-block text-[10px] mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-3 text-blue-600 dark:text-blue-400"
+              class="inline-block text-(length:--blogcard-countBadgeSize) mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-3 text-blue-600 dark:text-blue-400"
               >{{ byCatValue()?.length }} مقاله مرتبط</span
             >
           </p>
         } @else if (queryParamCategoryUrlHandles()?.length) {
-          <p class="inline-block text-[16px] mr-2 text-blue-600 dark:text-blue-400 gap-1">
+          <p
+            class="inline-block text-(length:--blogcard-categoryLabelSize) mr-2 text-blue-600 dark:text-blue-400 gap-1"
+          >
             > &nbsp; {{ categoryNamesFromQueryParams().join(' , ') }}
             <span
-              class="inline-block text-[10px] mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-3 text-blue-600 dark:text-blue-400"
+              class="inline-block text-(length:--blogcard-countBadgeSize) mr-2 bg-blue-100/80 dark:bg-blue-600/30 py-1 pb-0.5 rounded-2xl px-3 text-blue-600 dark:text-blue-400"
             >
               {{ filteredPosts()?.length }} مقاله مرتبط
             </span>
           </p>
         }
         @if (addBlogActive) {
-          <span class="inline-block text-sm text-black/60 mr-2 dark:text-white/95">
+          <span
+            class="inline-block text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) mr-2 dark:text-(--textWhite95)"
+          >
             > &nbsp; ایجاد مقاله
           </span>
         }
       </h1>
-      <span class="text-[12px] text-black/55 dark:text-white/65 mt-1">
+      <span
+        class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) mt-1"
+      >
         مشاهده جدیدترین و مفید ترین مقالات در زمینه
-        {{ categoryName() ? categoryName() : queryParamCategoryUrlHandles()?.length ? categoryNamesFromQueryParams().join(' , ') : 'آموزشی، علمی، خبری و ..' }}
+        {{
+          categoryName()
+            ? categoryName()
+            : queryParamCategoryUrlHandles()?.length
+              ? categoryNamesFromQueryParams().join(' , ')
+              : 'آموزشی، علمی، خبری و ..'
+        }}
       </span>
     </div>
     @if (!addBlogActive) {
       <a
         role="button"
         [routerLink]="['/admin', 'blogs', 'add']"
-        class="p-2 px-4 text-sm relative bg-blue-600 text-white flex mr-auto ml-0 flex-row justify-center items-center gap-1 rounded-[16px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 text-(length:--small-text14) leading-(--leading-sm) relative bg-blue-600 text-white flex mr-auto ml-0 flex-row justify-center items-center gap-1 rounded-(length:--blogcard-cardRadius) shadow-md shadow-(--textBlack20) cursor-pointer"
         (click)="addBlogActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
@@ -65,46 +81,52 @@
       @for (blog of filteredPosts(); track blog.id) {
         <div
           id="blog-card"
-          class="w-full glass-card h-[320px] hover:-translate-y-1.5 hover:shadow-lg transition cursor-pointer overflow-hidden relative"
+          class="w-full glass-card-blog h-(length:--blogcard-cardHeight) hover:-translate-y-1.5 hover:shadow-lg transition cursor-pointer overflow-hidden relative"
         >
-          <div id="header" class="h-[65%] bg-blue-200 dark:bg-white/15 overflow-hidden">
+          <div id="header" class="h-[65%] bg-blue-200 dark:bg-(--textWhite15) overflow-hidden">
             <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" />
             <div
               class="w-full z-10 h-fit flex flex-row justify-between items-center absolute bottom-0 px-3.5 py-3.5"
             >
               <div class="flex flex-row gap-1.5 justify-center items-center">
                 <div
-                  class="w-6 h-6 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
+                  class="w-6 h-6 bg-white shadow-md shadow-(--textBlack15) rounded-full flex justify-center items-center text-[15px]"
                 >
                   <img class="w-5 h-5 opacity-50" src="assets/vectors/male_user.svg" />
                 </div>
-                <p class="text-[11px] text-white/95 text-shadow-lg text-shadow-black/10">
+                <p
+                  class="text-(length:--blogcard-authorNameSize) text-(--textWhite95) text-shadow-lg text-shadow-(--textBlack10)"
+                >
                   {{ blog.author }}
                 </p>
               </div>
             </div>
           </div>
           <div id="main" class="w-full h-[35%] p-3 flex flex-col gap-1">
-            <h2 id="title" class="text-[15px] font-bold text-black/90 dark:text-white/95">
+            <h2
+              id="title"
+              class="text-(length:--blogcard-titleSize) font-bold text-(--textBlack90) dark:text-(--textWhite95)"
+            >
               {{ blog.title }}
             </h2>
             <p
               id="shortDescription"
-              class="text-[12px] text-black/60 dark:text-white/60 leading-4.5"
+              class="text-(length:--blogcard-smallSize) text-(--textBlack60) dark:text-(--textWhite60) leading-(--blogcard-descLineHeight)"
             >
               {{ blog.shortDescription }}
             </p>
           </div>
-          <span class="text-[9px] text-black/50 dark:text-white/50 absolute bottom-1.5 left-4.5">{{
-            blog.publishedDate | persianDate
-          }}</span>
+          <span
+            class="text-(length:--blogcard-metaSize) text-(--textBlack50) dark:text-(--textWhite50) absolute bottom-1.5 left-4.5"
+            >{{ blog.publishedDate | persianDate }}</span
+          >
           <div
             id="categories"
             class="absolute flex flex-row justify-center items-center bottom-1.5 right-3 gap-1"
           >
             @for (category of blog.categories; track category.id) {
               <span
-                class="text-blue-600 dark:text-blue-400 text-[9px] pb-0.5 px-1.5 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
+                class="text-blue-600 dark:text-blue-400 text-(length:--blogcard-metaSize) pb-0.5 px-1.5 pt-1 bg-blue-100 dark:bg-blue-500/20 rounded-lg opacity-80"
                 >{{ category.name }}</span
               >
             }
@@ -114,7 +136,7 @@
             class="w-full h-fit p-2 flex flex-row items-start justify-end absolute left-0 top-0"
           >
             <div
-              class="flex flex-row bg-white dark:bg-gray-900 shadow-md shadow-black/20 rounded-[14px] py-1 pb-0.5 px-2 gap-1.5"
+              class="flex flex-row bg-white dark:bg-gray-900 shadow-md shadow-(--textBlack20) rounded-(length:--blogcard-buttonBarRadius) py-1 pb-0.5 px-2 gap-1.5"
             >
               <button
                 [routerLink]="['/admin/blogs', 'edit', blog.id]"
@@ -123,11 +145,15 @@
                 <i
                   title="ویرایش"
                   class="fa-regular fa-pen-to-square"
-                  style="color: rgb(65, 160, 233)"
+                  style="color: var(--color-editIcon)"
                 ></i>
               </button>
               <button class="p-1 text-white cursor-pointer" (click)="deleteBlog(blog.id)">
-                <i title="حذف" class="fa-regular fa-trash-can" style="color: rgb(255, 80, 80)"></i>
+                <i
+                  title="حذف"
+                  class="fa-regular fa-trash-can"
+                  style="color: var(--color-deleteIcon)"
+                ></i>
               </button>
             </div>
           </div>

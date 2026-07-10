@@ -24,21 +24,26 @@
   --color-divider-blue500: rgba(59, 130, 246, 0.9);
   --color-divider-blue600: rgba(37, 99, 235, 0.9);
   --color-mainLogo: rgb(37, 99, 235);
+  --color-editIcon: rgb(65, 160, 233);
+  --color-deleteIcon: rgb(255, 80, 80);
   --textBlack05: rgba(0, 0, 0, 0.05);
   --textBlack10: rgba(0, 0, 0, 0.1);
   --textBlack12: rgba(0, 0, 0, 0.12);
+  --textBlack13: rgba(0, 0, 0, 0.13);
   --textBlack14: rgba(0, 0, 0, 0.14);
   --textBlack15: rgba(0, 0, 0, 0.15);
   --textBlack20: rgba(0, 0, 0, 0.2);
   --textBlack25: rgba(0, 0, 0, 0.25);
   --textBlack30: rgba(0, 0, 0, 0.3);
   --textBlack50: rgba(0, 0, 0, 0.5);
+  --textBlack55: rgba(0, 0, 0, 0.55);
   --textBlack60: rgba(0, 0, 0, 0.6);
   --textBlack70: rgba(0, 0, 0, 0.7);
   --textBlack80: rgba(0, 0, 0, 0.8);
   --textBlack90: rgba(0, 0, 0, 0.9);
   --textWhite05: rgba(255, 255, 255, 0.05);
   --textWhite08: rgba(255, 255, 255, 0.08);
+  --textWhite09: rgba(255, 255, 255, 0.09);
   --textWhite10: rgba(255, 255, 255, 0.1);
   --textWhite15: rgba(255, 255, 255, 0.15);
   --textWhite20: rgba(255, 255, 255, 0.2);
@@ -48,6 +53,7 @@
   --textWhite45: rgba(255, 255, 255, 0.45);
   --textWhite50: rgba(255, 255, 255, 0.5);
   --textWhite60: rgba(255, 255, 255, 0.6);
+  --textWhite65: rgba(255, 255, 255, 0.65);
   --textWhite70: rgba(255, 255, 255, 0.7);
   --textWhite75: rgba(255, 255, 255, 0.75);
   --textWhite80: rgba(255, 255, 255, 0.8);
@@ -99,6 +105,26 @@
   --addblog-previewHeight: 210px;
   --addblog-scrollThumb: rgba(43, 0, 255, 0.227);
   --addblog-searchPlaceholder: rgba(132, 132, 132, 0.878);
+  /*BLOGCARD*/
+  --blogcard-headingSize: 18px;
+  --blogcard-categoryLabelSize: 16px;
+  --blogcard-countBadgeSize: 10px;
+  --blogcard-smallSize: 12px;
+  --blogcard-titleSize: 15px;
+  --blogcard-authorNameSize: 11px;
+  --blogcard-metaSize: 9px;
+  --blogcard-cardRadius: 16px;
+  --blogcard-buttonBarRadius: 14px;
+  --blogcard-descLineHeight: 1.125rem;
+  --blogcard-cardHeight: 320px;
+  /*EDITBLOG*/
+  --editblog-headingSize: 16px;
+  /*CATEGORYLIST*/
+  --categorylist-searchHeight: 30px;
+  --categorylist-avatarLetterSize: 24px;
+  /*EDITCATEGORY*/
+  --editcategory-headingSize: 23px;
+  --editcategory-slugSize: 11px;
 }
 
 * {

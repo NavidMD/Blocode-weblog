@@ -41,49 +41,44 @@
   transition: 0.8s 0.3s all ease-out;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.09);
+.glass-card-blog {
+  background: var(--textWhite09);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   border-radius: 20px;
   box-shadow:
-    0 5px 15px 0px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
+    0 5px 15px 0px var(--textBlack15),
+    inset 0 1px 0 var(--textWhite50),
+    inset 0 -1px 0 var(--textWhite10),
+    inset 0 0 2px 1px var(--textWhite10);
   overflow: hidden;
 }
 
-.glass-card:hover {
+.glass-card-blog:hover {
   box-shadow:
-    0 7px 11px 0px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 4px 2px rgba(255, 255, 255, 0.2);
+    0 7px 11px 0px var(--textBlack20),
+    inset 0 1px 0 var(--textWhite50),
+    inset 0 -1px 0 var(--textWhite10),
+    inset 0 0 4px 2px var(--textWhite20);
 }
-.glass-card::before {
+.glass-card-blog::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, var(--textWhite40), transparent);
 }
 
-.glass-card::after {
+.glass-card-blog::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.3),
-    transparent,
-    rgba(255, 255, 255, 0.2)
-  );
+  background: linear-gradient(180deg, var(--textWhite30), transparent, var(--textWhite20));
 }
 
 @keyframes move-to-right {

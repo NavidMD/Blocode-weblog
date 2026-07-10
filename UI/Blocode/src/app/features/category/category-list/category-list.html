@@ -1,15 +1,19 @@
-<div class="w-full h-auto flex flex-col justify-center items-start gap-5">
+<div class="w-full min-h-[calc(100vh-68px)] h-auto flex flex-col justify-start items-start gap-5">
   <div class="w-full flex flex-row items-center">
     <div
-      class="w-14 h-14 p-2 rounded-3xl bg-gradient-to-br from-violet-300 to-blue-400 shadow-lg shadow-black/15 dark:shadow-white/15 dark:shadow-xl"
+      class="w-14 h-14 p-2 rounded-3xl bg-gradient-to-br from-violet-300 to-blue-400 shadow-lg shadow-(--textBlack15) dark:shadow-(--textWhite15) dark:shadow-xl"
     >
-      <img src="assets/vectors/diversity3.svg" class="w-full h-full" alt="">
+      <img src="assets/vectors/diversity3.svg" class="w-full h-full" alt="" />
     </div>
     <div class="flex flex-col pr-4 gap-1">
-      <h1 class="text-[18px] font-bold flex flex-row items-center gap-2 dark:text-white/95">
+      <h1
+        class="text-(length:--blogcard-headingSize) font-bold flex flex-row items-center gap-2 dark:text-(--textWhite95)"
+      >
         دسته بندی ها
         @if (addCategoryActive) {
-          <span class="inline-block text-sm text-black/60 dark:text-white/95 mr-2">
+          <span
+            class="inline-block text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) dark:text-(--textWhite95) mr-2"
+          >
             > &nbsp; ایجاد دسته بندی
           </span>
         }
@@ -21,21 +25,27 @@
           id="category-search-input"
           type="text"
           placeholder="جستجو ..."
-          class="input-text-normal dark:text-white/95 font-light justify-right px-2 items-center rounded-[15px] mr-4 border dark:border-white/20 border-gray-200 outline-0 h-[30px]"
+          class="input-text-normal dark:text-(--textWhite95) font-light justify-right px-2 items-center rounded-(length:--addblog-inputRadius) mr-4 border dark:border-(--textWhite20) border-gray-200 outline-0 h-(length:--categorylist-searchHeight)"
         />
       </h1>
-      <span class="text-[12px] text-black/55 dark:text-white/65 mt-1">
+      <span
+        class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) mt-1"
+      >
         دسته‌بندی‌های سایت خود را مدیریت و سازماندهی نمایید.
       </span>
     </div>
     @if (!addCategoryActive) {
       <a
         role="button"
-        class="p-2 px-4 relative text-sm mr-auto ml-0 bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-[15px] shadow-md shadow-black/20 cursor-pointer"
+        class="p-2 px-4 relative text-(length:--small-text14) leading-(--leading-sm) mr-auto ml-0 bg-blue-600 text-white flex flex-row justify-center items-center gap-1 rounded-(length:--addblog-inputRadius) shadow-md shadow-(--textBlack20) cursor-pointer"
         (click)="addCategoryActive = true"
       >
         <img src="assets/vectors/plus_math.svg" class="w-4 h-4" alt="" />
-        <img src="assets/vectors/arrow (1).png" class="absolute left-full w-9 ml-2.5 bottom-2 opacity-90 animate-pulse rotate-110 -scale-y-100" alt="">
+        <img
+          src="assets/vectors/arrow (1).png"
+          class="absolute left-full w-9 ml-2.5 bottom-2 opacity-90 animate-pulse rotate-110 -scale-y-100"
+          alt=""
+        />
         دسته بندی جدید
       </a>
     }
@@ -62,7 +72,7 @@
     } @else {
       @for (category of value(); track category.id) {
         <div
-          class="overflow-hidden glass-card bg-white dark:bg-black/80 relative transition-all duration-300 cursor-pointer hover:-translate-y-1.5 hover:shadow-xl flex flex-col rounded-3xl"
+          class="overflow-hidden glass-card-category bg-white dark:bg-(--textBlack80) relative transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-xl flex flex-col rounded-3xl"
         >
           <!-- Content -->
           <div class="px-4 py-4 flex flex-col gap-3 flex-1">
@@ -73,14 +83,14 @@
               >
                 <span
                   [class.pb-0.5]="isPersian(category.name[0])"
-                  class="text-[24px] font-bold text-blue-500 dark:text-blue-300"
+                  class="text-(length:--categorylist-avatarLetterSize) font-bold text-blue-500 dark:text-blue-300"
                 >
                   {{ category.name[0].toUpperCase() }}
                 </span>
               </div>
 
               <span
-                class="px-3 py-1 rounded-full text-[10px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
+                class="px-3 py-1 rounded-full text-(length:--addblog-helperTextSize) bg-blue-50 dark:bg-blue-500/20 text-blue-500"
               >
                 12 مقاله مرتبط
               </span>
@@ -88,26 +98,34 @@
 
             <!-- Title -->
             <div class="flex flex-col gap-1">
-              <h3 class="text-[18px] font-semibold text-black/90 dark:text-white/95">
+              <h3
+                class="text-(length:--blogcard-headingSize) font-semibold text-(--textBlack90) dark:text-(--textWhite95)"
+              >
                 {{ category.name }}
               </h3>
 
-              <span class="text-[12px] text-black/55 dark:text-white/65 flex items-center gap-1">
-                <i class="fa-solid fa-link text-[10px]"></i>
+              <span
+                class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) flex items-center gap-1"
+              >
+                <i class="fa-solid fa-link text-(length:--addblog-helperTextSize)"></i>
                 {{ category.urlHandle }}
               </span>
             </div>
 
             <!-- Description -->
-            <p class="text-[11px] leading-5 text-black/60 dark:text-white/70 line-clamp-2">
+            <p
+              class="text-(length:--addblog-badgeTextSize) leading-5 text-(--textBlack60) dark:text-(--textWhite70) line-clamp-2"
+            >
               مقالات و مطالب مرتبط با حوزه {{ category.name }} در این دسته‌بندی قرار می‌گیرند.
             </p>
 
             <!-- Footer -->
             <div
-              class="mt-auto pt-3 border-t border-black/5 dark:border-white/10 flex justify-between items-center"
+              class="mt-auto pt-3 border-t border-(--textBlack05) dark:border-(--textWhite10) flex justify-between items-center"
             >
-              <button class="px-3 py-1 rounded-full bg-slate-100 dark:bg-white/10 text-[11px] text-black/70 dark:text-white/70">
+              <button
+                class="px-3 py-1 rounded-full bg-slate-100 dark:bg-(--textWhite10) text-(length:--addblog-badgeTextSize) text-(--textBlack70) dark:text-(--textWhite70)"
+              >
                 مشاهده
               </button>
 
@@ -116,14 +134,20 @@
                   class="w-8 h-8 flex justify-center items-center rounded-xl bg-blue-50 dark:bg-blue-500/15 hover:scale-105 transition"
                   [routerLink]="['/admin/categories', 'edit', category.id]"
                 >
-                  <i class="fa-regular fa-pen-to-square fa-sm" style="color: rgb(65, 160, 233)"></i>
+                  <i
+                    class="fa-regular fa-pen-to-square fa-sm"
+                    style="color: var(--color-editIcon)"
+                  ></i>
                 </button>
 
                 <button
                   class="w-8 h-8 flex justify-center items-center rounded-xl bg-red-50 dark:bg-red-500/15 hover:scale-105 transition"
                   (click)="deleteCategory(category.id)"
                 >
-                  <i class="fa-regular fa-trash-can fa-sm" style="color: rgb(255, 80, 80)"></i>
+                  <i
+                    class="fa-regular fa-trash-can fa-sm"
+                    style="color: var(--color-deleteIcon)"
+                  ></i>
                 </button>
               </div>
             </div>

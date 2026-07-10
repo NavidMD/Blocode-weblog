@@ -29,7 +29,7 @@ textarea {
   opacity: 1;
 }
 
-.glass-card {
+.glass-card-sm {
   background: var(--textWhite05);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
@@ -43,24 +43,34 @@ textarea {
   overflow: hidden;
 }
 
-.glass-card::before {
+.glass-card-sm::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--textWhite30), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--textWhite30),
+    transparent
+  );
 }
 
-.glass-card::after {
+.glass-card-sm::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 1px;
   height: 100%;
-  background: linear-gradient(180deg, var(--textWhite30), transparent, var(--textWhite20));
+  background: linear-gradient(
+    180deg,
+    var(--textWhite30),
+    transparent,
+    var(--textWhite20)
+  );
 }
 
 #add-blog-hint img {

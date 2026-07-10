@@ -427,7 +427,7 @@
             @for (item of categoriesSelected; track item.id) {
               <div
                 (click)="toggleCategorySelection(item)"
-                class="text-blue-500 glass-card pb-0.5 px-2.5 pl-2.5 pt-1.5 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-(length:--addblog-badgeTextSize) select-none"
+                class="text-blue-500 glass-card-sm pb-0.5 px-2.5 pl-2.5 pt-1.5 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-(length:--addblog-badgeTextSize) select-none"
               >
                 {{ item.name }}
                 <i class="fa-solid fa-xmark pb-0.5" style="color: var(--color-brandBlue)"></i>
@@ -446,7 +446,7 @@
           <div
             id="category-list"
             #categoriesSearchBox
-            class="w-full bg-white dark:bg-blue-950 glass-card absolute rounded-(length:--addblog-inputRadius) right-0 top-[120%] z-10 shadow-sm shadow-(--textBlack20) gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
+            class="w-full bg-white dark:bg-blue-950 glass-card-sm absolute rounded-(length:--addblog-inputRadius) right-0 top-[120%] z-10 shadow-sm shadow-(--textBlack20) gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
           >
             @if (filteredCategories()?.length) {
               @for (category of filteredCategories(); track category.id) {

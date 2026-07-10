@@ -2,7 +2,6 @@ textarea {
   resize: none;
 }
 #edit-blog-page #category-list::-webkit-scrollbar {
-  /* display: block; */
   width: 1px !important;
   height: 1px !important;
 }
@@ -14,13 +13,13 @@ textarea {
 }
 
 #edit-blog-page #category-list::-webkit-scrollbar-thumb {
-  background: #2b00ff3a !important;
+  background: var(--addblog-scrollThumb) !important;
   border-radius: 10px;
 }
 
 #edit-blog-page #cat-select-input::placeholder {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: var(--addblog-placeholderSize);
+  color: var(--textBlack50);
 }
 
 #edit-blog-page #category-list {
