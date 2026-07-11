@@ -186,7 +186,7 @@
         <i class="fa-solid fa-power-off" style="color: var(--textWhite90)"></i>
       </button>
     }
-    @if (!authService.loggedUser()) {
+    @if (!authService.loggedUser() && showLoginBtn) {
       <button
         [routerLink]="['/admin', 'login']"
         class="cursor-pointer rounded-[13px] w-fit h-8 bg-blue-600 shadow-md shadow-black/20 text-white/90 text-sm flex flex-row items-center gap-2 font-thin px-4"

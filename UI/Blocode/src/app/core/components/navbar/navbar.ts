@@ -31,17 +31,25 @@ import { AuthService } from '../../../features/auth/services/auth-service';
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
+  private router = inject(Router);
+  currentUrl: WritableSignal<string> = signal(this.router.url);
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe((r) => {
+      this.currentUrl.set(this.router.url);
+      if(this.currentUrl().includes('/login') || this.currentUrl().includes('/signup')) {
+        this.showLoginBtn = false;
+      }
+      else {
+        this.showLoginBtn = true
+      }
+    });
+  }
+
   isDarkMode: boolean = false;
   authService = inject(AuthService);
   userInfoBoxOpen: boolean = false;
-  showLoginBtn: boolean = true;
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private router: Router,
-  ) {
-      console.log(this.router);
-  }
+  showLoginBtn: boolean = false;
 
   blogPostService = inject(BlogPostService);
   categoryService = inject(CategoryService);
