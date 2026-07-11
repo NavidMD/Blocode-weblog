@@ -25,7 +25,9 @@ export class CategoryService {
   //POST METHOD
   addCategory(newCategoryDTO: NewCategoryRequestValuesDTO) {
     this.addCategoryStatusSignal.set('loading');
-    this.http.post<Category>(`${this.baseUrl}/api/categories`, newCategoryDTO).subscribe({
+    this.http.post<Category>(`${this.baseUrl}/api/categories`, newCategoryDTO, {
+      withCredentials: true
+    }).subscribe({
       next: (res) => {
         this.addCategoryStatusSignal.set('success');
         console.log(res);
@@ -50,7 +52,9 @@ export class CategoryService {
       throw new Error("id is undefined!")
     }
     this.updateCategoryStatusSignal.set('updating');
-    this.http.put<Category>(`${this.baseUrl}/api/categories/${id}`, newCategoryDTO).subscribe({
+    this.http.put<Category>(`${this.baseUrl}/api/categories/${id}`, newCategoryDTO, {
+      withCredentials: true
+    }).subscribe({
       next: (res) => {
         this.updateCategoryStatusSignal.set('success');
         console.log(res);
@@ -64,7 +68,9 @@ export class CategoryService {
   //DELETE METHOD
   deleteCategory(id: string) {
     this.deleteCategoryStatusSignal.set('deleting');
-    this.http.delete<Category>(`${this.baseUrl}/api/categories/${id}`)
+    this.http.delete<Category>(`${this.baseUrl}/api/categories/${id}`, {
+      withCredentials: true
+    })
     .subscribe({
       next: (res) => {
         this.deleteCategoryStatusSignal.set('success')

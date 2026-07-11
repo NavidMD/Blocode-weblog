@@ -1,29 +1,28 @@
-.glass-card {
-  /* background: rgba(255, 255, 255, 0.1); */
+.glass-card-detail {
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--textWhite20);
   box-shadow:
-    0 5px 15px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
+    0 5px 15px var(--textBlack15),
+    inset 0 1px 0 var(--textWhite50),
+    inset 0 -1px 0 var(--textWhite10),
+    inset 0 0 2px 1px var(--textWhite10);
   position: relative;
   overflow: hidden;
 }
 
-.glass-card::before {
+.glass-card-detail::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, var(--textWhite30), transparent);
 }
 
-.glass-card::after {
+.glass-card-detail::after {
   content: '';
   position: absolute;
   top: 0;
@@ -32,8 +31,8 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.2),
+    var(--textWhite20),
     transparent,
-    rgba(255, 255, 255, 0.2)
+    var(--textWhite20)
   );
 }

@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-col pr-4 gap-1">
       <h1
-        class="text-(length:--blogcard-headingSize) flex items-center font-bold dark:text-(--textWhite95)"
+        class="text-(length:--heading-text18) flex items-center font-bold dark:text-(--textWhite95)"
       >
         مقالات
         @if (categoryName()) {
@@ -41,7 +41,7 @@
         }
       </h1>
       <span
-        class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) mt-1"
+        class="text-(length:--small-text12) text-(--textBlack55) dark:text-(--textWhite65) mt-1"
       >
         مشاهده جدیدترین و مفید ترین مقالات در زمینه
         {{
@@ -105,13 +105,13 @@
           <div id="main" class="w-full h-[35%] p-3 flex flex-col gap-1">
             <h2
               id="title"
-              class="text-(length:--blogcard-titleSize) font-bold text-(--textBlack90) dark:text-(--textWhite95)"
+              class="text-(length:--small-text15) font-bold text-(--textBlack90) dark:text-(--textWhite95)"
             >
               {{ blog.title }}
             </h2>
             <p
               id="shortDescription"
-              class="text-(length:--blogcard-smallSize) text-(--textBlack60) dark:text-(--textWhite60) leading-(--blogcard-descLineHeight)"
+              class="text-(length:--small-text12) text-(--textBlack60) dark:text-(--textWhite60) leading-(--blogcard-descLineHeight)"
             >
               {{ blog.shortDescription }}
             </p>

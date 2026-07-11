@@ -43,7 +43,7 @@ export class Login {
             progressBar: true,
             timeOut: 3000,
           });
-          this.router.navigate(['/']);  
+          this.router.navigate(['/']);
         },
         error: (err: HttpErrorResponse) => {
           const errorMessage = err.error.errors.message[0];

@@ -52,6 +52,9 @@ export class Home {
   categoriesLoading: Signal<boolean> = this.categoriesRef.isLoading;
   categories: WritableSignal<Category[] | undefined> = this.categoriesRef.value;
 
+  //NewsBlogs
+  newsBlogs: WritableSignal<BlogPost[] | undefined> = signal(undefined);
+
   openCategories = signal<Set<string>>(new Set());
 
   toggleCategory(id: string) {
@@ -68,7 +71,11 @@ export class Home {
 
   constructor() {
     effect(() => {
-      console.log('status:', this.blogsStatus());
+      if(this.blogPosts()) {
+         // یافتن مقاله های دسته بندی اخبار
+          const news = this.blogPosts()?.filter((b) => b.categories.some(c => c.name === 'اخبار'));
+          this.newsBlogs.set(news);
+      }
     });
   }
 }

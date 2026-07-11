@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   DOCUMENT,
+  effect,
   HostListener,
   inject,
   Inject,
+  input,
   Input,
   OnInit,
   signal,
@@ -32,11 +34,14 @@ export class Navbar implements OnInit {
   isDarkMode: boolean = false;
   authService = inject(AuthService);
   userInfoBoxOpen: boolean = false;
+  showLoginBtn: boolean = true;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
-  ) {}
+  ) {
+      console.log(this.router);
+  }
 
   blogPostService = inject(BlogPostService);
   categoryService = inject(CategoryService);

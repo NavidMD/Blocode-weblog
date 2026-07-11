@@ -114,17 +114,19 @@
                       </div>
                     </li>
                   }
-                  <li class="w-full flex flex-row">
-                    <p
-                      class="w-max flex items-center justify-between pt-[7px] text-(length:--navbar-dropdownMd) text-blue-600 dark:text-blue-300 gap-2"
-                      [routerLink]="['/admin', 'categories']"
-                    >
-                      <i
-                        class="fa-regular fa-pen-to-square fa-[10px] text-blue-600 dark:text-blue-300"
-                      ></i>
-                      ویرایش دسته بندی ها
-                    </p>
-                  </li>
+                  @if (authService.loggedUser() && authService.loggedUser()?.roles!.includes('Writer')) {
+                    <li class="w-full flex flex-row">
+                      <p
+                        class="w-max flex items-center justify-between pt-[7px] text-(length:--navbar-dropdownMd) text-blue-600 dark:text-blue-300 gap-2"
+                        [routerLink]="['/admin', 'categories']"
+                      >
+                        <i
+                          class="fa-regular fa-pen-to-square fa-[10px] text-blue-600 dark:text-blue-300"
+                        ></i>
+                        ویرایش دسته بندی ها
+                      </p>
+                    </li>
+                  }
                 </ul>
               }
             </div>
