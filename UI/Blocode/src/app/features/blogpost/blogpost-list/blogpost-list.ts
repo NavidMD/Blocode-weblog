@@ -15,6 +15,7 @@ import { BlogPost } from '../models/blogpost.model';
 import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../auth/services/auth-service';
 
 @Component({
   selector: 'app-blogpost-list',
@@ -25,6 +26,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class BlogpostList {
   categoryName = input<string>();
   blogpostService = inject(BlogPostService);
+  authService = inject(AuthService);
+
   addBlogActive: boolean = false;
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);

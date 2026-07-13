@@ -224,6 +224,37 @@ namespace Blocode.API.Controllers
             return Ok(responseDTO);
         }
 
+        // GET : {apibaseurl}/api/blogs/searchByWordAndCategory
+        [HttpGet("searchByWordAndCategory")]
+        public async Task<ActionResult> GetBlogsBySearchWordAndCategory([FromQuery] string? searchWord, [FromQuery] string? selectedCategory)
+        {
+            var result = await blogRepository.GetBlogsBySearchWordAndCategoryAsync(searchWord, selectedCategory);
+            
+            var mappedResponse = new List<BlogPostDTO>();
+            foreach (var blog in result)
+            {
+                var item = new BlogPostDTO()
+                {
+                    Id = blog.Id,
+                    Title = blog.Title,
+                    ShortDescription = blog.ShortDescription,
+                    Content = blog.Content,
+                    UrlHandle = blog.UrlHandle,
+                    FeaturedImageUrl = blog.FeaturedImageUrl,
+                    PublishedDate = blog.PublishedDate,
+                    Author = blog.Author,
+                    IsVisible = blog.IsVisible,
+                    Categories = blog.Categories.Select(c => new CategoryDTO()
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        UrlHandle = c.UrlHandle
+                    }).ToList()
+                };
+                mappedResponse.Add(item);
+            };
+            return Ok(mappedResponse);
+        }
         // PUT : {apibaseurl}/api/blogs/{id}
         [HttpPut("{id:guid}")]
         [Authorize(Roles = "Writer")]

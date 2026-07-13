@@ -1,11 +1,18 @@
 import { Injectable, InputSignal, Signal, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { HttpClient, httpResource, HttpResourceRef, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpParams,
+  httpResource,
+  HttpResourceRef,
+  HttpResponse,
+} from '@angular/common/http';
 import {
   NewBlogPostRequestValuesDTO,
   BlogPost,
   EditBlogPostRequestValuesDTO,
 } from '../models/blogpost.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +43,14 @@ export class BlogPostService {
     url: InputSignal<string | undefined>,
   ): HttpResourceRef<BlogPost | undefined> {
     return httpResource<BlogPost>(() => `${this.baseUrl}/api/blogs/${url()}`);
+  }
+
+  getBlogsFromAdvancedSearch(searchWord: string,selectedCategory: string): Observable<BlogPost[] | []> {
+    let params = new HttpParams().set('searchWord', searchWord);
+    if (selectedCategory !== 'در دسته بندی' && selectedCategory !== 'بدون دسته بندی') {
+      params = params.set('selectedCategory', selectedCategory);
+    }
+    return this.http.get<BlogPost[] | []>(`${this.baseUrl}/api/blogs/searchByWordAndCategory`, { params });
   }
 
   //HTTP POST

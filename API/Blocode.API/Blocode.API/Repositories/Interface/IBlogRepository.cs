@@ -17,5 +17,7 @@ namespace Blocode.API.Repositories.Interface
         Task<IEnumerable<BlogPost>> GetBlogsByCategoryAsync(string categoryName);
 
         Task<BlogPost?> GetBlogByUrlHandleAsync(string urlHandle);
+
+        Task<IEnumerable<BlogPost>> GetBlogsBySearchWordAndCategoryAsync(string? searchWord, string? categoryName);
     }
 }

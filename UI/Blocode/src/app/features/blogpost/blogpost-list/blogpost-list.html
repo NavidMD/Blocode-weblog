@@ -53,7 +53,7 @@
         }}
       </span>
     </div>
-    @if (!addBlogActive) {
+    @if (!addBlogActive && authService.loggedUser()?.roles!.includes('Writer')) {
       <a
         role="button"
         [routerLink]="['/admin', 'blogs', 'add']"

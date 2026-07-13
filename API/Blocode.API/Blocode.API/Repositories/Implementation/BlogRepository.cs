@@ -50,7 +50,6 @@ namespace Blocode.API.Repositories.Implementation
             await _context.SaveChangesAsync();
             return exisitingBlog;
         }
-
         public async Task<IEnumerable<BlogPost>> GetBlogsByCategoryAsync(string categoryName)
         {
             return await _context.BlogPosts
@@ -58,10 +57,19 @@ namespace Blocode.API.Repositories.Implementation
                     .Where(b => b.Categories.Any(c => c.Name == categoryName))
                     .ToListAsync();
         }
-
         public async Task<BlogPost?> GetBlogByUrlHandleAsync(string urlHandle)
         {
             return await _context.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.UrlHandle == urlHandle);
+        }
+        public async Task<IEnumerable<BlogPost>> GetBlogsBySearchWordAndCategoryAsync(string? searchWord, string? categoryName)
+        {
+            var query =
+                 (from blog in _context.BlogPosts.Include(b => b.Categories)
+                  where string.IsNullOrWhiteSpace(categoryName) || blog.Categories.Any(c => c.Name == categoryName)
+                  where string.IsNullOrWhiteSpace(searchWord) || blog.Title.ToLower().Contains(searchWord.ToLower())
+                  select blog
+                 );
+            return await query.ToListAsync();
         }
     }
 }

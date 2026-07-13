@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   CUSTOM_ELEMENTS_SCHEMA,
   effect,
   inject,
@@ -19,6 +20,7 @@ import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
 import { RouterLink } from '@angular/router';
 import { LoaderMagazine } from '../../../shared/components/loader-magazine/loader-magazine';
 import { LoadError } from '../../../shared/components/load-error/load-error';
+import { HttpResourceRef } from '@angular/common/http';
 
 register();
 
@@ -40,6 +42,9 @@ export class Home {
   blogPostService = inject(BlogPostService);
   categoryService = inject(CategoryService);
 
+  selectedFilter = signal('در دسته بندی');
+  isFilterOpen = signal(false);
+
   //Blogs
   blogPostsRef = this.blogPostService.getAllBlogPosts();
   blogsLoading: Signal<boolean> = this.blogPostsRef.isLoading;
@@ -55,6 +60,11 @@ export class Home {
   //NewsBlogs
   newsBlogs: WritableSignal<BlogPost[] | undefined> = signal(undefined);
 
+  //ُSearchedBlogs
+  searchedBlogs = signal<BlogPost[] | undefined>(undefined);
+  searchedBlogsLoading = signal(false);
+  isSearching = signal(false);
+
   openCategories = signal<Set<string>>(new Set());
 
   toggleCategory(id: string) {
@@ -69,12 +79,38 @@ export class Home {
     return this.openCategories().has(id);
   }
 
+  selectFilterOption(option: string) {
+    this.selectedFilter.set(option);
+    this.isFilterOpen.set(false);
+  }
+
+  searchBlog(event: Event) {
+    const searchValue = (event.target as HTMLInputElement).value;
+    if (!searchValue.trim()) {
+      this.isSearching.set(false);
+      this.searchedBlogs.set(undefined);
+      return;
+    }
+    this.isSearching.set(true);
+    this.searchedBlogsLoading.set(true);
+
+    this.blogPostService.getBlogsFromAdvancedSearch(searchValue, this.selectedFilter()).subscribe({
+      next: (res) => {
+        this.searchedBlogs.set(res);
+        this.searchedBlogsLoading.set(false);
+      },
+      error: () => {
+        this.searchedBlogsLoading.set(false);
+      },
+    });
+  }
+
   constructor() {
     effect(() => {
-      if(this.blogPosts()) {
-         // یافتن مقاله های دسته بندی اخبار
-          const news = this.blogPosts()?.filter((b) => b.categories.some(c => c.name === 'اخبار'));
-          this.newsBlogs.set(news);
+      if (this.blogPosts()) {
+        // یافتن مقاله های دسته بندی اخبار
+        const news = this.blogPosts()?.filter((b) => b.categories.some((c) => c.name === 'اخبار'));
+        this.newsBlogs.set(news);
       }
     });
   }
