@@ -53,7 +53,7 @@ export class CategoryList {
   getAllBlogsRef = this.blogPostService.getAllBlogPosts();
   allBlogsValue: WritableSignal<BlogPost[] | undefined> = this.getAllBlogsRef.value;
 
-
+  
   addCategoryActive: boolean = false;
 
   isPersian(char: string): boolean {

@@ -3,8 +3,7 @@
     <app-load-error></app-load-error>
     <span class="text-black/60 dark:text-white/60 mt-3 text-sm">خطا در اتصال به سرور!</span>
   </div>
-}
-@else {
+} @else {
   <div class="w-full h-auto min-h-[calc(100vh-68px)] flex flex-col justify-start items-start gap-5">
     <div class="w-full flex flex-row items-center">
       <div
@@ -24,7 +23,7 @@
               > &nbsp; ایجاد دسته بندی
             </span>
           }
-          <label
+          <!-- <label
             for="category-open-search"
             class="cursor-pointer px-3 mx-2 py-1 h-(length:--categorylist-searchHeight) rounded-full flex flex-row items-center gap-1 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
           >
@@ -37,7 +36,7 @@
             type="text"
             placeholder="جستجو ..."
             class="input-text-normal dark:text-(--textWhite95) font-light justify-right px-2 items-center rounded-(length:--addblog-inputRadius) mr-4 border dark:border-(--textWhite20) border-gray-200 outline-0 h-(length:--categorylist-searchHeight)"
-          />
+          /> -->
         </h1>
         <span
           class="text-(length:--small-text12) text-(--textBlack55) dark:text-(--textWhite65) mt-1"
@@ -78,7 +77,10 @@
       @if (categoriesLoading()) {
         <app-loader-magazine class="scale-50 mt-20"></app-loader-magazine>
       } @else {
-        @for (category of allCategoriesValue(); track category.id) {
+        @for (
+          category of allCategoriesValue()?.filter(c => c.parentCategoryId == null);
+          track category.id
+        ) {
           <div
             class="overflow-hidden glass-card-category bg-white dark:bg-(--textBlack80) relative transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-xl flex flex-col rounded-3xl"
           >
@@ -96,14 +98,13 @@
                     {{ category.name[0].toUpperCase() }}
                   </span>
                 </div>
-
                 <span
                   class="px-3 py-1 rounded-full text-(length:--addblog-helperTextSize) bg-blue-50 dark:bg-blue-500/20 text-blue-500"
                 >
-                  {{allBlogsValue()?.filter((b) => b.categories.some(c => c.name === category.name))?.length}} مقاله مرتبط
+                  {{allBlogsValue()?.filter((b) => b.categories.some(c => c.name === category.name))?.length}}
+                  مقاله مرتبط
                 </span>
               </div>
-
               <!-- Title -->
               <div class="flex flex-col gap-1">
                 <h3
@@ -111,7 +112,6 @@
                 >
                   {{ category.name }}
                 </h3>
-
                 <span
                   class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) flex items-center gap-1"
                 >
@@ -119,24 +119,22 @@
                   {{ category.urlHandle }}
                 </span>
               </div>
-
               <!-- Description -->
               <p
                 class="text-(length:--addblog-badgeTextSize) leading-5 text-(--textBlack60) dark:text-(--textWhite70) line-clamp-2"
               >
                 مقالات و مطالب مرتبط با حوزه {{ category.name }} در این دسته‌بندی قرار می‌گیرند.
               </p>
-
               <!-- Footer -->
               <div
                 class="mt-auto pt-3 border-t border-(--textBlack05) dark:border-(--textWhite10) flex justify-between items-center"
               >
                 <button
-                  class="px-3 py-1 rounded-full bg-slate-100 dark:bg-(--textWhite10) text-(length:--addblog-badgeTextSize) text-(--textBlack70) dark:text-(--textWhite70)"
+                  [routerLink]="['/admin', 'blogs', 'byCategory', category.name]"
+                  class="cursor-pointer px-3 py-1 rounded-full bg-slate-100 dark:bg-(--textWhite10) text-(length:--addblog-badgeTextSize) text-(--textBlack70) dark:text-(--textWhite70)"
                 >
                   مشاهده
                 </button>
-
                 <div class="flex gap-2">
                   <button
                     class="cursor-pointer w-8 h-8 flex justify-center items-center rounded-xl bg-blue-50 dark:bg-blue-500/15"
@@ -147,7 +145,6 @@
                       style="color: var(--color-editIcon)"
                     ></i>
                   </button>
-
                   <button
                     class="cursor-pointer w-8 h-8 flex justify-center items-center rounded-xl bg-red-50 dark:bg-red-500/15"
                     (click)="deleteCategory(category.id)"
@@ -161,9 +158,168 @@
               </div>
             </div>
           </div>
+          @for (sub of category.subCategories; track sub.id) {
+            <div
+              class="overflow-hidden glass-card-category bg-white dark:bg-(--textBlack80) relative transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-xl flex flex-col rounded-3xl"
+            >
+              <!-- Content -->
+              <div class="px-4 py-4 flex flex-col gap-3 flex-1">
+                <!-- Header -->
+                <div class="flex justify-between items-start">
+                  <div
+                    class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-500/20 flex justify-center items-center"
+                  >
+                    <span
+                      [class.pb-0.5]="isPersian(sub.name[0])"
+                      class="text-(length:--categorylist-avatarLetterSize) font-bold text-blue-500 dark:text-blue-300"
+                    >
+                      {{ sub.name[0].toUpperCase() }}
+                    </span>
+                  </div>
+                  <span
+                    class="px-3 py-1 rounded-full text-(length:--addblog-helperTextSize) bg-blue-50 dark:bg-blue-500/20 text-blue-500"
+                  >
+                    {{allBlogsValue()?.filter((b) => b.categories.some(c => c.name === sub.name))?.length}}
+                    مقاله مرتبط
+                  </span>
+                </div>
+                <!-- Title -->
+                <div class="flex flex-col gap-1">
+                  <h3
+                    class="text-(length:--blogcard-headingSize) font-semibold text-(--textBlack90) dark:text-(--textWhite95)"
+                  >
+                    {{ sub.name }}
+                  </h3>
+                  <span
+                    class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) flex items-center gap-1"
+                  >
+                    <i class="fa-solid fa-link text-(length:--addblog-helperTextSize)"></i>
+                    {{ sub.urlHandle }}
+                  </span>
+                </div>
+                <!-- Description -->
+                <p
+                  class="text-(length:--addblog-badgeTextSize) leading-5 text-(--textBlack60) dark:text-(--textWhite70) line-clamp-2"
+                >
+                  مقالات و مطالب مرتبط با حوزه {{ sub.name }} در این دسته‌بندی قرار می‌گیرند.
+                </p>
+                <!-- Footer -->
+                <div
+                  class="mt-auto pt-3 border-t border-(--textBlack05) dark:border-(--textWhite10) flex justify-between items-center"
+                >
+                  <button
+                    [routerLink]="['/admin', 'blogs', 'byCategory', sub.name]"
+                    class="cursor-pointer px-3 py-1 rounded-full bg-slate-100 dark:bg-(--textWhite10) text-(length:--addblog-badgeTextSize) text-(--textBlack70) dark:text-(--textWhite70)"
+                  >
+                    مشاهده
+                  </button>
+                  <div class="flex gap-2">
+                    <button
+                      class="cursor-pointer w-8 h-8 flex justify-center items-center rounded-xl bg-blue-50 dark:bg-blue-500/15"
+                      [routerLink]="['/admin/categories', 'edit', sub.id]"
+                    >
+                      <i
+                        class="fa-regular fa-pen-to-square fa-sm"
+                        style="color: var(--color-editIcon)"
+                      ></i>
+                    </button>
+
+                    <button
+                      class="cursor-pointer w-8 h-8 flex justify-center items-center rounded-xl bg-red-50 dark:bg-red-500/15"
+                      (click)="deleteCategory(sub.id)"
+                    >
+                      <i
+                        class="fa-regular fa-trash-can fa-sm"
+                        style="color: var(--color-deleteIcon)"
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @for (subsub of sub.subCategories; track subsub.id) {
+              <div
+                class="overflow-hidden glass-card-category bg-white dark:bg-(--textBlack80) relative transition-all cursor-pointer hover:-translate-y-1.5 hover:shadow-xl flex flex-col rounded-3xl"
+              >
+                <!-- Content -->
+                <div class="px-4 py-4 flex flex-col gap-3 flex-1">
+                  <!-- Header -->
+                  <div class="flex justify-between items-start">
+                    <div
+                      class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-500/20 flex justify-center items-center"
+                    >
+                      <span
+                        [class.pb-0.5]="isPersian(subsub.name[0])"
+                        class="text-(length:--categorylist-avatarLetterSize) font-bold text-blue-500 dark:text-blue-300"
+                      >
+                        {{ subsub.name[0].toUpperCase() }}
+                      </span>
+                    </div>
+                    <span
+                      class="px-3 py-1 rounded-full text-(length:--addblog-helperTextSize) bg-blue-50 dark:bg-blue-500/20 text-blue-500"
+                    >
+                      {{allBlogsValue()?.filter((b) => b.categories.some(c => c.name === subsub.name))?.length}}
+                      مقاله مرتبط
+                    </span>
+                  </div>
+                  <!-- Title -->
+                  <div class="flex flex-col gap-1">
+                    <h3
+                      class="text-(length:--blogcard-headingSize) font-semibold text-(--textBlack90) dark:text-(--textWhite95)"
+                    >
+                      {{ subsub.name }}
+                    </h3>
+
+                    <span
+                      class="text-(length:--blogcard-smallSize) text-(--textBlack55) dark:text-(--textWhite65) flex items-center gap-1"
+                    >
+                      <i class="fa-solid fa-link text-(length:--addblog-helperTextSize)"></i>
+                      {{ subsub.urlHandle }}
+                    </span>
+                  </div>
+                  <!-- Description -->
+                  <p
+                    class="text-(length:--addblog-badgeTextSize) leading-5 text-(--textBlack60) dark:text-(--textWhite70) line-clamp-2"
+                  >
+                    مقالات و مطالب مرتبط با حوزه {{ subsub.name }} در این دسته‌بندی قرار می‌گیرند.
+                  </p>
+                  <!-- Footer -->
+                  <div
+                    class="mt-auto pt-3 border-t border-(--textBlack05) dark:border-(--textWhite10) flex justify-between items-center"
+                  >
+                    <button
+                      [routerLink]="['/admin', 'blogs', 'byCategory', subsub.name]"
+                      class="cursor-pointer px-3 py-1 rounded-full bg-slate-100 dark:bg-(--textWhite10) text-(length:--addblog-badgeTextSize) text-(--textBlack70) dark:text-(--textWhite70)"
+                    >
+                      مشاهده
+                    </button>
+                    <div class="flex gap-2">
+                      <button
+                        class="cursor-pointer w-8 h-8 flex justify-center items-center rounded-xl bg-blue-50 dark:bg-blue-500/15"
+                        [routerLink]="['/admin/categories', 'edit', subsub.id]"
+                      >
+                        <i
+                          class="fa-regular fa-pen-to-square fa-sm"
+                          style="color: var(--color-editIcon)"
+                        ></i>
+                      </button>
+                      <button
+                        class="cursor-pointer w-8 h-8 flex justify-center items-center rounded-xl bg-red-50 dark:bg-red-500/15"
+                        (click)="deleteCategory(subsub.id)"
+                      >
+                        <i
+                          class="fa-regular fa-trash-can fa-sm"
+                          style="color: var(--color-deleteIcon)"
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          }
         }
       }
     </div>
   </div>
 }
-
