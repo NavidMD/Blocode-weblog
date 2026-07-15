@@ -25,7 +25,7 @@
           navigation="true"
           autoplay-delay="5000"
         >
-          @for (blog of blogPosts()?.slice(-3); track blog.id) {
+          @for (blog of blogPosts()?.slice(-4); track blog.id) {
             <swiper-slide>
               <div
                 class="h-[420px] relative rounded-[20px] cursor-pointer hero-blog-card"
@@ -33,19 +33,19 @@
               >
                 <img [src]="blog.featuredImageUrl" class="w-full h-full object-cover" alt="" />
                 <div
-                  class="absolute px-6 bottom-5 w-full flex flex-col items-start gap-2 text-xs text-white/95 z-999"
+                  class="absolute px-5 bottom-4 w-full flex flex-col items-start gap-1 text-xs text-white/95 z-999"
                 >
                   <div class="flex flex-row gap-1.5 justify-center items-center">
                     <div
-                      class="w-8 h-8 mb-1 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
+                      class="w-7 h-7 mb-1 bg-white shadow-md shadow-black/15 rounded-full flex justify-center items-center text-[15px]"
                     >
-                      <img class="w-7 h-7 opacity-50" src="assets/vectors/male_user.svg" />
+                      <img class="w-6 h-6 opacity-50" src="assets/vectors/male_user.svg" />
                     </div>
-                    <p class="text-[14px] text-white/95 text-shadow-lg text-shadow-black/10">
+                    <p class="text-[13px] text-white/95 text-shadow-lg text-shadow-black/10">
                       {{ blog.author }}
                     </p>
                   </div>
-                  <p class="font-bold text-[27px] mb-1 w-1/2">{{ blog.title }}</p>
+                  <p class="font-bold text-[24px] mb-1 w-1/2">{{ blog.title }}</p>
                   <p class="font-thin leading-6 text-white/80 text-sm mb-2 w-1/2">
                     {{ blog.shortDescription }}
                   </p>
@@ -73,7 +73,7 @@
     <!-- CATEGORIES -->
     <div id="categories-container" class="w-full overflow-visible gap-5 min-h-[100px] pb-3 pt-2">
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'سرگرمی']"
+        [routerLink]="['blogs', 'byCategory', 'سرگرمی']"
         class="shiny-card rounded-3xl! glass-card bg-[rgba(142,121,217,0.95)] dark:bg-[rgba(142,121,217,0.75)] hover:bg-[rgba(142,121,217)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -81,7 +81,7 @@
         <span class="text-white text-[14px] font-thin text-center">سرگرمی</span>
       </div>
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'تکنولوژی']"
+        [routerLink]="['blogs', 'byCategory', 'تکنولوژی']"
         class="rounded-3xl! glass-card bg-[rgba(87,86,86,0.95)] dark:bg-[rgba(87,86,86,0.75)] hover:bg-[rgba(87,86,86)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -89,7 +89,7 @@
         <span class="text-white text-[14px] font-thin text-center">تکنولوژی</span>
       </div>
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'علمی']"
+        [routerLink]="['blogs', 'byCategory', 'علمی']"
         class="rounded-3xl! glass-card bg-[rgba(92,158,85,0.95)] dark:bg-[rgba(92,158,85,0.75)] hover:bg-[rgba(92,158,85)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -97,7 +97,7 @@
         <span class="text-white text-[14px] font-thin text-center">علمی</span>
       </div>
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'آموزشی']"
+        [routerLink]="['blogs', 'byCategory', 'آموزشی']"
         class="rounded-3xl! glass-card bg-[rgba(77,85,255,0.95)] dark:bg-[rgba(77,85,255,0.75)] hover:bg-[rgba(77,85,255)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -105,7 +105,7 @@
         <span class="text-white text-[14px] font-thin text-center">آموزشی</span>
       </div>
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'نقد و بررسی']"
+        [routerLink]="['blogs', 'byCategory', 'نقد و بررسی']"
         class="rounded-3xl! glass-card bg-[rgba(181,102,42,0.95)] dark:bg-[rgba(181,102,42,0.75)] hover:bg-[rgba(181,102,42)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -113,7 +113,7 @@
         <span class="text-white text-[14px] font-thin text-center">نقد و بررسی</span>
       </div>
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'اخبار']"
+        [routerLink]="['blogs', 'byCategory', 'اخبار']"
         class="rounded-3xl! glass-card bg-[rgba(176,158,0,0.95)] dark:bg-[rgba(176,158,0,0.75)] hover:bg-[rgba(176,158,0)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -121,7 +121,7 @@
         <span class="text-white text-[14px] font-thin text-center">اخبار</span>
       </div>
       <div
-        [routerLink]="['/admin', 'blogs', 'byCategory', 'ترفند']"
+        [routerLink]="['blogs', 'byCategory', 'ترفند']"
         class="rounded-3xl! glass-card bg-[rgba(214,39,39,0.9)] dark:bg-[rgba(214,39,39,0.7)] hover:bg-[rgba(214,39,39)] transition flex shrink-0 flex-col justify-center items-center gap-4 cursor-pointer hover:-translate-y-0.5"
       >
         <div class="shine"></div>
@@ -342,7 +342,7 @@
             <i class="fa-solid fa-bullhorn fa-sm" style="color: rgb(155, 155, 155)"></i>
             <h3 class="text-[15px] font-bold dark:text-white/95">جدید ترین اخبار</h3>
             <span
-              [routerLink]="['/admin', 'blogs', 'byCategory', 'اخبار']"
+              [routerLink]="['blogs', 'byCategory', 'اخبار']"
               class="cursor-pointer px-3 ml-0 mr-auto py-1 rounded-full flex flex-row items-center gap-1 text-[12px] bg-blue-50 dark:bg-blue-500/20 text-blue-500"
             >
               بیشتر
@@ -418,7 +418,7 @@
         </div>
 
         <!-- LEADERBOARD -->
-        <div class="bg-white/5 glass-card rounded-2xl p-6">
+        <!-- <div class="bg-white/5 glass-card rounded-2xl p-6">
           <div class="w-full flex flex-row justify-start items-center mb-5 gap-1.5">
             <i class="fa-solid fa-star-half-stroke fa-sm" style="color: rgb(155, 155, 155)"></i>
             <h3 class="text-[15px] font-bold dark:text-white/95">جدول امتیازات</h3>
@@ -467,7 +467,7 @@
               <span class="text-xs font-bold text-blue-600">۴.۴</span>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

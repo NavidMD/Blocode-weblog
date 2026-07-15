@@ -130,6 +130,17 @@ export class EditBlogpost {
 
   editBlogPost() {
     const id = this.id();
+    console.log('Form valid?', this.editBlogPostForm.valid);
+    console.log('Form errors:', this.editBlogPostForm.errors);
+    console.log('id:', id);
+    if (!this.editBlogPostForm.valid) {
+      Object.keys(this.editBlogPostForm.controls).forEach((key) => {
+        const control = this.editBlogPostForm.get(key);
+        if (control?.invalid) {
+          console.log(key, control.errors);
+        }
+      });
+    }
     const formValues = this.editBlogPostForm.getRawValue();
     if (this.editBlogPostForm.valid && id) {
       const editedBlogPost: EditBlogPostRequestValuesDTO = {
@@ -147,7 +158,7 @@ export class EditBlogpost {
       this.blogpostService.editBlogPost(id, editedBlogPost).subscribe({
         next: (response) => {
           if (response) {
-            this.router.navigate(['/', 'admin', 'blogs']);
+            this.router.navigate(['/', 'blogs']);
             this.toastService.success('مقاله با موفقیت ویرایش شد', '', {
               progressBar: true,
               timeOut: 3000,
@@ -155,7 +166,7 @@ export class EditBlogpost {
           }
         },
         error: (err) => {
-          this.toastService.error('خطا در ارتباط با سرور', `${err.status}`, {
+          this.toastService.error('خطا در ارتباط با سرور', ``, {
             progressBar: true,
             timeOut: 3000,
           });
@@ -169,7 +180,7 @@ export class EditBlogpost {
     if (id) {
       this.blogpostService.deleteBlogPost(id).subscribe({
         next: (response) => {
-          this.router.navigate(['/admin/blogs']);
+          this.router.navigate(['/blogs']);
           this.toastService.success('مقاله با موفقیت حذف شد', '', {
             progressBar: true,
             timeOut: 3000,

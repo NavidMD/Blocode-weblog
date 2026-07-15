@@ -7,6 +7,7 @@ import { EditBlogpost } from './features/blogpost/edit-blogpost/edit-blogpost';
 import { Home } from './features/public/home/home';
 import { BlogDetails } from './features/public/blog-details/blog-details';
 import { Login } from './features/auth/login/login';
+import { adminGuard } from './features/auth/guards/admin-guard';
 
 export const routes: Routes = [
   {
@@ -14,31 +15,35 @@ export const routes: Routes = [
     component: BlogDetails
   },
   {
-    path: 'admin/blogs/byCategory/:categoryName',
+    path: 'blogs/byCategory/:categoryName',
     component: BlogpostList
   },
   {
     path: 'admin/blogs/edit/:id',
-    component: EditBlogpost
+    component: EditBlogpost,
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/categories/edit/:id',
     component: EditCategory,
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/blogs/add',
-    component: AddBlogpost
+    component: AddBlogpost,
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/categories',
     component: CategoryList,
+    canActivate: [adminGuard]
   },
   {
-    path: 'admin/blogs',
+    path: 'blogs',
     component: BlogpostList,
   },
   {
-    path: 'admin/login',
+    path: 'login',
     component: Login
   },
   {

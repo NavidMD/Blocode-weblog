@@ -68,7 +68,7 @@ export class AddCategory {
         });
       }
       if (this.categoryService.addCategoryStatusSignal() === 'error') {
-        this.toastService.error('خطا در ارتباط با سرور', '', {
+        this.toastService.error('خطا در ایجاد دسته بندی!', '', {
           progressBar: true,
           timeOut: 3000,
         });

@@ -1,5 +1,5 @@
 import { inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { firstValueFrom, Observable, tap } from 'rxjs';
 import { LoggedUser, LoginResponseDTO } from '../models/auth.model';
 import {
   HttpClient,
@@ -20,6 +20,27 @@ export class AuthService {
   router = inject(Router);
 
   loggedUser: WritableSignal<LoggedUser | null> = signal(null);
+
+  private authPromise: Promise<void> | null = null;
+
+  checkAuth(): Promise<void> {
+    if (this.authPromise) {
+      return this.authPromise;
+    } else {
+      this.authPromise = firstValueFrom(
+        this.http.get<LoggedUser>(`${environment.apiBaseUrl}/api/auth/me`, {
+          withCredentials: true,
+        })
+      )
+      .then((user) => {
+        this.loggedUser.set(user);
+      })
+      .catch(() => {
+        this.loggedUser.set(null);
+      })
+      return this.authPromise;
+    }
+  }
 
   loadUser(): HttpResourceRef<LoggedUser | undefined> {
     return httpResource<LoggedUser>(() => {
@@ -60,14 +81,14 @@ export class AuthService {
             progressBar: true,
             timeOut: 3000,
           });
-          this.router.navigate(['/admin','login']);
+          this.router.navigate(['/admin', 'login']);
         },
         error: () => {
           this.toastService.error(`خطا`, 'دوباره تلاش کنید', {
             progressBar: true,
             timeOut: 3000,
           });
-        }
+        },
       });
   }
 }

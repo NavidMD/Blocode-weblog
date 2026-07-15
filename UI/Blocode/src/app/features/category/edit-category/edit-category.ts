@@ -5,6 +5,8 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/services/auth-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-category',
@@ -14,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class EditCategory {
   private categoryService = inject(CategoryService);
+  toastService = inject(ToastrService);
   editCategoryActive: boolean = false;
   id = input<string>();
   changeState: boolean = false;
@@ -27,9 +30,16 @@ export class EditCategory {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigateByUrl(this.router.url);
         });
+        this.toastService.success('دسته بندی با موفقیت ویرایش شد', '', {
+          progressBar: true,
+          timeOut: 3000,
+        });
       }
       if (this.categoryService.updateCategoryStatusSignal() === 'error') {
-        console.log('updating category failed in database!');
+        this.toastService.error('خطا در ویرایش دسته بندی!', '', {
+          progressBar: true,
+          timeOut: 3000,
+        });
       }
     });
   }
