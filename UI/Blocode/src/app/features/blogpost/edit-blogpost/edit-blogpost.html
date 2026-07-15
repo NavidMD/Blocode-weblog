@@ -1,4 +1,7 @@
-<div id="edit-blog-page" class="w-full min-h-[calc(100vh-68px)] h-auto flex flex-col justify-start items-start gap-5">
+<div
+  id="edit-blog-page"
+  class="w-full min-h-[calc(100vh-68px)] h-auto flex flex-col justify-start items-start gap-5"
+>
   <div class="w-full flex flex-row justify-between items-center">
     <h1 class="text-(length:--editblog-headingSize) font-bold dark:text-(--textWhite95)">
       مقالات
@@ -24,17 +27,20 @@
           for="blog-title"
           >عنوان مقاله</label
         >
-        @if (editBlogPostForm.controls.title.invalid && editBlogPostForm.controls.title.touched) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+        @if (
+          editBlogPostForm.controls.title.invalid ||
+          editBlogPostForm.controls.title.hasError('required')
+        ) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
-        @if (editBlogPostForm.controls.title.valid && editBlogPostForm.controls.title.touched) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+        @if (editBlogPostForm.controls.title.valid && editBlogPostForm.controls.title.value) {
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -86,20 +92,21 @@
           >لینک مقاله (slug)</label
         >
         @if (
-          editBlogPostForm.controls.urlHandle.invalid && editBlogPostForm.controls.urlHandle.touched
+          editBlogPostForm.controls.urlHandle.invalid ||
+          editBlogPostForm.controls.urlHandle.hasError('required')
         ) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (
-          editBlogPostForm.controls.urlHandle.valid && editBlogPostForm.controls.urlHandle.touched
+          editBlogPostForm.controls.urlHandle.valid && editBlogPostForm.controls.urlHandle.value
         ) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -153,22 +160,22 @@
           >چکیده مقاله</label
         >
         @if (
-          editBlogPostForm.controls.shortDescription.invalid &&
-          editBlogPostForm.controls.shortDescription.touched
+          editBlogPostForm.controls.shortDescription.invalid ||
+          editBlogPostForm.controls.shortDescription.hasError('required')
         ) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (
           editBlogPostForm.controls.shortDescription.valid &&
-          editBlogPostForm.controls.shortDescription.touched
+          editBlogPostForm.controls.shortDescription.value
         ) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -224,20 +231,19 @@
             >متن کامل مقاله</label
           >
           @if (
-            editBlogPostForm.controls.content.invalid && editBlogPostForm.controls.content.touched
+            editBlogPostForm.controls.content.invalid ||
+            editBlogPostForm.controls.content.hasError('required')
           ) {
-            <img
-              class="absolute left-0 opacity-60 top-0 w-6 h-6"
-              src="assets/vectors/box_important.svg"
-            />
+            <i
+              class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+              style="color: var(--login-errorIcon)"
+            ></i>
           }
-          @if (
-            editBlogPostForm.controls.content.valid && editBlogPostForm.controls.content.touched
-          ) {
-            <img
-              class="absolute left-0 opacity-70 top-0 w-6 h-6"
-              src="assets/vectors/Check Circle.svg"
-            />
+          @if (editBlogPostForm.controls.content.valid && editBlogPostForm.controls.content.value) {
+            <i
+              class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+              style="color: var(--login-successIcon)"
+            ></i>
           }
           <textarea
             class="focus:border-(--textBlack30) scrollbar-thin scrollbar-thumb-sky-700 scrollbar-track-sky-100 dark:focus:border-(--textWhite30) input-text-normal overflow-auto w-full border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) p-2 px-3 outline-0"
@@ -312,22 +318,22 @@
           </button>
         </label>
         @if (
-          editBlogPostForm.controls.featuredImageUrl.invalid &&
-          editBlogPostForm.controls.featuredImageUrl.touched
+          editBlogPostForm.controls.featuredImageUrl.invalid ||
+          editBlogPostForm.controls.featuredImageUrl.hasError('required')
         ) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (
           editBlogPostForm.controls.featuredImageUrl.valid &&
-          editBlogPostForm.controls.featuredImageUrl.touched
+          editBlogPostForm.controls.featuredImageUrl.value
         ) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) w-full input-text-normal text-right h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -393,17 +399,20 @@
           for="blog-author"
           >نویسنده</label
         >
-        @if (editBlogPostForm.controls.author.invalid && editBlogPostForm.controls.author.touched) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+        @if (
+          editBlogPostForm.controls.author.invalid ||
+          editBlogPostForm.controls.author.hasError('required')
+        ) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
-        @if (editBlogPostForm.controls.author.valid && editBlogPostForm.controls.author.touched) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+        @if (editBlogPostForm.controls.author.valid && editBlogPostForm.controls.author.value) {
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -443,16 +452,16 @@
           >دسته بندی ها</label
         >
         @if (!categoriesSelected?.length) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (categoriesSelected?.length) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <div
           id="category-select"
