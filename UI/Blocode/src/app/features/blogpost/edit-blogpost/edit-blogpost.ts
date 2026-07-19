@@ -60,7 +60,7 @@ export class EditBlogpost {
     }),
     featuredImageUrl: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(200)],
+      validators: [Validators.required, Validators.maxLength(500)],
     }),
     urlHandle: new FormControl<string>('', {
       nonNullable: true,

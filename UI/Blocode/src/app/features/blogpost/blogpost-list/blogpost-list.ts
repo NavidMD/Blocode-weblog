@@ -16,6 +16,7 @@ import { PersianDatePipe } from '../../../shared/pipes/persian-date-pipe';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../auth/services/auth-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blogpost-list',
@@ -27,6 +28,7 @@ export class BlogpostList {
   categoryName = input<string>();
   blogpostService = inject(BlogPostService);
   authService = inject(AuthService);
+  toastService = inject(ToastrService);
 
   addBlogActive: boolean = false;
   router = inject(Router);
@@ -97,10 +99,16 @@ export class BlogpostList {
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigateByUrl(currentUrl);
           });
-          console.log('deleted', response);
+          this.toastService.success(`مقاله با حذف شد`, '', {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
         error: () => {
-          console.log('something went wrong');
+          this.toastService.error(`خطا در ارتباط با سرور`, '', {
+            progressBar: true,
+            timeOut: 3000,
+          });
         },
       });
     }

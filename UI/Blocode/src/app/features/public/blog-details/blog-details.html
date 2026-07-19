@@ -80,7 +80,7 @@
           <div class="w-2/3 flex flex-col gap-5">
             <markdown
               [data]="blogDetail()?.content"
-              class="text-(length:--small-text14) leading-(--leading-sm) leading-7 text-(--textBlack90) dark:text-(--textWhite95)"
+              class="text-(length:--small-text14) leading-(--leading-sm) leading-7.5 text-(--textBlack90) dark:text-(--textWhite95)"
             >
             </markdown>
             <!-- Article Actions -->
@@ -171,11 +171,11 @@
                     }
                     @for (blog of relatedBlogs()?.slice(-3); track blog.id) {
                       <div
-                        class="overflow-hidden flex cursor-pointer h-16 w-full"
+                        class="overflow-hidden flex cursor-pointer h-20 w-full"
                         [routerLink]="['/blogs', `${blog.urlHandle}`]"
                       >
                         <div
-                          class="w-1/4 shrink-0 flex items-center justify-center rounded-xl overflow-hidden"
+                          class="w-1/3 shrink-0 flex items-center justify-center rounded-xl overflow-hidden"
                         >
                           <img
                             [src]="blog.featuredImageUrl"
@@ -183,7 +183,7 @@
                             alt=""
                           />
                         </div>
-                        <div class="w-3/4 pr-3 flex flex-col justify-between flex-1">
+                        <div class="w-2/3 pr-3 flex flex-col justify-between flex-1">
                           <div class="h-full flex flex-col justify-between">
                             <p
                               class="text-xs text-(--textBlack80) dark:text-(--textWhite95) font-bold mb-1 leading-6"

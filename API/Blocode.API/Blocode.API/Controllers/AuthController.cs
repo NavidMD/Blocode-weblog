@@ -61,7 +61,7 @@ namespace Blocode.API.Controllers
                         HttpOnly = true,
                         Secure = true,
                         SameSite = SameSiteMode.Lax,
-                        Expires = DateTime.UtcNow.AddMinutes(20)
+                        Expires = DateTime.UtcNow.AddMinutes(60)
                     });
                     return Ok(response);
                 }

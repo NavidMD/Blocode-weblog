@@ -115,7 +115,7 @@
   --blogcard-cardRadius: 16px;
   --blogcard-buttonBarRadius: 14px;
   --blogcard-descLineHeight: 1.125rem;
-  --blogcard-cardHeight: 320px;
+  --blogcard-cardHeight: 385px;
   /*EDITBLOG*/
   --editblog-headingSize: 16px;
   /*CATEGORYLIST*/
@@ -164,6 +164,11 @@ a {
 
 button {
   outline: 0;
+}
+
+img {
+  image-rendering: crisp-edges !important;
+  image-rendering: -webkit-optimize-contrast !important;
 }
 
 @layer base {

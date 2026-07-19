@@ -471,7 +471,7 @@
             @for (item of categoriesSelected; track item.id) {
               <div
                 (click)="toggleCategorySelection(item)"
-                class="text-blue-500 glass-card-sm pb-0.5 px-2.5 pl-2.5 pt-1.5 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-(length:--addblog-badgeTextSize) select-none"
+                class="text-blue-500 glass-card-sm pb-0 px-2.5 pl-2.5 pt-1 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-(length:--addblog-badgeTextSize) select-none"
               >
                 {{ item.name }}
                 <i class="fa-solid fa-xmark pb-0.5" style="color: var(--color-brandBlue)"></i>
@@ -494,12 +494,12 @@
           >
             @if (filteredCategories()?.length) {
               @for (category of filteredCategories(); track category.id) {
-                <p
+                <span
                   (click)="toggleCategorySelection(category)"
                   class="text-(--textBlack50) text-(length:--addblog-helperTextSize) shrink-0 pb-1 px-3 pt-1.5 bg-(--textBlack05) dark:bg-(--textWhite10) dark:text-(--textWhite90) w-fit inline-block whitespace-nowrap gap-1 rounded-(length:--addblog-inputRadius) cursor-pointer select-none"
                 >
                   {{ category.name }}
-                </p>
+                </span>
               }
             } @else {
               <span

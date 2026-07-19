@@ -87,7 +87,7 @@ swiper-container::part(bullet-active) {
   height: 45%;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 200%);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 130%);
 }
 
 #categories-container {

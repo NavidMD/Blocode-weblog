@@ -9,7 +9,7 @@ import { Category } from '../../category/models/category.model';
 import { ToastrService } from 'ngx-toastr';
 import { NgClass, NgIf } from '@angular/common';
 import { ImageSelectorService } from '../../../shared/services/image-selector-service';
-import { ImageSelector } from "../../../shared/components/image-selector/image-selector";
+import { ImageSelector } from '../../../shared/components/image-selector/image-selector';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -25,27 +25,28 @@ export class AddBlogpost {
     private blogpostService: BlogPostService,
     private router: Router,
   ) {
-
     effect(() => {
       if (this.blogpostService.addBlogPostStatusSignal() === 'success') {
         this.blogpostService.addBlogPostStatusSignal.set('idle');
-        this.router.navigate(['/admin', 'blogs']);
-        this.toastService.success('مقاله با موفقیت ایجاد شد','',{
+        this.router.navigate(['/', 'blogs']);
+        this.toastService.success('مقاله با موفقیت ایجاد شد', '', {
           progressBar: true,
           timeOut: 3000,
-        })
+        });
       }
       if (this.blogpostService.addBlogPostStatusSignal() === 'error') {
-        this.toastService.error('خطا در ارتباط با سرور','',{
+        this.toastService.error('خطا در ارتباط با سرور', '', {
           progressBar: true,
           timeOut: 3000,
-        })
+        });
       }
     });
     effect(() => {
-      const data = this.allCategoriesValue();
-      if (data) {
-        this.filteredCategories.set(data);
+      const mainCats = this.allCategoriesValue() ?? [];
+      const secondLevelCats = mainCats.flatMap((c) => c.subCategories ?? []);
+      const thirdLevelCats = secondLevelCats.flatMap((ssc) => ssc.subCategories ?? []);
+      if (mainCats) {
+        this.filteredCategories.set([...mainCats, ...secondLevelCats, ...thirdLevelCats]);
       }
     });
   }
@@ -71,7 +72,7 @@ export class AddBlogpost {
     }),
     featuredImageUrl: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(200)],
+      validators: [Validators.required, Validators.maxLength(500)],
     }),
     urlHandle: new FormControl<string>('', {
       nonNullable: true,
@@ -104,7 +105,7 @@ export class AddBlogpost {
     const orgCategories = this.allCategoriesValue();
     if (!orgCategories) return;
     if (!searchValue) {
-      this.filteredCategories.set(orgCategories);
+      this.filteredCategories.set(this.filteredCategories());
       return;
     } else {
       const filtered = orgCategories.filter((c) => c.name.toLowerCase().startsWith(searchValue));

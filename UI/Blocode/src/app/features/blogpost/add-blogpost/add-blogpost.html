@@ -1,8 +1,13 @@
-<div id="add-blog-page" class="w-full min-h-[calc(100vh-68px)] h-auto flex flex-col justify-start items-start gap-5">
+<div
+  id="add-blog-page"
+  class="w-full min-h-[calc(100vh-68px)] h-auto flex flex-col justify-start items-start gap-5"
+>
   <div class="w-full flex flex-row justify-start items-center">
     <h1 class="text-(length:--heading-text18) font-bold dark:text-(--textWhite95)">
       مقالات
-      <span class="inline-block text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) mr-2 dark:text-(--textWhite95)">
+      <span
+        class="inline-block text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) mr-2 dark:text-(--textWhite95)"
+      >
         > &nbsp; ایجاد مقاله
       </span>
     </h1>
@@ -17,7 +22,7 @@
         راهنمای ایجاد مقاله
       </span>
     </div>
-    <button class="ml-0 mr-auto cursor-pointer" [routerLink]="['blogs']">
+    <button class="ml-0 mr-auto cursor-pointer" [routerLink]="['/blogs']">
       <img src="assets/vectors/left.svg" class="w-7.5 h-7.5" alt="" />
     </button>
   </div>
@@ -28,18 +33,25 @@
       (ngSubmit)="createBlogPost($event)"
     >
       <div class="flex-1 flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-title">عنوان مقاله</label>
-        @if (newBlogPostForm.controls.title.invalid && newBlogPostForm.controls.title.touched) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-title"
+          >عنوان مقاله</label
+        >
+        @if (
+          newBlogPostForm.controls.title.invalid ||
+          newBlogPostForm.controls.title.hasError('required')
+        ) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
-        @if (newBlogPostForm.controls.title.valid && newBlogPostForm.controls.title.touched) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+        @if (newBlogPostForm.controls.title.valid && newBlogPostForm.controls.title.value) {
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) w-full input-text-normal h-9 border dark:bg-(--textWhite05) border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -49,7 +61,8 @@
           maxlength="80"
         />
         @if (newBlogPostForm.controls.title.untouched || newBlogPostForm.controls.title.valid) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
             >عنوان مقاله را وارد کنید (حداقل 10 کلمه)</span
           >
         }
@@ -57,7 +70,8 @@
           newBlogPostForm.controls.title.touched &&
           newBlogPostForm.controls.title.hasError('required')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >عنوان مقاله نباید خالی باشد</span
           >
         }
@@ -65,7 +79,8 @@
           newBlogPostForm.controls.title.touched &&
           newBlogPostForm.controls.title.hasError('minlength')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >عنوان مقاله حداقل 10 کلمه باید باشد</span
           >
         }
@@ -73,7 +88,8 @@
           class="absolute left-1 -bottom-5 text-(length:--addblog-helperTextSize)"
           [ngClass]="{
             'text-green-500/70': newBlogPostForm.controls.title.value.length >= 10,
-            'text-(--textBlack50) dark:text-(--textWhite50)': newBlogPostForm.controls.title.value.length <= 10,
+            'text-(--textBlack50) dark:text-(--textWhite50)':
+              newBlogPostForm.controls.title.value.length <= 10,
           }"
           *ngIf="newBlogPostForm.controls.title.dirty"
         >
@@ -81,24 +97,26 @@
         </span>
       </div>
       <div class="flex-1 flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-urlHandle"
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-urlHandle"
           >لینک مقاله (slug)</label
         >
         @if (
-          newBlogPostForm.controls.urlHandle.invalid && newBlogPostForm.controls.urlHandle.touched
+          newBlogPostForm.controls.urlHandle.invalid || newBlogPostForm.controls.urlHandle.hasError('required')
         ) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (
-          newBlogPostForm.controls.urlHandle.valid && newBlogPostForm.controls.urlHandle.touched
+          newBlogPostForm.controls.urlHandle.valid && newBlogPostForm.controls.urlHandle.value
         ) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) dark:bg-(--textWhite05) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -110,7 +128,8 @@
         @if (
           newBlogPostForm.controls.urlHandle.untouched || newBlogPostForm.controls.urlHandle.valid
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
             >لینک مقاله یا slug را وارد کنید (حداقل 10 کلمه)</span
           >
         }
@@ -118,7 +137,8 @@
           newBlogPostForm.controls.urlHandle.touched &&
           newBlogPostForm.controls.urlHandle.hasError('required')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >لینک یا slug نباید خالی باشد</span
           >
         }
@@ -126,7 +146,8 @@
           newBlogPostForm.controls.urlHandle.touched &&
           newBlogPostForm.controls.urlHandle.hasError('minlength')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >لینک مقاله یا slug حداقل 10 کلمه باید باشد</span
           >
         }
@@ -143,26 +164,28 @@
         </span>
       </div>
       <div class="flex-[100%] flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-shortDescription"
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-shortDescription"
           >چکیده مقاله</label
         >
         @if (
-          newBlogPostForm.controls.shortDescription.invalid &&
-          newBlogPostForm.controls.shortDescription.touched
+          newBlogPostForm.controls.shortDescription.invalid ||
+          newBlogPostForm.controls.shortDescription.hasError('required')
         ) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (
           newBlogPostForm.controls.shortDescription.valid &&
-          newBlogPostForm.controls.shortDescription.touched
+          newBlogPostForm.controls.shortDescription.value
         ) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) dark:bg-(--textWhite05) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -175,7 +198,8 @@
           newBlogPostForm.controls.shortDescription.untouched ||
           newBlogPostForm.controls.shortDescription.valid
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
             >چکیده مقاله را وارد کنید (حداقل 20 کلمه)</span
           >
         }
@@ -183,7 +207,8 @@
           newBlogPostForm.controls.shortDescription.touched &&
           newBlogPostForm.controls.shortDescription.hasError('required')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >چکیده مقاله نباید خالی باشد</span
           >
         }
@@ -191,7 +216,8 @@
           newBlogPostForm.controls.shortDescription.touched &&
           newBlogPostForm.controls.shortDescription.hasError('minlength')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >چکیده مقاله حداقل 20 کلمه باید باشد</span
           >
         }
@@ -209,22 +235,24 @@
       </div>
       <div class="flex-[100%] flex flex-row gap-x-4 items-start relative" id="content-input">
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
-          <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-content"
+          <label
+            class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+            for="blog-content"
             >متن کامل مقاله</label
           >
           @if (
-            newBlogPostForm.controls.content.invalid && newBlogPostForm.controls.content.touched
+            newBlogPostForm.controls.content.invalid || newBlogPostForm.controls.content.hasError('required')
           ) {
-            <img
-              class="absolute left-0 opacity-60 top-0 w-6 h-6"
-              src="assets/vectors/box_important.svg"
-            />
+            <i
+              class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+              style="color: var(--login-errorIcon)"
+            ></i>
           }
-          @if (newBlogPostForm.controls.content.valid && newBlogPostForm.controls.content.touched) {
-            <img
-              class="absolute left-0 opacity-70 top-0 w-6 h-6"
-              src="assets/vectors/Check Circle.svg"
-            />
+          @if (newBlogPostForm.controls.content.valid && newBlogPostForm.controls.content.value) {
+            <i
+              class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+              style="color: var(--login-successIcon)"
+            ></i>
           }
           <textarea
             class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) dark:bg-(--textWhite05) input-text-normal overflow-auto w-full border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) p-2 px-3 outline-0"
@@ -236,7 +264,8 @@
           @if (
             newBlogPostForm.controls.content.untouched || newBlogPostForm.controls.content.valid
           ) {
-            <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+            <span
+              class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
               >متن کامل مقاله را وارد کنید (حداقل 50 کلمه)</span
             >
           }
@@ -244,7 +273,8 @@
             newBlogPostForm.controls.content.touched &&
             newBlogPostForm.controls.content.hasError('required')
           ) {
-            <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+            <span
+              class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
               >متن مقاله نباید خالی باشد</span
             >
           }
@@ -252,7 +282,8 @@
             newBlogPostForm.controls.content.touched &&
             newBlogPostForm.controls.content.hasError('minlength')
           ) {
-            <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+            <span
+              class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
               >متن مقاله حداقل 50 کلمه باید باشد</span
             >
           }
@@ -269,7 +300,9 @@
           </span>
         </div>
         <div class="w-1/2 flex flex-col gap-2 items-start relative">
-          <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-content-preview"
+          <label
+            class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+            for="blog-content-preview"
             >پیش نمایش متن مقاله</label
           >
           <div
@@ -281,7 +314,9 @@
         </div>
       </div>
       <div class="grow shrink flex-[60%] flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-featuredImageUrl"
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-featuredImageUrl"
           >لینک تصویر
           <button
             class="px-2 py-1 absolute left-0 top-0 text-(length:--addblog-helperTextSize) text-blue-600 dark:text-blue-500 rounded-full cursor-pointer"
@@ -292,22 +327,22 @@
           </button>
         </label>
         @if (
-          newBlogPostForm.controls.featuredImageUrl.invalid &&
-          newBlogPostForm.controls.featuredImageUrl.touched
+          newBlogPostForm.controls.featuredImageUrl.invalid ||
+          newBlogPostForm.controls.featuredImageUrl.hasError('required')
         ) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+           <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (
           newBlogPostForm.controls.featuredImageUrl.valid &&
-          newBlogPostForm.controls.featuredImageUrl.touched
+          newBlogPostForm.controls.featuredImageUrl.value
         ) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+           <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) dark:bg-(--textWhite05) w-full input-text-normal text-right h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -321,7 +356,8 @@
           newBlogPostForm.controls.featuredImageUrl.untouched ||
           newBlogPostForm.controls.featuredImageUrl.valid
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
             >لینک مرتبط به تصویر مقاله را بطور کامل وارد کنید</span
           >
         }
@@ -329,13 +365,16 @@
           newBlogPostForm.controls.featuredImageUrl.touched &&
           newBlogPostForm.controls.featuredImageUrl.hasError('required')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >وارد کردن لینک تصویر الزامی است</span
           >
         }
       </div>
       <div class="grow shrink flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-publishedDate"
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-publishedDate"
           >تاریخ انتشار</label
         >
         <input
@@ -348,7 +387,8 @@
           newBlogPostForm.controls.publishedDate.untouched ||
           newBlogPostForm.controls.publishedDate.valid
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
             >تاریخ انتشار مقاله را انتخاب کنید</span
           >
         }
@@ -356,24 +396,29 @@
           newBlogPostForm.controls.publishedDate.touched &&
           newBlogPostForm.controls.publishedDate.hasError('required')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >انتخاب تاریخ انتشار الزامی است</span
           >
         }
       </div>
       <div class="grow shrink flex-[40%] flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-author">نویسنده</label>
-        @if (newBlogPostForm.controls.author.invalid && newBlogPostForm.controls.author.touched) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-author"
+          >نویسنده</label
+        >
+        @if (newBlogPostForm.controls.author.invalid || newBlogPostForm.controls.author.hasError('required')) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
-        @if (newBlogPostForm.controls.author.valid && newBlogPostForm.controls.author.touched) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+        @if (newBlogPostForm.controls.author.valid && newBlogPostForm.controls.author.value) {
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <input
           class="focus:border-(--textBlack30) dark:focus:border-(--textWhite30) dark:bg-(--textWhite05) w-full input-text-normal h-9 border border-(--textBlack20) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-(length:--addblog-inputRadius) py-1 px-2 outline-0"
@@ -382,7 +427,8 @@
           formControlName="author"
         />
         @if (newBlogPostForm.controls.author.untouched || newBlogPostForm.controls.author.valid) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-0.5"
             >نام نویسنده مقاله را وارد کنید</span
           >
         }
@@ -390,7 +436,8 @@
           newBlogPostForm.controls.author.touched &&
           newBlogPostForm.controls.author.hasError('minlength')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >نام نویسنده مقاله حداقل 10 کلمه باید باشد</span
           >
         }
@@ -398,26 +445,29 @@
           newBlogPostForm.controls.author.touched &&
           newBlogPostForm.controls.author.hasError('required')
         ) {
-          <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
+          <span
+            class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-red-500 pr-0.5"
             >نام نویسنده الزامی است</span
           >
         }
       </div>
       <div class="grow shrink flex-[50%] flex flex-col gap-2 items-start relative">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)" for="blog-author"
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          for="blog-author"
           >دسته بندی ها</label
         >
         @if (!categoriesSelected.length) {
-          <img
-            class="absolute left-1.5 opacity-60 top-8.5 w-6 h-6"
-            src="assets/vectors/box_important.svg"
-          />
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-errorIcon)"
+          ></i>
         }
         @if (categoriesSelected.length) {
-          <img
-            class="absolute left-1.5 opacity-70 top-8.5 w-6 h-6"
-            src="assets/vectors/Check Circle.svg"
-          />
+          <i
+            class="fa-solid fa-check absolute left-1 top-9.5 w-6 h-6"
+            style="color: var(--login-successIcon)"
+          ></i>
         }
         <div
           id="category-select"
@@ -427,7 +477,7 @@
             @for (item of categoriesSelected; track item.id) {
               <div
                 (click)="toggleCategorySelection(item)"
-                class="text-blue-500 glass-card-sm pb-0.5 px-2.5 pl-2.5 pt-1.5 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-(length:--addblog-badgeTextSize) select-none"
+                class="text-blue-500 glass-card-sm pb-0 px-2.5 pl-2.5 pt-1 flex flex-row justify-center items-center gap-2.5 cursor-pointer text-(length:--addblog-badgeTextSize) select-none"
               >
                 {{ item.name }}
                 <i class="fa-solid fa-xmark pb-0.5" style="color: var(--color-brandBlue)"></i>
@@ -446,13 +496,13 @@
           <div
             id="category-list"
             #categoriesSearchBox
-            class="w-full bg-white dark:bg-blue-950 glass-card-sm absolute rounded-(length:--addblog-inputRadius) right-0 top-[120%] z-10 shadow-sm shadow-(--textBlack20) gap-1 py-1.5 pt-2 px-2 flex overflow-x-scroll"
+            class="w-full bg-white dark:bg-gray-900 absolute rounded-(length:--addblog-inputRadius) right-0 top-[120%] z-10 shadow-sm shadow-(--textBlack20) gap-1 py-1.5 pt-2 px-2 flex overflow-x-auto!"
           >
             @if (filteredCategories()?.length) {
               @for (category of filteredCategories(); track category.id) {
                 <span
                   (click)="toggleCategorySelection(category)"
-                  class="text-(--textBlack50) text-(length:--addblog-helperTextSize) pb-0.5 px-2 pt-1 bg-blue-50 dark:bg-(--textWhite10) dark:text-(--textWhite90) flex flex-row items-start gap-1 rounded-(length:--addblog-inputRadius) cursor-pointer select-none"
+                  class="text-(--textBlack50) text-(length:--addblog-helperTextSize) shrink-0 pb-1 px-3 pt-1.5 bg-(--textBlack05) dark:bg-(--textWhite10) dark:text-(--textWhite90) w-fit inline-block whitespace-nowrap gap-1 rounded-(length:--addblog-inputRadius) cursor-pointer select-none"
                 >
                   {{ category.name }}
                 </span>
@@ -466,12 +516,16 @@
             }
           </div>
         </div>
-        <span class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-1"
+        <span
+          class="text-(length:--addblog-helperTextSize) absolute -bottom-5 text-(--textBlack50) dark:text-(--textWhite50) pr-1"
           >دسته بندی مقاله را از بین دسته بندی های موجود انتخاب کنید</span
         >
       </div>
       <div class="grow shrink h-full flex-[40%] flex flex-col gap-2 items-start">
-        <label class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)">وضعیت نمایش مقاله</label>
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+          >وضعیت نمایش مقاله</label
+        >
         <div class="w-full h-9 flex flex-row items-center justify-start gap-5">
           <label
             class="w-full text-(--textBlack80) dark:text-(--textWhite95) flex flex-row justify-start items-center gap-2"
