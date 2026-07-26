@@ -37,7 +37,7 @@ export class Navbar implements OnInit {
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe((r) => {
       this.currentUrl.set(this.router.url);
-      if(this.currentUrl().includes('/login') || this.currentUrl().includes('/signup')) {
+      if(this.currentUrl().includes('/login') || this.currentUrl().includes('/register')) {
         this.showLoginBtn = false;
       }
       else {

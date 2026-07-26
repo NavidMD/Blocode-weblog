@@ -38,10 +38,10 @@
               (change)="onFileSelect($event)"
             />
           </div>
-          <div class="mt-3 flex flex-col gap-2.5">
+          <div class="mt-3 flex flex-col gap-2">
             <div class="w-full flex flex-row justify-between items-center">
-              <span class="text-[11px] text-white/50">فایل انتخاب شده :</span>
-              <span class="text-[11px] text-white/70">
+              <span class="text-[11px] w-[120px] text-white/50 text-right">فایل انتخاب شده :</span>
+              <span class="text-[10px] leading-3 w-fit text-left text-white/70">
                 @if (imageSelectorUploadForm.controls.file.value) {
                   {{ imageSelectorUploadForm.controls.file.value.name }}
                 } @else {
@@ -49,22 +49,16 @@
                 }
               </span>
             </div>
-            <div class="relative">
-              @if (
-                imageSelectorUploadForm.controls.file.value &&
-                imageSelectorUploadForm.controls.name.invalid
-              ) {
+            <div class="relative pb-5">
+              @if (imageSelectorUploadForm.controls.name.invalid) {
                 <i
-                  class="fa-solid fa-circle-exclamation absolute left-2 top-2.5"
+                  class="fa-solid fa-circle-exclamation absolute left-2.5 top-2.5"
                   style="color: rgb(172, 172, 172)"
                 ></i>
               }
-              @if (
-                imageSelectorUploadForm.controls.file.value &&
-                imageSelectorUploadForm.controls.name.valid
-              ) {
+              @if (imageSelectorUploadForm.controls.name.valid) {
                 <i
-                  class="fa-solid fa-check absolute left-2 top-2.5"
+                  class="fa-solid fa-check absolute left-2.5 top-2.5"
                   style="color: rgb(150, 177, 124)"
                 ></i>
               }
@@ -73,12 +67,35 @@
                 type="text"
                 placeholder="نام جدید"
                 formControlName="name"
-                class="focus:border-white/60 dark:focus:border-white/30 w-full input-text-normal h-9 border border-white/40 dark:border-white/20 text-white/95 rounded-[15px] py-1 px-2 outline-0"
+                class="focus:border-white/60 pl-8 dark:focus:border-white/30 w-full input-text-normal h-9 border border-white/40 dark:border-white/20 text-white/95 rounded-[15px] py-1 px-2 outline-0"
               />
-            </div>
-            <div class="relative">
               @if (
-                imageSelectorUploadForm.controls.file.value &&
+                imageSelectorUploadForm.controls.name.valid ||
+                imageSelectorUploadForm.controls.name.untouched
+              ) {
+                <span
+                  class="text-(length:--addblog-helperTextSize) absolute bottom-0 right-0 text-(--textWhite40) pr-0.5"
+                  >نام دلخواه برای عکس بدون پسوند فایل</span
+                >
+              }
+              @if (imageSelectorUploadForm.controls.name.hasError('fileExtension')) {
+                <span
+                  class="text-(length:--addblog-helperTextSize) absolute bottom-0 right-0 text-red-600/80 dark:text-red-400 pr-0.5"
+                  >نام تصویر باید فاقد پسوند باشد</span
+                >
+              }
+              @if (
+                imageSelectorUploadForm.controls.name.hasError('required') &&
+                imageSelectorUploadForm.controls.name.touched
+              ) {
+                <span
+                  class="text-(length:--addblog-helperTextSize) absolute bottom-0 right-0 text-red-600/80 dark:text-red-400 pr-0.5"
+                  >وارد کردن نام تصویر الزامی است</span
+                >
+              }
+            </div>
+            <div class="relative pb-5">
+              @if (
                 imageSelectorUploadForm.controls.title.invalid
               ) {
                 <i
@@ -87,7 +104,6 @@
                 ></i>
               }
               @if (
-                imageSelectorUploadForm.controls.file.value &&
                 imageSelectorUploadForm.controls.title.valid
               ) {
                 <i
@@ -100,12 +116,36 @@
                 type="text"
                 placeholder="عنوان جدید"
                 formControlName="title"
-                class="focus:border-white/60 dark:focus:border-white/30 w-full input-text-normal h-9 border border-white/40 dark:border-white/20 text-white/95 rounded-[15px] py-1 px-2 outline-0"
+                class="focus:border-white/60 pl-8 dark:focus:border-white/30 w-full input-text-normal h-9 border border-white/40 dark:border-white/20 text-white/95 rounded-[15px] py-1 px-2 outline-0"
               />
+              @if (
+                imageSelectorUploadForm.controls.title.valid ||
+                imageSelectorUploadForm.controls.title.untouched
+              ) {
+                <span
+                  class="text-(length:--addblog-helperTextSize) absolute bottom-0 right-0 text-(--textWhite40) pr-0.5"
+                  >عنوان دلخواه برای عکس بدون پسوند فایل</span
+                >
+              }
+              @if (imageSelectorUploadForm.controls.title.hasError('fileExtension')) {
+                <span
+                  class="text-(length:--addblog-helperTextSize) absolute bottom-0 right-0 text-red-600/80 dark:text-red-400 pr-0.5"
+                  >عنوان تصویر باید فاقد پسوند باشد</span
+                >
+              }
+              @if (
+                imageSelectorUploadForm.controls.title.hasError('required') &&
+                imageSelectorUploadForm.controls.title.touched
+              ) {
+                <span
+                  class="text-(length:--addblog-helperTextSize) absolute bottom-0 right-0 text-red-600/80 dark:text-red-400 pr-0.5"
+                  >وارد کردن عنوان تصویر الزامی است</span
+                >
+              }
             </div>
             <button
               [disabled]="imageSelectorUploadForm.invalid"
-              class="w-full cursor-pointer bg-blue-600 disabled:opacity-60 active:scale-[0.98] text-white text-sm font-medium py-2 rounded-[16px] shadow-md shadow-black/15 transition-all"
+              class="w-full cursor-pointer bg-blue-600 disabled:opacity-60 active:scale-[0.98] text-white text-sm mt-2 font-medium py-2 rounded-[16px] shadow-md shadow-black/15 transition-all"
             >
               <i class="ti ti-upload text-sm align-[-2px] ml-1"></i>
               بارگذاری
@@ -116,7 +156,7 @@
           <p class="text-xs font-medium text-white/95 mb-2 text-right">تصاویر انتخاب‌شده</p>
           <div
             id="gallery"
-            class="bg-transparent border w-full border-white/30 dark:border-white/30 rounded-[16px] p-3 h-full"
+            class="bg-transparent border w-full max-h-[400px] overflow-auto border-white/30 dark:border-white/30 rounded-[16px] p-3 h-full"
           >
             @if (isloading()) {
               <app-loader></app-loader>
@@ -125,11 +165,11 @@
               <div class="images-container">
                 @for (image of allImages(); track image.id) {
                   <div
-                    class="flex flex-col justify-center items-center gap-1 flex-[90px] shrink grow h-fit overflow-hidden cursor-pointer"
+                    class="flex flex-col justify-center rounded-lg hover:bg-white/15 items-center gap-1 flex-[90px] shrink grow h-fit overflow-hidden cursor-pointer"
                     (click)="onSelectImage(image)"
                   >
                     <div
-                      class="w-full h-[80px] hover:bg-white/20 transition overflow-hidden p-2 rounded-lg border border-white/20"
+                      class="w-full h-[80px] transition overflow-hidden p-2 rounded-lg border border-white/20"
                     >
                       <img
                         class="w-full h-full object-contain"
@@ -137,7 +177,9 @@
                         [alt]="image.title"
                       />
                     </div>
-                    <span class="text-[10px] text-white/80 font-thin">{{ image.fileName }}</span>
+                    <span class="text-[10px] text-center text-white/80 font-thin">{{
+                      image.fileName
+                    }}</span>
                   </div>
                 }
               </div>
@@ -153,7 +195,9 @@
             }
           </div>
           <div class="mt-2 flex justify-between items-center">
-            <span id="count-label" class="text-[11px] text-white/70">{{ allImages()?.length }} تصویر</span>
+            <span id="count-label" class="text-[11px] text-white/70"
+              >{{ allImages()?.length }} تصویر</span
+            >
             <button
               onclick="clearAll()"
               class="text-[10px] cursor-pointer hover:bg-red-600/50 px-3 py-1 rounded-full bg-red-500/70 text-white/80 shadow-md shadow-black/15 transition-colors"

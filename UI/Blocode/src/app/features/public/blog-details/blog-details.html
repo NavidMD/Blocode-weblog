@@ -14,16 +14,16 @@
         <!-- Content -->
         <div class="col-span-12">
           <!-- Hero -->
-          <div class="w-full h-[270px] mb-10 overflow-visible">
+          <div class="w-full h-[360px] mb-10 overflow-visible">
             <div class="w-full h-full flex flex-row">
-              <div class="relative w-[40%] glass-card-detail bg-(--textWhite05)">
+              <div class="relative w-[60%] glass-card-detail bg-(--textWhite05)">
                 <img
                   [src]="blogDetail()?.featuredImageUrl"
                   class="w-full h-full object-cover"
                   alt=""
                 />
               </div>
-              <div class="flex flex-col gap-2 justify-start pr-5 w-[60%] pl-5">
+              <div class="flex flex-col gap-2 justify-start pr-5 w-[40%] pl-2 py-2">
                 <div
                   class="text-(length:--blogdetail-metaSize) text-(--textBlack60) dark:text-(--textWhite60) py-1 flex flex-row items-center gap-2"
                 >
@@ -41,11 +41,11 @@
                   </div>
                 </div>
 
-                <h1 class="text-(length:--blogdetail-titleSize) mb-1 font-extrabold text-slate-900 dark:text-white">
+                <h1 class="text-(length:--blogdetail-titleSize) mb-1 leading-10 font-extrabold text-slate-900 dark:text-white">
                   {{ blogDetail()?.title }}
                 </h1>
 
-                <p class="leading-6 text-(length:--blogdetail-descSize) text-(--textBlack70) dark:text-(--textWhite70)">
+                <p class="leading-7 text-(length:--blogdetail-descSize) text-(--textBlack70) dark:text-(--textWhite70)">
                   {{ blogDetail()?.shortDescription }}
                 </p>
 
@@ -76,11 +76,11 @@
             </div>
           </div>
         </div>
-        <div class="w-full flex flex-row gap-8 mt-4">
+        <div class="w-full flex flex-row gap-12 mt-3">
           <div class="w-2/3 flex flex-col gap-5">
             <markdown
               [data]="blogDetail()?.content"
-              class="text-(length:--small-text14) leading-(--leading-sm) leading-7.5 text-(--textBlack90) dark:text-(--textWhite95)"
+              class="text-(length:--small-text15) leading-(--leading-sm) leading-7.5 text-(--textBlack90) dark:text-(--textWhite95)"
             >
             </markdown>
             <!-- Article Actions -->
@@ -162,7 +162,7 @@
                 @if (blogsStatus() === 'loading') {
                   <app-loader-magazine class="scale-30 my-10"></app-loader-magazine>
                 } @else {
-                  <ul class="flex flex-col list-unstyled gap-3 overflow-y-auto w-full">
+                  <ul class="flex flex-col list-unstyled gap-4 overflow-y-auto w-full">
                     @if (!relatedBlogs()?.length) {
                       <span
                         class="w-full text-(length:--small-text12) text-(--textBlack60) dark:text-(--textWhite60) text-center py-6"
@@ -171,7 +171,7 @@
                     }
                     @for (blog of relatedBlogs()?.slice(-3); track blog.id) {
                       <div
-                        class="overflow-hidden flex cursor-pointer h-20 w-full"
+                        class="overflow-hidden flex cursor-pointer h-22 w-full"
                         [routerLink]="['/blogs', `${blog.urlHandle}`]"
                       >
                         <div
@@ -179,19 +179,19 @@
                         >
                           <img
                             [src]="blog.featuredImageUrl"
-                            class="w-full h-full object-cover"
+                            class="w-full h-full object-cover border-2 rounded-xl border-white/20"
                             alt=""
                           />
                         </div>
                         <div class="w-2/3 pr-3 flex flex-col justify-between flex-1">
                           <div class="h-full flex flex-col justify-between">
                             <p
-                              class="text-xs text-(--textBlack80) dark:text-(--textWhite95) font-bold mb-1 leading-6"
+                              class="text-xs text-(--textBlack80) dark:text-(--textWhite95) font-bold leading-6"
                             >
                               {{ blog.title }}
                             </p>
                             <div
-                              class="flex flex-row items-center gap-4 text-(length:--blogdetail-relatedThumbTitleSize) text-(--textBlack50) dark:text-(--textWhite50)"
+                              class="flex flex-col items-start gap-1 text-(length:--blogdetail-relatedThumbTitleSize) text-(--textBlack50) dark:text-(--textWhite50)"
                             >
                               <span class="flex flex-row items-center gap-1.5">
                                 <i
@@ -201,7 +201,7 @@
                                 {{ blog.publishedDate | persianDate }}
                               </span>
                               <div
-                                class="flex flex-row justify-center items-center mb-0.5 mr-auto ml-0 gap-1"
+                                class="flex flex-row justify-center items-center gap-1"
                               >
                                 @for (category of blog.categories; track category.id) {
                                   <span

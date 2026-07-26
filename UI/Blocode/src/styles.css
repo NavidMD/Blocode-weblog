@@ -167,7 +167,7 @@ button {
 }
 
 img {
-  image-rendering: crisp-edges !important;
+  image-rendering: auto !important;
   image-rendering: -webkit-optimize-contrast !important;
 }
 

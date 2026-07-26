@@ -1,0 +1,336 @@
+.uiverse-midnight-sky {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  background-color: transparent;
+  position: absolute;
+  z-index: -10;
+  align-items: center;
+  justify-content: center;
+}
+
+.uiverse-midnight-sky .sky-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.uiverse-midnight-sky .stars {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+.uiverse-midnight-sky .stars-1 {
+  background-image:
+    radial-gradient(1px 1px at 10% 10%, var(--login-starColor), transparent),
+    radial-gradient(1px 1px at 30% 20%, var(--login-starColor), transparent),
+    radial-gradient(1px 1px at 50% 50%, var(--login-starColor), transparent),
+    radial-gradient(1px 1px at 70% 30%, var(--login-starColor), transparent),
+    radial-gradient(1px 1px at 90% 10%, var(--login-starColor), transparent);
+  background-size: 200px 200px;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.uiverse-midnight-sky .stars-2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 40%, var(--login-starColor), transparent),
+    radial-gradient(1.5px 1.5px at 60% 85%, var(--login-starColor), transparent),
+    radial-gradient(1.5px 1.5px at 85% 65%, var(--login-starColor), transparent);
+  background-size: 300px 300px;
+  animation: twinkle 5s ease-in-out infinite 1s;
+}
+
+.uiverse-midnight-sky .stars-3 {
+  background-image:
+    radial-gradient(2px 2px at 40% 70%, var(--login-starColor), transparent),
+    radial-gradient(2px 2px at 10% 80%, var(--login-starColor), transparent),
+    radial-gradient(2px 2px at 80% 40%, var(--login-starColor), transparent);
+  background-size: 400px 400px;
+  animation: twinkle 7s ease-in-out infinite 2s;
+}
+
+.uiverse-midnight-sky .meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--login-starColor);
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px var(--login-meteorGlow);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.uiverse-midnight-sky .meteor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--login-starColor), transparent);
+}
+
+.uiverse-midnight-sky .m1 {
+  top: 10%;
+  left: 110%;
+  animation: shoot 8s linear infinite;
+}
+.uiverse-midnight-sky .m2 {
+  top: 30%;
+  left: 110%;
+  animation: shoot 12s linear infinite 3s;
+}
+.uiverse-midnight-sky .m3 {
+  top: 50%;
+  left: 110%;
+  animation: shoot 10s linear infinite 2s;
+}
+
+.uiverse-midnight-sky .moon {
+  position: absolute;
+  top: 2%;
+  right: 12%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 10px 10px 0 0 var(--login-moonColor);
+  filter: drop-shadow(0 0 17px var(--login-moonGlow));
+  z-index: 10;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-35deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  15% {
+    transform: translateX(-1500px) translateY(1000px) rotate(-35deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-1500px) translateY(1000px) rotate(-35deg);
+    opacity: 0;
+  }
+}
+
+.sky {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  border-radius: 20px;
+  background: transparent;
+}
+
+.cloud {
+  position: absolute;
+  width: 64px;
+  height: 18px;
+  background: var(--login-cloudColor);
+  border-radius: 20px;
+  opacity: 0.95;
+  animation: float 1s ease-in-out infinite alternate;
+}
+
+.cloud::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: var(--login-cloudColor);
+  border-radius: 50%;
+  left: 8px;
+  top: -10px;
+}
+
+.cloud::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: var(--login-cloudColor);
+  border-radius: 50%;
+  right: 8px;
+  top: -15px;
+}
+
+@keyframes float {
+  from {
+    transform: translateX(-25px);
+  }
+  to {
+    transform: translateX(25px);
+  }
+}
+
+.c1 {
+  top: 40px;
+  left: 35px;
+  animation-duration: 9s;
+  transform: scale(0.8);
+}
+
+.c2 {
+  top: 70px;
+  left: 250px;
+  animation-duration: 12s;
+  transform: scale(0.6);
+}
+
+.c3 {
+  top: 140px;
+  left: 120px;
+  animation-duration: 10s;
+  transform: scale(1);
+}
+
+.c4 {
+  top: 160px;
+  left: 300px;
+  animation-duration: 13s;
+  transform: scale(0.7);
+}
+
+.c5 {
+  top: 220px;
+  left: 45px;
+  animation-duration: 11s;
+  transform: scale(0.4);
+}
+
+.c6 {
+  top: 285px;
+  left: 210px;
+  animation-duration: 9s;
+  transform: scale(0.8);
+}
+
+.c7 {
+  top: 340px;
+  left: 150px;
+  animation-duration: 14s;
+  transform: scale(0.65);
+}
+
+.c8 {
+  top: 390px;
+  left: 290px;
+  animation-duration: 8s;
+  transform: scale(0.9);
+}
+
+.c9 {
+  top: 430px;
+  left: 70px;
+  animation-duration: 10s;
+  transform: scale(0.55);
+}
+
+.c10 {
+  top: 455px;
+  left: 230px;
+  animation-duration: 13s;
+  transform: scale(0.45);
+}
+
+.sun {
+  top: -10px;
+  right: 0;
+  width: 110px;
+  height: 110px;
+  z-index: -10;
+  position: absolute;
+  background:
+    radial-gradient(transparent 50%, white), radial-gradient(var(--login-sunYellow), transparent 70%);
+  -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+  mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+  border-radius: 50%;
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    border-radius: 50%;
+    -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+    mask-image: radial-gradient(rgba(0, 0, 0, 1) 40%, transparent 65%);
+    opacity: 40%;
+  }
+
+  &::before {
+    background: repeating-conic-gradient(
+      from 0deg,
+      var(--login-sunYellow) 0deg 20deg,
+      transparent 20deg 40deg
+    );
+    animation:
+      rotate 1s linear,
+      scale 3s linear infinite;
+  }
+
+  &::after {
+    background:
+      radial-gradient(
+        var(--login-sunYellow),
+        var(--login-sunGlowOrange) 27%,
+        transparent calc(27% + 3px) 100%
+      ),
+      radial-gradient(var(--login-sunGlowYellow), transparent 70%),
+      repeating-conic-gradient(from 0deg, var(--login-sunGlowYellow) 0deg 5deg, transparent 5deg 10deg);
+    transform: rotate(15deg);
+    animation: rotate 80s linear;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

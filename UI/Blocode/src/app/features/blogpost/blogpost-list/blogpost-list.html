@@ -72,15 +72,13 @@
   </div>
   <div class="gap-5 mt-2" id="blogs-container">
     @if (loading()) {
-      <p>درحل بارگذاری...</p>
-    }
-    @if (error()) {
-      <p>مشکل در بارگذاری...</p>
+      <app-loader-magazine class="scale-50 my-20"></app-loader-magazine>
     }
     @if (value()) {
       @for (blog of filteredPosts(); track blog.id) {
         <div
           id="blog-card"
+          [routerLink]="['/blogs', `${blog.urlHandle}`]"
           class="w-full glass-card-blog h-(length:--blogcard-cardHeight) hover:-translate-y-1.5 hover:shadow-lg transition cursor-pointer overflow-hidden relative"
         >
           <div id="header" class="h-[65%] bg-blue-200 dark:bg-(--textWhite15) overflow-hidden">
@@ -117,12 +115,12 @@
             </p>
           </div>
           <span
-            class="text-(length:--blogcard-metaSize) text-(--textBlack50) dark:text-(--textWhite50) absolute bottom-1.5 left-4.5"
+            class="text-(length:--blogcard-metaSize) text-(--textBlack50) dark:text-(--textWhite50) absolute bottom-2 left-4.5"
             >{{ blog.publishedDate | persianDate }}</span
           >
           <div
             id="categories"
-            class="absolute flex flex-row justify-center items-center bottom-1.5 right-3 gap-1"
+            class="absolute flex flex-row justify-center items-center bottom-2 right-3 gap-1"
           >
             @for (category of blog.categories; track category.id) {
               <span

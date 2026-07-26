@@ -26,9 +26,11 @@ export class EditBlogpost {
 
   constructor(private router: Router) {
     effect(() => {
-      const data = this.allCategoriesValue();
-      if (data) {
-        this.filteredCategories.set(data);
+      const mainCats = this.allCategoriesValue() ?? [];
+      const secondLevelCats = mainCats.flatMap((c) => c.subCategories ?? []);
+      const thirdLevelCats = secondLevelCats.flatMap((ssc) => ssc.subCategories ?? []);
+      if (mainCats) {
+        this.filteredCategories.set([...mainCats, ...secondLevelCats, ...thirdLevelCats]);
       }
     });
   }

@@ -121,7 +121,7 @@ namespace Blocode.API.Controllers
             var result = await blogRepository.GetBlogsByCategoryAsync(categoryName);
             if (result == null || !result.Any())
             {
-                return NotFound();
+                return Ok(result);
             }
             var mappedResponse = new List<BlogPostDTO>();
             foreach (var blog in result)

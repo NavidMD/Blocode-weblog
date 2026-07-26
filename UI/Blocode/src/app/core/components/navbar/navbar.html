@@ -1,4 +1,4 @@
-<nav class="w-full flex flex-row justify-between items-center py-5 pb-3 px-6 bg-transparent mb-2">
+<nav class="w-full flex flex-row justify-between items-center py-4 pb-3 px-6 bg-transparent mb-1">
   <div class="w-auto flex flex-row gap-7 items-center">
     <h1
       [routerLink]="['/']"
@@ -7,19 +7,13 @@
       بلاکُد
     </h1>
     <div>
-      <ul class="flex flex-row gap-7 text-sm font-semibold">
+      <ul class="flex flex-row gap-6 pt-1 text-sm font-semibold">
         <li
           class="flex justify-center gap-1.5 items-center cursor-pointer text-(--textBlack90) hover:text-black dark:text-(--textWhite90) dark:hover:text-white transition"
         >
           <i class="fa-brands fa-buffer mb-0.5" style="color: var(--color-brandBlue)"></i>
-          <a [routerLink]="['blogs']">مقالات</a>
+          <a [routerLink]="['blogs']">همه مقالات</a>
         </li>
-        <!-- <li
-          class="flex justify-center gap-1.5 items-center cursor-pointer text-(--textBlack90) hover:text-black dark:text-(--textWhite90) dark:hover:text-white transition"
-        >
-          <i class="fa-solid fa-feather-pointed fa-sm mb-0.5" style="color: var(--color-brandBlue)"></i>
-          <a>نویسندگان</a>
-        </li> -->
         <li
           (mouseenter)="categoryService.categoriesDropDownInHeader = true"
           (mouseleave)="categoryService.categoriesDropDownInHeader = false"
@@ -135,7 +129,7 @@
       </ul>
     </div>
   </div>
-  <div class="w-auto flex flex-row gap-3 justify-end items-center">
+  <div class="w-auto flex flex-row gap-4 justify-end items-center">
     <label class="ui-switch">
       <input type="checkbox" [checked]="isDarkMode" (change)="toggleTheme()" />
       <div class="slider bg-(--textBlack10) dark:bg-(--textWhite15)">

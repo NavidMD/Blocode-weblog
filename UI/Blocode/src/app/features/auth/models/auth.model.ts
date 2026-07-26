@@ -3,6 +3,11 @@ export interface LoginResponseDTO {
   roles: string[];
 }
 
+export interface RegisterResponseDTO {
+  email: string;
+  roles: string[];
+}
+
 export interface LoggedUser {
   email: string;
   roles: string[];

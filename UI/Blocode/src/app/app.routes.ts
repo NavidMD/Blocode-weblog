@@ -8,6 +8,7 @@ import { Home } from './features/public/home/home';
 import { BlogDetails } from './features/public/blog-details/blog-details';
 import { Login } from './features/auth/login/login';
 import { adminGuard } from './features/auth/guards/admin-guard';
+import { Register } from './features/auth/register/register';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: Login
+  },
+  {
+    path: 'register',
+    component: Register
   },
   {
     path: '',

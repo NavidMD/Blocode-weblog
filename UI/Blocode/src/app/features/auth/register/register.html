@@ -1,1 +1,213 @@
-<p>register works!</p>
+<div
+  class="bg-transparent w-full min-h-[calc(100vh-68px)] flex flex-col justify-center items-center overflow-hidden pb-10"
+>
+  <div class="relative w-full max-w-[390px]">
+    <div class="sky dark:opacity-10">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3 dark:hidden"></div>
+      <div class="cloud c4 dark:top-[100px]!"></div>
+    </div>
+    <div class="sun dark:hidden"></div>
+    <div class="uiverse-midnight-sky dark:flex hidden">
+      <div class="sky-canvas">
+        <div class="stars stars-1"></div>
+        <div class="stars stars-2"></div>
+        <div class="stars stars-3"></div>
+
+        <div class="meteor m1"></div>
+        <div class="meteor m2"></div>
+        <div class="meteor m3"></div>
+
+        <div class="moon"></div>
+      </div>
+    </div>
+    <div class="text-center mb-6">
+      <div class="mx-auto w-20 h-20 flex items-center">
+        <img src="assets/vectors/sign-key.svg" class="w-full h-full object-contain" alt="" />
+      </div>
+
+      <h1 class="mt-4 text-(length:--login-headingSize) font-bold text-blue-900 dark:text-blue-200">
+        ثبت نام
+      </h1>
+
+      <p
+        class="mt-2 text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) dark:text-(--textWhite60)"
+      >
+        حساب کاربری خود را ایجاد کنید
+      </p>
+    </div>
+
+    <form class="flex flex-col gap-4" [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
+      <div class="flex-1 flex flex-col gap-3 items-start relative">
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) font-bold text-(--textBlack80) dark:text-(--textWhite95)"
+          for="register-email"
+        >
+          ایمیل
+        </label>
+        @if (registerFormGroup.controls.email.invalid && registerFormGroup.controls.email.dirty) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-3.5 top-11.5"
+            style="color: var(--login-errorIcon)"
+          ></i>
+        }
+        @if (registerFormGroup.controls.email.valid && registerFormGroup.controls.email.dirty) {
+          <i
+            class="fa-solid fa-check absolute left-3.5 top-11.5"
+            style="color: var(--login-successIcon)"
+          ></i>
+        }
+        <input
+          type="email"
+          email
+          class="focus:border-(--textBlack30) bg-(--textWhite60) dark:focus:border-(--textWhite30) w-full input-text-normal h-11 border dark:bg-(--textWhite05) border-(--textBlack15) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-[15px] py-1 px-4 outline-0"
+          placeholder="example@gmail.com"
+          id="register-email"
+          formControlName="email"
+        />
+        @if (
+          registerFormGroup.controls.email.touched &&
+          registerFormGroup.controls.email.hasError('required')
+        ) {
+          <span
+            class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+            >وارد کردن ایمیل الزامی است</span
+          >
+        }
+        @if (
+          registerFormGroup.controls.email.value.length > 5 && registerFormGroup.controls.email.invalid
+        ) {
+          <span
+            class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+            >فرمت ایمیل اشتباه است</span
+          >
+        }
+      </div>
+
+      <div class="flex-1 flex flex-col gap-3 items-start relative">
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) font-bold text-(--textBlack80) dark:text-(--textWhite95)"
+          for="register-password"
+          >رمز عبور</label
+        >
+        @if (registerFormGroup.controls.password.invalid && registerFormGroup.controls.password.dirty) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-3.5 top-11.5"
+            style="color: var(--login-errorIcon)"
+          ></i>
+        }
+        @if (registerFormGroup.controls.password.valid && registerFormGroup.controls.password.dirty) {
+          <i
+            class="fa-solid fa-check absolute left-3.5 top-11.5"
+            style="color: var(--login-successIcon)"
+          ></i>
+        }
+        <input
+          type="password"
+          id="register-password"
+          class="focus:border-(--textBlack30) bg-(--textWhite60) dark:focus:border-(--textWhite30) w-full input-text-normal h-11 border dark:bg-(--textWhite05) border-(--textBlack15) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-[15px] py-1 px-4 outline-0"
+          placeholder="********"
+          formControlName="password"
+          #passwordInput
+        />
+        @if (passwordInput.type === 'text') {
+          <i
+            (click)="passwordInput.type = 'password'"
+            class="fa-regular fa-eye-slash absolute right-13 top-2.5 fa-sm cursor-pointer"
+            style="color: var(--login-eyeIcon)"
+          ></i>
+        }
+        @if (passwordInput.type === 'password') {
+          <i
+            (click)="passwordInput.type = 'text'"
+            class="fa-regular fa-eye absolute right-13 top-2.5 fa-sm cursor-pointer"
+            style="color: var(--login-eyeIcon)"
+          ></i>
+        }
+        @if (
+          registerFormGroup.controls.password.touched &&
+          registerFormGroup.controls.password.hasError('required')
+        ) {
+          <span
+            class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+            >وارد کردن رمز عبور الزامی است</span
+          >
+        }
+      </div>
+      <div class="flex-1 flex flex-col gap-3 items-start relative">
+        <label
+          class="text-(length:--small-text14) leading-(--leading-sm) font-bold text-(--textBlack80) dark:text-(--textWhite95)"
+          for="repeat-password"
+          >تکرار رمز عبور</label
+        >
+        @if ((repeatPasswordFormControl.value !== passwordFormControl.value) && repeatPasswordFormControl.dirty) {
+          <i
+            class="fa-solid fa-circle-exclamation absolute left-3.5 top-11.5"
+            style="color: var(--login-errorIcon)"
+          ></i>
+        }
+        @if (registerFormGroup.controls.repeatPassword.valid && (repeatPasswordFormControl.value === passwordFormControl.value)) {
+          <i
+            class="fa-solid fa-check absolute left-3.5 top-11.5"
+            style="color: var(--login-successIcon)"
+          ></i>
+        }
+        <input
+          type="password"
+          id="repeat-password"
+          class="focus:border-(--textBlack30) bg-(--textWhite60) dark:focus:border-(--textWhite30) w-full input-text-normal h-11 border dark:bg-(--textWhite05) border-(--textBlack15) dark:border-(--textWhite20) dark:text-(--textWhite95) rounded-[15px] py-1 px-4 outline-0"
+          placeholder="********"
+          formControlName="repeatPassword"
+          #repeatPasswordInput
+        />
+        @if (repeatPasswordInput.type === 'text') {
+          <i
+            (click)="repeatPasswordInput.type = 'password'"
+            class="fa-regular fa-eye-slash absolute right-22 top-2.5 fa-sm cursor-pointer"
+            style="color: var(--login-eyeIcon)"
+          ></i>
+        }
+        @if (repeatPasswordInput.type === 'password') {
+          <i
+            (click)="repeatPasswordInput.type = 'text'"
+            class="fa-regular fa-eye absolute right-22 top-2.5 fa-sm cursor-pointer"
+            style="color: var(--login-eyeIcon)"
+          ></i>
+        }
+        @if (
+          registerFormGroup.controls.repeatPassword.touched &&
+          registerFormGroup.controls.repeatPassword.hasError('required')
+        ) {
+          <span
+            class="text-(length:--login-errorTextSize) absolute top-1 left-1 text-red-500 dark:text-red-400/90"
+            >وارد کردن تکرار رمز عبور الزامی است</span
+          >
+        }
+      </div>
+      <div class="flex justify-between text-(length:--small-text14) leading-(--leading-sm) my-1">
+        <label
+          class="flex gap-2 items-center text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack80) dark:text-(--textWhite95)"
+        >
+          <input type="checkbox" />
+          مرا به خاطر بسپار
+        </label>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full h-12 cursor-pointer hover:to-blue-700 transition rounded-2xl shadow-lg shadow-(--textBlack15) bg-gradient-to-r from-violet-500/80 to-blue-500/80 dark:to-blue-600 text-white font-bold"
+      >
+        ثبت نام
+      </button>
+    </form>
+
+    <p
+      class="mt-4 text-center text-(length:--small-text14) leading-(--leading-sm) text-(--textBlack60) dark:text-(--textWhite60)"
+    >
+      قبلا ثبت نام کرده اید؟
+
+      <a class="text-blue-600 dark:text-blue-500" [routerLink]="['/login']"> ورود </a>
+    </p>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { firstValueFrom, Observable, tap } from 'rxjs';
-import { LoggedUser, LoginResponseDTO } from '../models/auth.model';
+import { LoggedUser, LoginResponseDTO, RegisterResponseDTO } from '../models/auth.model';
 import {
   HttpClient,
   httpResource,
@@ -51,6 +51,22 @@ export class AuthService {
       return request;
     });
   }
+
+  register(email: string, password: string): Observable<RegisterResponseDTO> {
+    return this.http
+      .post<RegisterResponseDTO>(
+        `${environment.apiBaseUrl}/api/auth/register`,
+        {
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        },
+      )
+      .pipe(tap((user) => this.loggedUser.set(user)));
+  }
+
   login(email: string, password: string): Observable<LoginResponseDTO> {
     return this.http
       .post<LoginResponseDTO>(
@@ -65,6 +81,7 @@ export class AuthService {
       )
       .pipe(tap((user) => this.loggedUser.set(user)));
   }
+
   logout() {
     this.http
       .post<void>(

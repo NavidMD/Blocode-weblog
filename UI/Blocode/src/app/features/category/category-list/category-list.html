@@ -75,7 +75,7 @@
       [ngClass]="addCategoryActive === true ? 'mt-6' : 'mt-2'"
     >
       @if (categoriesLoading()) {
-        <app-loader-magazine class="scale-50 mt-20"></app-loader-magazine>
+        <app-loader-magazine class="scale-50 my-20"></app-loader-magazine>
       } @else {
         @for (
           category of allCategoriesValue()?.filter(c => c.parentCategoryId == null);

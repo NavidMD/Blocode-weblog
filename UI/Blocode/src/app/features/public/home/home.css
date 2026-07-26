@@ -29,7 +29,7 @@ swiper-container::part(bullet-active) {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
     0 5px 15px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 2px 1px rgba(255, 255, 255, 0.1);
   position: relative;
@@ -46,7 +46,7 @@ swiper-container::part(bullet-active) {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.2),
     transparent
   );
 }
@@ -87,7 +87,7 @@ swiper-container::part(bullet-active) {
   height: 45%;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 130%);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 150%);
 }
 
 #categories-container {

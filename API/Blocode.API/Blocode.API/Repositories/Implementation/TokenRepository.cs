@@ -32,7 +32,7 @@ namespace Blocode.API.Repositories.Implementation
                     issuer: configuration["Jwt:Issuer"],
                     claims: claims,
                     signingCredentials: credentials,
-                    expires: DateTime.Now.AddMinutes(20)
+                    expires: DateTime.Now.AddMinutes(60)
                );
             // return token
             return new JwtSecurityTokenHandler().WriteToken(token); 

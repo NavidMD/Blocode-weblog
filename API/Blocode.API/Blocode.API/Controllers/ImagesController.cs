@@ -74,7 +74,7 @@ namespace Blocode.API.Controllers
 
         private void ValidateFileUpload(IFormFile file)
         {
-            var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png" };
+            var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png", ".webp" };
             if (!allowedExtensions.Contains(Path.GetExtension(file.FileName).ToLower()))
             {
                 ModelState.AddModelError("File", "Unsupported file format!");

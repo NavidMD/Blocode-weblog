@@ -17,10 +17,11 @@ import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../auth/services/auth-service';
 import { ToastrService } from 'ngx-toastr';
+import { LoaderMagazine } from "../../../shared/components/loader-magazine/loader-magazine";
 
 @Component({
   selector: 'app-blogpost-list',
-  imports: [RouterLink, PersianDatePipe],
+  imports: [RouterLink, PersianDatePipe, LoaderMagazine],
   templateUrl: './blogpost-list.html',
   styleUrl: './blogpost-list.css',
 })

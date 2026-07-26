@@ -4,6 +4,7 @@ import { NgClass } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BlogImage } from '../../models/image.model';
 import { Loader } from '../loader/loader';
+import { NoFileExtensionValidator } from '../../validators/no-file-extension.validator';
 
 @Component({
   selector: 'app-image-selector',
@@ -33,11 +34,11 @@ export class ImageSelector {
     }),
     name: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(100)],
+      validators: [Validators.required, NoFileExtensionValidator()],
     }),
     title: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(100)],
+      validators: [Validators.required, NoFileExtensionValidator()],
     }),
   });
 
